@@ -1,0 +1,57 @@
+# Algorithms and Complexity
+
+Algorithms are step-by-step procedures used to solve computational problems. The efficiency of an algorithm is measured using time complexity and space complexity, most commonly expressed using Big-O notation.
+
+An algorithm is a precise sequence of steps for solving a computational problem. Algorithms have measurable efficiency in time and space.
+
+## Big-O Complexity
+
+A mathematical notation that describes how runtime or memory usage grows with input size. Examples:
+- O(1) constant time
+- O(log n) logarithmic
+- O(n) linear
+- O(n log n) log-linear
+- O(n squared) quadratic
+
+## Sorting Algorithms
+
+Sorting is a fundamental task in computer science. Common algorithms include:
+- QuickSort: average O(n log n), divide-and-conquer pivot partitioning; excellent average performance.
+- MergeSort: O(n log n), stable, divide-and-conquer; great for external sorting.
+- HeapSort: O(n log n) using binary heap; good worst-case guarantees.
+- InsertionSort: efficient for nearly sorted arrays
+- RadixSort: non-comparison sort for fixed-length integers; linear time.
+
+## Graph Algorithms
+
+Graphs model relationships between entities.
+
+Famous graph algorithms:
+- Dijkstra's algorithm for shortest paths in weighted graphs with non-negative weights.
+- Bellman-Ford for handling negative weights; shortest path allowing negative edges.
+- Depth-First Search (DFS)
+- Breadth-First Search (BFS)
+- A* search algorithm: heuristic-guided shortest path, widely used in AI.
+- Minimum spanning trees via Kruskal and Prim's algorithm: finds minimal-cost tree connecting all nodes.
+
+## Data Structures
+
+Efficient data structures form the backbone of good algorithm design:
+- Arrays and linked lists
+- Stacks and queues
+- Hash tables: key-value store using hash functions.
+- Balanced binary trees (AVL, Red-Black): keep O(log n) operations.
+- Heaps, priority queues
+- Tries: prefix tree for strings.
+- Disjoint-set union (Union-Find): maintains disjoint sets for dynamic connectivity.
+- Bloom filters: probabilistic membership test (no false negatives).
+
+## Algorithmic Paradigms
+
+Different strategies inspire algorithm design:
+- Greedy algorithms: chooses best local option.
+- Dynamic programming: solves overlapping subproblems with memoization.
+- Divide-and-conquer: recursively splits problem.
+- Backtracking: explores solution space with pruning.
+- Randomized algorithms: use randomness to simplify logic or guarantee average performance.
+- Approximation algorithms for NP-hard problems

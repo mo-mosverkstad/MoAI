@@ -1,0 +1,44 @@
+# Computer Networking Overview
+
+Computer networking connects computing devices so they can exchange data. Modern networks range from small office LANs to global-scale communication infrastructures.
+
+Networking allows electronic devices to exchange data using wired or wireless communication.
+
+## OSI Model
+
+The Open Systems Interconnection (OSI) model divides communication into seven layers:
+1. Physical: hardware signals
+2. Data Link: MAC addressing, frames
+3. Network: routing (IP)
+4. Transport: TCP/UDP
+5. Session: connections
+6. Presentation: encoding/decoding
+7. Application: end-user protocols (HTTP, DNS)
+
+A conceptual 7-layer framework describing communication functions from physical hardware signals up to application-level protocols.
+
+## TCP/IP
+
+The Internet is based on the TCP/IP protocol suite, the dominant Internet protocol suite:
+- IP handles addressing and routing
+- TCP provides reliable byte streams
+- UDP provides connectionless, fast datagram communication
+- HTTP/HTTPS for web traffic and web protocols
+- DNS for domain name resolution and name-to-IP resolution
+
+## Network Devices
+
+Common network hardware includes:
+- Routers: forwards packets between networks
+- Switches: connects devices in LAN
+- Firewalls: filters traffic
+- Load Balancers: distributes load across servers
+- Access Points: wireless networking
+
+## Modern Networking Topics
+
+- IPv6 addressing
+- Software Defined Networking (SDN)
+- Network Function Virtualization (NFV)
+- Zero Trust architectures
+- QUIC protocol

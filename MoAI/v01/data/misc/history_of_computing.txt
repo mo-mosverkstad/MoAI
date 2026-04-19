@@ -1,0 +1,33 @@
+# History of Computing
+
+Computing has evolved dramatically from mechanical calculating machines to modern distributed cloud systems.
+
+Key eras include mechanical devices, early electronic computers, transistors and integrated circuits, personal computers, Internet revolution, and cloud and mobile computing.
+
+## Early Mechanical Devices
+
+- Abacus (ancient)
+- Pascaline (Blaise Pascal, 1642)
+- Analytical Engine (Charles Babbage)
+- Ada Lovelace's algorithms
+
+## 20th Century Foundations
+
+- Alan Turing's theoretical model of computation
+- ENIAC: one of the first general-purpose electronic computers
+- Transistor invention enabled miniaturization
+- Development of programming languages (FORTRAN, COBOL)
+
+## Personal Computers and Internet
+
+- Apple II, IBM PC
+- MS-DOS to Windows
+- UNIX to Linux
+- Rise of the World Wide Web (1990s)
+
+## Modern Computing
+
+- Mobile devices and smartphones
+- Cloud computing
+- Virtualization and containers
+- Artificial Intelligence and Machine Learning
