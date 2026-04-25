@@ -398,3 +398,67 @@ CompositeAnswer (with validation metadata)
 | 3.2 Self-ask (internal checks) | ✅ Signal-word validation |
 | 3.3 Answer consistency & confidence | ✅ Conflict detection + confidence penalty |
 | 3.4 Conversation memory | ✅ File-persisted (from Step 4) |
+
+---
+
+## Step 7: QA Integration Test Suite
+
+### Goal
+
+Add an automated integration test script that runs benchmark queries against the QA pipeline and verifies correctness of property detection, answer content, and validation status.
+
+### Test Script
+
+`tests/test_qa_integration.sh` — a bash script that:
+1. Runs 13 benchmark queries via `./mysearch ask "..." --json`
+2. Parses JSON output with `python3` to extract property, answer text, validated status, and confidence
+3. Checks each answer against expected property, content keywords, and validation status
+4. Reports PASS/FAIL per test with confidence scores
+5. Exits with code 0 if all pass, 1 if any fail
+
+### Test Cases (13 total)
+
+| Category | Test | Property | Expected Keywords |
+|----------|------|----------|-------------------|
+| Core | Where is Stockholm | LOCATION | eastern, coast, sweden, sea |
+| Core | Stockholm close to sea (implicit) | LOCATION | sea, stockholm |
+| Core | What is a database | DEFINITION | database, data |
+| Core | How does TCP ensure reliability | FUNCTION | tcp |
+| Core | Drawbacks of NoSQL | LIMITATIONS | nosql, limitation |
+| Core | Databases for beginners | USAGE | beginner |
+| Core | When did networking become mainstream | TIME | 1990 |
+| Core | TCP reliability (explain) | FUNCTION | tcp |
+| Core | Stockholm close to sea (benchmark) | LOCATION | sea |
+| Multi-need | Stockholm location (need 0) | LOCATION | eastern, coast, sea |
+| Multi-need | Stockholm importance (need 1) | ADVANTAGES | stockholm, important |
+| Validation | NoSQL limitations validated | LIMITATIONS | nosql (validated=true) |
+| Validation | Stockholm location validated | LOCATION | coast (validated=true) |
+
+### How to Run
+
+```bash
+cd build
+./mysearch ingest ../data
+./mysearch build-hnsw
+bash ../tests/test_qa_integration.sh
+```
+
+### Results
+
+All 13 tests pass with the current codebase and data:
+
+```
+Results: 13 passed, 0 failed, 13 total
+```
+
+### Files Created
+
+| File | Description |
+|------|-------------|
+| `tests/test_qa_integration.sh` | Bash integration test script (requires python3 for JSON parsing) |
+
+### Files Modified
+
+| File | What Changed |
+|------|-------------|
+| `build.md` | Added QA integration test section with usage instructions and expected output |

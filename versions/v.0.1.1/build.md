@@ -53,8 +53,10 @@ cmake --build .
 
 ## 3. Run Tests
 
+### Unit tests (GoogleTest)
+
 ```bash
-# All tests
+# All unit tests
 ctest --output-on-failure
 
 # Or run the test binary directly
@@ -68,6 +70,59 @@ ctest --output-on-failure
 # List all available tests
 ./mysearch_tests --gtest_list_tests
 ```
+
+### QA integration tests
+
+The integration test script runs 13 benchmark queries against the QA pipeline
+and verifies that each answer has the correct property, contains expected
+content keywords, and passes validation. Requires `python3` for JSON parsing.
+
+```bash
+# First: ingest data and build HNSW index
+./mysearch ingest ../data
+./mysearch build-hnsw
+
+# Run integration tests
+bash ../tests/test_qa_integration.sh
+```
+
+Expected output:
+
+```
+========================================
+MoAI v.0.1.1 QA Integration Tests
+========================================
+
+--- Core queries ---
+PASS Where is Stockholm (confidence=0.93)
+PASS Stockholm close to sea (implicit location) (confidence=0.86)
+PASS What is a database (confidence=0.91)
+PASS How does TCP ensure reliability (confidence=0.76)
+PASS Drawbacks of NoSQL (confidence=0.95)
+PASS Databases for beginners (confidence=0.87)
+PASS When did networking become mainstream (confidence=0.57)
+PASS TCP reliability (explain) (confidence=0.85)
+PASS Stockholm close to sea (benchmark) (confidence=0.86)
+
+--- Multi-need queries ---
+PASS Stockholm location (need 0) (confidence=0.93)
+PASS Stockholm importance (need 1) (confidence=0.87)
+
+--- Validation checks ---
+PASS NoSQL limitations validated (confidence=0.95)
+PASS Stockholm location validated (confidence=0.93)
+
+========================================
+Results: 13 passed, 0 failed, 13 total
+========================================
+```
+
+The test script checks:
+- **Property detection**: query maps to the correct property (LOCATION, DEFINITION, FUNCTION, etc.)
+- **Answer content**: answer text contains expected keywords (e.g., "eastern", "coast", "sea" for Stockholm location)
+- **Validation status**: self-ask validation passes for well-answered queries
+- **Multi-need decomposition**: compound queries produce multiple needs with correct properties
+- **Exit code**: 0 if all tests pass, 1 if any fail
 
 ---
 
@@ -280,6 +335,10 @@ cmake --build .
 ./mysearch ingest ../data
 ./mysearch build-hnsw
 
+# Run integration tests for regression
+bash ../tests/test_qa_integration.sh
+
+# Run manual test cases
 echo "=== Single-need ==="
 ./mysearch ask "where is stockholm"
 ./mysearch ask "what is a database"
