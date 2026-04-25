@@ -39,6 +39,8 @@ add_library(mysearch_lib
     src/chunk/chunker.cpp
     src/answer/answer_synthesizer.cpp
     src/answer/answer_validator.cpp
+    src/answer/question_planner.cpp
+    src/answer/self_ask.cpp
     src/conversation/conversation_state.cpp
 
     src/tools/sandbox.cpp

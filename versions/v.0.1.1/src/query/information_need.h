@@ -31,7 +31,8 @@ struct InformationNeed {
     Property property;
     AnswerForm form;
     std::vector<std::string> keywords;
-    double property_score = 1.0;  // confidence in property detection
+    double property_score = 1.0;
+    bool is_support = false;  // true for self-ask generated sub-needs (not shown in output)
 };
 
 inline const char* property_str(Property p) {

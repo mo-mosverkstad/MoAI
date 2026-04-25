@@ -462,3 +462,145 @@ Results: 13 passed, 0 failed, 13 total
 | File | What Changed |
 |------|-------------|
 | `build.md` | Added QA integration test section with usage instructions and expected output |
+
+---
+
+## Step 8: Phase 3 Completion — QuestionPlanner + SelfAskModule
+
+### Goal
+
+Complete the two remaining Phase 3 requirements: explicit question planning with dependency ordering, and self-ask internal sub-question generation.
+
+### 8.1 QuestionPlanner
+
+New `QuestionPlanner` class (`src/answer/question_planner.h/.cpp`) that builds a dependency-ordered plan from InformationNeeds:
+
+- **Priority ordering**: LOCATION/DEFINITION (0) → TIME (1) → HISTORY/FUNCTION/COMPOSITION (2) → USAGE/ADVANTAGES/LIMITATIONS (3) → COMPARISON (4) → GENERAL (5)
+- **Dependency edges**: each need depends on the closest prerequisite with strictly lower priority
+- **Stable sort**: preserves original order for same-priority needs
+
+Example: "Where is Stockholm and why is it important?" → LOCATION (priority 0) is processed before ADVANTAGES (priority 3), with a dependency edge (0→1).
+
+### 8.2 SelfAskModule
+
+New `SelfAskModule` class (`src/answer/self_ask.h/.cpp`) that generates internal sub-questions before synthesis:
+
+| Property | Internal Sub-Questions (keywords checked) |
+|----------|------------------------------------------|
+| LOCATION | located, country, region |
+| ADVANTAGES | political, economic, cultural + capital, government, innovation |
+| LIMITATIONS | standardization, consistency, scalability |
+| FUNCTION | mechanism, process, ensures |
+| HISTORY | founded, century, developed |
+| DEFINITION | is a, refers to, system |
+| COMPARISON | better, worse, difference |
+
+`check_support_coverage()` measures what fraction of sub-question keywords appear in the evidence. If coverage < 50%, confidence is reduced by `(0.5 + coverage)` factor and a note is added.
+
+### Pipeline After Step 8
+
+```
+Query → Analyze → InformationNeeds[]
+  ↓
+QuestionPlanner.build() → ordered QuestionPlan with dependencies
+  ↓
+For each need (in dependency order):
+  ├─ SelfAsk: generate internal sub-questions
+  ├─ Retrieve (BM25 + HNSW)
+  ├─ Chunk Select (keyword + type)
+  ├─ SelfAsk: check support coverage
+  ├─ Synthesize
+  ├─ Attach prior_context (dependent planning)
+  ├─ Detect conflicts
+  ├─ Validate answer vs property
+  ├─ Apply support coverage penalty
+  ├─ Retry with BM25-only if validation fails
+  └─ Store answer as context for next need
+  ↓
+CompositeAnswer (with full reasoning metadata)
+```
+
+### Phase 3 Final Status
+
+| # | Requirement | Status |
+|---|---|---|
+| 1 | Question Planning (`QuestionPlan` + `QuestionPlanner`) | ✅ Explicit dependency graph with priority ordering |
+| 2 | Self-Ask (`SelfAskModule`) | ✅ Internal sub-questions with coverage check |
+| 3 | Evidence Agreement & Confidence | ✅ Multi-factor + conflict + validation + self-ask coverage |
+| 4 | Conversation State | ✅ File-persisted, cross-process |
+| ✓ | Multi-part answers sequential & contextual | ✅ |
+| ✓ | Follow-ups work naturally | ✅ |
+| ✓ | Confidence reflects evidence strength | ✅ |
+| ✓ | System can explain why it answered | ✅ validation_note + self-ask coverage |
+
+**All Phase 3 requirements are now complete.**
+
+### Files Created
+
+| File | Description |
+|------|-------------|
+| `src/answer/question_planner.h` | `QuestionPlan` struct + `QuestionPlanner` class |
+| `src/answer/question_planner.cpp` | Priority-based dependency ordering |
+| `src/answer/self_ask.h` | `SelfAskModule` class |
+| `src/answer/self_ask.cpp` | Property-specific sub-question generation + coverage check |
+
+### Files Modified
+
+| File | What Changed |
+|------|-------------|
+| `src/cli/commands.cpp` | Integrated `QuestionPlanner` (reorders needs) and `SelfAskModule` (coverage check + confidence adjustment) |
+| `CMakeLists.txt` | Added `question_planner.cpp` and `self_ask.cpp` to build |
+
+### Integration Test Results
+
+All 13 tests pass after Phase 3 completion:
+
+```
+Results: 13 passed, 0 failed, 13 total
+```
+
+---
+
+## Step 8b: Rewrite QuestionPlanner + SelfAsk to Match Spec
+
+### Changes from Step 8
+
+**QuestionPlanner** rewritten with:
+- Explicit pairwise `depends_on(a, b)` rules instead of priority-based ordering:
+  - HISTORY depends on LOCATION
+  - ADVANTAGES depends on LOCATION + DEFINITION
+  - FUNCTION depends on DEFINITION
+  - LIMITATIONS depends on DEFINITION
+  - COMPARISON depends on DEFINITION
+  - USAGE depends on DEFINITION
+- Topological sort (one need placed per iteration for stable ordering)
+
+**SelfAskModule** rewritten with:
+- `expand()` generates actual `InformationNeed` sub-needs (not just keyword checks):
+  - ADVANTAGES → DEFINITION + LOCATION
+  - COMPARISON → DEFINITION
+  - LIMITATIONS → USAGE
+  - HISTORY → TIME + DEFINITION
+  - FUNCTION → DEFINITION
+- Sub-needs are marked `is_support = true` and filtered from output
+- Sub-needs are deduplicated before adding to the plan
+- Coverage check still runs post-synthesis for confidence adjustment
+
+**Pipeline flow** now matches the spec:
+```cpp
+// Step 1: expand needs with self-ask sub-needs
+for (auto& n : baseNeeds) {
+    auto support = selfAsk.expand(n);
+    expanded.insert(expanded.end(), support.begin(), support.end());
+}
+// Step 2: plan execution order
+QuestionPlan plan = planner.build(expanded);
+// Step 3: execute in dependency order
+```
+
+**InformationNeed** struct: added `bool is_support = false` to distinguish user-facing needs from internal sub-needs.
+
+### Integration Test Results
+
+All 13 tests pass: `Results: 13 passed, 0 failed, 13 total`
+

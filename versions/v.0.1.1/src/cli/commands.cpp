@@ -11,6 +11,8 @@
 #include "../chunk/chunker.h"
 #include "../answer/answer_synthesizer.h"
 #include "../answer/answer_validator.h"
+#include "../answer/question_planner.h"
+#include "../answer/self_ask.h"
 #include "../conversation/conversation_state.h"
 #ifdef HAS_TORCH
 #include "../encoder/encoder_trainer.h"
@@ -160,8 +162,30 @@ int run_cli(int argc, char** argv) {
             std::cerr << "Using hybrid retrieval (BM25 + HNSW)\n";
         }
 
-        // 3. For each need: retrieve → chunk select → synthesize → validate
-        //    6.1: Pass previous answer as context to next need (dependent planning)
+        // 3. Self-Ask: expand needs with support sub-needs
+        SelfAskModule self_ask;
+        std::vector<InformationNeed> expanded = needs;
+        for (auto& n : needs) {
+            auto support = self_ask.expand(n);
+            // Only add support needs that aren't already in the list
+            for (auto& s : support) {
+                bool dup = false;
+                for (auto& e : expanded)
+                    if (e.property == s.property && e.entity == s.entity)
+                        { dup = true; break; }
+                if (!dup) {
+                    s.is_support = true;
+                    expanded.push_back(s);
+                }
+            }
+        }
+
+        // 4. Plan question order (dependency-aware topological sort)
+        QuestionPlanner planner;
+        QuestionPlan plan = planner.build(expanded);
+        needs = plan.needs;
+
+        // 5. For each need: retrieve → chunk select → synthesize → validate
         AnswerValidator validator;
         std::string prior_answer_context;
 
@@ -254,6 +278,12 @@ int run_cli(int argc, char** argv) {
 
             if (evidence.size() > 15) evidence.resize(15);
 
+            // --- Self-Ask: check if evidence covers support sub-questions ---
+            auto support_needs = self_ask.expand(need);
+            std::vector<std::string> ev_texts;
+            for (auto& e : evidence) ev_texts.push_back(e.text);
+            double support_coverage = self_ask.check_support_coverage(support_needs, ev_texts);
+
             // --- Synthesize ---
             Answer answer = synthesizer.synthesize(need, evidence);
 
@@ -273,6 +303,17 @@ int run_cli(int argc, char** argv) {
 
             // 6.2: Self-ask validation — does the answer address the property?
             validator.validate(answer, need);
+
+            // Apply self-ask support coverage to confidence
+            if (support_coverage < 0.5 && !support_needs.empty()) {
+                answer.confidence *= (0.5 + support_coverage);
+                std::string sc_note = "Self-ask coverage: " +
+                    std::to_string((int)(support_coverage * 100)) + "%.";
+                if (answer.validation_note.empty())
+                    answer.validation_note = sc_note;
+                else
+                    answer.validation_note += " " + sc_note;
+            }
 
             // 6.2b: If validation failed and we used hybrid, retry with BM25-only
             if (!answer.validated && use_hybrid) {
@@ -308,11 +349,16 @@ int run_cli(int argc, char** argv) {
             conversation.update(need);
         }
 
-        // 4. Save conversation memory for next invocation
+        // 6. Save conversation memory for next invocation
         if (!needs.empty())
             conversation.save(conv_path);
 
-        // 5. Output
+        // Filter: only show user-facing needs in output (not self-ask support)
+        std::vector<size_t> user_indices;
+        for (size_t i = 0; i < needs.size(); i++)
+            if (!needs[i].is_support) user_indices.push_back(i);
+
+        // 7. Output
         if (json) {
             auto escaped = [](const std::string& s) {
                 std::string r;
@@ -328,7 +374,8 @@ int run_cli(int argc, char** argv) {
             std::cout << "{\n  \"query\": \"" << escaped(query) << "\",\n"
                       << "  \"retrieval\": \"" << (use_hybrid ? "hybrid" : "bm25") << "\",\n"
                       << "  \"needs\": [\n";
-            for (size_t i = 0; i < needs.size(); i++) {
+            for (size_t ui = 0; ui < user_indices.size(); ui++) {
+                size_t i = user_indices[ui];
                 auto& n = needs[i];
                 auto& a = composite.parts[i];
                 std::cout << "    {\n"
@@ -352,7 +399,7 @@ int run_cli(int argc, char** argv) {
                 }
                 std::cout << "]\n"
                           << "    }";
-                if (i + 1 < needs.size()) std::cout << ",";
+                if (ui + 1 < user_indices.size()) std::cout << ",";
                 std::cout << "\n";
             }
             std::cout << "  ],\n"
@@ -361,7 +408,8 @@ int run_cli(int argc, char** argv) {
         } else {
             if (use_hybrid)
                 std::cerr << "Retrieval: hybrid (BM25 + HNSW)\n";
-            for (size_t i = 0; i < needs.size(); i++) {
+            for (size_t ui = 0; ui < user_indices.size(); ui++) {
+                size_t i = user_indices[ui];
                 auto& n = needs[i];
                 auto& a = composite.parts[i];
                 std::cout << "[" << property_str(n.property) << " / "
