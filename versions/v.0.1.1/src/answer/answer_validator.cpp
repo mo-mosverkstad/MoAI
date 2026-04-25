@@ -1,4 +1,5 @@
 #include "answer_validator.h"
+#include "evidence_normalizer.h"
 #include <algorithm>
 #include <cctype>
 #include <unordered_set>
@@ -12,13 +13,7 @@ static std::string to_lower_v(const std::string& s) {
     return r;
 }
 
-static bool has_any_v(const std::string& text, const std::vector<std::string>& terms) {
-    for (auto& t : terms)
-        if (text.find(t) != std::string::npos) return true;
-    return false;
-}
-
-// Property → expected signal words that should appear in a valid answer
+// Property → expected signal words for self-ask validation
 static const std::vector<std::string>& expected_signals(Property prop) {
     static const std::unordered_map<int, std::vector<std::string>> m = {
         {(int)Property::LOCATION,    {"located", "capital", "coast", "city", "region",
@@ -47,7 +42,6 @@ static const std::vector<std::string>& expected_signals(Property prop) {
     return it != m.end() ? it->second : empty;
 }
 
-// 6.2: Self-ask validation
 void AnswerValidator::validate(Answer& answer, const InformationNeed& need) const {
     if (answer.text.empty() || answer.text.find("not found") != std::string::npos) {
         answer.validated = false;
@@ -59,12 +53,8 @@ void AnswerValidator::validate(Answer& answer, const InformationNeed& need) cons
     std::string lower = to_lower_v(answer.text);
     auto& signals = expected_signals(need.property);
 
-    if (signals.empty()) {
-        answer.validated = true;
-        return;
-    }
+    if (signals.empty()) { answer.validated = true; return; }
 
-    // Count how many expected signals appear in the answer
     int matches = 0;
     for (auto& sig : signals)
         if (lower.find(sig) != std::string::npos) matches++;
@@ -72,7 +62,6 @@ void AnswerValidator::validate(Answer& answer, const InformationNeed& need) cons
     double signal_ratio = static_cast<double>(matches) / signals.size();
 
     if (signal_ratio == 0.0) {
-        // Answer contains zero property-relevant signals
         answer.validated = false;
         answer.validation_note = "Answer does not appear to address " +
             std::string(property_str(need.property)) + " (0 signal words found).";
@@ -80,72 +69,81 @@ void AnswerValidator::validate(Answer& answer, const InformationNeed& need) cons
     } else if (signal_ratio < 0.15) {
         answer.validated = true;
         answer.validation_note = "Weak property match (" +
-            std::to_string(matches) + "/" + std::to_string(signals.size()) +
-            " signals).";
+            std::to_string(matches) + "/" + std::to_string(signals.size()) + " signals).";
         answer.confidence *= 0.7;
     } else {
         answer.validated = true;
     }
 }
 
-// 6.3: Conflict detection
-// Looks for contradicting factual claims across evidence chunks
-double AnswerValidator::detect_conflicts(
+EvidenceAnalysis AnswerValidator::analyze_evidence(
     const std::vector<Evidence>& evidence,
     const std::string& entity) const
 {
-    if (evidence.size() < 2) return 0.0;
+    EvidenceAnalysis result = {0.0, 0, 0, 0.0};
+    if (evidence.size() < 2) {
+        result.agreement = 0.5; // neutral with single source
+        return result;
+    }
 
-    std::string entity_lower = to_lower_v(entity);
+    EvidenceNormalizer normalizer;
+    std::vector<NormalizedClaim> claims;
+    for (auto& e : evidence)
+        claims.push_back(normalizer.normalize(entity, e));
 
-    // Extract key factual fragments from each evidence chunk
-    // A "fact" is a short phrase containing the entity + a descriptor
-    struct Fact {
-        std::string text;
-        uint32_t docId;
-    };
-    std::vector<Fact> facts;
+    double agreement_sum = 0.0;
 
-    // Negation words that indicate contradiction
-    static const std::vector<std::string> negations = {
-        "not ", "no ", "never ", "neither ", "without ", "lack"
-    };
-
-    for (auto& e : evidence) {
-        std::string lower = to_lower_v(e.text);
-        if (!entity_lower.empty() && lower.find(entity_lower) == std::string::npos)
-            continue;
-
-        // Extract sentences containing the entity
-        std::string cur;
-        for (char c : e.text) {
-            cur.push_back(c);
-            if (c == '.' || c == '!' || c == '?') {
-                std::string sl = to_lower_v(cur);
-                if (sl.find(entity_lower) != std::string::npos && cur.size() > 20)
-                    facts.push_back({sl, e.docId});
-                cur.clear();
+    for (size_t i = 0; i < claims.size(); i++) {
+        for (size_t j = i + 1; j < claims.size(); j++) {
+            if (contradicts(claims[i], claims[j])) {
+                result.contradiction_pairs++;
+            } else {
+                double a = agreement_score(claims[i], claims[j]);
+                if (a > 0.0) {
+                    agreement_sum += a;
+                    result.agreement_pairs++;
+                }
             }
         }
     }
 
-    if (facts.size() < 2) return 0.0;
+    result.agreement = result.agreement_pairs > 0
+        ? agreement_sum / result.agreement_pairs : 0.5;
+    result.confidence_penalty = std::min(0.4,
+        result.contradiction_pairs * 0.15);
 
-    // Check for contradictions: same entity but one has negation, other doesn't
-    int conflicts = 0;
-    int comparisons = 0;
-    for (size_t i = 0; i < facts.size(); i++) {
-        for (size_t j = i + 1; j < facts.size(); j++) {
-            if (facts[i].docId == facts[j].docId) continue;
-            comparisons++;
+    return result;
+}
 
-            bool i_neg = has_any_v(facts[i].text, negations);
-            bool j_neg = has_any_v(facts[j].text, negations);
-            if (i_neg != j_neg) conflicts++;
-        }
+double AnswerValidator::compute_refined_confidence(
+    const std::vector<Evidence>& evidence,
+    const std::string& entity,
+    const std::vector<std::string>& keywords) const
+{
+    if (evidence.empty() || keywords.empty()) return 0.0;
+
+    // Factor 1: keyword coverage
+    std::unordered_set<std::string> found;
+    for (auto& e : evidence) {
+        std::string lower = to_lower_v(e.text);
+        for (auto& k : keywords)
+            if (lower.find(to_lower_v(k)) != std::string::npos)
+                found.insert(k);
     }
+    double coverage = static_cast<double>(found.size()) / keywords.size();
 
-    if (comparisons == 0) return 0.0;
-    double conflict_ratio = static_cast<double>(conflicts) / comparisons;
-    return std::min(0.3, conflict_ratio * 0.5);
+    // Factor 2: evidence volume
+    double volume = std::min(1.0, evidence.size() / 3.0);
+
+    // Factor 3: agreement & contradiction
+    auto analysis = analyze_evidence(evidence, entity);
+
+    // Refined confidence: coverage + volume + agreement - contradictions
+    double confidence =
+        0.3 * coverage +
+        0.2 * volume +
+        0.3 * analysis.agreement +
+        0.2 * (1.0 - analysis.confidence_penalty);
+
+    return std::max(0.0, std::min(1.0, confidence));
 }

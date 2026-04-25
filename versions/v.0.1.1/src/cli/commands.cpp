@@ -287,19 +287,22 @@ int run_cli(int argc, char** argv) {
             // --- Synthesize ---
             Answer answer = synthesizer.synthesize(need, evidence);
 
-            // 6.1: Dependent planning — attach prior answer as context
+            // Phase 3: Refined confidence using agreement + contradiction analysis
+            auto ev_analysis = validator.analyze_evidence(evidence, need.entity);
+            answer.confidence = validator.compute_refined_confidence(
+                evidence, need.entity, need.keywords);
+
+            if (ev_analysis.contradiction_pairs > 0) {
+                std::string note = std::to_string(ev_analysis.contradiction_pairs) +
+                    " contradiction(s) detected.";
+                if (ev_analysis.agreement_pairs > 0)
+                    note += " " + std::to_string(ev_analysis.agreement_pairs) + " agreement(s).";
+                answer.validation_note = note;
+            }
+
+            // Dependent planning: attach prior answer as context
             if (!prior_answer_context.empty())
                 answer.prior_context = prior_answer_context;
-
-            // 6.3: Conflict detection — reduce confidence if evidence contradicts
-            double conflict_penalty = validator.detect_conflicts(evidence, need.entity);
-            if (conflict_penalty > 0.0) {
-                answer.confidence = std::max(0.0, answer.confidence - conflict_penalty);
-                if (answer.validation_note.empty())
-                    answer.validation_note = "Evidence conflict detected.";
-                else
-                    answer.validation_note += " Evidence conflict detected.";
-            }
 
             // 6.2: Self-ask validation — does the answer address the property?
             validator.validate(answer, need);

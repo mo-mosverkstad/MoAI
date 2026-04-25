@@ -785,3 +785,95 @@ Results: 36 passed, 0 failed, 36 total
 ```
 Results: 67 passed, 0 failed, 67 total
 ```
+
+---
+
+## Step 10: Evidence Agreement & Contradiction Detection (Full Implementation)
+
+### Goal
+
+Replace the simple negation-based conflict detection with a full **NormalizedClaim-based** evidence agreement and contradiction system, producing refined multi-factor confidence scores.
+
+### Architecture
+
+```
+Evidence chunks
+  ↓
+EvidenceNormalizer → NormalizedClaim[]
+  (entity, property, keywords, negations, docId)
+  ↓
+Pairwise analysis:
+  ├─ agreement_score() → keyword overlap ratio
+  └─ contradicts() → negation conflict OR directional opposites
+  ↓
+EvidenceAnalysis
+  (agreement, agreement_pairs, contradiction_pairs, penalty)
+  ↓
+compute_refined_confidence()
+  = 0.3 * coverage + 0.2 * volume + 0.3 * agreement + 0.2 * (1 - penalty)
+```
+
+### NormalizedClaim Model
+
+Each evidence chunk is normalized to a claim with:
+- **Entity**: lowercase entity name
+- **Property**: chunk type (LOCATION, DEFINITION, etc.)
+- **Keywords**: extracted from 4 domain vocabularies (geo, tech, science, economics)
+- **Negations**: "not", "no", "never", "without", "lack", "cannot", "unable", "impossible"
+- **DocId**: source document
+
+### Agreement Detection
+
+Two claims **agree** if:
+- Same entity + same property
+- Substantial keyword overlap (Jaccard-like ratio)
+- No negation mismatch
+
+### Contradiction Detection
+
+Two claims **contradict** if:
+- Same entity + same property + different documents
+- Negation conflict (one has negation, other doesn't)
+- OR directional opposites detected (east/west, north/south, cheap/expensive, etc.)
+
+14 opposite pairs defined: east/west, eastern/western, north/south, northern/southern, increase/decrease, rising/falling, advantage/disadvantage, benefit/drawback, cheap/expensive, fast/slow, safe/dangerous, reliable/unreliable, efficient/inefficient, simple/complex.
+
+### Refined Confidence Formula
+
+```
+confidence = 0.3 * coverage      (keyword match ratio)
+           + 0.2 * volume        (min(1.0, evidence_count / 3.0))
+           + 0.3 * agreement     (average agreement score)
+           + 0.2 * (1 - penalty) (contradiction penalty, max 0.4)
+```
+
+### Files Created
+
+| File | Description |
+|------|-------------|
+| `src/answer/evidence_normalizer.h` | `NormalizedClaim` struct, `EvidenceNormalizer` class, `agreement_score()`, `contradicts()` |
+| `src/answer/evidence_normalizer.cpp` | Domain keyword vocabularies, normalization, agreement scoring, directional opposite detection |
+
+### Files Modified
+
+| File | What Changed |
+|------|-------------|
+| `src/answer/answer_validator.h` | Added `EvidenceAnalysis` struct, `analyze_evidence()`, `compute_refined_confidence()`. Removed old `detect_conflicts()`. |
+| `src/answer/answer_validator.cpp` | Rewritten to use `EvidenceNormalizer` for claim-level analysis |
+| `src/cli/commands.cpp` | Pipeline uses `analyze_evidence()` + `compute_refined_confidence()` instead of old `detect_conflicts()` |
+| `CMakeLists.txt` | Added `evidence_normalizer.cpp` |
+
+### Integration Test Results
+
+All 67 tests pass: `Results: 67 passed, 0 failed, 67 total`
+
+### Example Output
+
+```json
+"answer": {
+    "text": "Stockholm is situated on the eastern coast of Sweden...",
+    "confidence": 0.70,
+    "validated": true,
+    "note": "10 contradiction(s) detected. 37 agreement(s)."
+}
+```
