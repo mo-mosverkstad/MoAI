@@ -80,9 +80,12 @@ static std::vector<ChunkType> preferred_chunks_for(Property prop) {
         case Property::DEFINITION:  return {ChunkType::DEFINITION, ChunkType::GENERAL};
         case Property::TIME:        return {ChunkType::TEMPORAL, ChunkType::HISTORY};
         case Property::HISTORY:     return {ChunkType::HISTORY, ChunkType::TEMPORAL};
-        case Property::FUNCTION:    return {ChunkType::PROCEDURE, ChunkType::DEFINITION};
+        case Property::FUNCTION:    return {ChunkType::FUNCTION, ChunkType::PROCEDURE, ChunkType::DEFINITION};
         case Property::COMPOSITION: return {ChunkType::DEFINITION, ChunkType::GENERAL};
-        case Property::USAGE:       return {ChunkType::PROCEDURE, ChunkType::GENERAL};
+        case Property::USAGE:       return {ChunkType::USAGE, ChunkType::PROCEDURE, ChunkType::GENERAL};
+        case Property::ADVANTAGES:  return {ChunkType::ADVANTAGES, ChunkType::GENERAL};
+        case Property::LIMITATIONS: return {ChunkType::LIMITATIONS, ChunkType::GENERAL};
+        case Property::COMPARISON:  return {ChunkType::ADVANTAGES, ChunkType::LIMITATIONS, ChunkType::GENERAL};
         default:                    return {};
     }
 }
@@ -354,37 +357,168 @@ Answer AnswerSynthesizer::synthesize_general(
     return {text, compute_confidence(evidence, need.keywords), need.property};
 }
 
+// ── Typed synthesizers: ADVANTAGES, LIMITATIONS, USAGE, HISTORY, COMPARISON ──
+
+static std::vector<std::string> scored_segments(
+    const std::vector<Evidence>& evidence,
+    const std::vector<std::string>& keywords,
+    const std::string& entity_lower,
+    const std::vector<std::string>& boost_words,
+    size_t max_segs, size_t max_chars)
+{
+    struct Scored { double score; std::string text; };
+    std::vector<Scored> all;
+    for (auto& e : evidence) {
+        auto segs = split_into_segments(e.text);
+        for (auto& s : segs) {
+            // Skip headings and very short fragments
+            if (!s.empty() && s[0] == '#') continue;
+            if (s.size() < 30) continue;
+            std::string lower = to_lower(s);
+            double sc = 0.0;
+            for (auto& k : keywords)
+                if (contains_word(lower, k)) sc += 3.0;
+            if (!entity_lower.empty() && contains_word(lower, entity_lower)) sc += 4.0;
+            for (auto& bw : boost_words)
+                if (lower.find(bw) != std::string::npos) sc += 2.0;
+            // Prefer substantive sentences over bare labels
+            if (s.size() > 60) sc += 1.0;
+            if (sc > 0.0) all.push_back({sc, s});
+        }
+    }
+    std::sort(all.begin(), all.end(),
+              [](auto& a, auto& b) { return a.score > b.score; });
+    std::vector<std::string> result;
+    size_t chars = 0;
+    for (size_t i = 0; i < max_segs && i < all.size(); i++) {
+        result.push_back(all[i].text);
+        chars += all[i].text.size();
+        if (chars > max_chars) break;
+    }
+    return result;
+}
+
+Answer AnswerSynthesizer::synthesize_advantages(
+    const InformationNeed& need, const std::vector<Evidence>& evidence) const
+{
+    for (auto& e : evidence) {
+        if (e.type == ChunkType::ADVANTAGES && e.text.size() > 50) {
+            std::string text = e.text;
+            if (text.size() > 700) text.resize(700);
+            return {text, compute_confidence(evidence, need.keywords), Property::ADVANTAGES};
+        }
+    }
+    auto segs = scored_segments(evidence, need.keywords, to_lower(need.entity),
+        {"advantage", "benefit", "strength", "widely", "proven", "mature",
+         "standardiz", "reliable", "powerful"}, 6, 600);
+    std::string text;
+    for (auto& s : segs) { if (!text.empty()) text += " "; text += s; }
+    if (text.empty()) text = "No advantages information found.";
+    return {text, compute_confidence(evidence, need.keywords), Property::ADVANTAGES};
+}
+
+Answer AnswerSynthesizer::synthesize_limitations(
+    const InformationNeed& need, const std::vector<Evidence>& evidence) const
+{
+    // First: prefer LIMITATIONS-typed chunks directly
+    for (auto& e : evidence) {
+        if (e.type == ChunkType::LIMITATIONS && e.text.size() > 50) {
+            std::string text = e.text;
+            if (text.size() > 700) text.resize(700);
+            return {text, compute_confidence(evidence, need.keywords), Property::LIMITATIONS};
+        }
+    }
+    // Fallback: score segments
+    auto segs = scored_segments(evidence, need.keywords, to_lower(need.entity),
+        {"limitation", "drawback", "disadvantage", "lack", "not suitable",
+         "weaker", "less mature", "vendor lock", "costly"}, 6, 600);
+    std::string text;
+    for (auto& s : segs) { if (!text.empty()) text += " "; text += s; }
+    if (text.empty()) text = "No limitations information found.";
+    return {text, compute_confidence(evidence, need.keywords), Property::LIMITATIONS};
+}
+
+Answer AnswerSynthesizer::synthesize_usage(
+    const InformationNeed& need, const std::vector<Evidence>& evidence) const
+{
+    for (auto& e : evidence) {
+        if (e.type == ChunkType::USAGE && e.text.size() > 50) {
+            std::string text = e.text;
+            if (text.size() > 700) text.resize(700);
+            return {text, compute_confidence(evidence, need.keywords), Property::USAGE};
+        }
+    }
+    auto segs = scored_segments(evidence, need.keywords, to_lower(need.entity),
+        {"used for", "use case", "beginner", "start with", "recommend",
+         "suitable", "learning path", "best for"}, 6, 600);
+    std::string text;
+    for (auto& s : segs) { if (!text.empty()) text += " "; text += s; }
+    if (text.empty()) text = "No usage information found.";
+    return {text, compute_confidence(evidence, need.keywords), Property::USAGE};
+}
+
+Answer AnswerSynthesizer::synthesize_history(
+    const InformationNeed& need, const std::vector<Evidence>& evidence) const
+{
+    auto filtered = filter_by_type(evidence,
+        {ChunkType::HISTORY, ChunkType::TEMPORAL, ChunkType::GENERAL});
+    auto segs = scored_segments(filtered, need.keywords, to_lower(need.entity),
+        {"history", "origin", "founded", "century", "developed",
+         "introduced", "evolved", "heritage"}, 4, 500);
+    std::string text;
+    for (auto& s : segs) { if (!text.empty()) text += " "; text += s; }
+    if (text.empty()) text = "No history information found.";
+    return {text, compute_confidence(filtered, need.keywords), Property::HISTORY};
+}
+
+Answer AnswerSynthesizer::synthesize_comparison(
+    const InformationNeed& need, const std::vector<Evidence>& evidence) const
+{
+    // For comparison, collect segments mentioning any of the keywords
+    auto segs = scored_segments(evidence, need.keywords, to_lower(need.entity),
+        {"vs", "compare", "difference", "better", "worse", "more", "less",
+         "affordable", "expensive", "cheaper"}, 6, 600);
+    std::string text;
+    for (auto& s : segs) { if (!text.empty()) text += " "; text += s; }
+    if (text.empty()) text = "No comparison information found.";
+    return {text, compute_confidence(evidence, need.keywords), Property::COMPARISON};
+}
+
 // ── Main dispatch ──
 
 Answer AnswerSynthesizer::synthesize(
     const InformationNeed& need, const std::vector<Evidence>& evidence) const
 {
     if (evidence.empty())
-        return {"No relevant information found.", 0.0, need.property};
+        return {"No relevant information found.", 0.0, need.property, {}};
+
+    Answer answer;
 
     // Dispatch by property first, then refine by form
     switch (need.property) {
-        case Property::LOCATION:
-            return synthesize_location(need, evidence);
-        case Property::DEFINITION:
-            return synthesize_definition(need, evidence);
-        case Property::TIME:
-            return synthesize_temporal(need, evidence);
-        case Property::COMPARISON:
-            return synthesize_general(need, evidence); // TODO: dedicated comparator
+        case Property::LOCATION:    answer = synthesize_location(need, evidence); break;
+        case Property::DEFINITION:  answer = synthesize_definition(need, evidence); break;
+        case Property::TIME:        answer = synthesize_temporal(need, evidence); break;
+        case Property::ADVANTAGES:  answer = synthesize_advantages(need, evidence); break;
+        case Property::LIMITATIONS: answer = synthesize_limitations(need, evidence); break;
+        case Property::USAGE:       answer = synthesize_usage(need, evidence); break;
+        case Property::HISTORY:     answer = synthesize_history(need, evidence); break;
+        case Property::COMPARISON:  answer = synthesize_comparison(need, evidence); break;
         default:
+            switch (need.form) {
+                case AnswerForm::EXPLANATION: answer = synthesize_explanation(need, evidence); break;
+                case AnswerForm::LIST:        answer = synthesize_list(need, evidence); break;
+                case AnswerForm::SHORT_FACT:  answer = synthesize_location(need, evidence); break;
+                default:                      answer = synthesize_general(need, evidence); break;
+            }
             break;
     }
 
-    // Dispatch by answer form
-    switch (need.form) {
-        case AnswerForm::EXPLANATION:
-            return synthesize_explanation(need, evidence);
-        case AnswerForm::LIST:
-            return synthesize_list(need, evidence);
-        case AnswerForm::SHORT_FACT:
-            return synthesize_location(need, evidence); // reuse concise extractor
-        default:
-            return synthesize_general(need, evidence);
+    // Collect unique source doc IDs from evidence
+    std::unordered_set<uint32_t> seen;
+    for (auto& e : evidence) {
+        if (seen.insert(e.docId).second)
+            answer.sources.push_back(e.docId);
     }
+    return answer;
 }

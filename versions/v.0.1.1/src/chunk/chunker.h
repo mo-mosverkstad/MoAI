@@ -7,8 +7,12 @@
 enum class ChunkType {
     LOCATION,
     DEFINITION,
+    FUNCTION,
+    USAGE,
     HISTORY,
     TEMPORAL,
+    ADVANTAGES,
+    LIMITATIONS,
     PERSON,
     PROCEDURE,
     GENERAL

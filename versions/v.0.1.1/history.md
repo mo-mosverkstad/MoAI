@@ -220,3 +220,101 @@ This enables natural follow-up questions like:
 | `src/chunk/chunker.cpp` | Mechanism 2 already complete from Steps 1–3 |
 | `src/answer/answer_synthesizer.cpp` | Mechanism 3 already complete from Steps 1–3 |
 | `src/conversation/conversation_state.h/.cpp` | Already implemented, just needed wiring |
+
+---
+
+## Step 5: Property Detection Heuristics, Chunk Typing, and Typed Synthesizers
+
+### Goal
+
+Complete the property-driven architecture with three improvements:
+1. Expanded property detection prototypes
+2. New chunk types for FUNCTION, USAGE, ADVANTAGES, LIMITATIONS
+3. Dedicated answer synthesizers for all major property types
+
+### 5.1 Property Detection Heuristics
+
+Expanded `PropertyPrototype` signal vocabularies in `query_analyzer.cpp`:
+- LOCATION: added `sea`, `lake`, `island`
+- TIME: added `period`, `date`
+- ADVANTAGES: added `widely used`
+- USAGE: added `suitable`
+- HISTORY: added `developed`, `introduced`
+- DEFINITION: added `means`
+- COMPARISON: added `better than`
+
+### 5.2 Chunk Typing Rules
+
+Added 4 new `ChunkType` values: `FUNCTION`, `USAGE`, `ADVANTAGES`, `LIMITATIONS`.
+
+New `classify_chunk` signals:
+- ADVANTAGES: `advantage`, `benefit`, `strength`, `widely used`, `mature ecosystem`
+- LIMITATIONS: `limitation`, `drawback`, `disadvantage`, `vendor lock`
+- USAGE: `used for`, `use case`, `beginner`, `learning path`, `recommend`
+- FUNCTION: `ensures`, `mechanism`, `handshake`, `retransmit`, `flow control`, `congestion`, `checksum`
+
+Updated `preferred_types_for` to map properties to the new chunk types.
+
+### 5.3 Typed Answer Synthesizers
+
+Added 5 dedicated synthesizers using a shared `scored_segments` helper:
+
+| Synthesizer | Boost Words | Max Segments |
+|-------------|-------------|-------------|
+| `synthesize_advantages` | advantage, benefit, strength, widely, proven, mature, standardiz, reliable, powerful | 6 |
+| `synthesize_limitations` | limitation, drawback, disadvantage, lack, not suitable, weaker, vendor lock, costly | 6 |
+| `synthesize_usage` | used for, use case, beginner, start with, recommend, suitable, learning path, best for | 6 |
+| `synthesize_history` | history, origin, founded, century, developed, introduced, evolved, heritage | 4 |
+| `synthesize_comparison` | vs, compare, difference, better, worse, more, less, affordable, expensive, cheaper | 6 |
+
+### Files Modified
+
+| File | What Changed |
+|------|-------------|
+| `src/query/query_analyzer.cpp` | Expanded property prototype signal vocabularies |
+| `src/chunk/chunker.h` | Added `FUNCTION`, `USAGE`, `ADVANTAGES`, `LIMITATIONS` to `ChunkType` enum |
+| `src/chunk/chunker.cpp` | Added classify signals for new chunk types; updated `preferred_types_for` |
+| `src/answer/answer_synthesizer.h` | Added 5 new synthesizer declarations |
+| `src/answer/answer_synthesizer.cpp` | Added `scored_segments` helper, 5 typed synthesizers, updated `preferred_chunks_for` and dispatch |
+
+### 5.4 JSON Structured Answers + Source Tracking
+
+Added `sources` field to `Answer` struct — a list of unique document IDs that contributed evidence to the answer. The main `synthesize` dispatch now collects doc IDs from evidence after synthesis.
+
+**JSON output format (new):**
+
+```json
+{
+  "query": "where is stockholm",
+  "retrieval": "hybrid",
+  "needs": [
+    {
+      "entity": "stockholm",
+      "property": "LOCATION",
+      "property_score": 3.0,
+      "form": "SHORT_FACT",
+      "answer": {
+        "text": "Stockholm is situated on the eastern coast...",
+        "confidence": 0.95
+      },
+      "sources": [1, 3, 7]
+    }
+  ],
+  "confidence": 0.95
+}
+```
+
+**Changes vs previous JSON format:**
+- `answer` is now a nested object with `text` and `confidence` (was flat `"answer": "..."` + `"confidence": 0.95`)
+- Added `sources` array with document IDs used as evidence
+- Entity string is now properly escaped in JSON
+
+**Plain text output** also shows `Sources: [1, 3, 7]` line.
+
+### Files Modified
+
+| File | What Changed |
+|------|-------------|
+| `src/answer/answer_synthesizer.h` | Added `std::vector<uint32_t> sources` to `Answer` struct |
+| `src/answer/answer_synthesizer.cpp` | Main `synthesize` dispatch restructured to collect unique doc IDs from evidence |
+| `src/cli/commands.cpp` | JSON output uses nested `answer` object + `sources` array; plain text shows sources |

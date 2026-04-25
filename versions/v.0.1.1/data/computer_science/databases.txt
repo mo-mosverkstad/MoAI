@@ -71,17 +71,16 @@ Types of NoSQL systems:
 
 NoSQL systems are widely used in big-data environments, real-time analytics, caching, and large-scale distributed systems.
 
-## Limitations of NoSQL Databases
+## Limitations and Drawbacks of NoSQL Databases
 
-NoSQL databases have several important limitations and drawbacks:
-
-- Lack of standardization: there is no universal query language like SQL; each NoSQL system has its own API and query syntax, making skills less transferable.
+The following are the main limitations and drawbacks of NoSQL databases:
+- Lack of standardization: NoSQL has no universal query language like SQL; each NoSQL system has its own API and query syntax, making skills less transferable.
 - Weaker consistency guarantees: many NoSQL systems use eventual consistency rather than strong ACID transactions, which can lead to stale reads and data conflicts.
 - Limited join support: NoSQL databases generally do not support complex joins across collections, requiring data denormalization and application-level joins.
-- Schema flexibility can be a drawback: without enforced schemas, data quality issues and inconsistencies can accumulate over time.
+- Schema flexibility can be a drawback of NoSQL: without enforced schemas, data quality issues and inconsistencies can accumulate over time.
 - Less mature tooling: compared to SQL databases, NoSQL systems often have fewer monitoring, backup, and administration tools.
 - Not suitable for complex queries: ad-hoc analytical queries and multi-table aggregations are difficult or impossible in most NoSQL systems.
-- Vendor lock-in: proprietary APIs mean migrating between NoSQL systems is often costly and complex.
+- Vendor lock-in: proprietary NoSQL APIs mean migrating between NoSQL systems is often costly and complex.
 
 ## ACID Properties
 

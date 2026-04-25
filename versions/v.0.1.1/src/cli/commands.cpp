@@ -204,17 +204,16 @@ int run_cli(int argc, char** argv) {
                 for (auto& [id, sc] : doc_scores)
                     if (sc > max_bm25) max_bm25 = sc;
 
-                // Fuse ANN scores
+                // Fuse ANN scores — only boost docs that BM25 also found
                 for (uint32_t id : ann_ids) {
                     uint32_t doc = id + 1;
+                    if (!doc_scores.count(doc)) continue; // skip ANN-only docs
                     const auto& vec = hnsw->get_vector(id);
                     float dot = 0.0f;
                     for (size_t i = 0; i < q_emb.size(); i++)
                         dot += q_emb[i] * vec[i];
                     double ann_norm = (static_cast<double>(dot) + 1.0) * 0.5;
-                    double bm25_norm = 0.0;
-                    if (doc_scores.count(doc) && max_bm25 > 0)
-                        bm25_norm = doc_scores[doc] / max_bm25;
+                    double bm25_norm = (max_bm25 > 0) ? doc_scores[doc] / max_bm25 : 0.0;
                     doc_scores[doc] = 0.7 * bm25_norm + 0.3 * ann_norm;
                 }
 
@@ -274,19 +273,27 @@ int run_cli(int argc, char** argv) {
                 }
                 return r;
             };
-            std::cout << "{\n  \"query\": \"" << query << "\",\n"
+            std::cout << "{\n  \"query\": \"" << escaped(query) << "\",\n"
                       << "  \"retrieval\": \"" << (use_hybrid ? "hybrid" : "bm25") << "\",\n"
                       << "  \"needs\": [\n";
             for (size_t i = 0; i < needs.size(); i++) {
                 auto& n = needs[i];
                 auto& a = composite.parts[i];
                 std::cout << "    {\n"
-                          << "      \"entity\": \"" << n.entity << "\",\n"
+                          << "      \"entity\": \"" << escaped(n.entity) << "\",\n"
                           << "      \"property\": \"" << property_str(n.property) << "\",\n"
                           << "      \"property_score\": " << std::fixed << std::setprecision(1) << n.property_score << ",\n"
                           << "      \"form\": \"" << answer_form_str(n.form) << "\",\n"
-                          << "      \"confidence\": " << std::fixed << std::setprecision(2) << a.confidence << ",\n"
-                          << "      \"answer\": \"" << escaped(a.text) << "\"\n"
+                          << "      \"answer\": {\n"
+                          << "        \"text\": \"" << escaped(a.text) << "\",\n"
+                          << "        \"confidence\": " << std::fixed << std::setprecision(2) << a.confidence << "\n"
+                          << "      },\n"
+                          << "      \"sources\": [";
+                for (size_t j = 0; j < a.sources.size(); j++) {
+                    if (j > 0) std::cout << ", ";
+                    std::cout << a.sources[j];
+                }
+                std::cout << "]\n"
                           << "    }";
                 if (i + 1 < needs.size()) std::cout << ",";
                 std::cout << "\n";
@@ -305,6 +312,12 @@ int run_cli(int argc, char** argv) {
                           << "Entity: " << n.entity << "\n"
                           << "Confidence: " << std::fixed << std::setprecision(2)
                           << a.confidence << "\n"
+                          << "Sources: [";
+                for (size_t j = 0; j < a.sources.size(); j++) {
+                    if (j > 0) std::cout << ", ";
+                    std::cout << a.sources[j];
+                }
+                std::cout << "]\n"
                           << a.text << "\n\n";
             }
         }

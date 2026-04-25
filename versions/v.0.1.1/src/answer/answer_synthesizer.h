@@ -15,6 +15,7 @@ struct Answer {
     std::string text;
     double confidence;
     Property property;
+    std::vector<uint32_t> sources;  // doc IDs used as evidence
 };
 
 struct CompositeAnswer {
@@ -39,6 +40,16 @@ private:
                                   const std::vector<Evidence>& evidence) const;
     Answer synthesize_list(const InformationNeed& need,
                            const std::vector<Evidence>& evidence) const;
+    Answer synthesize_advantages(const InformationNeed& need,
+                                 const std::vector<Evidence>& evidence) const;
+    Answer synthesize_limitations(const InformationNeed& need,
+                                  const std::vector<Evidence>& evidence) const;
+    Answer synthesize_usage(const InformationNeed& need,
+                            const std::vector<Evidence>& evidence) const;
+    Answer synthesize_history(const InformationNeed& need,
+                              const std::vector<Evidence>& evidence) const;
+    Answer synthesize_comparison(const InformationNeed& need,
+                                 const std::vector<Evidence>& evidence) const;
     Answer synthesize_general(const InformationNeed& need,
                               const std::vector<Evidence>& evidence) const;
 

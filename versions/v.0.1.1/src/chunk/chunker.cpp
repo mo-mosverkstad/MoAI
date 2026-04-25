@@ -53,13 +53,36 @@ ChunkType Chunker::classify_chunk(const std::string& paragraph) const {
     // Location signals
     if (has_any(lower, {"located", "capital", "coast", "island", "city",
                         "region", "country", "bridge", "port", "archipelago",
-                        "built across", "connected to"}))
+                        "built across", "connected to", "situated",
+                        "eastern", "western", "southern", "northern"}))
         return ChunkType::LOCATION;
+
+    // Advantages signals
+    if (has_any(lower, {"advantage", "benefit", "strength", "why is",
+                        "still widely", "widely used", "proven",
+                        "mature ecosystem"}))
+        return ChunkType::ADVANTAGES;
+
+    // Limitations signals
+    if (has_any(lower, {"limitation", "drawback", "disadvantage", "weakness",
+                        "not suitable", "lack of", "vendor lock"}))
+        return ChunkType::LIMITATIONS;
+
+    // Usage signals
+    if (has_any(lower, {"used for", "use case", "suitable for", "application",
+                        "beginner", "start with", "recommend", "learning path"}))
+        return ChunkType::USAGE;
+
+    // Function / mechanism signals
+    if (has_any(lower, {"ensures", "mechanism", "how does", "how do",
+                        "three-way", "handshake", "retransmit",
+                        "flow control", "congestion", "checksum"}))
+        return ChunkType::FUNCTION;
 
     // Definition signals
     if (has_any(lower, {"is a ", "is an ", "refers to", "defined as",
-                        "are step", "are organized", "collection of",
-                        "aims to", "studies how"}))
+                        "are organized", "collection of",
+                        "aims to", "studies how", "means "}))
         return ChunkType::DEFINITION;
 
     // Person signals
@@ -69,9 +92,10 @@ ChunkType Chunker::classify_chunk(const std::string& paragraph) const {
         return ChunkType::PERSON;
 
     // Temporal signals
-    if (has_any(lower, {"century", "1642", "1990", "ancient", "early",
-                        "modern computing", "history", "evolution",
-                        "emerged", "invented"}))
+    if (has_any(lower, {"century", "1642", "1947", "1990", "ancient", "early",
+                        "modern computing", "evolution",
+                        "emerged", "invented", "year ", "1960", "1970",
+                        "1980", "1989", "1991", "1995", "2000"}))
         return ChunkType::TEMPORAL;
 
     // Procedure signals
@@ -81,7 +105,8 @@ ChunkType Chunker::classify_chunk(const std::string& paragraph) const {
 
     // History signals
     if (has_any(lower, {"history", "heritage", "medieval", "centuries",
-                        "political", "economic center", "founded"}))
+                        "political", "economic center", "founded",
+                        "origin", "developed", "introduced"}))
         return ChunkType::HISTORY;
 
     return ChunkType::GENERAL;
@@ -118,11 +143,12 @@ static std::unordered_set<int> preferred_types_for(Property prop) {
         case Property::DEFINITION:  return s({ChunkType::DEFINITION, ChunkType::GENERAL});
         case Property::TIME:        return s({ChunkType::TEMPORAL, ChunkType::HISTORY});
         case Property::HISTORY:     return s({ChunkType::HISTORY, ChunkType::TEMPORAL});
-        case Property::FUNCTION:    return s({ChunkType::PROCEDURE, ChunkType::DEFINITION});
+        case Property::FUNCTION:    return s({ChunkType::FUNCTION, ChunkType::PROCEDURE, ChunkType::DEFINITION});
         case Property::COMPOSITION: return s({ChunkType::DEFINITION, ChunkType::GENERAL});
-        case Property::USAGE:       return s({ChunkType::PROCEDURE, ChunkType::GENERAL});
-        case Property::ADVANTAGES:  return s({ChunkType::GENERAL, ChunkType::DEFINITION});
-        case Property::LIMITATIONS: return s({ChunkType::GENERAL, ChunkType::DEFINITION});
+        case Property::USAGE:       return s({ChunkType::USAGE, ChunkType::PROCEDURE, ChunkType::GENERAL});
+        case Property::ADVANTAGES:  return s({ChunkType::ADVANTAGES, ChunkType::GENERAL});
+        case Property::LIMITATIONS: return s({ChunkType::LIMITATIONS, ChunkType::GENERAL});
+        case Property::COMPARISON:  return s({ChunkType::ADVANTAGES, ChunkType::LIMITATIONS, ChunkType::GENERAL});
         default:                    return std::unordered_set<int>{};
     }
 }
