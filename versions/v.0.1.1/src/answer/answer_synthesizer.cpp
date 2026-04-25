@@ -200,17 +200,46 @@ Answer AnswerSynthesizer::synthesize_location(
         auto segs = split_into_segments(e.text);
         for (auto& s : segs) {
             std::string lower = to_lower(s);
+            // Hard filter: skip segments that don't mention the entity
+            if (!entity_lower.empty() && !contains_word(lower, entity_lower))
+                continue;
             double sc = 0.0;
             for (auto& k : need.keywords)
                 if (contains_word(lower, k)) sc += 3.0;
-            if (!entity_lower.empty() && contains_word(lower, entity_lower)) sc += 2.0;
-            // Boost location-specific language
-            if (contains_word(lower, "located") || contains_word(lower, "coast") ||
-                contains_word(lower, "sea") || contains_word(lower, "capital") ||
-                contains_word(lower, "island") || contains_word(lower, "region") ||
-                lower.find("built across") != std::string::npos ||
-                lower.find("situated") != std::string::npos)
-                sc += 5.0;
+            if (!entity_lower.empty()) sc += 4.0; // entity already confirmed above
+            // Location-specific language — count each match individually
+            static const std::vector<std::string> loc_words = {
+                "located", "coast", "eastern", "western", "southern", "northern",
+                "situated", "built across", "latitude", "longitude"
+            };
+            static const std::vector<std::string> loc_nouns = {
+                "sea", "ocean", "lake", "river", "island", "peninsula",
+                "region", "border", "strait"
+            };
+            double loc_sc = 0.0;
+            for (auto& lw : loc_words)
+                if (lower.find(lw) != std::string::npos) loc_sc += 5.0;
+            for (auto& ln : loc_nouns)
+                if (contains_word(lower, ln)) loc_sc += 3.0;
+            // "capital" only counts as location when near entity
+            if (contains_word(lower, "capital") && !entity_lower.empty() &&
+                contains_word(lower, entity_lower))
+                loc_sc += 4.0;
+            sc += loc_sc;
+            // Penalize non-location content when no location words present
+            if (loc_sc == 0.0) {
+                if (lower.find("important") != std::string::npos ||
+                    lower.find("nobel") != std::string::npos ||
+                    lower.find("museum") != std::string::npos ||
+                    lower.find("cultural") != std::string::npos ||
+                    lower.find("startup") != std::string::npos ||
+                    lower.find("tech hub") != std::string::npos ||
+                    lower.find("green area") != std::string::npos ||
+                    lower.find("nature park") != std::string::npos ||
+                    lower.find("ferry") != std::string::npos ||
+                    lower.find("airport") != std::string::npos)
+                    sc -= 5.0;
+            }
             if (s.size() > 30 && s.size() < 300) sc += 0.5;
             if (!s.empty() && s[0] == '#') sc -= 2.0;
             if (sc > 0.0) all_scored.push_back({sc, s});

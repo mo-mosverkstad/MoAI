@@ -97,6 +97,13 @@ int run_cli(int argc, char** argv) {
 
         auto needs = analyzer.analyze(query);
 
+        // Apply conversation memory (resolve ellipsis / follow-ups)
+        // Persisted to file so it works across separate process invocations
+        std::string conv_path = segdir + "/../.conversation";
+        ConversationState conversation;
+        conversation.load(conv_path);
+        conversation.apply(needs);
+
         // 2. Set up retrieval: try hybrid (BM25+HNSW), fall back to BM25-only
         BM25 bm25(reader);
         Chunker chunker;
@@ -115,8 +122,17 @@ int run_cli(int argc, char** argv) {
         if (std::filesystem::exists(encoder_path) &&
             std::filesystem::exists(embeddir + "/vocab.txt")) {
             vocab.load(embeddir + "/vocab.txt");
-            // Neural encoder path handled below via EncoderTrainer
-            use_hybrid = false; // neural hybrid handled separately
+            EncoderTrainer encoder(vocab, 128, 4, 2, 256);
+            encoder.load(encoder_path);
+
+            hnsw = std::make_unique<HNSWIndex>(
+                static_cast<uint32_t>(encoder.dim()), 16, 200, 100);
+            uint32_t N = reader.doc_count();
+            for (uint32_t d = 1; d <= N; d++)
+                hnsw->add_point(encoder.encode(reader.get_document_text(d)));
+
+            use_hybrid = true;
+            std::cerr << "Using hybrid retrieval (BM25 + neural HNSW)\n";
         } else
 #endif
         if (std::filesystem::exists(embeddir + "/model.bin") &&
@@ -153,16 +169,35 @@ int run_cli(int argc, char** argv) {
             for (auto& [docId, score] : bm25_results)
                 doc_scores[docId] = score;
 
-            if (use_hybrid && hnsw && emb_model) {
-                // Embed the need's keywords as a query vector
-                Tokenizer tok;
-                std::vector<float> bow(vocab.size(), 0.0f);
-                for (auto& kw : need.keywords) {
-                    int vid = vocab.id(kw);
-                    if (vid >= 0) bow[vid] += 1.0f;
+            if (use_hybrid && hnsw) {
+                std::vector<float> q_emb;
+#ifdef HAS_TORCH
+                // Prefer neural encoder for query embedding
+                std::string enc_path = embeddir + "/encoder.pt";
+                if (std::filesystem::exists(enc_path)) {
+                    EncoderTrainer encoder(vocab, 128, 4, 2, 256);
+                    encoder.load(enc_path);
+                    // Encode the keywords as a query sentence
+                    std::string query_text;
+                    for (auto& kw : need.keywords) {
+                        if (!query_text.empty()) query_text += " ";
+                        query_text += kw;
+                    }
+                    q_emb = encoder.encode(query_text);
+                } else
+#endif
+                if (emb_model) {
+                    Tokenizer tok;
+                    std::vector<float> bow(vocab.size(), 0.0f);
+                    for (auto& kw : need.keywords) {
+                        int vid = vocab.id(kw);
+                        if (vid >= 0) bow[vid] += 1.0f;
+                    }
+                    q_emb = emb_model->embed(bow);
                 }
-                auto q_emb = emb_model->embed(bow);
-                auto ann_ids = hnsw->search(q_emb, 10);
+
+                if (!q_emb.empty()) {
+                    auto ann_ids = hnsw->search(q_emb, 10);
 
                 // Normalize BM25
                 double max_bm25 = 0.0;
@@ -183,13 +218,14 @@ int run_cli(int argc, char** argv) {
                     doc_scores[doc] = 0.7 * bm25_norm + 0.3 * ann_norm;
                 }
 
-                // Re-normalize BM25-only docs
-                for (auto& [doc, sc] : doc_scores) {
-                    if (max_bm25 > 0) {
-                        bool was_ann = false;
-                        for (uint32_t id : ann_ids)
-                            if (id + 1 == doc) { was_ann = true; break; }
-                        if (!was_ann) sc = 0.7 * (sc / max_bm25);
+                    // Re-normalize BM25-only docs
+                    for (auto& [doc, sc] : doc_scores) {
+                        if (max_bm25 > 0) {
+                            bool was_ann = false;
+                            for (uint32_t id : ann_ids)
+                                if (id + 1 == doc) { was_ann = true; break; }
+                            if (!was_ann) sc = 0.7 * (sc / max_bm25);
+                        }
                     }
                 }
             }
@@ -216,9 +252,16 @@ int run_cli(int argc, char** argv) {
 
             // --- Synthesize ---
             composite.parts.push_back(synthesizer.synthesize(need, evidence));
+
+            // Update conversation memory
+            conversation.update(need);
         }
 
-        // 4. Output
+        // 4. Save conversation memory for next invocation
+        if (!needs.empty())
+            conversation.save(conv_path);
+
+        // 5. Output
         if (json) {
             auto escaped = [](const std::string& s) {
                 std::string r;
@@ -240,6 +283,7 @@ int run_cli(int argc, char** argv) {
                 std::cout << "    {\n"
                           << "      \"entity\": \"" << n.entity << "\",\n"
                           << "      \"property\": \"" << property_str(n.property) << "\",\n"
+                          << "      \"property_score\": " << std::fixed << std::setprecision(1) << n.property_score << ",\n"
                           << "      \"form\": \"" << answer_form_str(n.form) << "\",\n"
                           << "      \"confidence\": " << std::fixed << std::setprecision(2) << a.confidence << ",\n"
                           << "      \"answer\": \"" << escaped(a.text) << "\"\n"

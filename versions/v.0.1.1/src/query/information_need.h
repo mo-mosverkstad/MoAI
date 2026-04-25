@@ -31,6 +31,7 @@ struct InformationNeed {
     Property property;
     AnswerForm form;
     std::vector<std::string> keywords;
+    double property_score = 1.0;  // confidence in property detection
 };
 
 inline const char* property_str(Property p) {

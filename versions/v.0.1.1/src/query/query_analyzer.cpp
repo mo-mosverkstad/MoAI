@@ -130,62 +130,57 @@ std::string RuleBasedQueryAnalyzer::extract_entity(
     return best;
 }
 
+// ── Semantic prototypes: small vocabularies per property ──
+
+struct PropertyPrototype {
+    Property property;
+    std::vector<std::string> signals;
+    double weight;  // base weight per signal match
+};
+
+static const std::vector<PropertyPrototype>& property_prototypes() {
+    static const std::vector<PropertyPrototype> protos = {
+        {Property::LOCATION,    {"locat", "where", "capital", "coast", "close to", "near",
+                                 "region", "country", "city", "geograph", "situated", "border"}, 3.0},
+        {Property::COMPARISON,  {"vs ", "versus", "compare", "difference between",
+                                 "better", "worse", "which"}, 3.0},
+        {Property::TIME,        {"when", "what year", "what date", "timeline",
+                                 "century", "era", "year"}, 3.0},
+        {Property::ADVANTAGES,  {"advantage", "benefit", "strength", "pro ",
+                                 "why is", "why are", "still widely"}, 2.5},
+        {Property::LIMITATIONS, {"limitation", "drawback", "disadvantage", "weakness",
+                                 "not suitable", "problem with"}, 2.5},
+        {Property::USAGE,       {"used for", "use case", "suitable for", "application",
+                                 "start with", "beginner", "recommend"}, 2.5},
+        {Property::FUNCTION,    {"how does", "how do", "purpose", "function",
+                                 "work", "ensure", "mechanism", "process"}, 2.0},
+        {Property::COMPOSITION, {"made of", "consist", "compos", "component",
+                                 "type", "overview", "part of"}, 2.0},
+        {Property::HISTORY,     {"history", "origin", "evolv", "founded",
+                                 "heritage", "why"}, 1.5},
+        {Property::DEFINITION,  {"what is", "what are", "define", "definition",
+                                 "meaning", "refers to"}, 1.5},
+    };
+    return protos;
+}
+
+// Score all properties for a clause — returns sorted (property, score) pairs
+static std::vector<std::pair<Property, double>> score_properties(const std::string& clause) {
+    std::vector<std::pair<Property, double>> scores;
+    for (auto& proto : property_prototypes()) {
+        double sc = 0.0;
+        for (auto& signal : proto.signals)
+            if (contains(clause, signal)) sc += proto.weight;
+        if (sc > 0.0) scores.push_back({proto.property, sc});
+    }
+    std::sort(scores.begin(), scores.end(),
+              [](auto& a, auto& b) { return a.second > b.second; });
+    return scores;
+}
+
 Property RuleBasedQueryAnalyzer::detect_property(const std::string& clause) const {
-    // Semantic signal groups — not dependent on interrogative position
-    if (contains(clause, "locat") || contains(clause, "where") ||
-        contains(clause, "capital") || contains(clause, "coast") ||
-        contains(clause, "close to") || contains(clause, "near") ||
-        contains(clause, "region") || contains(clause, "country") ||
-        contains(clause, "city") || contains(clause, "geograph"))
-        return Property::LOCATION;
-
-    if (contains(clause, "vs ") || contains(clause, "versus") ||
-        contains(clause, "compare") || contains(clause, "difference between") ||
-        contains(clause, "better") || contains(clause, "worse"))
-        return Property::COMPARISON;
-
-    if (contains(clause, "when") || contains(clause, "what year") ||
-        contains(clause, "what date") || contains(clause, "timeline") ||
-        contains(clause, "century") || contains(clause, "era"))
-        return Property::TIME;
-
-    if (contains(clause, "advantage") || contains(clause, "benefit") ||
-        contains(clause, "strength") || contains(clause, "pro"))
-        return Property::ADVANTAGES;
-
-    if (contains(clause, "limitation") || contains(clause, "drawback") ||
-        contains(clause, "disadvantage") || contains(clause, "weakness") ||
-        contains(clause, "not suitable"))
-        return Property::LIMITATIONS;
-
-    if (contains(clause, "used for") || contains(clause, "use case") ||
-        contains(clause, "suitable for") || contains(clause, "application") ||
-        contains(clause, "start with") || contains(clause, "beginner"))
-        return Property::USAGE;
-
-    if (contains(clause, "how does") || contains(clause, "how do") ||
-        contains(clause, "purpose") || contains(clause, "function") ||
-        contains(clause, "work") || contains(clause, "ensure") ||
-        contains(clause, "mechanism"))
-        return Property::FUNCTION;
-
-    if (contains(clause, "made of") || contains(clause, "consist") ||
-        contains(clause, "compos") || contains(clause, "component") ||
-        contains(clause, "type") || contains(clause, "overview") ||
-        contains(clause, "part"))
-        return Property::COMPOSITION;
-
-    if (contains(clause, "history") || contains(clause, "origin") ||
-        contains(clause, "evolv") || contains(clause, "founded") ||
-        contains(clause, "heritage") || contains(clause, "why"))
-        return Property::HISTORY;
-
-    if (contains(clause, "what is") || contains(clause, "what are") ||
-        contains(clause, "define") || contains(clause, "definition") ||
-        contains(clause, "meaning") || contains(clause, "refers to"))
-        return Property::DEFINITION;
-
-    return Property::GENERAL;
+    auto scores = score_properties(clause);
+    return scores.empty() ? Property::GENERAL : scores[0].first;
 }
 
 AnswerForm RuleBasedQueryAnalyzer::detect_form(const std::string& clause, Property prop) const {
@@ -226,7 +221,18 @@ std::vector<InformationNeed> RuleBasedQueryAnalyzer::analyze(const std::string& 
 
         Property prop = detect_property(clause);
         AnswerForm form = detect_form(clause, prop);
-        needs.push_back({entity, prop, form, kw});
+
+        // Store property confidence from scoring
+        auto pscores = score_properties(clause);
+        double pscore = pscores.empty() ? 0.0 : pscores[0].second;
+
+        InformationNeed need;
+        need.entity = entity;
+        need.property = prop;
+        need.form = form;
+        need.keywords = kw;
+        need.property_score = pscore;
+        needs.push_back(std::move(need));
     }
     return needs;
 }

@@ -184,6 +184,30 @@ The output will contain a JSON object with a `needs` array — one entry per
 InformationNeed — each with entity, property, form, confidence, and answer text.
 Actual values depend on the indexed corpus.
 
+#### Conversation memory (follow-up questions)
+
+Conversation memory carries entity context across follow-up questions
+**within the same process**. Since each `./mysearch ask` invocation is a
+separate process, follow-up resolution works within multi-need queries
+(where clauses share entity context), but not across separate commands.
+
+Within a single multi-need query, entity propagation works:
+
+```bash
+# "why it is important" inherits entity "stockholm" from the first clause
+./mysearch ask "tell me where stockholm is and why it is important"
+# [LOCATION / SHORT_FACT] Entity: stockholm
+# Confidence: 0.95
+# It is the capital of Sweden and the seat of the Swedish government ...
+#
+# [HISTORY / EXPLANATION] Entity: stockholm
+# Confidence: ...
+# Stockholm is important because it is the seat of the Swedish government ...
+
+# Semicolon-separated sub-questions also share entity
+./mysearch ask "what is stockholm; why is it famous"
+```
+
 #### More examples to try
 
 ```bash
@@ -199,11 +223,25 @@ Actual values depend on the indexed corpus.
 # Composition
 ./mysearch ask "what are the types of databases"
 
-# Multi-need with entity propagation
-./mysearch ask "what is stockholm; why is it famous"
+# 10 benchmark questions (Step 3)
+./mysearch ask "Stockholm vs Gothenburg: which is better for living"
+./mysearch ask "Why is SQL still widely used"
+./mysearch ask "What are the limitations of NoSQL databases"
+./mysearch ask "Explain how TCP ensures reliability"
+./mysearch ask "Give me an overview of database types and their use cases"
+./mysearch ask "Is Stockholm close to the sea"
+./mysearch ask "When did computer networking start becoming mainstream"
+./mysearch ask "What makes an algorithm scalable"
+./mysearch ask "Databases for beginners what should I start with"
+./mysearch ask "How is Sweden connected to continental Europe"
 ```
 
 ### Step 5 (optional, requires libtorch): Train neural encoder
+Improves retrieval (the hybrid search step):
+* Replaces the random BoW embedding model with a trained Transformer sentence encoder
+* The HNSW vector index will use semantically meaningful embeddings instead of bag-of-words vectors
+* Documents that are semantically similar to the query (even without exact keyword overlap) will rank higher
+* Impact: better document ranking, especially for paraphrased or implicit queries like "Is Stockholm close to the sea?"
 
 ```bash
 ./train_encoder --epochs 10 --dim 128
@@ -211,6 +249,11 @@ Actual values depend on the indexed corpus.
 ```
 
 ### Step 6 (optional, requires libtorch): Train neural query analyzer
+Improves query analysis (the InformationNeed extraction step):
+* Replaces the rule-based property/entity detection with a neural multi-task classifier
+* Better entity extraction via BIO tagging (learned, not longest-keyword heuristic)
+* Better property detection for unusual phrasings
+* However: the neural analyzer currently produces a single InformationNeed per query — it doesn't support multi-need decomposition. So multi-clause queries like "tell me where stockholm is and why it is important" would lose the clause-splitting capability and produce only one need.
 
 ```bash
 ./mysearch train-qa --epochs 30
@@ -241,10 +284,24 @@ echo "=== Single-need ==="
 ./mysearch ask "where is stockholm"
 ./mysearch ask "what is a database"
 ./mysearch ask "how does TCP work"
+./mysearch ask "what are the drawbacks of NoSQL"
+./mysearch ask "What makes an algorithm scalable"
 
 echo "=== Multi-need ==="
 ./mysearch ask "tell me where stockholm is and why it is important"
 ./mysearch ask "what is TCP and how does it work"
+
+echo "=== Conversation memory (within multi-need) ==="
+./mysearch ask "what is stockholm; why is it famous"
+
+echo "=== Benchmark questions ==="
+./mysearch ask "Stockholm vs Gothenburg: which is better for living"
+./mysearch ask "Why is SQL still widely used"
+./mysearch ask "Explain how TCP ensures reliability"
+./mysearch ask "Is Stockholm close to the sea"
+./mysearch ask "When did computer networking start becoming mainstream"
+./mysearch ask "Databases for beginners what should I start with"
+./mysearch ask "How is Sweden connected to continental Europe"
 
 echo "=== JSON ==="
 ./mysearch ask "where is stockholm" --json
