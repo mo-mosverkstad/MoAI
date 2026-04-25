@@ -93,27 +93,64 @@ Expected output:
 MoAI v.0.1.1 QA Integration Tests
 ========================================
 
---- Core queries ---
-PASS Where is Stockholm (confidence=0.93)
-PASS Stockholm close to sea (implicit location) (confidence=0.86)
+--- Sweden ---
+PASS Where is Stockholm (confidence=0.90)
+PASS Stockholm close to sea (implicit) (confidence=0.86)
+PASS Stockholm importance (multi, need 0) (confidence=0.90)
+PASS Stockholm importance (multi, need 1) (confidence=0.79)
+
+--- Databases ---
 PASS What is a database (confidence=0.91)
-PASS How does TCP ensure reliability (confidence=0.76)
-PASS Drawbacks of NoSQL (confidence=0.95)
+PASS Drawbacks of NoSQL (confidence=0.88)
 PASS Databases for beginners (confidence=0.87)
-PASS When did networking become mainstream (confidence=0.57)
+PASS Why SQL is widely used (confidence=...)
+
+--- Networking ---
+PASS How TCP ensures reliability (confidence=0.76)
 PASS TCP reliability (explain) (confidence=0.85)
-PASS Stockholm close to sea (benchmark) (confidence=0.86)
+PASS When networking became mainstream (confidence=0.57)
 
---- Multi-need queries ---
-PASS Stockholm location (need 0) (confidence=0.93)
-PASS Stockholm importance (need 1) (confidence=0.87)
+--- Physics ---
+PASS What is electricity (confidence=...)
+PASS How electricity works (confidence=...)
+PASS History of electricity (confidence=...)
+PASS Advantages of electricity (confidence=...)
+PASS Limitations of electricity (confidence=...)
 
---- Validation checks ---
-PASS NoSQL limitations validated (confidence=0.95)
-PASS Stockholm location validated (confidence=0.93)
+--- Solar Energy ---
+PASS What is solar energy (confidence=...)
+PASS How solar panels work (confidence=...)
+PASS Advantages of solar energy (confidence=...)
+PASS Limitations of solar energy (confidence=...)
+
+--- Japan ---
+PASS Where is Japan (confidence=0.99)
+PASS Why Japan is important (confidence=...)
+PASS Limitations of Japan (confidence=...)
+
+--- Python ---
+PASS What is Python (confidence=...)
+PASS Advantages of Python (confidence=...)
+PASS Limitations of Python (confidence=...)
+PASS Python for beginners (confidence=...)
+
+--- Climate Change ---
+PASS What is climate change (confidence=...)
+PASS How climate change works (confidence=...)
+PASS History of climate science (confidence=...)
+
+--- Multi-need & Cross-topic ---
+PASS TCP definition + function (need 0) (confidence=...)
+PASS TCP definition + function (need 1) (confidence=...)
+PASS Algorithm scalability (confidence=0.85)
+
+--- Validation ---
+PASS NoSQL limitations validated (confidence=0.88)
+PASS Stockholm location validated (confidence=0.90)
+PASS Japan location validated (confidence=0.99)
 
 ========================================
-Results: 13 passed, 0 failed, 13 total
+Results: 36 passed, 0 failed, 36 total
 ========================================
 ```
 

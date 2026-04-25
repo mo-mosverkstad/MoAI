@@ -53,7 +53,8 @@ ChunkType Chunker::classify_chunk(const std::string& paragraph) const {
     // Location signals — require geographic context, not just "capital"
     if (has_any(lower, {"located", "coast", "archipelago",
                         "built across", "connected to", "situated",
-                        "eastern", "western", "southern", "northern"}))
+                        "eastern", "western", "southern", "northern",
+                        "island nation", "port city"}))
         return ChunkType::LOCATION;
     // "capital" + geographic words = LOCATION; "capital" alone = not enough
     if (has_any(lower, {"capital"}) &&
@@ -110,7 +111,8 @@ ChunkType Chunker::classify_chunk(const std::string& paragraph) const {
     // History signals
     if (has_any(lower, {"history", "heritage", "medieval", "centuries",
                         "political", "economic center", "founded",
-                        "origin", "developed", "introduced"}))
+                        "origin", "developed", "introduced",
+                        "first described", "first practical", "first released"}))
         return ChunkType::HISTORY;
 
     return ChunkType::GENERAL;

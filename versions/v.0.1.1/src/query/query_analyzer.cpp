@@ -141,7 +141,7 @@ struct PropertyPrototype {
 static const std::vector<PropertyPrototype>& property_prototypes() {
     static const std::vector<PropertyPrototype> protos = {
         {Property::LOCATION,    {"locat", "where", "capital", "coast", "close to", "near",
-                                 "region", "country", "city", "geograph", "situated",
+                                 "region", "country", " city", "geograph", "situated",
                                  "border", "sea", "lake", "island"}, 3.0},
         {Property::COMPARISON,  {"vs ", "versus", "compare", "difference between",
                                  "better", "worse", "which", "better than"}, 3.0},
@@ -151,7 +151,8 @@ static const std::vector<PropertyPrototype>& property_prototypes() {
                                  "why is", "why are", "still widely", "widely used",
                                  "important", "famous", "significant"}, 2.5},
         {Property::LIMITATIONS, {"limitation", "drawback", "disadvantage", "weakness",
-                                 "not suitable", "problem with", "problem of"}, 2.5},
+                                 "not suitable", "problem with", "problem of",
+                                 "challenge", "problem"}, 2.5},
         {Property::USAGE,       {"used for", "use case", "suitable for", "application",
                                  "start with", "beginner", "recommend", "suitable"}, 2.5},
         {Property::FUNCTION,    {"how does", "how do", "purpose", "function",

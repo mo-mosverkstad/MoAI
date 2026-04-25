@@ -604,3 +604,184 @@ QuestionPlan plan = planner.build(expanded);
 
 All 13 tests pass: `Results: 13 passed, 0 failed, 13 total`
 
+
+---
+
+## Step 9: Layered Architecture Verification
+
+### Goal
+
+Verify the `ask` pipeline matches the final layered architecture spec.
+
+### Architecture Mapping
+
+```
+┌─────────────────────────┐
+│     QueryAnalyzer       │  Phase 1  → analyzer.analyze(query)
+└──────────┬──────────────┘
+           ↓
+┌─────────────────────────┐
+│  ConversationState      │  Phase 3  → conversation.apply(needs)
+└──────────┬──────────────┘
+           ↓
+┌─────────────────────────┐
+│  SelfAsk + Planner      │  Phase 3  → selfAsk.expand() + planner.build()
+└──────────┬──────────────┘
+           ↓
+┌─────────────────────────┐
+│  Retrieval Layer        │  Phase 2  → BM25 + HNSW fusion
+│  + Chunk Selection      │           → Chunker::select_chunks()
+└──────────┬──────────────┘
+           ↓
+┌─────────────────────────┐
+│  AnswerSynthesizer      │  Phase 2  → synthesizer.synthesize()
+│  + AnswerValidator      │  Phase 3  → validator.validate() + detect_conflicts()
+└──────────┬──────────────┘
+           ↓
+┌─────────────────────────┐
+│  ConversationState      │  Phase 3  → conversation.update() + save()
+└─────────────────────────┘
+```
+
+### Main Loop (as implemented in commands.cpp)
+
+```cpp
+// Phase 1: Analyze
+auto needs = analyzer.analyze(query);
+conversation.apply(needs);
+
+// Phase 3: Expand + Plan
+for (auto& n : needs) {
+    auto support = selfAsk.expand(n);
+    expanded.insert(expanded.end(), support.begin(), support.end());
+}
+auto plan = planner.build(expanded);
+
+// Phase 2+3: Execute in dependency order
+for (auto& need : plan.needs) {
+    auto docs = bm25.search(need.keywords, 10);     // retrieval
+    auto chunks = Chunker::select_chunks(...);        // chunk selection
+    auto answer = synthesizer.synthesize(need, chunks); // synthesis
+    validator.validate(answer, need);                  // validation
+    composite.parts.push_back(answer);
+    conversation.update(need);
+}
+conversation.save(conv_path);
+```
+
+### Verification Checklist
+
+| Spec Requirement | Status |
+|---|---|
+| QueryAnalyzer produces InformationNeeds (not intents) | ✅ |
+| SelfAsk expands needs before planning | ✅ |
+| QuestionPlanner orders by dependency (topological sort) | ✅ |
+| Retrieval uses BM25 + HNSW with property-aware chunk selection | ✅ |
+| AnswerSynthesizer dispatches by Property with typed-chunk-first | ✅ |
+| AnswerValidator checks signal words + conflict detection | ✅ |
+| ConversationState persists across processes | ✅ |
+| Support needs hidden from output (is_support flag) | ✅ |
+| Prior context propagated between dependent needs | ✅ |
+| BM25-only retry on validation failure | ✅ |
+| JSON output with structured answer + sources + validation metadata | ✅ |
+
+### What This Unlocks
+
+✅ Multi-part questions answered in logical order
+✅ Implicit follow-ups supported naturally
+✅ No dependency on interrogative words
+✅ Clear separation of concerns
+✅ Future LLM integration becomes trivial (replace any layer independently)
+
+### All Three Phases Complete
+
+- **Phase 1** ✅ — Information Need model (entity + property + form), multi-need decomposition, property-aware synthesis
+- **Phase 2** ✅ — Evidence-driven answers with chunk typing, hybrid retrieval, keyword-aware selection
+- **Phase 3** ✅ — Question planning, self-ask expansion, conflict detection, validation, conversation memory
+
+### Integration Test Results
+
+All 13 tests pass: `Results: 13 passed, 0 failed, 13 total`
+
+---
+
+## Step 9b: Expanded Test Data and Integration Tests
+
+### New Data Files (5 documents)
+
+| File | Topic | Properties Covered |
+|------|-------|--------------------|
+| `data/physics/electricity.txt` | Electricity & magnetism | DEFINITION, HISTORY, FUNCTION, USAGE, ADVANTAGES, LIMITATIONS |
+| `data/engineering/solar_energy.txt` | Solar energy | DEFINITION, HISTORY, FUNCTION, USAGE, ADVANTAGES, LIMITATIONS |
+| `data/geography/japan.txt` | Japan | LOCATION, HISTORY, ADVANTAGES, LIMITATIONS |
+| `data/geography/climate_change.txt` | Climate change | DEFINITION, HISTORY, FUNCTION, ADVANTAGES, LIMITATIONS |
+| `data/computer_science/python.txt` | Python language | DEFINITION, HISTORY, FUNCTION, USAGE, ADVANTAGES, LIMITATIONS |
+
+Total corpus: 16 documents (was 11).
+
+### Expanded Integration Tests (36 test cases)
+
+| Category | Tests | Topics |
+|----------|-------|--------|
+| Sweden | 4 | Stockholm location, importance, multi-need |
+| Databases | 4 | Definition, NoSQL drawbacks, beginners, SQL advantages |
+| Networking | 3 | TCP reliability, explain, timeline |
+| Physics | 5 | Electricity: definition, function, history, advantages, limitations |
+| Solar Energy | 4 | Definition, function, advantages, limitations |
+| Japan | 3 | Location, importance, challenges |
+| Python | 4 | Definition, advantages, limitations, beginners |
+| Climate Change | 3 | Definition, function, history |
+| Multi-need | 3 | TCP def+function, algorithm scalability |
+| Validation | 3 | NoSQL, Stockholm, Japan validated |
+
+### Bug Fixes
+
+- Fixed `"city"` substring matching in LOCATION prototype — `"electricity"` was being detected as LOCATION because it contains `"city"`. Changed to `" city"` (with leading space).
+- Added `"challenge"` to LIMITATIONS property prototype signals.
+- Added `"island nation"` and `"port city"` as safe compound LOCATION signals in chunker.
+
+### Results
+
+```
+Results: 36 passed, 0 failed, 36 total
+```
+
+---
+
+## Step 9c: Expanded Corpus and Stress Tests
+
+### New Data Files (5 documents, 21 total)
+
+| File | Topic | Properties Covered |
+|------|-------|--------------------|
+| `data/health/antibiotics.txt` | Antibiotics | DEFINITION, HISTORY (Fleming 1928), FUNCTION (cell wall/protein/DNA), ADVANTAGES, LIMITATIONS (resistance), USAGE |
+| `data/computer_science/blockchain.txt` | Blockchain | DEFINITION, HISTORY (Nakamoto 2008), FUNCTION (consensus), ADVANTAGES (decentralization), LIMITATIONS (scalability), USAGE |
+| `data/economics/inflation.txt` | Inflation | DEFINITION, HISTORY (Weimar, 1970s), FUNCTION (demand-pull/cost-push), ADVANTAGES (moderate), LIMITATIONS (purchasing power) |
+| `data/geography/mars.txt` | Mars | LOCATION (4th planet), HISTORY (Mariner 4 1965), COMPOSITION, ADVANTAGES (exploration), LIMITATIONS (distance/cost) |
+| `data/engineering/electric_vehicles.txt` | Electric vehicles | DEFINITION, HISTORY (1832-Tesla), FUNCTION (battery/motor), COMPARISON (vs gasoline), ADVANTAGES (emissions), LIMITATIONS (charging) |
+
+### Expanded Integration Tests (67 test cases)
+
+| Category | Tests | New Tests Added |
+|----------|-------|-----------------|
+| Antibiotics | 6 | definition, function, history, advantages, limitations, usage |
+| Blockchain | 5 | definition, function, advantages, limitations, history |
+| Inflation | 4 | definition, function, limitations, history |
+| Mars | 5 | location, composition, advantages, limitations, history |
+| Electric Vehicles | 6 | definition, function, advantages, limitations, comparison, history |
+| Edge Cases | 5 | polite prefix, no interrogative, implicit advantages, implicit definition, short query |
+| Previous | 36 | unchanged |
+
+### Bug Fixes
+
+- Fixed `"city"` substring in LOCATION prototype: changed to `" city"` (with space) to prevent "electricity" matching
+- Added `"challenge"` and `"problem"` to LIMITATIONS property prototype signals
+- Added `"first described"`, `"first practical"`, `"first released"` to HISTORY chunk classifier
+- Added `"island nation"`, `"port city"` as safe compound LOCATION signals in chunker
+- Increased HISTORY synthesizer entity proximity threshold from 100 to 200 chars
+
+### Results
+
+```
+Results: 67 passed, 0 failed, 67 total
+```

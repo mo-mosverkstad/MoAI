@@ -528,7 +528,7 @@ Answer AnswerSynthesizer::synthesize_history(
             std::string lower = to_lower(e.text);
             if (!entity_lower.empty()) {
                 auto pos = lower.find(entity_lower);
-                if (pos == std::string::npos || pos > 100) continue;
+                if (pos == std::string::npos || pos > 200) continue;
             }
             int sig = 0;
             for (auto& w : {"history", "founded", "century", "centuries",

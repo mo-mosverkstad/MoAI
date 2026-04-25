@@ -1,0 +1,51 @@
+# Electric Vehicles
+
+Electric vehicles (EVs) are automobiles powered by electric motors using energy stored in rechargeable batteries, rather than internal combustion engines that burn gasoline or diesel fuel.
+
+## Definition
+
+An electric vehicle is a vehicle that uses one or more electric motors for propulsion. Energy is stored in rechargeable battery packs, typically lithium-ion batteries. Battery electric vehicles (BEVs) run entirely on electricity, while plug-in hybrid electric vehicles (PHEVs) combine an electric motor with a conventional engine.
+
+## History of Electric Vehicles
+
+Electric vehicles have a longer history than most people realize. The first crude electric vehicle was built by Robert Anderson of Scotland around 1832. Electric cars were popular in the late 1800s and early 1900s, outselling gasoline cars in the United States in 1900. However, the mass production of cheap gasoline cars by Henry Ford and the discovery of large oil reserves made electric cars uncompetitive by the 1920s. Interest in electric vehicles revived during the 1970s oil crisis. Tesla Motors, founded in 2003, launched the Roadster in 2008 and the Model S in 2012, proving that electric cars could be desirable and practical. By 2023, electric vehicles account for approximately 18% of global new car sales.
+
+## How Electric Vehicles Work
+
+Electric vehicles work by converting electrical energy stored in batteries into mechanical motion:
+- The battery pack stores electrical energy in lithium-ion cells
+- A power electronics controller regulates the flow of electricity from the battery to the motor
+- The electric motor converts electrical energy into rotational force to drive the wheels
+- Regenerative braking captures kinetic energy during deceleration and converts it back to electricity to recharge the battery
+- A charging system connects to external power sources (home outlets, public charging stations) to replenish the battery
+
+## Electric Vehicles vs Gasoline Cars
+
+Comparing electric vehicles and gasoline cars:
+- Fuel cost: electricity is significantly cheaper per kilometer than gasoline in most countries
+- Maintenance: EVs have fewer moving parts, requiring less maintenance (no oil changes, fewer brake replacements)
+- Performance: electric motors provide instant torque, giving EVs quick acceleration
+- Range: modern EVs typically offer 300-500 km per charge, while gasoline cars can travel 600-800 km per tank
+- Refueling time: charging an EV takes 30 minutes to several hours, while refueling gasoline takes 5 minutes
+- Environmental impact: EVs produce zero tailpipe emissions, but total lifecycle emissions depend on electricity source
+
+## Advantages of Electric Vehicles
+
+The advantages and benefits of electric vehicles include:
+- Zero tailpipe emissions: reduces air pollution in cities and contributes to climate goals
+- Lower operating costs: electricity is cheaper than gasoline, and maintenance costs are significantly lower
+- Quiet operation: electric motors are nearly silent, reducing noise pollution
+- Energy efficiency: electric motors convert over 85% of electrical energy to motion, compared to 20-30% for combustion engines
+- Government incentives: many countries offer tax credits, subsidies, and other incentives for EV purchases
+- Home charging convenience: owners can charge overnight at home, starting each day with a full battery
+
+## Limitations and Drawbacks of Electric Vehicles
+
+The limitations and drawbacks of electric vehicles include:
+- High purchase price: EVs typically cost more upfront than comparable gasoline vehicles
+- Limited charging infrastructure: public charging stations are less common than gas stations in many areas
+- Long charging times: even fast charging takes 30-60 minutes for a significant charge
+- Range anxiety: drivers worry about running out of charge, especially on long trips
+- Battery degradation: battery capacity decreases over time, typically losing 10-20% after 8-10 years
+- Battery production impact: mining lithium, cobalt, and nickel for batteries has environmental and ethical concerns
+- Cold weather performance: battery range decreases significantly in cold temperatures
