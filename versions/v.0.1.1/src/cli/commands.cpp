@@ -10,6 +10,7 @@
 #include "../query/query_analyzer.h"
 #include "../chunk/chunker.h"
 #include "../answer/answer_synthesizer.h"
+#include "../answer/answer_validator.h"
 #include "../conversation/conversation_state.h"
 #ifdef HAS_TORCH
 #include "../encoder/encoder_trainer.h"
@@ -159,7 +160,11 @@ int run_cli(int argc, char** argv) {
             std::cerr << "Using hybrid retrieval (BM25 + HNSW)\n";
         }
 
-        // 3. For each need: retrieve → chunk select → synthesize
+        // 3. For each need: retrieve → chunk select → synthesize → validate
+        //    6.1: Pass previous answer as context to next need (dependent planning)
+        AnswerValidator validator;
+        std::string prior_answer_context;
+
         for (auto& need : needs) {
             // --- Retrieval ---
             auto bm25_results = bm25.search(need.keywords, 10);
@@ -250,7 +255,54 @@ int run_cli(int argc, char** argv) {
             if (evidence.size() > 15) evidence.resize(15);
 
             // --- Synthesize ---
-            composite.parts.push_back(synthesizer.synthesize(need, evidence));
+            Answer answer = synthesizer.synthesize(need, evidence);
+
+            // 6.1: Dependent planning — attach prior answer as context
+            if (!prior_answer_context.empty())
+                answer.prior_context = prior_answer_context;
+
+            // 6.3: Conflict detection — reduce confidence if evidence contradicts
+            double conflict_penalty = validator.detect_conflicts(evidence, need.entity);
+            if (conflict_penalty > 0.0) {
+                answer.confidence = std::max(0.0, answer.confidence - conflict_penalty);
+                if (answer.validation_note.empty())
+                    answer.validation_note = "Evidence conflict detected.";
+                else
+                    answer.validation_note += " Evidence conflict detected.";
+            }
+
+            // 6.2: Self-ask validation — does the answer address the property?
+            validator.validate(answer, need);
+
+            // 6.2b: If validation failed and we used hybrid, retry with BM25-only
+            if (!answer.validated && use_hybrid) {
+                std::vector<Evidence> bm25_evidence;
+                for (auto& [docId, score] : bm25_results) {
+                    std::string text = reader.get_document_text(docId);
+                    if (text.empty()) continue;
+                    auto all_chunks = chunker.chunk_document(docId, text);
+                    auto selected = Chunker::select_chunks(
+                        all_chunks, need.property, need.keywords, 5);
+                    for (auto& c : selected)
+                        bm25_evidence.push_back({c.docId, c.type, c.text, score});
+                }
+                if (bm25_evidence.size() > 15) bm25_evidence.resize(15);
+
+                Answer retry = synthesizer.synthesize(need, bm25_evidence);
+                validator.validate(retry, need);
+
+                if (retry.validated || retry.confidence > answer.confidence) {
+                    answer = retry;
+                    answer.validation_note += " (retried with BM25-only)";
+                    if (!prior_answer_context.empty())
+                        answer.prior_context = prior_answer_context;
+                }
+            }
+
+            composite.parts.push_back(answer);
+
+            // 6.1: Store this answer as context for the next need
+            prior_answer_context = answer.text;
 
             // Update conversation memory
             conversation.update(need);
@@ -286,8 +338,13 @@ int run_cli(int argc, char** argv) {
                           << "      \"form\": \"" << answer_form_str(n.form) << "\",\n"
                           << "      \"answer\": {\n"
                           << "        \"text\": \"" << escaped(a.text) << "\",\n"
-                          << "        \"confidence\": " << std::fixed << std::setprecision(2) << a.confidence << "\n"
-                          << "      },\n"
+                          << "        \"confidence\": " << std::fixed << std::setprecision(2) << a.confidence << ",\n"
+                          << "        \"validated\": " << (a.validated ? "true" : "false");
+                if (!a.validation_note.empty())
+                    std::cout << ",\n        \"note\": \"" << escaped(a.validation_note) << "\"";
+                if (!a.prior_context.empty())
+                    std::cout << ",\n        \"used_prior_context\": true";
+                std::cout << "\n      },\n"
                           << "      \"sources\": [";
                 for (size_t j = 0; j < a.sources.size(); j++) {
                     if (j > 0) std::cout << ", ";
@@ -311,8 +368,13 @@ int run_cli(int argc, char** argv) {
                           << answer_form_str(n.form) << "] "
                           << "Entity: " << n.entity << "\n"
                           << "Confidence: " << std::fixed << std::setprecision(2)
-                          << a.confidence << "\n"
-                          << "Sources: [";
+                          << a.confidence
+                          << (a.validated ? "" : " [UNVALIDATED]") << "\n";
+                if (!a.validation_note.empty())
+                    std::cout << "Note: " << a.validation_note << "\n";
+                if (!a.prior_context.empty())
+                    std::cout << "(uses prior context)\n";
+                std::cout << "Sources: [";
                 for (size_t j = 0; j < a.sources.size(); j++) {
                     if (j > 0) std::cout << ", ";
                     std::cout << a.sources[j];

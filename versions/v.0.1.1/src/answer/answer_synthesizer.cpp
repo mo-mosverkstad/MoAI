@@ -195,10 +195,41 @@ double AnswerSynthesizer::compute_confidence(
 Answer AnswerSynthesizer::synthesize_location(
     const InformationNeed& need, const std::vector<Evidence>& evidence) const
 {
-    // Score segments with location-specific boosting
+    std::string entity_lower = to_lower(need.entity);
+
+    // First: prefer LOCATION-typed chunks that are ABOUT the entity
+    // Scan all evidence, pick the best LOCATION chunk by entity proximity
+    const Evidence* best_loc = nullptr;
+    for (auto& e : evidence) {
+        if (e.type == ChunkType::LOCATION && e.text.size() > 50) {
+            std::string lower = to_lower(e.text);
+            if (!entity_lower.empty()) {
+                auto pos = lower.find(entity_lower);
+                if (pos == std::string::npos || pos > 100) continue;
+            }
+            // Prefer chunks from the entity's own document (entity in first sentence)
+            if (!best_loc) {
+                best_loc = &e;
+            } else {
+                // Pick the one with more location words
+                std::string bl = to_lower(best_loc->text);
+                int cur_loc = 0, new_loc = 0;
+                for (auto& w : {"located", "coast", "eastern", "situated", "sea", "lake", "island"})
+                    { if (lower.find(w) != std::string::npos) new_loc++;
+                      if (bl.find(w) != std::string::npos) cur_loc++; }
+                if (new_loc > cur_loc) best_loc = &e;
+            }
+        }
+    }
+    if (best_loc) {
+        std::string text = best_loc->text;
+        if (text.size() > 400) text.resize(400);
+        return {text, compute_confidence(evidence, need.keywords), Property::LOCATION};
+    }
+
+    // Fallback: score segments with location-specific boosting
     struct Scored { double score; std::string text; };
     std::vector<Scored> all_scored;
-    std::string entity_lower = to_lower(need.entity);
     for (auto& e : evidence) {
         auto segs = split_into_segments(e.text);
         for (auto& s : segs) {
@@ -401,18 +432,46 @@ static std::vector<std::string> scored_segments(
 Answer AnswerSynthesizer::synthesize_advantages(
     const InformationNeed& need, const std::vector<Evidence>& evidence) const
 {
+    std::string entity_lower = to_lower(need.entity);
+    // First: prefer ADVANTAGES-typed chunks about the entity
     for (auto& e : evidence) {
         if (e.type == ChunkType::ADVANTAGES && e.text.size() > 50) {
+            std::string lower = to_lower(e.text);
+            if (!entity_lower.empty()) {
+                auto pos = lower.find(entity_lower);
+                if (pos == std::string::npos || pos > 50) continue;
+            }
             std::string text = e.text;
             if (text.size() > 700) text.resize(700);
             return {text, compute_confidence(evidence, need.keywords), Property::ADVANTAGES};
         }
     }
-    auto segs = scored_segments(evidence, need.keywords, to_lower(need.entity),
+
+    // Fallback: score segments, but filter to entity-mentioning segments
+    auto segs = scored_segments(evidence, need.keywords, entity_lower,
         {"advantage", "benefit", "strength", "widely", "proven", "mature",
-         "standardiz", "reliable", "powerful"}, 6, 600);
+         "standardiz", "reliable", "powerful", "important", "significant",
+         "leading", "major", "innovation"}, 6, 600);
+    // Filter to segments primarily about the entity (entity in first 50 chars)
     std::string text;
-    for (auto& s : segs) { if (!text.empty()) text += " "; text += s; }
+    for (auto& s : segs) {
+        if (!entity_lower.empty()) {
+            std::string sl = to_lower(s);
+            auto pos = sl.find(entity_lower);
+            if (pos == std::string::npos || pos > 50) continue;
+        }
+        if (!text.empty()) text += " ";
+        text += s;
+        if (text.size() > 600) break;
+    }
+    // If no entity-specific segments, use all
+    if (text.empty()) {
+        for (auto& s : segs) {
+            if (!text.empty()) text += " ";
+            text += s;
+            if (text.size() > 600) break;
+        }
+    }
     if (text.empty()) text = "No advantages information found.";
     return {text, compute_confidence(evidence, need.keywords), Property::ADVANTAGES};
 }
@@ -460,6 +519,29 @@ Answer AnswerSynthesizer::synthesize_usage(
 Answer AnswerSynthesizer::synthesize_history(
     const InformationNeed& need, const std::vector<Evidence>& evidence) const
 {
+    std::string entity_lower = to_lower(need.entity);
+    // First: prefer HISTORY-typed chunks about the entity (best by signal count)
+    const Evidence* best_hist = nullptr;
+    int best_signals = 0;
+    for (auto& e : evidence) {
+        if (e.type == ChunkType::HISTORY && e.text.size() > 50) {
+            std::string lower = to_lower(e.text);
+            if (!entity_lower.empty()) {
+                auto pos = lower.find(entity_lower);
+                if (pos == std::string::npos || pos > 100) continue;
+            }
+            int sig = 0;
+            for (auto& w : {"history", "founded", "century", "centuries",
+                            "origin", "heritage", "medieval", "political"})
+                if (lower.find(w) != std::string::npos) sig++;
+            if (sig > best_signals) { best_hist = &e; best_signals = sig; }
+        }
+    }
+    if (best_hist) {
+        std::string text = best_hist->text;
+        if (text.size() > 500) text.resize(500);
+        return {text, compute_confidence(evidence, need.keywords), Property::HISTORY};
+    }
     auto filtered = filter_by_type(evidence,
         {ChunkType::HISTORY, ChunkType::TEMPORAL, ChunkType::GENERAL});
     auto segs = scored_segments(filtered, need.keywords, to_lower(need.entity),

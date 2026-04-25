@@ -38,6 +38,7 @@ add_library(mysearch_lib
     src/query/query_analyzer.cpp
     src/chunk/chunker.cpp
     src/answer/answer_synthesizer.cpp
+    src/answer/answer_validator.cpp
     src/conversation/conversation_state.cpp
 
     src/tools/sandbox.cpp

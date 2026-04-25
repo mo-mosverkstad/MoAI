@@ -50,17 +50,21 @@ std::vector<std::string> Chunker::split_paragraphs(const std::string& text) cons
 ChunkType Chunker::classify_chunk(const std::string& paragraph) const {
     std::string lower = to_lower(paragraph);
 
-    // Location signals
-    if (has_any(lower, {"located", "capital", "coast", "island", "city",
-                        "region", "country", "bridge", "port", "archipelago",
+    // Location signals — require geographic context, not just "capital"
+    if (has_any(lower, {"located", "coast", "archipelago",
                         "built across", "connected to", "situated",
                         "eastern", "western", "southern", "northern"}))
+        return ChunkType::LOCATION;
+    // "capital" + geographic words = LOCATION; "capital" alone = not enough
+    if (has_any(lower, {"capital"}) &&
+        has_any(lower, {"island", "city", "region", "country", "bridge",
+                        "port", "sea", "lake", "coast", "located"}))
         return ChunkType::LOCATION;
 
     // Advantages signals
     if (has_any(lower, {"advantage", "benefit", "strength", "why is",
                         "still widely", "widely used", "proven",
-                        "mature ecosystem"}))
+                        "mature ecosystem", "important for", "important because"}))
         return ChunkType::ADVANTAGES;
 
     // Limitations signals
@@ -171,6 +175,21 @@ std::vector<Chunk> Chunker::select_chunks(
     const std::vector<std::string>& keywords,
     size_t max_chunks)
 {
+    // Map property to its primary chunk type (strong match)
+    auto primary_type = [](Property p) -> int {
+        switch (p) {
+            case Property::LOCATION:    return (int)ChunkType::LOCATION;
+            case Property::DEFINITION:  return (int)ChunkType::DEFINITION;
+            case Property::TIME:        return (int)ChunkType::TEMPORAL;
+            case Property::HISTORY:     return (int)ChunkType::HISTORY;
+            case Property::FUNCTION:    return (int)ChunkType::FUNCTION;
+            case Property::USAGE:       return (int)ChunkType::USAGE;
+            case Property::ADVANTAGES:  return (int)ChunkType::ADVANTAGES;
+            case Property::LIMITATIONS: return (int)ChunkType::LIMITATIONS;
+            default:                    return -1;
+        }
+    };
+    int primary = primary_type(property);
     auto prefs = preferred_types_for(property);
 
     // Score each chunk by keyword relevance + type preference
@@ -182,7 +201,9 @@ std::vector<Chunk> Chunker::select_chunks(
         double sc = 0.0;
         for (auto& kw : keywords)
             if (contains_word_lower(lower, kw)) sc += 3.0;
-        if (prefs.count(static_cast<int>(c.type))) sc += 1.0;
+        // Strong boost for exact type match, weak for fallback
+        if (static_cast<int>(c.type) == primary) sc += 10.0;
+        else if (prefs.count(static_cast<int>(c.type))) sc += 1.0;
         scored.push_back({sc, i});
     }
     std::sort(scored.begin(), scored.end(),

@@ -318,3 +318,83 @@ Added `sources` field to `Answer` struct — a list of unique document IDs that 
 | `src/answer/answer_synthesizer.h` | Added `std::vector<uint32_t> sources` to `Answer` struct |
 | `src/answer/answer_synthesizer.cpp` | Main `synthesize` dispatch restructured to collect unique doc IDs from evidence |
 | `src/cli/commands.cpp` | JSON output uses nested `answer` object + `sources` array; plain text shows sources |
+
+---
+
+## Step 6: Phase 3 Completion — Weak Reasoning (Dependent Planning, Self-Ask, Conflict Detection)
+
+### Goal
+
+Complete Phase 3 by implementing the three missing reasoning mechanisms:
+1. Dependent answer planning (answers are ordered and dependent)
+2. Self-ask validation (verify answer addresses the property)
+3. Conflict detection (reduce confidence on contradicting evidence)
+
+### 6.1 Dependent Answer Planning
+
+When processing multiple InformationNeeds from a single query, each need's answer now receives the previous need's answer as `prior_context`. This enables logical ordering:
+
+- "Where is Stockholm and why is it important?" → Need 2 (IMPORTANCE) receives Need 1's LOCATION answer as context
+- The `prior_context` field is exposed in JSON output as `used_prior_context: true`
+
+### 6.2 Self-Ask Validation
+
+New `AnswerValidator::validate()` checks whether the synthesized answer actually addresses the requested property by counting property-specific signal words:
+
+- Each Property has an expected signal vocabulary (e.g., LOCATION expects "located", "capital", "coast", "sea", etc.)
+- If 0 signals found → `validated=false`, confidence × 0.3, note explains the failure
+- If <15% signals found → `validated=true` but confidence × 0.7, note warns "Weak property match"
+- If ≥15% signals → `validated=true`, no penalty
+
+This catches cases where the synthesizer returns irrelevant text (e.g., museum info for a LOCATION query).
+
+### 6.3 Conflict Detection
+
+New `AnswerValidator::detect_conflicts()` checks for contradicting factual claims across evidence chunks:
+
+- Extracts sentences containing the entity from each evidence chunk
+- Compares sentence pairs from different documents
+- If one sentence has negation words ("not", "no", "never", "without", "lack") and the other doesn't → conflict detected
+- Conflict ratio is converted to a confidence penalty (max -0.3)
+- Note "Evidence conflict detected." is added to the answer
+
+### Files Created
+
+| File | Description |
+|------|-------------|
+| `src/answer/answer_validator.h` | `AnswerValidator` class declaration |
+| `src/answer/answer_validator.cpp` | Self-ask validation + conflict detection implementation |
+
+### Files Modified
+
+| File | What Changed |
+|------|-------------|
+| `src/answer/answer_synthesizer.h` | Added `validated`, `validation_note`, `prior_context` fields to `Answer` struct |
+| `src/cli/commands.cpp` | Integrated `AnswerValidator` into pipeline: prior context propagation, conflict detection, self-ask validation. JSON/text output shows validation metadata. |
+| `CMakeLists.txt` | Added `answer_validator.cpp` to build |
+
+### Pipeline After Step 6
+
+```
+Query → Analyze → InformationNeeds[]
+  ↓
+For each need (sequentially):
+  ├─ Retrieve (BM25 + HNSW)
+  ├─ Chunk Select (keyword + type)
+  ├─ Synthesize
+  ├─ Attach prior_context from previous need (6.1)
+  ├─ Detect conflicts in evidence (6.3)
+  ├─ Self-ask validate answer vs property (6.2)
+  └─ Store answer as context for next need
+  ↓
+CompositeAnswer (with validation metadata)
+```
+
+### Phase 3 Completion Status
+
+| Requirement | Status |
+|---|---|
+| 3.1 Question decomposition (ordered, dependent) | ✅ Prior context propagation |
+| 3.2 Self-ask (internal checks) | ✅ Signal-word validation |
+| 3.3 Answer consistency & confidence | ✅ Conflict detection + confidence penalty |
+| 3.4 Conversation memory | ✅ File-persisted (from Step 4) |

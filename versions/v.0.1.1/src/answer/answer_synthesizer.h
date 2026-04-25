@@ -15,7 +15,10 @@ struct Answer {
     std::string text;
     double confidence;
     Property property;
-    std::vector<uint32_t> sources;  // doc IDs used as evidence
+    std::vector<uint32_t> sources;
+    bool validated = true;          // false if self-ask check failed
+    std::string validation_note;    // explains confidence adjustment
+    std::string prior_context;      // context from previous need's answer
 };
 
 struct CompositeAnswer {

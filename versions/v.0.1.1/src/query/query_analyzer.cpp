@@ -148,7 +148,8 @@ static const std::vector<PropertyPrototype>& property_prototypes() {
         {Property::TIME,        {"when", "what year", "what date", "timeline",
                                  "century", "era", "year", "period", "date"}, 3.0},
         {Property::ADVANTAGES,  {"advantage", "benefit", "strength", "pro ",
-                                 "why is", "why are", "still widely", "widely used"}, 2.5},
+                                 "why is", "why are", "still widely", "widely used",
+                                 "important", "famous", "significant"}, 2.5},
         {Property::LIMITATIONS, {"limitation", "drawback", "disadvantage", "weakness",
                                  "not suitable", "problem with", "problem of"}, 2.5},
         {Property::USAGE,       {"used for", "use case", "suitable for", "application",
@@ -158,7 +159,7 @@ static const std::vector<PropertyPrototype>& property_prototypes() {
         {Property::COMPOSITION, {"made of", "consist", "compos", "component",
                                  "type", "overview", "part of"}, 2.0},
         {Property::HISTORY,     {"history", "origin", "evolv", "founded",
-                                 "heritage", "developed", "introduced", "why"}, 1.5},
+                                 "heritage", "developed", "introduced"}, 1.5},
         {Property::DEFINITION,  {"what is", "what are", "define", "definition",
                                  "meaning", "refers to", "means"}, 1.5},
     };
