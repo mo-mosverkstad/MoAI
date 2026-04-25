@@ -125,11 +125,8 @@ std::string RuleBasedQueryAnalyzer::extract_entity(
         if (non_ent.count(k)) continue;
         if (k.size() > best.size()) best = k;
     }
-    // Fallback to longest keyword if all were filtered
-    if (best.empty()) {
-        for (auto& k : keywords)
-            if (k.size() > best.size()) best = k;
-    }
+    // If all keywords are non-entity words, return empty to trigger
+    // shared entity propagation from previous clauses
     return best;
 }
 
