@@ -100,13 +100,36 @@ std::vector<std::string> RuleBasedQueryAnalyzer::extract_keywords(const std::str
     return keywords;
 }
 
+// Words that describe properties but are not entities
+static const std::unordered_set<std::string>& non_entity_words() {
+    static const std::unordered_set<std::string> w = {
+        "important", "famous", "popular", "useful", "good", "bad",
+        "better", "worse", "best", "worst", "great", "large", "small",
+        "scalable", "reliable", "fast", "slow", "cheap", "expensive",
+        "suitable", "mainstream", "widely", "still", "connected",
+        "limitation", "limitations", "advantage", "advantages",
+        "benefit", "benefits", "drawback", "drawbacks",
+        "overview", "difference", "comparison", "beginner", "beginners"
+    };
+    return w;
+}
+
 std::string RuleBasedQueryAnalyzer::extract_entity(
     const std::string& clause, const std::vector<std::string>& keywords) const
 {
     if (keywords.empty()) return "";
-    std::string best = keywords[0];
-    for (auto& k : keywords)
+    auto& non_ent = non_entity_words();
+    // Prefer keywords that are not generic adjectives/property words
+    std::string best;
+    for (auto& k : keywords) {
+        if (non_ent.count(k)) continue;
         if (k.size() > best.size()) best = k;
+    }
+    // Fallback to longest keyword if all were filtered
+    if (best.empty()) {
+        for (auto& k : keywords)
+            if (k.size() > best.size()) best = k;
+    }
     return best;
 }
 
@@ -194,7 +217,14 @@ std::vector<InformationNeed> RuleBasedQueryAnalyzer::analyze(const std::string& 
     for (auto& clause : clauses) {
         auto kw = extract_keywords(clause);
         auto entity = extract_entity(clause, kw);
-        if (entity.empty() && !shared_entity.empty()) entity = shared_entity;
+        if (entity.empty() && !shared_entity.empty()) {
+            entity = shared_entity;
+            // Inject shared entity into keywords so retrieval finds it
+            bool has_entity = false;
+            for (auto& k : kw)
+                if (k == entity) { has_entity = true; break; }
+            if (!has_entity) kw.insert(kw.begin(), entity);
+        }
         if (!entity.empty()) shared_entity = entity;
 
         Property prop = detect_property(clause);

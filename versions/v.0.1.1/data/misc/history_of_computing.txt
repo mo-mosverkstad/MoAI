@@ -13,17 +13,19 @@ Key eras include mechanical devices, early electronic computers, transistors and
 
 ## 20th Century Foundations
 
-- Alan Turing's theoretical model of computation
-- ENIAC: one of the first general-purpose electronic computers
-- Transistor invention enabled miniaturization
-- Development of programming languages (FORTRAN, COBOL)
+- Alan Turing's theoretical model of computation (1936)
+- ENIAC: one of the first general-purpose electronic computers (1945)
+- The transistor was invented in 1947 at Bell Labs by John Bardeen, Walter Brattain, and William Shockley. The invention of the transistor revolutionized electronics and enabled the miniaturization of computers.
+- Integrated circuits were developed in 1958 by Jack Kilby and Robert Noyce, combining multiple transistors on a single chip.
+- Development of programming languages: FORTRAN (1957), COBOL (1959), C (1972)
 
 ## Personal Computers and Internet
 
-- Apple II, IBM PC
+- Apple II (1977), IBM PC (1981)
 - MS-DOS to Windows
 - UNIX to Linux
 - Rise of the World Wide Web (1990s)
+- Tim Berners-Lee invented the World Wide Web in 1989
 
 ## Modern Computing
 

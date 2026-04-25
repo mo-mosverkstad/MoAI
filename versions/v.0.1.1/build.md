@@ -97,6 +97,15 @@ All commands below assume you are inside the `build/` directory.
 ./mysearch hybrid "what is a database"
 ```
 
+> **Important:** If you modify any text files in `data/`, you must re-ingest
+> before the changes take effect. `build-hnsw` only rebuilds the HNSW index
+> from the existing segment — it does not re-read the source text files.
+>
+> ```bash
+> ./mysearch ingest ../data    # re-read text files into segment
+> ./mysearch build-hnsw        # rebuild HNSW from new segment
+> ```
+
 ### Step 4: Question-answering (NEW — InformationNeed pipeline)
 
 This is the main change in v.0.1.1. The `ask` command now decomposes a query into
@@ -217,10 +226,16 @@ available via the rule-based analyzer in this version.
 
 ## 5. Quick Smoke Test (copy-paste)
 
-Run this block after building and ingesting to verify everything works:
+Run this block after building to verify everything works.
+**You must ingest before every test run if data files have changed.**
 
 ```bash
+cmake .. -DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTS=ON \
+         -DUSE_TORCH=ON -DCMAKE_PREFIX_PATH=~/opt/libtorch
+cmake --build .
+
 ./mysearch ingest ../data
+./mysearch build-hnsw
 
 echo "=== Single-need ==="
 ./mysearch ask "where is stockholm"

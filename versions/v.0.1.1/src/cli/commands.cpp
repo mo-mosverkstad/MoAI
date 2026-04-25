@@ -207,7 +207,7 @@ int run_cli(int argc, char** argv) {
                 std::string text = reader.get_document_text(docId);
                 if (text.empty()) continue;
                 auto all_chunks = chunker.chunk_document(docId, text);
-                auto selected = Chunker::select_chunks(all_chunks, need.property, 5);
+                auto selected = Chunker::select_chunks(all_chunks, need.property, need.keywords, 5);
                 for (auto& c : selected)
                     evidence.push_back({c.docId, c.type, c.text, score});
             }

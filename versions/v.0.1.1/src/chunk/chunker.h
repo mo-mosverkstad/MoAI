@@ -26,11 +26,12 @@ public:
     std::vector<Chunk> chunk_document(uint32_t docId,
                                       const std::string& fullText) const;
 
-    // Property-aware chunk selection: preferred types get boosted,
-    // others are kept with lower priority
+    // Property and keyword-aware chunk selection: scores chunks by
+    // keyword relevance and type preference, returns top max_chunks
     static std::vector<Chunk> select_chunks(
         const std::vector<Chunk>& chunks,
         Property property,
+        const std::vector<std::string>& keywords,
         size_t max_chunks = 10);
 
 private:

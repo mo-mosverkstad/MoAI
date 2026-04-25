@@ -258,16 +258,33 @@ Answer AnswerSynthesizer::synthesize_explanation(
 Answer AnswerSynthesizer::synthesize_list(
     const InformationNeed& need, const std::vector<Evidence>& evidence) const
 {
-    auto prefs = preferred_chunks_for(need.property);
-    auto filtered = filter_by_type(evidence, prefs);
+    std::string entity_lower = to_lower(need.entity);
+    // Score all segments across all evidence by keyword relevance
+    struct Scored { double score; std::string text; };
+    std::vector<Scored> all_scored;
+    for (auto& e : evidence) {
+        auto segs = split_into_segments(e.text);
+        for (auto& s : segs) {
+            std::string lower = to_lower(s);
+            double sc = 0.0;
+            for (auto& k : need.keywords)
+                if (contains_word(lower, k)) sc += 3.0;
+            if (!entity_lower.empty() && contains_word(lower, entity_lower)) sc += 4.0;
+            if (s.size() > 30 && s.size() < 300) sc += 0.5;
+            if (!s.empty() && s[0] == '#') sc -= 2.0;
+            if (sc > 0.0) all_scored.push_back({sc, s});
+        }
+    }
+    std::sort(all_scored.begin(), all_scored.end(),
+              [](auto& a, auto& b) { return a.score > b.score; });
     std::string text;
-    for (auto& e : filtered) {
-        auto sents = extract_sentences(e.text, need.keywords, 4);
-        for (auto& s : sents) { if (!text.empty()) text += " "; text += s; }
+    for (size_t i = 0; i < 6 && i < all_scored.size(); i++) {
+        if (!text.empty()) text += " ";
+        text += all_scored[i].text;
         if (text.size() > 600) break;
     }
     if (text.empty()) text = "No relevant information found.";
-    return {text, compute_confidence(filtered, need.keywords), need.property};
+    return {text, compute_confidence(evidence, need.keywords), need.property};
 }
 
 Answer AnswerSynthesizer::synthesize_general(

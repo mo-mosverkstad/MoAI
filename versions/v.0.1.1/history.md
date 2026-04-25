@@ -110,3 +110,51 @@ CompositeAnswer (merged)
 1. Maps `Property` to a set of preferred `ChunkType`s (e.g. `LOCATION` → `{LOCATION, GENERAL}`)
 2. Partitions chunks: preferred types first, then others
 3. Returns up to `max_chunks` (default 10) chunks per document
+
+---
+
+## Step 3: Expand Corpus Data for 10 Benchmark Questions
+
+### Goal
+
+Enrich the text files in `data/` so that all 10 benchmark questions (plus the build.md examples) can find accurate, relevant answers through the InformationNeed pipeline.
+
+### Questions Covered
+
+| # | Question | Content Added To |
+|---|----------|-----------------|
+| 1 | "Stockholm vs Gothenburg: which is better for living?" | `stockholm.txt` (quality of life, cost of living), `gothenburg.txt` (same) |
+| 2 | "Why is SQL still widely used?" | `databases.txt` (new "Why SQL Is Still Widely Used" section) |
+| 3 | "What are the limitations of NoSQL databases?" | `databases.txt` (new "Limitations of NoSQL Databases" section) |
+| 4 | "Explain how TCP ensures reliability" | `networking.txt` (new "How TCP Ensures Reliability" section) |
+| 5 | "Give me an overview of database types and their use cases" | `databases.txt` (new "Types of Databases and Their Use Cases" section) |
+| 6 | "Is Stockholm close to the sea?" | `stockholm.txt` (explicit "close to the sea" in geography section) |
+| 7 | "When did computer networking start becoming mainstream?" | `networking.txt` (new "History and Timeline" section with 1990s mainstream date) |
+| 8 | "What makes an algorithm scalable?" | `algorithms.txt` (new "What Makes an Algorithm Scalable" section) |
+| 9 | "Databases for beginners — what should I start with?" | `databases.txt` (new "Databases for Beginners" section) |
+| 10 | "How is Sweden connected to continental Europe?" | `malmo.txt` (expanded Oresund Bridge, ferry, air connections) |
+
+### Files Modified
+
+| File | Changes |
+|------|---------|
+| `data/sweden/stockholm.txt` | Added: Geography section (eastern coast, Baltic Sea, close to sea), Quality of Life, Cost of Living sections |
+| `data/sweden/gothenburg.txt` | Added: Geography section, Quality of Life, Cost of Living, Economy sections |
+| `data/sweden/malmo.txt` | Expanded: Geography section with Oresund Bridge details, ferry/air connections to continental Europe |
+| `data/computer_science/databases.txt` | Added: Types and Use Cases, Why SQL Is Still Widely Used, Limitations of NoSQL, Databases for Beginners sections |
+| `data/computer_science/networking.txt` | Added: History and Timeline section (1960s–2000), How TCP Ensures Reliability section (8 mechanisms) |
+| `data/computer_science/algorithms.txt` | Added: What Makes an Algorithm Scalable section (6 factors) |
+| `data/misc/history_of_computing.txt` | Added: explicit transistor invention date (1947, Bell Labs), integrated circuits (1958), more timeline dates |
+
+### Additional build.md Examples Also Covered
+
+- "where is stockholm" → Geography section with "eastern coast" and "Baltic Sea"
+- "is stockholm close to the sea" → explicit "close to the sea" phrase
+- "what is a database" → existing + expanded definition
+- "when was the transistor invented" → "1947 at Bell Labs"
+- "how does TCP ensure reliability" → 8-mechanism detailed section
+- "what are the benefits of SQL" → Why SQL Is Still Widely Used section
+- "what are the drawbacks of NoSQL" → Limitations of NoSQL section
+- "databases for beginners" → Databases for Beginners section
+- "difference between SQL and NoSQL" → both sections present for comparison
+- "what are the types of databases" → Types of Databases and Their Use Cases

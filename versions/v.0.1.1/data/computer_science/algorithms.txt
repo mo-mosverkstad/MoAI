@@ -13,6 +13,19 @@ A mathematical notation that describes how runtime or memory usage grows with in
 - O(n log n) log-linear
 - O(n squared) quadratic
 
+## What Makes an Algorithm Scalable
+
+An algorithm is scalable when its performance remains acceptable as the input size grows. The key factors that make an algorithm scalable are:
+
+- Sub-linear or linear time complexity: algorithms with O(log n) or O(n) complexity scale well because their runtime grows slowly relative to input size. Algorithms with O(n squared) or worse complexity become impractical for large inputs.
+- Efficient memory usage: a scalable algorithm uses memory proportional to the input size or less, avoiding excessive allocation that causes swapping or out-of-memory failures.
+- Parallelizability: algorithms that can divide work across multiple processors or machines scale horizontally. MapReduce and divide-and-conquer algorithms are inherently parallelizable.
+- Cache-friendly access patterns: algorithms that access memory sequentially perform better on modern hardware due to CPU cache efficiency.
+- Avoiding redundant computation: techniques like memoization, dynamic programming, and pruning eliminate repeated work, making algorithms scale to larger problem sizes.
+- Incremental processing: algorithms that can process data in streams or batches without requiring all data in memory at once are more scalable for big-data workloads.
+
+A scalable algorithm maintains its efficiency characteristics as the problem size increases by orders of magnitude, from thousands to millions to billions of elements.
+
 ## Sorting Algorithms
 
 Sorting is a fundamental task in computer science. Common algorithms include:

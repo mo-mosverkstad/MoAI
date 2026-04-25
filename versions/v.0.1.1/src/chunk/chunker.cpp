@@ -127,30 +127,43 @@ static std::unordered_set<int> preferred_types_for(Property prop) {
     }
 }
 
+static bool contains_word_lower(const std::string& text_lower, const std::string& word) {
+    size_t pos = 0;
+    while ((pos = text_lower.find(word, pos)) != std::string::npos) {
+        bool left_ok = (pos == 0) || !std::isalnum(static_cast<unsigned char>(text_lower[pos - 1]));
+        bool right_ok = (pos + word.size() >= text_lower.size()) ||
+            !std::isalnum(static_cast<unsigned char>(text_lower[pos + word.size()]));
+        if (left_ok && right_ok) return true;
+        pos++;
+    }
+    return false;
+}
+
 std::vector<Chunk> Chunker::select_chunks(
     const std::vector<Chunk>& chunks,
     Property property,
+    const std::vector<std::string>& keywords,
     size_t max_chunks)
 {
     auto prefs = preferred_types_for(property);
 
-    // Partition: preferred first, then the rest
-    std::vector<const Chunk*> preferred, others;
-    for (auto& c : chunks) {
-        if (prefs.count(static_cast<int>(c.type)))
-            preferred.push_back(&c);
-        else
-            others.push_back(&c);
+    // Score each chunk by keyword relevance + type preference
+    struct Scored { double score; size_t idx; };
+    std::vector<Scored> scored;
+    for (size_t i = 0; i < chunks.size(); i++) {
+        auto& c = chunks[i];
+        std::string lower = to_lower(c.text);
+        double sc = 0.0;
+        for (auto& kw : keywords)
+            if (contains_word_lower(lower, kw)) sc += 3.0;
+        if (prefs.count(static_cast<int>(c.type))) sc += 1.0;
+        scored.push_back({sc, i});
     }
+    std::sort(scored.begin(), scored.end(),
+              [](auto& a, auto& b) { return a.score > b.score; });
 
     std::vector<Chunk> result;
-    for (auto* p : preferred) {
-        result.push_back(*p);
-        if (result.size() >= max_chunks) return result;
-    }
-    for (auto* p : others) {
-        result.push_back(*p);
-        if (result.size() >= max_chunks) return result;
-    }
+    for (size_t i = 0; i < max_chunks && i < scored.size(); i++)
+        result.push_back(chunks[scored[i].idx]);
     return result;
 }
