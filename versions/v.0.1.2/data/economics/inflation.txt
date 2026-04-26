@@ -1,0 +1,40 @@
+# Inflation
+
+Inflation is the rate at which the general level of prices for goods and services rises over time, resulting in a decrease in the purchasing power of money.
+
+## Definition
+
+Inflation is a sustained increase in the general price level of goods and services in an economy over a period of time. When the general price level rises, each unit of currency buys fewer goods and services. Inflation is typically measured by the Consumer Price Index (CPI) or the GDP deflator. The opposite of inflation is deflation, where prices decrease over time.
+
+## History of Inflation
+
+Notable periods of inflation include the hyperinflation in Germany's Weimar Republic in 1923, where prices doubled every few days. The United States experienced significant inflation during the 1970s oil crisis, with annual rates exceeding 13% in 1979. Paul Volcker, as chairman of the Federal Reserve, raised interest rates dramatically in the early 1980s to bring inflation under control. Zimbabwe experienced hyperinflation in 2008, with monthly inflation rates reaching 79.6 billion percent. More recently, global inflation surged in 2021-2022 following the COVID-19 pandemic and supply chain disruptions.
+
+## How Inflation Works
+
+Inflation works through several economic mechanisms:
+- Demand-pull inflation: occurs when aggregate demand exceeds aggregate supply, driving prices up
+- Cost-push inflation: occurs when production costs increase (raw materials, wages), forcing businesses to raise prices
+- Monetary inflation: occurs when the money supply grows faster than economic output, reducing the value of each currency unit
+- Built-in inflation: occurs when workers demand higher wages to keep up with rising prices, creating a wage-price spiral
+
+Central banks attempt to control inflation through monetary policy, primarily by adjusting interest rates. Higher interest rates reduce borrowing and spending, which slows demand and reduces inflationary pressure.
+
+## Advantages of Moderate Inflation
+
+The benefits of moderate inflation (typically 2-3% annually) include:
+- Encourages spending and investment rather than hoarding cash
+- Reduces the real burden of debt over time, benefiting borrowers
+- Provides central banks with room to cut interest rates during recessions
+- Allows relative wages and prices to adjust more easily across the economy
+- Signals a growing, healthy economy when kept at moderate levels
+
+## Limitations and Problems of Inflation
+
+The limitations, drawbacks, and problems of high inflation include:
+- Erodes purchasing power: consumers can buy less with the same amount of money
+- Hurts savers: the real value of savings decreases when inflation exceeds interest rates
+- Creates uncertainty: businesses find it difficult to plan and invest when prices are unpredictable
+- Disproportionately affects low-income households who spend a larger share of income on essentials
+- Can lead to hyperinflation if left unchecked, destroying economic stability
+- Distorts price signals: makes it harder for markets to allocate resources efficiently
