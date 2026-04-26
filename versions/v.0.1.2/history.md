@@ -198,3 +198,76 @@ echo "=== Scope comparison (JSON) ==="
 ./mysearch ask "where is stockholm" --json
 ./mysearch ask "explain in detail where stockholm is" --json
 ```
+
+---
+
+## Step 2: Property-Based Default Scope + CLI Override Flags
+
+### Goal
+
+1. Make AnswerScope have strong, sensible defaults per Property so most queries "just work"
+2. Add `--brief` and `--detailed` CLI flags for explicit user override
+
+### 2.1 Property → Default Scope Matrix
+
+| Property | Default Scope | Rationale |
+|----------|--------------|-----------|
+| LOCATION | STRICT | Geographic facts should be concise |
+| DEFINITION | STRICT | Dictionary-style answers |
+| TIME | STRICT | Dates & time facts |
+| FUNCTION | NORMAL | Needs 1-2 explanatory steps |
+| USAGE | NORMAL | Often needs context |
+| ADVANTAGES | NORMAL | Short list + brief explanation |
+| LIMITATIONS | NORMAL | Clear but not verbose |
+| HISTORY | EXPANDED | Chronology requires narrative |
+| COMPARISON | EXPANDED | Multiple dimensions |
+| GENERAL | NORMAL | Safe default |
+
+Implemented as `default_scope_for_property()` in `answer_scope.h`.
+
+### 2.2 Scope Resolution Priority
+
+```
+1. CLI flag (--brief / --detailed)     ← highest priority, always wins
+2. Query wording ("brief", "explain")  ← explicit user intent
+3. Property-based default              ← baseline behavior
+4. Confidence-based adjustment         ← post-synthesis fine-tuning
+```
+
+### 2.3 CLI Flags
+
+```bash
+./mysearch ask "query" --brief      # Force STRICT for all needs
+./mysearch ask "query" --detailed   # Force EXPANDED for all needs
+./mysearch ask "query" --json       # Can combine with --brief/--detailed
+```
+
+Flags are mutually exclusive. They apply to all user-facing needs (support needs stay internal).
+
+### Files Modified
+
+| File | What Changed |
+|------|-------------|
+| `src/answer/answer_scope.h` | Added `default_scope_for_property()` policy function |
+| `src/query/query_analyzer.cpp` | `infer_scope()` simplified to only handle explicit query hints; property default applied separately via `default_scope_for_property()` |
+| `src/cli/commands.cpp` | Added `--brief`/`--detailed` flag parsing; scope override applied to expanded needs before planning |
+
+### Demo
+
+```bash
+# Property defaults
+./mysearch ask "where is stockholm"              # STRICT (LOCATION default)
+./mysearch ask "what are the drawbacks of NoSQL"  # NORMAL (LIMITATIONS default)
+./mysearch ask "history of electricity"           # EXPANDED (HISTORY default)
+
+# CLI override
+./mysearch ask "explain how TCP works" --brief    # STRICT (forced)
+./mysearch ask "where is stockholm" --detailed    # EXPANDED (forced)
+
+# Combined with JSON
+./mysearch ask "where is stockholm" --detailed --json
+```
+
+### Integration Test Results
+
+All 67 tests pass: `Results: 67 passed, 0 failed, 67 total`

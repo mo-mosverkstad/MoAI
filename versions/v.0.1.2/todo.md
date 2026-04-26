@@ -670,3 +670,709 @@ If you want next, I can help you:
 *   Decide when to **stop adding features**
 
 Just tell me.
+
+
+========
+
+*   Fine‑tune default scopes per Property
+*   Add user‑override flags (`--brief`, `--detailed`)
+*   Define a “system maturity exit checklist”
+
+
+Great—this is the *right* finishing work to do now. You are no longer building capabilities; you are **calibrating behavior**.  
+Below is a **clean, end‑to‑end design** for the three items you asked for, written as **engineering guidance + concrete code proposals**, tightly aligned with your MoAI v0.1.1 system.
+
+***
+
+# 1️⃣ Fine‑tune Default AnswerScope per Property
+
+## 1.1 Design principle (important)
+
+**AnswerScope should have strong, sensible defaults per Property**, so that:
+
+*   Most queries “just work” without user hints
+*   Oververbosity or under‑explanation is rare
+*   AnswerScope only needs to be overridden intentionally
+
+This means:
+
+> **Property decides the default scope; query wording only fine‑tunes it.**
+
+***
+
+## 1.2 Default Scope Matrix (Recommended)
+
+This table is the *core policy*. It is deliberately conservative.
+
+| Property    | Default AnswerScope | Rationale                             |
+| ----------- | ------------------- | ------------------------------------- |
+| LOCATION    | STRICT              | Geographic facts should be concise    |
+| DEFINITION  | STRICT              | Dictionary-style answers              |
+| TEMPORAL    | STRICT              | Dates & time facts                    |
+| PERSON      | NORMAL              | Identity + main role                  |
+| FUNCTION    | NORMAL              | Needs 1–2 explanatory steps           |
+| USAGE       | NORMAL              | Often needs context                   |
+| ADVANTAGES  | NORMAL              | Short list + brief explanation        |
+| LIMITATIONS | NORMAL              | Clear but not verbose                 |
+| HISTORY     | EXPANDED            | Chronology usually requires narrative |
+| COMPARISON  | EXPANDED            | Multiple dimensions                   |
+| GENERAL     | NORMAL              | Safe default                          |
+
+***
+
+## 1.3 Implementation: Property → Default Scope
+
+```cpp
+// answer_scope_policy.h
+#pragma once
+#include "information_need.h"
+#include "answer_scope.h"
+
+inline AnswerScope default_scope_for_property(Property p) {
+    switch (p) {
+        case Property::LOCATION:
+        case Property::DEFINITION:
+        case Property::TEMPORAL:
+            return AnswerScope::STRICT;
+
+        case Property::PERSON:
+        case Property::FUNCTION:
+        case Property::USAGE:
+        case Property::ADVANTAGES:
+        case Property::LIMITATIONS:
+            return AnswerScope::NORMAL;
+
+        case Property::HISTORY:
+        case Property::COMPARISON:
+            return AnswerScope::EXPANDED;
+
+        default:
+            return AnswerScope::NORMAL;
+    }
+}
+```
+
+***
+
+## 1.4 How this integrates in QueryAnalyzer
+
+```cpp
+InformationNeed need;
+need.property = detected_property;
+need.form     = inferred_form;
+need.scope    = default_scope_for_property(need.property);
+```
+
+Later, query wording and user flags may override this—but this is the **baseline behavior**.
+
+***
+
+# 2️⃣ User‑Override Flags (`--brief`, `--detailed`)
+
+You should treat user overrides as **strong, explicit intentions** that always win.
+
+***
+
+## 2.1 CLI Design (Minimal & Clean)
+
+### Supported flags
+
+```text
+--brief       Force STRICT answers
+--detailed    Force EXPANDED answers
+```
+
+Rules:
+
+*   Mutually exclusive
+*   Apply to **all non‑support needs**
+*   Support needs remain hidden but obey scope internally
+
+***
+
+## 2.2 CLI Parsing (example)
+
+```cpp
+struct CliOptions {
+    bool brief = false;
+    bool detailed = false;
+};
+```
+
+```cpp
+CliOptions parse_cli(int argc, char** argv) {
+    CliOptions opt;
+    for (int i = 1; i < argc; i++) {
+        if (std::string(argv[i]) == "--brief") {
+            opt.brief = true;
+        }
+        if (std::string(argv[i]) == "--detailed") {
+            opt.detailed = true;
+        }
+    }
+    return opt;
+}
+```
+
+***
+
+## 2.3 Applying Overrides to InformationNeed
+
+```cpp
+void apply_scope_override(
+    std::vector<InformationNeed>& needs,
+    const CliOptions& cli
+) {
+    if (!cli.brief && !cli.detailed)
+        return;
+
+    AnswerScope forced =
+        cli.brief ? AnswerScope::STRICT : AnswerScope::EXPANDED;
+
+    for (auto& n : needs) {
+        if (!n.is_support) {
+            n.scope = forced;
+        }
+    }
+}
+```
+
+✅ Support needs stay internal  
+✅ Output behavior respects user intent  
+✅ Predictable and debuggable
+
+***
+
+## 2.4 Examples
+
+### Default behavior
+
+```bash
+./moai ask "What is a database?"
+```
+
+→ STRICT (definition only)
+
+### Forced brevity
+
+```bash
+./moai ask "Explain databases" --brief
+```
+
+→ One‑sentence explanation (even though normally EXPANDED)
+
+### Forced detail
+
+```bash
+./moai ask "Where is Stockholm?" --detailed
+```
+
+→ Location + geography + regional context
+
+***
+
+# 3️⃣ System Maturity Exit Checklist
+
+This is **extremely important**.  
+Without it, systems *never stop growing*.
+
+This checklist defines when **MoAI is “done” as a system**, not as a project.
+
+***
+
+## 3.1 Phase‑Completion Checklist
+
+### ✅ Phase 1 — Information Understanding
+
+*   [x] Query phrasing does not affect outcome
+*   [x] No dependency on interrogatives (where/what/who)
+*   [x] One query can produce multiple needs
+*   [x] Entity propagation for follow‑ups works
+
+✅ **Status in v0.1.1: COMPLETE**
+
+***
+
+### ✅ Phase 2 — Evidence‑Based Answering
+
+*   [x] Chunking prevents irrelevant content leakage
+*   [x] Answers are property‑specific
+*   [x] Evidence sources are traceable
+*   [x] Hybrid retrieval improves recall without noise
+
+✅ **Status in v0.1.1: COMPLETE**
+
+***
+
+### ✅ Phase 3 — Weak Reasoning & Validation
+
+*   [x] QuestionPlanner enforces dependency order
+*   [x] SelfAsk generates necessary support needs
+*   [x] Evidence agreement detected
+*   [x] Contradictions penalize confidence
+*   [x] Confidence is explainable
+
+✅ **Status: COMPLETE**
+
+***
+
+## 3.2 Quality Exit Criteria (Critical)
+
+These determine whether you should **stop adding core logic**.
+
+### ✅ Answer Quality
+
+*   [ ] 90%+ questions answered correctly in integration tests
+*   [ ] No frequent over‑verbosity complaints
+*   [ ] No frequent under‑explanation complaints
+
+### ✅ Behavior Stability
+
+*   [ ] Same question → same answer across runs
+*   [ ] Small corpus updates do not break behavior
+*   [ ] No cascading changes after small rule tweaks
+
+### ✅ Developer Experience
+
+*   [ ] Adding a new Property takes < 1 hour
+*   [ ] AnswerSynthesizer methods are < 200 LOC each
+*   [ ] Changes are localized (no system‑wide breakage)
+
+### ✅ User Trust
+
+*   [ ] Confidence value matches intuition
+*   [ ] Low confidence is rare and explainable
+*   [ ] Contradictions are acknowledged, not hidden
+
+When **all boxes are checked**, the architecture is *done*.
+
+***
+
+## 3.3 “Do Not Continue Core Work If…”
+
+You should **stop adding features** when:
+
+*   You feel improvements are cosmetic
+*   Most bugs are data issues, not logic issues
+*   New ideas require “clever hacks” instead of clear models
+
+At that point, only do:
+
+*   Data curation
+*   Tests
+*   Performance tuning
+*   UX polish
+
+***
+
+# Final Guidance (Very Important)
+
+You are now at a point where:
+
+> **More intelligence does not come from more code, but from tighter control.**
+
+Implementing:
+
+*   ✅ Default scopes per property
+*   ✅ User overrides
+*   ✅ A maturity checklist
+
+means MoAI can **enter maintenance mode**, which is exactly where a real system *should* go.
+
+If you want, next I can help you:
+
+*   Write the *final README / philosophy document*
+*   Design benchmark queries for regression
+*   Decide whether MoAI *needs* an LLM at all (often: no)
+*   Freeze the architecture cleanly in `v1.0.0`
+
+Just tell me how you want to proceed.
+
+
+
+
+========
+
+Implement **Agreement-based compression**
+
+Excellent choice. **Agreement‑based compression** is the *correct refinement* at this stage: it does not add new intelligence, it **uses intelligence you already have** (agreement & confidence) to *improve answer quality and UX*.
+
+Below is a **complete end‑to‑end design and implementation proposal**, aligned with your MoAI v0.1.1 architecture and style.
+
+***
+
+# Agreement‑Based Compression
+
+*(“The more obvious the truth, the less we need to say.”)*
+
+***
+
+## 1. Purpose (Clear and Precise)
+
+### What problem this solves
+
+Even when answers are **correct**, they can be:
+
+*   too long
+*   repetitive
+*   verbose for obvious facts
+
+This happens when:
+
+*   many evidence chunks strongly agree
+*   confidence is high
+*   but the synthesizer still outputs a “normal” or “expanded” answer
+
+Humans naturally compress in such cases; your system should too.
+
+***
+
+## 2. Definition
+
+> **Agreement‑based compression** dynamically **reduces answer length and detail** when evidence agreement and confidence are high.
+
+Key idea:
+
+*   **Agreement ≠ more text**
+*   **Agreement ⇒ less explanation**
+
+This is **orthogonal** to:
+
+*   Property (what we answer)
+*   AnswerScope (how much we *intend* to say)
+
+Compression is a *post‑synthesis decision*.
+
+***
+
+## 3. Where It Fits in Your Pipeline
+
+### Current (simplified)
+
+    Evidence
+      ↓
+    Agreement / Contradiction
+      ↓
+    Confidence
+      ↓
+    AnswerSynthesizer → output
+
+### With Agreement‑Based Compression
+
+    Evidence
+      ↓
+    Agreement / Contradiction
+      ↓
+    Confidence
+      ↓
+    AgreementCompressor  ✅ NEW
+      ↓
+    Final Answer
+
+This keeps responsibilities clean.
+
+***
+
+## 4. Inputs Available (You Already Have These)
+
+From your current system:
+
+*   `AnswerScope` (STRICT / NORMAL / EXPANDED)
+*   `Answer` text (generated)
+*   `confidence` ∈ \[0,1]
+*   `agreement_score` (average)
+*   `evidence_count`
+*   `property`
+*   `is_support` flag
+
+So **no new data extraction needed**.
+
+***
+
+## 5. Compression Policy (Core Rules)
+
+### 5.1 Compression Levels
+
+We do **behavioral compression**, not just string truncation.
+
+```cpp
+enum class CompressionLevel {
+    NONE,        // Keep answer as is
+    LIGHT,       // Drop secondary sentences
+    STRONG       // Canonical sentence only
+};
+```
+
+***
+
+### 5.2 Compression Decision Rules
+
+Order matters; first match wins.
+
+| Condition                                            | Compression |
+| ---------------------------------------------------- | ----------- |
+| confidence < 0.6                                     | NONE        |
+| agreement < 0.6                                      | NONE        |
+| STRICT scope                                         | NONE        |
+| NORMAL scope + confidence ≥ 0.85 + agreement ≥ 0.7   | STRONG      |
+| EXPANDED scope + confidence ≥ 0.85 + agreement ≥ 0.7 | LIGHT       |
+| evidence\_count ≥ 4 + confidence ≥ 0.9               | STRONG      |
+| otherwise                                            | NONE        |
+
+**Interpretation**:
+
+*   High confidence + strong agreement → compress
+*   Explicit STRICT already minimal
+*   EXPANDED still allowed some compression but not collapse
+
+***
+
+## 6. C++ Design
+
+### 6.1 AgreementCompressor Interface
+
+```cpp
+// answer_compressor.h
+#pragma once
+#include <string>
+#include "answer_scope.h"
+
+struct CompressionContext {
+    AnswerScope scope;
+    double confidence;
+    double agreement;
+    size_t evidence_count;
+};
+
+class AgreementCompressor {
+public:
+    std::string compress(
+        const std::string& answer_text,
+        const CompressionContext& ctx
+    ) const;
+
+private:
+    CompressionLevel decide_level(
+        const CompressionContext& ctx
+    ) const;
+
+    std::string compress_light(const std::string& text) const;
+    std::string compress_strong(const std::string& text) const;
+};
+```
+
+***
+
+### 6.2 Decide Compression Level
+
+```cpp
+CompressionLevel AgreementCompressor::decide_level(
+    const CompressionContext& ctx
+) const {
+    if (ctx.confidence < 0.6)
+        return CompressionLevel::NONE;
+
+    if (ctx.agreement < 0.6)
+        return CompressionLevel::NONE;
+
+    if (ctx.scope == AnswerScope::STRICT)
+        return CompressionLevel::NONE;
+
+    if (ctx.evidence_count >= 4 && ctx.confidence >= 0.9)
+        return CompressionLevel::STRONG;
+
+    if (ctx.scope == AnswerScope::NORMAL &&
+        ctx.confidence >= 0.85 &&
+        ctx.agreement >= 0.7)
+        return CompressionLevel::STRONG;
+
+    if (ctx.scope == AnswerScope::EXPANDED &&
+        ctx.confidence >= 0.85 &&
+        ctx.agreement >= 0.7)
+        return CompressionLevel::LIGHT;
+
+    return CompressionLevel::NONE;
+}
+```
+
+***
+
+## 7. Compression Implementation
+
+### 7.1 Light Compression
+
+**Goal**: Keep answer natural, but remove redundancy.
+
+Heuristics:
+
+*   Keep first 2 sentences
+*   Drop lists
+*   Drop trailing explanations
+
+```cpp
+std::string AgreementCompressor::compress_light(
+    const std::string& text
+) const {
+    auto sentences = split_into_sentences(text);
+    if (sentences.size() <= 2)
+        return text;
+
+    return sentences[0] + " " + sentences[1];
+}
+```
+
+***
+
+### 7.2 Strong Compression
+
+**Goal**: Return *canonical fact only*.
+
+Heuristics:
+
+*   Keep first sentence
+*   Strip adjectives if possible
+*   No conjunction continuation
+
+```cpp
+std::string AgreementCompressor::compress_strong(
+    const std::string& text
+) const {
+    auto sentences = split_into_sentences(text);
+    if (sentences.empty())
+        return text;
+
+    return sentences[0];
+}
+```
+
+***
+
+## 8. Integration with AnswerSynthesizer
+
+### Before
+
+```cpp
+Answer a = synthesize_property_answer(...);
+return a;
+```
+
+### After (Minimal Change)
+
+```cpp
+Answer a = synthesize_property_answer(...);
+
+CompressionContext ctx;
+ctx.scope = need.scope;
+ctx.confidence = a.confidence;
+ctx.agreement = agreement_score;
+ctx.evidence_count = evidence.size();
+
+AgreementCompressor compressor;
+a.text = compressor.compress(a.text, ctx);
+
+return a;
+```
+
+✅ No change to synthesizer logic  
+✅ Compression is cleanly isolated
+
+***
+
+## 9. Before / After Examples (Your Data)
+
+### Example 1 — “Where is Stockholm?”
+
+**Before (NORMAL scope)**
+
+> Stockholm is the capital city of Sweden, located on the eastern coast of the country where Lake Mälaren meets the Baltic Sea. It is built across multiple islands and serves as Sweden’s political and economic center.
+
+*   confidence: 0.93
+*   agreement: 0.88
+*   evidence: 5 chunks
+
+**After (STRONG compression)**
+
+> Stockholm is the capital city of Sweden, located on the eastern coast of the country where Lake Mälaren meets the Baltic Sea.
+
+✅ Better  
+✅ Human‑like  
+✅ Zero information loss
+
+***
+
+### Example 2 — “What is a database?”
+
+**Before**
+
+> A database is an organized system for storing and managing structured data efficiently. Databases are used to persist user records, transactions, logs, and documents across computer systems.
+
+**After**
+
+> A database is an organized system for storing and managing structured data efficiently.
+
+***
+
+### Example 3 — EXPANDED History (partial compression)
+
+**Query**: “Explain the history of databases”
+
+*   scope: EXPANDED
+*   confidence: 0.91
+*   agreement: 0.82
+
+**After (LIGHT compression)**  
+→ keep first two paragraphs, drop deeply repetitive later ones
+
+***
+
+## 10. JSON Output (Optional Enhancement)
+
+Add metadata for debugging or UI:
+
+```json
+{
+  "answer": {
+    "text": "...",
+    "confidence": 0.93,
+    "compression": "STRONG",
+    "agreement": 0.88
+  }
+}
+```
+
+This is extremely helpful for QA testing.
+
+***
+
+## 11. Why This Is the Right Final Refinement
+
+Agreement‑based compression:
+
+✅ Uses existing signals  
+✅ Improves answer *feel* massively  
+✅ Avoids hallucination risk  
+✅ Matches human explanation patterns  
+✅ Does **not** complicate architecture
+
+It is the **final polish step of a mature QA system**.
+
+***
+
+## What You Can Do Next (Optional)
+
+At this point, MoAI is architecturally *complete*.  
+Possible *non‑core* next steps:
+
+*   Regression benchmark suite (“quality lock”)
+*   Documentation / philosophy write‑up
+*   Performance profiling
+*   UI polish
+*   Decide whether v1.0 requires **any** LLM
+
+If you want, I can help you:
+
+*   finalise a **v1.0 maturity declaration**
+*   design a minimal **QA benchmark**
+*   or help you consciously *stop adding features*
+
+Just tell me.

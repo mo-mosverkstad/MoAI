@@ -81,12 +81,20 @@ int run_cli(int argc, char** argv) {
     // Pipeline: Query → Analyze → InformationNeeds[] → Hybrid Retrieve → Chunk Select → Synthesize → Answer
     if (cmd == "ask") {
         if (argc < 3) {
-            std::cerr << "Usage: mysearch ask \"query\" [--json]\n";
+            std::cerr << "Usage: mysearch ask \"query\" [--json] [--brief] [--detailed]\n";
             return 1;
         }
 
         std::string query = argv[2];
-        bool json = (argc >= 4 && std::string(argv[3]) == "--json");
+        bool json = false;
+        bool force_brief = false;
+        bool force_detailed = false;
+        for (int i = 3; i < argc; i++) {
+            std::string arg = argv[i];
+            if (arg == "--json") json = true;
+            else if (arg == "--brief") force_brief = true;
+            else if (arg == "--detailed") force_detailed = true;
+        }
         std::string segdir = "../segments/seg_000001";
         std::string embeddir = "../embeddings";
 
@@ -179,6 +187,13 @@ int run_cli(int argc, char** argv) {
                     expanded.push_back(s);
                 }
             }
+        }
+
+        // Apply CLI scope override (--brief / --detailed)
+        if (force_brief || force_detailed) {
+            AnswerScope forced = force_brief ? AnswerScope::STRICT : AnswerScope::EXPANDED;
+            for (auto& n : expanded)
+                if (!n.is_support) n.scope = forced;
         }
 
         // 4. Plan question order (dependency-aware topological sort)

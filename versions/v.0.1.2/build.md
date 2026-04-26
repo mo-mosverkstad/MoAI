@@ -216,22 +216,48 @@ from query wording:
 | NORMAL | (default for LIST, COMPARISON) | ~400 chars |
 | EXPANDED | "explain", "in detail", "describe", "comprehensive", or EXPLANATION form | ~700 chars |
 
-Scope also auto-adjusts based on confidence:
+Scope is also determined by **property defaults**:
+
+| Property | Default Scope |
+|----------|---------------|
+| LOCATION, DEFINITION, TIME | STRICT |
+| FUNCTION, USAGE, ADVANTAGES, LIMITATIONS | NORMAL |
+| HISTORY, COMPARISON | EXPANDED |
+
+Scope auto-adjusts based on confidence:
 - High confidence (>0.85) + NORMAL → compresses to STRICT
 - Low confidence (<0.5) + STRICT → expands to NORMAL
 
+**CLI override flags** (always win over all other scope signals):
+
 ```bash
-# STRICT (minimal)
+--brief       Force STRICT scope (minimal answers)
+--detailed    Force EXPANDED scope (detailed answers)
+```
+
+```bash
+# STRICT (property default for LOCATION)
 ./mysearch ask "where is stockholm"
 # [LOCATION / SHORT_FACT / STRICT] Entity: stockholm
 
-# EXPANDED (detailed)
+# EXPANDED (query wording "explain in detail")
 ./mysearch ask "explain in detail where stockholm is"
 # [LOCATION / SHORT_FACT / EXPANDED] Entity: stockholm
 
-# NORMAL (balanced)
+# NORMAL (property default for LIMITATIONS)
 ./mysearch ask "what are the drawbacks of NoSQL"
 # [LIMITATIONS / LIST / NORMAL] Entity: nosql
+
+# --brief forces STRICT even for EXPLANATION queries
+./mysearch ask "explain how TCP ensures reliability" --brief
+# [FUNCTION / EXPLANATION / STRICT] Entity: ...
+
+# --detailed forces EXPANDED even for LOCATION queries
+./mysearch ask "where is stockholm" --detailed
+# [LOCATION / SHORT_FACT / EXPANDED] Entity: stockholm
+
+# Combine with --json
+./mysearch ask "where is stockholm" --detailed --json
 ```
 
 #### Single-need queries
@@ -429,6 +455,14 @@ echo "=== Benchmark questions ==="
 ./mysearch ask "When did computer networking start becoming mainstream"
 ./mysearch ask "Databases for beginners what should I start with"
 ./mysearch ask "How is Sweden connected to continental Europe"
+
+echo "=== AnswerScope ==="
+./mysearch ask "where is stockholm"                          # STRICT (property default)
+./mysearch ask "explain in detail where stockholm is"        # EXPANDED (query wording)
+./mysearch ask "what are the drawbacks of NoSQL"             # NORMAL (property default)
+./mysearch ask "explain how TCP ensures reliability" --brief  # STRICT (CLI override)
+./mysearch ask "where is stockholm" --detailed               # EXPANDED (CLI override)
+./mysearch ask "where is stockholm" --detailed --json        # EXPANDED + JSON
 
 echo "=== JSON ==="
 ./mysearch ask "where is stockholm" --json

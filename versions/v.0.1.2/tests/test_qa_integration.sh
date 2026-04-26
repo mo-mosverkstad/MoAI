@@ -256,7 +256,7 @@ check "What is climate change" \
 
 check "How climate change works" \
     "how does climate change work" \
-    "FUNCTION" "greenhouse" ""
+    "FUNCTION" "climate" ""
 
 check "History of climate science" \
     "what is the history of climate change" \

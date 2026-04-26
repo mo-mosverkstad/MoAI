@@ -1,4 +1,5 @@
 #include "query_analyzer.h"
+#include "../answer/answer_scope.h"
 #include <algorithm>
 #include <cctype>
 #include <unordered_set>
@@ -205,7 +206,7 @@ AnswerForm RuleBasedQueryAnalyzer::detect_form(const std::string& clause, Proper
 }
 
 AnswerScope RuleBasedQueryAnalyzer::infer_scope(const std::string& clause, AnswerForm form) const {
-    // Explicit scope hints from query wording
+    // 1. Explicit scope hints from query wording (always win)
     if (contains(clause, "brief") || contains(clause, "short") ||
         contains(clause, "quick") || contains(clause, "just"))
         return AnswerScope::STRICT;
@@ -215,13 +216,11 @@ AnswerScope RuleBasedQueryAnalyzer::infer_scope(const std::string& clause, Answe
         contains(clause, "comprehensive") || contains(clause, "thorough"))
         return AnswerScope::EXPANDED;
 
-    // Form-based defaults
-    if (form == AnswerForm::SHORT_FACT)
-        return AnswerScope::STRICT;
-    if (form == AnswerForm::EXPLANATION || form == AnswerForm::SUMMARY)
-        return AnswerScope::EXPANDED;
-
-    return AnswerScope::NORMAL;
+    // 2. Form-based defaults (no query wording hint)
+    //    Property-based defaults are applied later in the pipeline
+    //    via default_scope_for_property() — here we only handle
+    //    form-level signals that aren't already covered by property.
+    return AnswerScope::NORMAL; // placeholder; overridden by property default
 }
 
 std::vector<InformationNeed> RuleBasedQueryAnalyzer::analyze(const std::string& query) const {
@@ -245,6 +244,9 @@ std::vector<InformationNeed> RuleBasedQueryAnalyzer::analyze(const std::string& 
         Property prop = detect_property(clause);
         AnswerForm form = detect_form(clause, prop);
         AnswerScope scope = infer_scope(clause, form);
+        // If no explicit query hint, use property-based default
+        if (scope == AnswerScope::NORMAL)
+            scope = default_scope_for_property(prop);
 
         // Store property confidence from scoring
         auto pscores = score_properties(clause);
