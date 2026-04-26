@@ -4,31 +4,36 @@ A fully self-contained, offline search engine and question-answering system writ
 
 ## What It Does
 
-MoAI ingests a directory of text documents and builds a compact binary index. From there it supports three retrieval modes, each building on the last:
+MoAI ingests a directory of text documents and builds a compact binary index. It answers natural language questions by modeling what the user actually needs (entity + property + answer form), not just matching keywords.
 
-- **BM25 search** — Classic inverted-index retrieval with boolean (AND / OR / NOT) and position-aware phrase queries, ranked by Okapi BM25.
-- **Hybrid BM25 + ANN search** — Fuses lexical BM25 scores with semantic nearest-neighbor scores (0.7 / 0.3 weighting) from an HNSW vector index, then produces an extractive summary.
-- **Question answering** — Analyzes query intent and answer type, retrieves and chunks documents, and synthesizes a type-aware extractive answer with a confidence score. Supports follow-up questions via conversation memory.
+- **Lexical search** — Inverted-index retrieval with boolean (AND / OR / NOT) and phrase queries, ranked by Okapi BM25.
+- **Semantic search** — Nearest-neighbor retrieval using an HNSW vector index with BoW or neural embeddings.
+- **Hybrid search** — Fuses lexical and semantic scores with configurable weights.
+- **Question answering** — Decomposes queries into InformationNeeds, retrieves and chunks documents, and synthesizes typed extractive answers with confidence scoring, agreement-based compression, and conversation memory.
+
+## Architecture
+
+MoAI is a **pluggable algorithm platform**. The QA pipeline is fixed; retrieval and query analysis algorithms are interchangeable via interfaces and selected by configuration:
+
+- **IRetriever** — BM25, HNSW, Hybrid, or your own algorithm
+- **IQueryAnalyzer** — Rule-based or neural (multi-task Transformer)
+
+All tuning parameters, vocabularies, and pipeline rules are externalized to configuration files — no rebuild needed to adjust behavior.
 
 ## Core Components
 
 - **Custom binary index** — Varint + delta-encoded postings with position storage for phrase matching.
-- **BM25 ranking** — Standard Okapi BM25 (k1 = 1.2, b = 0.75) with min-heap top-K extraction.
-- **HNSW vector index** — Full multilayer navigable small-world graph with configurable M, efConstruction, and efSearch.
-- **Embedding models** — A lightweight BoW feedforward net (no dependencies) as the default, plus an optional Transformer sentence encoder trained with InfoNCE contrastive loss (requires libtorch).
-- **Query analyzer** — Two-tier architecture: a rule-based fallback that detects intent, answer type, keywords, and entity from patterns, and an optional neural multi-task Transformer classifier (intent + answer type + BIO entity extraction) that auto-activates when a trained model is present.
-- **Document chunker** — Splits documents into paragraphs and classifies each by semantic type (location, definition, person, temporal, procedure, history, general).
-- **Answer synthesizer** — Dispatches to specialized extractors per answer type, with year-aware temporal extraction using stem-prefix matching and regex boosting.
-- **Extractive summarizer** — Keyword-scored sentence extraction with deduplication and per-document limits.
-- **Conversation memory** — Carries entity and answer type across follow-up questions.
-- **Confidence scoring** — Combines keyword coverage, evidence relevance, and evidence agreement into a 0–1 score.
-
-## Optional Neural Features (libtorch)
-
-When built with `USE_TORCH=ON`, two additional neural components become available. Both auto-detect their model files at runtime and fall back gracefully when absent:
-
-- **Neural sentence encoder** — Transformer encoder with sinusoidal positional encoding, mean pooling, and L2 normalization. Trained with in-batch InfoNCE contrastive loss on query–document pairs generated from the corpus.
-- **Neural query analyzer** — Multi-task Transformer classifier with three heads (intent, answer type, BIO entity). Training data (~27K samples) is auto-generated from the corpus using entity extraction and 22 question templates. Trained with AdamW and a combined cross-entropy loss.
+- **BM25 ranking** — Okapi BM25 with configurable k1 and b parameters.
+- **HNSW vector index** — Full multilayer navigable small-world graph.
+- **Embedding models** — BoW feedforward net (default) or Transformer sentence encoder (optional, libtorch).
+- **Query analyzer** — Rule-based semantic prototype scoring, or neural multi-task Transformer classifier.
+- **Document chunker** — Splits documents into paragraphs, classifies by semantic type (11 types).
+- **Answer synthesizer** — 11 typed extractors dispatched by property, with scope-aware truncation.
+- **Agreement-based compression** — Dynamically reduces answer length when evidence strongly agrees.
+- **Evidence normalizer** — Domain-aware agreement and contradiction detection.
+- **Self-ask + question planner** — Internal sub-question generation with dependency-aware topological sort.
+- **Conversation memory** — Carries entity context across follow-up questions.
+- **Confidence scoring** — Multi-factor score combining coverage, volume, agreement, and contradiction penalty.
 
 ## Build
 
@@ -49,10 +54,27 @@ cmake --build .
 
 ## Tests
 
-76+ GoogleTest cases covering varint encoding, tokenization, query parsing, segment I/O, BM25, boolean/phrase search, HNSW recall, and hybrid search.
+76+ GoogleTest unit tests and 75 QA integration tests.
 
 ```bash
 cmake .. -DBUILD_TESTS=ON
 cmake --build .
 ctest --output-on-failure
+
+# QA integration tests
+./mysearch ingest ../data && ./mysearch build-hnsw
+bash ../tests/test_qa_integration.sh
 ```
+
+## Versions
+
+Each version is self-contained in `versions/v.X.Y.Z/` with its own source, config, tests, and documentation.
+
+| Version | Focus |
+|---------|-------|
+| v.0.1.1 | InformationNeed model, hybrid retrieval, self-ask reasoning |
+| v.0.1.2 | AnswerScope, agreement-based compression, definition synthesis |
+| v.0.1.3 | Configuration and vocabulary externalization |
+| v.0.1.4 | Pluggable algorithm platform (IRetriever, IQueryAnalyzer) |
+
+See each version's `README.md`, `codebase_analysis.md`, and `history.md` for details.
