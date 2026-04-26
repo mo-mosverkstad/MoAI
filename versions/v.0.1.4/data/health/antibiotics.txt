@@ -1,0 +1,52 @@
+# Antibiotics
+
+Antibiotics are medicines used to treat bacterial infections by killing bacteria or preventing them from reproducing. They are among the most important medical discoveries of the 20th century.
+
+## Definition
+
+An antibiotic is a type of antimicrobial substance active against bacteria. Antibiotics are widely used in the prevention and treatment of bacterial infections. They work by either killing bacteria (bactericidal) or inhibiting their growth (bacteriostatic). Antibiotics do not work against viral infections such as the common cold or influenza.
+
+## History of Antibiotics
+
+The history of antibiotics began with Alexander Fleming's accidental discovery of penicillin in 1928. Fleming noticed that a mold called Penicillium notatum killed bacteria on a culture plate. Howard Florey and Ernst Boris Chain developed penicillin into a practical medicine during the 1940s. Mass production of penicillin began during World War II, saving countless lives from infected wounds. The discovery of streptomycin by Selman Waksman in 1943 provided the first effective treatment for tuberculosis. The period from the 1940s to the 1960s is often called the golden age of antibiotic discovery, when most major antibiotic classes were identified.
+
+## How Antibiotics Work
+
+Antibiotics work through several mechanisms to fight bacterial infections:
+- Cell wall disruption: penicillin and cephalosporins prevent bacteria from building their cell walls, causing them to burst
+- Protein synthesis inhibition: tetracyclines and macrolides block the bacterial ribosome, preventing protein production
+- DNA replication interference: fluoroquinolones inhibit enzymes needed for bacterial DNA replication
+- Metabolic pathway disruption: sulfonamides block folic acid synthesis, which bacteria need to grow
+
+The choice of antibiotic depends on the type of bacteria causing the infection, the site of infection, and patient factors such as allergies.
+
+## Advantages of Antibiotics
+
+The advantages and benefits of antibiotics include:
+- Life-saving treatment for serious bacterial infections including pneumonia, sepsis, and meningitis
+- Enabled modern surgery by preventing post-operative infections
+- Reduced mortality from infectious diseases dramatically since the 1940s
+- Wide range of options available for different types of infections
+- Many antibiotics are inexpensive and widely available
+- Preventive use in surgery and for immunocompromised patients reduces infection risk
+
+## Limitations and Drawbacks of Antibiotics
+
+The limitations and drawbacks of antibiotics include:
+- Antibiotic resistance: overuse and misuse have led to the emergence of drug-resistant bacteria (superbugs) such as MRSA
+- Side effects: antibiotics can cause nausea, diarrhea, allergic reactions, and disruption of beneficial gut bacteria
+- Ineffective against viruses: antibiotics do not treat viral infections, but are often incorrectly prescribed for them
+- Narrow spectrum: some antibiotics only work against specific types of bacteria
+- Development pipeline: few new antibiotic classes have been discovered since the 1980s, while resistance continues to grow
+- Environmental impact: antibiotic residues in water and soil contribute to resistance in environmental bacteria
+
+## Usage and Applications
+
+Antibiotics are used for:
+- Treating bacterial infections (pneumonia, urinary tract infections, skin infections, strep throat)
+- Preventing infections during and after surgery
+- Treating acne and certain chronic conditions
+- Veterinary medicine and livestock farming (controversial due to resistance concerns)
+- Dental procedures for patients at risk of endocarditis
+
+For beginners learning about antibiotics, it is important to understand that antibiotics should only be used when prescribed by a doctor and the full course should always be completed.

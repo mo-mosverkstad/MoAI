@@ -1,0 +1,65 @@
+# Computer Networking Overview
+
+Computer networking connects computing devices so they can exchange data. Modern networks range from small office LANs to global-scale communication infrastructures.
+
+Networking allows electronic devices to exchange data using wired or wireless communication.
+
+## History and Timeline of Computer Networking
+
+Computer networking began in the late 1960s with ARPANET, a US Department of Defense research project that connected four university computers in 1969. The TCP/IP protocol suite was developed in the 1970s by Vint Cerf and Bob Kahn. In 1983, ARPANET adopted TCP/IP, which became the foundation of the modern Internet.
+
+Computer networking started becoming mainstream in the early 1990s with the invention of the World Wide Web by Tim Berners-Lee in 1989 and the release of the first web browser in 1991. By the mid-1990s, commercial Internet service providers made networking accessible to the general public. The year 1995 marked a turning point when major commercial services like Amazon and eBay launched, and Internet usage grew exponentially. By the year 2000, networking had become an essential part of daily life and business worldwide.
+
+## OSI Model
+
+The Open Systems Interconnection (OSI) model divides communication into seven layers:
+1. Physical: hardware signals
+2. Data Link: MAC addressing, frames
+3. Network: routing (IP)
+4. Transport: TCP/UDP
+5. Session: connections
+6. Presentation: encoding/decoding
+7. Application: end-user protocols (HTTP, DNS)
+
+A conceptual 7-layer framework describing communication functions from physical hardware signals up to application-level protocols.
+
+## TCP/IP
+
+The Internet is based on the TCP/IP protocol suite, the dominant Internet protocol suite:
+- IP handles addressing and routing
+- TCP provides reliable byte streams
+- UDP provides connectionless, fast datagram communication
+- HTTP/HTTPS for web traffic and web protocols
+- DNS for domain name resolution and name-to-IP resolution
+
+## How TCP Ensures Reliability
+
+TCP (Transmission Control Protocol) ensures reliable data delivery through several mechanisms:
+
+- Three-way handshake: TCP establishes a connection using a SYN, SYN-ACK, ACK sequence before any data is sent, ensuring both sides are ready to communicate.
+- Sequence numbers: every byte of data is assigned a sequence number, allowing the receiver to detect missing, duplicate, or out-of-order segments and reassemble them correctly.
+- Acknowledgments (ACKs): the receiver sends acknowledgment packets to confirm receipt of data. If the sender does not receive an ACK within a timeout period, it retransmits the data.
+- Retransmission: if a segment is lost or corrupted, TCP automatically retransmits it after a timeout, ensuring no data is permanently lost.
+- Flow control: TCP uses a sliding window mechanism to prevent the sender from overwhelming the receiver with more data than it can process.
+- Congestion control: TCP monitors network conditions and reduces its sending rate when congestion is detected, using algorithms such as slow start, congestion avoidance, and fast retransmit.
+- Checksum: every TCP segment includes a checksum to detect data corruption during transmission. Corrupted segments are discarded and retransmitted.
+- Ordered delivery: TCP guarantees that data arrives at the application layer in the exact order it was sent, even if network packets arrive out of order.
+
+These mechanisms together make TCP suitable for applications that require complete and accurate data delivery, such as web browsing, email, file transfer, and database communication.
+
+## Network Devices
+
+Common network hardware includes:
+- Routers: forwards packets between networks
+- Switches: connects devices in LAN
+- Firewalls: filters traffic
+- Load Balancers: distributes load across servers
+- Access Points: wireless networking
+
+## Modern Networking Topics
+
+- IPv6 addressing
+- Software Defined Networking (SDN)
+- Network Function Virtualization (NFV)
+- Zero Trust architectures
+- QUIC protocol
