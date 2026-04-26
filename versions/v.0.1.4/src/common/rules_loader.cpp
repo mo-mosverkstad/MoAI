@@ -34,6 +34,10 @@ static AnswerForm parse_form(const std::string& s) {
     return (it != m.end()) ? it->second : AnswerForm::SHORT_FACT;
 }
 
+static int parse_form_int(const std::string& s) {
+    return static_cast<int>(parse_form(s));
+}
+
 static int parse_chunk_type(const std::string& s) {
     static const std::unordered_map<std::string, ChunkType> m = {
         {"LOCATION", ChunkType::LOCATION}, {"DEFINITION", ChunkType::DEFINITION},
@@ -122,6 +126,8 @@ const PlanningRules& PlanningRules::get() {
                     int c = parse_chunk_type(trim(ct));
                     if (c >= 0) r.preferred_chunks[prop].push_back(c);
                 }
+            } else if (section == "DEFAULT_FORM") {
+                r.default_form[static_cast<int>(parse_property(left))] = parse_form_int(right);
             }
         }
 

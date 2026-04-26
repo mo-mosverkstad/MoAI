@@ -7,7 +7,7 @@
 #include "../inverted/search_engine.h"
 #include "../hybrid/hybrid_builder.h"
 #include "../hybrid/hybrid_search.h"
-#include "../query/query_analyzer.h"
+#include "../query/query_analyzer_factory.h"
 #include "../chunk/chunker.h"
 #include "../answer/answer_synthesizer.h"
 #include "../answer/answer_validator.h"
@@ -110,13 +110,8 @@ int run_cli(int argc, char** argv) {
         double cfg_support_thr = cfg.get_double("validator.support_coverage_threshold", 0.5);
 
         // 1. Analyze query
-        QueryAnalyzer analyzer;
-        analyzer.load_neural(embeddir + "/qa_model.pt",
-                             embeddir + "/vocab.txt");
-        if (analyzer.is_neural())
-            std::cerr << "Using neural query analyzer\n";
-
-        auto needs = analyzer.analyze(query);
+        auto analyzer = QueryAnalyzerFactory::create(embeddir);
+        auto needs = analyzer->analyze(query);
 
         // Apply conversation memory
         std::string conv_path = segdir + "/../.conversation";

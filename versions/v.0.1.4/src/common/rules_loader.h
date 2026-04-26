@@ -30,6 +30,7 @@ struct PlanningRules {
     std::vector<DependencyRule> dependencies;
     std::unordered_map<int, std::vector<int>> preferred_chunks; // Property -> ChunkType list
     std::vector<QueryTemplate> query_templates;
+    std::unordered_map<int, int> default_form; // Property -> AnswerForm
 
     static const PlanningRules& get();
 };

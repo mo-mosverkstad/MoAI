@@ -16,6 +16,7 @@ struct SynthConfig {
     double def_pattern_boost, def_fp_is_boost, def_fp_pattern_boost;
     double def_fp_penalty, def_fp_min_score;
     double loc_word_boost, loc_noun_boost, loc_capital_boost, loc_non_loc_penalty;
+    std::string loc_capital_word;
     double boost_word_score, heading_penalty, non_def_penalty;
     size_t max_def_text, max_loc_text, max_hist_text, max_adv_text, max_lim_text;
     size_t max_usage_text, max_general_text;
@@ -38,6 +39,7 @@ struct SynthConfig {
             s.loc_noun_boost = c.get_double("synth.location_noun_boost", 3.0);
             s.loc_capital_boost = c.get_double("synth.location_capital_boost", 4.0);
             s.loc_non_loc_penalty = c.get_double("synth.location_non_loc_penalty", -5.0);
+            s.loc_capital_word = c.get_string("synth.location_capital_word", "capital");
             s.boost_word_score = c.get_double("synth.boost_word_score", 2.0);
             s.heading_penalty = c.get_double("synth.heading_penalty", -2.0);
             s.non_def_penalty = c.get_double("synth.non_def_penalty", -3.0);
@@ -327,8 +329,9 @@ Answer AnswerSynthesizer::synthesize_location(
                 if (lower.find(lw) != std::string::npos) loc_sc += SC.loc_word_boost;
             for (auto& ln : SV.loc_nouns)
                 if (contains_word(lower, ln)) loc_sc += SC.loc_noun_boost;
-            if (contains_word(lower, "capital") && !entity_lower.empty() &&
-                contains_word(lower, entity_lower))
+            // "capital" only counts as location when entity is also mentioned
+            if (contains_word(lower, SC.loc_capital_word) &&
+                !entity_lower.empty() && contains_word(lower, entity_lower))
                 loc_sc += SC.loc_capital_boost;
             sc += loc_sc;
             if (loc_sc == 0.0) {

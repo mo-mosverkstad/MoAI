@@ -17,9 +17,13 @@ All tuning parameters are in `config/default.conf`. All vocabularies are in `con
                          +----------+-----------+
                                     |
                     +---------------v---------------+
-                    |       QueryAnalyzer           |  Phase 1
-                    |  (rule-based or neural)        |
-                    |  Query -> InformationNeed[]    |
+                    |   Query Analysis (pluggable)   |
+                    |                                |
+                    |   IQueryAnalyzer interface      |
+                    |     +-- RuleBasedQueryAnalyzer  |
+                    |     +-- NeuralQueryAnalyzer     |
+                    |                                |
+                    |   Selected by: query.analyzer   |
                     +---------------+---------------+
                                     |
                     +---------------v---------------+
@@ -57,27 +61,21 @@ All tuning parameters are in `config/default.conf`. All vocabularies are in `con
 
 ## 3. Pluggable Algorithm Design
 
-### IRetriever Interface
+The pipeline depends only on interfaces — never on concrete implementations. Config selects which algorithm runs.
 
-The pipeline depends only on this interface — never on concrete implementations:
+### Interfaces
 
-```cpp
-struct IRetriever {
-    virtual vector<ScoredDoc> search(const vector<string>& keywords) = 0;
-    virtual string name() const = 0;
-    virtual bool supports_fallback() const { return false; }
-    virtual vector<ScoredDoc> fallback_search(const vector<string>& keywords);
-};
-```
+| Interface | Method | Implementations |
+|-----------|--------|----------------|
+| `IRetriever` | `search(keywords) → ScoredDoc[]` | BM25Retriever, HNSWRetriever, HybridRetriever |
+| `IQueryAnalyzer` | `analyze(query) → InformationNeed[]` | RuleBasedQueryAnalyzer, NeuralQueryAnalyzerAdapter |
 
-### RetrieverFactory
+### Factories
 
-Config selects the implementation at startup:
-
-```cpp
-auto retriever = RetrieverFactory::create(reader, embeddir);
-// Config: retrieval.retriever = hybrid | bm25 | hnsw
-```
+| Factory | Config Key | Options |
+|---------|-----------|--------|
+| `RetrieverFactory` | `retrieval.retriever` | bm25, hnsw, hybrid |
+| `QueryAnalyzerFactory` | `query.analyzer` | rule, neural, auto |
 
 ### How to Add a New Retrieval Algorithm
 
@@ -117,6 +115,7 @@ retrieval.retriever = my_algo
 
 | Category | Example Keys |
 |----------|-------------|
+| `query.*` | `analyzer` (rule/neural/auto), `weight.LOCATION` through `weight.DEFINITION` (prototype weights) |
 | `retrieval.*` | `retriever` (bm25/hnsw/hybrid), `bm25_weight`, `ann_weight`, `max_ranked_docs`, `max_evidence` |
 | `bm25.*` | `k1`, `b`, `top_k` |
 | `hnsw.*` | `M`, `ef_construction`, `ef_search` |
@@ -133,7 +132,7 @@ retrieval.retriever = my_algo
 | File | Contents |
 |------|----------|
 | `properties.conf` | Per-property word lists (CHUNK_, QUERY_, VALIDATE_, SYNTH_ prefixes) |
-| `pipeline_rules.conf` | Self-ask rules, dependencies, preferred chunks, scope/form hints |
+| `pipeline_rules.conf` | Self-ask rules, dependencies, preferred chunks, scope/form hints, default form per property |
 | `domains.conf` | Evidence domain keywords, negations, opposites |
 | `language.conf` | Stop words, non-entity words, neural training templates |
 
@@ -149,7 +148,7 @@ Each module has a cached struct loaded once at startup:
 | `answer_synthesizer.cpp` | SynthConfig + SynthVocab | `default.conf` + `properties.conf` |
 | `chunker.cpp` | ChunkConfig + ChunkVocab | `default.conf` + `properties.conf` |
 | `evidence_normalizer.cpp` | EvidenceVocab | `domains.conf` |
-| `query_analyzer.cpp` | QueryVocab | `language.conf` + `pipeline_rules.conf` |
+| `query_analyzer.cpp` | QueryVocab | `language.conf` + `pipeline_rules.conf` + `properties.conf` + `default.conf` |
 
 ---
 
@@ -160,14 +159,19 @@ Each module has a cached struct loaded once at startup:
 
 2. RetrieverFactory::create(reader, embeddir)
    -> reads retrieval.retriever from config
-   -> returns BM25Retriever or HybridRetriever
+   -> returns BM25Retriever, HNSWRetriever, or HybridRetriever
 
-3. QueryAnalyzer.analyze(query)
-   -> clause splitting, property detection, scope inference
+3. QueryAnalyzerFactory::create(embeddir)
+   -> reads query.analyzer from config
+   -> returns RuleBasedQueryAnalyzer or NeuralQueryAnalyzerAdapter
 
-4. ConversationState.apply(needs)
-5. SelfAsk.expand() + CLI scope override
-6. QuestionPlanner.build() -> topological sort
+4. analyzer->analyze(query)
+   -> clause splitting, property detection (from QUERY_* vocab + weights),
+      form detection (from DEFAULT_FORM rules), scope inference
+
+5. ConversationState.apply(needs)
+6. SelfAsk.expand() + CLI scope override
+7. QuestionPlanner.build() -> topological sort
 
 7. For each need:
    a. retriever->search(keywords) -> ranked ScoredDocs
@@ -193,6 +197,7 @@ Each module has a cached struct loaded once at startup:
 | File | Purpose |
 |------|---------|
 | `i_retriever.h` | IRetriever interface: search(), name(), supports_fallback(), fallback_search() |
+| `embedding_index.h` | Shared HNSW + embedding infrastructure (used by HNSW and Hybrid retrievers) |
 | `bm25_retriever.h` | BM25-only retriever |
 | `hnsw_retriever.h` | HNSW-only retriever with BoW/neural embedding auto-detection |
 | `hybrid_retriever.h` | Hybrid retriever: BM25 + HNSW fusion |
@@ -204,7 +209,7 @@ Each module has a cached struct loaded once at startup:
 |------|---------|
 | `config.h/.cpp` | Config singleton: key=value parser with inline comment support |
 | `vocab_loader.h/.cpp` | VocabLoader: [SECTION]/comma vocabulary file parser |
-| `rules_loader.h/.cpp` | PlanningRules: self-ask, dependencies, preferred chunks, query templates |
+| `rules_loader.h/.cpp` | PlanningRules: self-ask, dependencies, preferred chunks, default forms, query templates |
 | `varint.h/.cpp` | Variable-length integer encoding |
 | `file_utils.h/.cpp` | File I/O helpers |
 | `types.h` | Type aliases |
@@ -257,7 +262,9 @@ Each module has a cached struct loaded once at startup:
 | File | Purpose |
 |------|---------|
 | `information_need.h` | Property (11), AnswerForm (5), AnswerScope (3), InformationNeed struct |
-| `query_analyzer.h/.cpp` | Rule-based: clause splitting, prototype scoring, scope inference (all from config/vocab) |
+| `i_query_analyzer.h` | IQueryAnalyzer interface: analyze(), name() |
+| `query_analyzer.h/.cpp` | RuleBasedQueryAnalyzer implementing IQueryAnalyzer |
+| `query_analyzer_factory.h` | Config-driven factory with NeuralQueryAnalyzerAdapter |
 | `neural_query_analyzer.h/.cpp` | Neural multi-task Transformer (libtorch) |
 
 ### 6.9 Chunking (`src/chunk/`)
@@ -314,7 +321,7 @@ v.0.1.4/
 |   +-- hybrid/                     # legacy hybrid command
 |   +-- inverted/                   # tokenizer, BM25, boolean search, phrase matching
 |   +-- query/                      # InformationNeed model, query analyzers
-|   +-- retrieval/                  # IRetriever interface, BM25/Hybrid retrievers, factory
+|   +-- retrieval/                  # IRetriever interface, BM25/HNSW/Hybrid retrievers, EmbeddingIndex, factory
 |   +-- storage/                    # binary segment reader/writer, WAL, manifest
 |   +-- summarizer/                 # extractive summarization
 |   +-- tools/                      # sandboxed command execution

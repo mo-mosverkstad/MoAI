@@ -48,7 +48,7 @@ BM25  HNSW   HybridRetriever
          +----+----+
          |         |
        BM25    HNSW+Embedding
-    |              (BoW or Neural)
+              (BoW or Neural)
 ```
 
 ### IRetriever Interface
@@ -70,25 +70,28 @@ struct IRetriever {
 | `src/retrieval/bm25_retriever.h` | BM25-only retriever |
 | `src/retrieval/hnsw_retriever.h` | HNSW-only retriever with BoW/neural embedding |
 | `src/retrieval/hybrid_retriever.h` | Hybrid retriever: BM25 + HNSW fusion |
+| `src/retrieval/embedding_index.h` | Shared HNSW + embedding init/query logic |
 | `src/retrieval/retriever_factory.h` | Config-driven factory |
 
 What was built:
 
-* IRetriever interface — search(), name(), supports_bm25_retry(), search_bm25_only()
+* IRetriever interface — search(), name(), supports_fallback(), fallback_search()
 * BM25Retriever — lexical search only
 * HNSWRetriever — semantic search only (BoW or neural embeddings)
 * HybridRetriever — BM25 + HNSW fusion. All ~80 lines of retrieval logic from commands.cpp moved here.
+* EmbeddingIndex — shared HNSW + embedding infrastructure used by both HNSWRetriever and HybridRetriever
 * RetrieverFactory — reads retrieval.retriever from config, returns the right implementation
 
 What was simplified:
-* commands.cpp ask command lost ~80 lines of retrieval logic, replaced with 2 lines: auto retriever = RetrieverFactory::create(reader, embeddir); and auto ranked_docs = retriever->search(need.keywords);
+* commands.cpp ask command lost ~80 lines of retrieval logic, replaced with 2 lines
 
 What was fixed:
-* Config parser now strips inline # comments (was breaking retrieval.retriever = hybrid # comment)
+* Config parser now strips inline # comments
 
 Config-driven switching verified:
 * retrieval.retriever = hybrid → uses BM25 + HNSW fusion
 * retrieval.retriever = bm25 → uses BM25 only
+* retrieval.retriever = hnsw → uses HNSW only
 
 ### Files Modified
 
@@ -116,7 +119,7 @@ Switching requires no rebuild.
 
 All 75 tests pass: `Results: 75 passed, 0 failed, 75 total`
 
-Config switching verified: `hybrid` → `bm25` → `hybrid` all work without rebuild.
+Config switching verified: `hybrid` → `bm25` → `hnsw` → `hybrid` all work without rebuild.
 
 
 ---
@@ -163,3 +166,60 @@ retrieval.retriever = my_algo
 ```
 
 No changes to commands.cpp, no changes to the answer pipeline, no rebuild of other modules. All 75 tests still pass.
+
+
+---
+
+## Step 2: IQueryAnalyzer + QueryAnalyzerFactory
+
+### Goal
+
+Formalize the query analyzer into a pluggable interface, same pattern as IRetriever.
+
+### What Changed
+
+- Created `IQueryAnalyzer` interface: `analyze(query) → vector<InformationNeed>`, `name()`
+- `RuleBasedQueryAnalyzer` now implements `IQueryAnalyzer` directly
+- Created `NeuralQueryAnalyzerAdapter` (libtorch-only) — wraps the legacy `NeuralQueryAnalyzer` output into `InformationNeed`
+- Created `QueryAnalyzerFactory` — reads `query.analyzer` from config
+- Removed the old `QueryAnalyzer` wrapper class (72 lines of dispatch logic)
+- `commands.cpp` simplified: `auto analyzer = QueryAnalyzerFactory::create(embeddir);`
+
+### Config
+
+```
+query.analyzer = auto    # rule | neural | auto
+```
+
+| Value | Behavior |
+|-------|----------|
+| `rule` | Always use rule-based analyzer |
+| `neural` | Always use neural analyzer (fails if model missing) |
+| `auto` | Try neural if model exists, fall back to rule (default) |
+
+### Files Created
+
+| File | Description |
+|------|-------------|
+| `src/query/i_query_analyzer.h` | IQueryAnalyzer interface |
+| `src/query/query_analyzer_factory.h` | Config-driven factory with NeuralQueryAnalyzerAdapter |
+
+### Files Modified
+
+| File | What Changed |
+|------|-------------|
+| `src/query/query_analyzer.h` | RuleBasedQueryAnalyzer implements IQueryAnalyzer; removed old QueryAnalyzer wrapper |
+| `src/query/query_analyzer.cpp` | Removed 72 lines of old QueryAnalyzer dispatch logic |
+| `src/cli/commands.cpp` | Uses QueryAnalyzerFactory::create() instead of manual setup |
+| `config/default.conf` | Added `query.analyzer = auto`, `query.weight.*` prototype weights |
+
+### Additional Externalizations (Step 2 continued)
+
+- **Property prototypes**: Extracted hardcoded signal words and weights from `query_analyzer.cpp` → words from `properties.conf` QUERY_* sections, weights from `default.conf` query.weight.* keys
+- **Property→Form mapping**: Extracted hardcoded if-chain from `detect_form()` → `pipeline_rules.conf [DEFAULT_FORM]` section
+- **Last hardcoded word**: Moved `"capital"` special-case in synthesizer to `synth.location_capital_word` config key
+- **Electricity fix**: Removed `city` from QUERY_LOCATION (was matching `electri-city` as substring)
+
+### Integration Test Results
+
+All 75 tests pass: `Results: 75 passed, 0 failed, 75 total`

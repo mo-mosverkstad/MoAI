@@ -1,6 +1,8 @@
 #include "query_analyzer.h"
 #include "../answer/answer_scope.h"
+#include "../common/config.h"
 #include "../common/vocab_loader.h"
+#include "../common/rules_loader.h"
 #include <algorithm>
 #include <cctype>
 #include <unordered_set>
@@ -11,6 +13,12 @@
 #include <filesystem>
 #endif
 
+struct PropertyPrototype {
+    Property property;
+    std::vector<std::string> signals;
+    double weight;
+};
+
 struct QueryVocab {
     std::unordered_set<std::string> stop_words;
     std::unordered_set<std::string> non_entity_words;
@@ -19,11 +27,14 @@ struct QueryVocab {
     std::vector<std::string> scope_expanded_hints;
     std::vector<std::string> form_explanation_hints;
     std::vector<std::string> form_summary_hints;
+    std::vector<PropertyPrototype> prototypes;
 
     static const QueryVocab& get() {
         static QueryVocab qv = []() {
             auto sw = VocabLoader::load("../config/vocabularies/language.conf");
             auto pr = VocabLoader::load("../config/vocabularies/pipeline_rules.conf");
+            auto pp = VocabLoader::load("../config/vocabularies/properties.conf");
+            auto& cfg = Config::instance();
             QueryVocab v;
             for (auto& w : VocabLoader::get(sw, "STOP_WORDS")) v.stop_words.insert(w);
             for (auto& w : VocabLoader::get(sw, "NON_ENTITY_WORDS")) v.non_entity_words.insert(w);
@@ -32,6 +43,21 @@ struct QueryVocab {
             v.scope_expanded_hints  = VocabLoader::get(pr, "SCOPE_EXPANDED_HINTS");
             v.form_explanation_hints = VocabLoader::get(pr, "FORM_EXPLANATION_HINTS");
             v.form_summary_hints    = VocabLoader::get(pr, "FORM_SUMMARY_HINTS");
+
+            // Load property prototypes: words from properties.conf, weights from default.conf
+            struct { const char* name; Property prop; } props[] = {
+                {"LOCATION", Property::LOCATION}, {"COMPARISON", Property::COMPARISON},
+                {"TIME", Property::TIME}, {"ADVANTAGES", Property::ADVANTAGES},
+                {"LIMITATIONS", Property::LIMITATIONS}, {"USAGE", Property::USAGE},
+                {"FUNCTION", Property::FUNCTION}, {"COMPOSITION", Property::COMPOSITION},
+                {"HISTORY", Property::HISTORY}, {"DEFINITION", Property::DEFINITION},
+            };
+            for (auto& [name, prop] : props) {
+                auto& words = VocabLoader::get(pp, std::string("QUERY_") + name);
+                double weight = cfg.get_double(std::string("query.weight.") + name, 2.0);
+                if (!words.empty())
+                    v.prototypes.push_back({prop, words, weight});
+            }
             return v;
         }();
         return qv;
@@ -129,47 +155,10 @@ std::string RuleBasedQueryAnalyzer::extract_entity(
     return best;
 }
 
-// ── Semantic prototypes: small vocabularies per property ──
-
-struct PropertyPrototype {
-    Property property;
-    std::vector<std::string> signals;
-    double weight;  // base weight per signal match
-};
-
-static const std::vector<PropertyPrototype>& property_prototypes() {
-    static const std::vector<PropertyPrototype> protos = {
-        {Property::LOCATION,    {"locat", "where", "capital", "coast", "close to", "near",
-                                 "region", "country", " city", "geograph", "situated",
-                                 "border", "sea", "lake", "island"}, 3.0},
-        {Property::COMPARISON,  {"vs ", "versus", "compare", "difference between",
-                                 "better", "worse", "which", "better than"}, 3.0},
-        {Property::TIME,        {"when", "what year", "what date", "timeline",
-                                 "century", "era", "year", "period", "date"}, 3.0},
-        {Property::ADVANTAGES,  {"advantage", "benefit", "strength", "pro ",
-                                 "why is", "why are", "still widely", "widely used",
-                                 "important", "famous", "significant"}, 2.5},
-        {Property::LIMITATIONS, {"limitation", "drawback", "disadvantage", "weakness",
-                                 "not suitable", "problem with", "problem of",
-                                 "challenge", "problem"}, 2.5},
-        {Property::USAGE,       {"used for", "use case", "suitable for", "application",
-                                 "start with", "beginner", "recommend", "suitable"}, 2.5},
-        {Property::FUNCTION,    {"how does", "how do", "purpose", "function",
-                                 "work", "ensure", "mechanism", "process"}, 2.0},
-        {Property::COMPOSITION, {"made of", "consist", "compos", "component",
-                                 "type", "overview", "part of"}, 2.0},
-        {Property::HISTORY,     {"history", "origin", "evolv", "founded",
-                                 "heritage", "developed", "introduced"}, 1.5},
-        {Property::DEFINITION,  {"what is", "what are", "define", "definition",
-                                 "meaning", "refers to", "means"}, 1.5},
-    };
-    return protos;
-}
-
 // Score all properties for a clause — returns sorted (property, score) pairs
 static std::vector<std::pair<Property, double>> score_properties(const std::string& clause) {
     std::vector<std::pair<Property, double>> scores;
-    for (auto& proto : property_prototypes()) {
+    for (auto& proto : QueryVocab::get().prototypes) {
         double sc = 0.0;
         for (auto& signal : proto.signals)
             if (contains(clause, signal)) sc += proto.weight;
@@ -186,14 +175,12 @@ Property RuleBasedQueryAnalyzer::detect_property(const std::string& clause) cons
 }
 
 AnswerForm RuleBasedQueryAnalyzer::detect_form(const std::string& clause, Property prop) const {
-    if (prop == Property::COMPARISON) return AnswerForm::COMPARISON;
-    if (prop == Property::COMPOSITION || prop == Property::ADVANTAGES ||
-        prop == Property::LIMITATIONS || prop == Property::USAGE)
-        return AnswerForm::LIST;
-    if (prop == Property::FUNCTION || prop == Property::HISTORY)
-        return AnswerForm::EXPLANATION;
-    if (prop == Property::LOCATION || prop == Property::TIME)
-        return AnswerForm::SHORT_FACT;
+    // Check config-driven Property -> Form mapping first
+    auto& df = PlanningRules::get().default_form;
+    auto it = df.find(static_cast<int>(prop));
+    if (it != df.end()) return static_cast<AnswerForm>(it->second);
+
+    // Fall back to query wording hints
     for (auto& h : QueryVocab::get().form_explanation_hints)
         if (contains(clause, h)) return AnswerForm::EXPLANATION;
     for (auto& h : QueryVocab::get().form_summary_hints)
@@ -215,7 +202,7 @@ AnswerScope RuleBasedQueryAnalyzer::infer_scope(const std::string& clause, Answe
     return AnswerScope::NORMAL; // placeholder; overridden by property default
 }
 
-std::vector<InformationNeed> RuleBasedQueryAnalyzer::analyze(const std::string& query) const {
+std::vector<InformationNeed> RuleBasedQueryAnalyzer::analyze(const std::string& query) {
     auto clauses = split_clauses(query);
     std::vector<InformationNeed> needs;
     std::string shared_entity;
@@ -257,7 +244,7 @@ std::vector<InformationNeed> RuleBasedQueryAnalyzer::analyze(const std::string& 
 }
 
 // Legacy adapter
-QueryAnalysis RuleBasedQueryAnalyzer::analyze_legacy(const std::string& query) const {
+QueryAnalysis RuleBasedQueryAnalyzer::analyze_legacy(const std::string& query) {
     auto needs = analyze(query);
     QueryAnalysis qa;
     if (needs.empty()) {
@@ -289,75 +276,3 @@ QueryAnalysis RuleBasedQueryAnalyzer::analyze_legacy(const std::string& query) c
     return qa;
 }
 
-// ── QueryAnalyzer (unified dispatch) ──
-
-#ifdef HAS_TORCH
-struct QueryAnalyzer::NeuralImpl {
-    Vocabulary vocab;
-    NeuralQueryAnalyzer analyzer;
-    NeuralImpl(Vocabulary v, int64_t dim, int64_t max_len)
-        : vocab(std::move(v)), analyzer(vocab, dim, max_len) {}
-};
-#else
-struct QueryAnalyzer::NeuralImpl {};
-#endif
-
-QueryAnalyzer::QueryAnalyzer() = default;
-QueryAnalyzer::~QueryAnalyzer() = default;
-
-bool QueryAnalyzer::load_neural(const std::string& model_path,
-                                 const std::string& vocab_path) {
-#ifdef HAS_TORCH
-    if (!std::filesystem::exists(model_path) ||
-        !std::filesystem::exists(vocab_path))
-        return false;
-    Vocabulary vocab;
-    if (!vocab.load(vocab_path)) return false;
-    auto impl = std::make_unique<NeuralImpl>(std::move(vocab), 128, 64);
-    impl->analyzer.load(model_path);
-    neural_ = std::move(impl);
-    use_neural_ = true;
-    return true;
-#else
-    (void)model_path; (void)vocab_path;
-    return false;
-#endif
-}
-
-std::vector<InformationNeed> QueryAnalyzer::analyze(const std::string& query) const {
-#ifdef HAS_TORCH
-    if (use_neural_ && neural_) {
-        // Neural produces legacy QueryAnalysis; wrap as single InformationNeed
-        auto qa = neural_->analyzer.analyze(query);
-        InformationNeed need;
-        need.entity = qa.mainEntity;
-        need.keywords = qa.keywords;
-        switch (qa.answerType) {
-            case AnswerType::LOCATION:       need.property = Property::LOCATION; break;
-            case AnswerType::DEFINITION:     need.property = Property::DEFINITION; break;
-            case AnswerType::TEMPORAL:       need.property = Property::TIME; break;
-            case AnswerType::COMPARISON:     need.property = Property::COMPARISON; break;
-            case AnswerType::PROCEDURE:      need.property = Property::FUNCTION; break;
-            case AnswerType::PERSON_PROFILE: need.property = Property::HISTORY; break;
-            default:                         need.property = Property::GENERAL; break;
-        }
-        switch (qa.answerType) {
-            case AnswerType::LOCATION:
-            case AnswerType::TEMPORAL:       need.form = AnswerForm::SHORT_FACT; break;
-            case AnswerType::COMPARISON:     need.form = AnswerForm::COMPARISON; break;
-            case AnswerType::PROCEDURE:      need.form = AnswerForm::EXPLANATION; break;
-            default:                         need.form = AnswerForm::SUMMARY; break;
-        }
-        return {need};
-    }
-#endif
-    return rule_based_.analyze(query);
-}
-
-QueryAnalysis QueryAnalyzer::analyze_legacy(const std::string& query) const {
-#ifdef HAS_TORCH
-    if (use_neural_ && neural_)
-        return neural_->analyzer.analyze(query);
-#endif
-    return rule_based_.analyze_legacy(query);
-}
