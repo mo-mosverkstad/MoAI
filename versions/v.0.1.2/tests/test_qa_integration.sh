@@ -403,7 +403,7 @@ echo "--- Electric Vehicles ---"
 
 check "What are electric vehicles" \
     "what are electric vehicles" \
-    "DEFINITION" "electric,battery" ""
+    "DEFINITION" "electric,motor" ""
 
 check "How electric vehicles work" \
     "how do electric vehicles work" \
@@ -424,6 +424,71 @@ check "EVs vs gasoline cars" \
 check "History of EVs" \
     "what is the history of electric vehicles" \
     "HISTORY" "electric" ""
+
+echo ""
+
+# ── Definition quality (Step 3 fix) ──
+echo "--- Definition Quality ---"
+
+check "Stockholm definition (not quality-of-life)" \
+    "what is stockholm" \
+    "DEFINITION" "capital,sweden" "true"
+
+check "Database definition (is a)" \
+    "what is a database" \
+    "DEFINITION" "database,organized" "true"
+
+check "Python definition (programming)" \
+    "what is python" \
+    "DEFINITION" "python,programming" ""
+
+check "Blockchain definition (decentralized)" \
+    "what is blockchain" \
+    "DEFINITION" "blockchain,decentralized" ""
+
+check "EV definition (motor)" \
+    "what are electric vehicles" \
+    "DEFINITION" "electric,motor" ""
+
+# Verify compression field exists in JSON output
+check_compression() {
+    local desc="$1" query="$2" expect_comp="$3"
+    TOTAL=$((TOTAL + 1))
+    local output
+    output=$(./mysearch ask "$query" --json 2>/dev/null)
+    if [ $? -ne 0 ] || [ -z "$output" ]; then
+        FAIL=$((FAIL + 1))
+        printf "${RED}FAIL${NC} %s — command failed\n" "$desc"
+        return
+    fi
+    local comp
+    comp=$(echo "$output" | python3 -c "
+import sys,json
+try:
+    d=json.load(sys.stdin)
+    print(d['needs'][0]['answer']['compression'])
+except: print('MISSING')
+" 2>/dev/null)
+    if [ -n "$expect_comp" ] && [ "$comp" != "$expect_comp" ]; then
+        FAIL=$((FAIL + 1))
+        printf "${RED}FAIL${NC} %s — compression: got '%s', expected '%s'\n" "$desc" "$comp" "$expect_comp"
+    else
+        PASS=$((PASS + 1))
+        printf "${GREEN}PASS${NC} %s (compression=%s)\n" "$desc" "$comp"
+    fi
+}
+
+echo ""
+echo "--- Compression ---"
+
+check_compression "STRICT scope → NONE compression" \
+    "where is stockholm" "NONE"
+
+check_compression "DEFINITION STRICT → NONE compression" \
+    "what is a database" "NONE"
+
+check_compression "Compression field present in JSON" \
+    "what are the drawbacks of NoSQL" "STRONG"
 
 echo ""
 

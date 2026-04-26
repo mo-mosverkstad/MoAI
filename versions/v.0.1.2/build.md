@@ -73,7 +73,7 @@ ctest --output-on-failure
 
 ### QA integration tests
 
-The integration test script runs 67 benchmark queries against the QA pipeline
+The integration test script runs 75 benchmark queries against the QA pipeline
 and verifies that each answer has the correct property, contains expected
 content keywords, and passes validation. Requires `python3` for JSON parsing.
 
@@ -150,7 +150,7 @@ PASS Stockholm location validated (confidence=0.90)
 PASS Japan location validated (confidence=0.99)
 
 ========================================
-Results: 67 passed, 0 failed, 67 total
+Results: 75 passed, 0 failed, 75 total
 ========================================
 ```
 
@@ -227,6 +227,18 @@ Scope is also determined by **property defaults**:
 Scope auto-adjusts based on confidence:
 - High confidence (>0.85) + NORMAL → compresses to STRICT
 - Low confidence (<0.5) + STRICT → expands to NORMAL
+
+**Agreement-based compression** (NEW in Step 3): When evidence strongly agrees
+and confidence is high, answers are automatically shortened:
+
+| Condition | Effect |
+|-----------|--------|
+| NORMAL + confidence ≥ 0.85 + agreement ≥ 0.7 | Keep first sentence only |
+| EXPANDED + confidence ≥ 0.85 + agreement ≥ 0.7 | Keep first 2 sentences |
+| evidence ≥ 4 + confidence ≥ 0.9 | Keep first sentence only |
+| STRICT scope | Never compressed (already minimal) |
+
+Compression level appears in JSON output as `"compression": "NONE"` / `"LIGHT"` / `"STRONG"`.
 
 **CLI override flags** (always win over all other scope signals):
 
@@ -456,13 +468,13 @@ echo "=== Benchmark questions ==="
 ./mysearch ask "Databases for beginners what should I start with"
 ./mysearch ask "How is Sweden connected to continental Europe"
 
-echo "=== AnswerScope ==="
-./mysearch ask "where is stockholm"                          # STRICT (property default)
+echo "=== AnswerScope + Compression ==="
+./mysearch ask "where is stockholm"                          # STRICT (property default), compression: NONE
 ./mysearch ask "explain in detail where stockholm is"        # EXPANDED (query wording)
 ./mysearch ask "what are the drawbacks of NoSQL"             # NORMAL (property default)
 ./mysearch ask "explain how TCP ensures reliability" --brief  # STRICT (CLI override)
 ./mysearch ask "where is stockholm" --detailed               # EXPANDED (CLI override)
-./mysearch ask "where is stockholm" --detailed --json        # EXPANDED + JSON
+./mysearch ask "where is stockholm" --detailed --json        # EXPANDED + JSON (shows compression field)
 
 echo "=== JSON ==="
 ./mysearch ask "where is stockholm" --json

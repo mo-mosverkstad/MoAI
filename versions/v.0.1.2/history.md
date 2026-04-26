@@ -271,3 +271,95 @@ Flags are mutually exclusive. They apply to all user-facing needs (support needs
 ### Integration Test Results
 
 All 67 tests pass: `Results: 67 passed, 0 failed, 67 total`
+
+## Step 3: Agreement-Based Compression
+
+### Goal
+
+Dynamically reduce answer length when evidence agreement and confidence are high. When many sources strongly agree, the truth is obvious and less explanation is needed.
+
+### Design
+
+Compression is a **post-synthesis, pre-truncation** step — orthogonal to Property and AnswerScope.
+
+```
+Evidence → Agreement/Contradiction → Confidence → Synthesize → **Compress** → Scope Truncate → Validate
+```
+
+### Compression Levels
+
+```cpp
+enum class CompressionLevel { NONE, LIGHT, STRONG };
+```
+
+- **NONE** — Keep answer as-is
+- **LIGHT** — Keep first 2 sentences (drop trailing explanations)
+- **STRONG** — Keep first sentence only (canonical fact)
+
+### Decision Rules (first match wins)
+
+| Condition | Compression |
+|-----------|-------------|
+| confidence < 0.6 | NONE |
+| agreement < 0.6 | NONE |
+| STRICT scope | NONE |
+| evidence ≥ 4 + confidence ≥ 0.9 | STRONG |
+| NORMAL + confidence ≥ 0.85 + agreement ≥ 0.7 | STRONG |
+| EXPANDED + confidence ≥ 0.85 + agreement ≥ 0.7 | LIGHT |
+| otherwise | NONE |
+
+Key insight: STRICT scope is never compressed (already minimal). EXPANDED allows LIGHT but not STRONG.
+
+### Files Created
+
+| File | Description |
+|------|-------------|
+| `src/answer/answer_compressor.h` | CompressionLevel enum, CompressionContext struct, AgreementCompressor class, `compression_str()` helper |
+| `src/answer/answer_compressor.cpp` | `decide_level()` policy, `compress_light()` (2 sentences), `compress_strong()` (1 sentence), sentence splitter |
+
+### Files Modified
+
+| File | What Changed |
+|------|-------------|
+| `src/answer/answer_synthesizer.h` | Added `compression` field (CompressionLevel) to Answer struct; added `#include "answer_compressor.h"` |
+| `src/cli/commands.cpp` | Added `#include "answer_compressor.h"`; apply compression after confidence computation, before scope truncation; added `compression` field to JSON output |
+| `CMakeLists.txt` | Added `answer_compressor.cpp` to mysearch_lib sources |
+
+### JSON Output
+
+```json
+{
+  "answer": {
+    "text": "...",
+    "confidence": 0.93,
+    "validated": true,
+    "compression": "STRONG"
+  }
+}
+```
+
+### Definition Synthesizer Fix (discovered during testing)
+
+The original `synthesize_definition` used generic keyword scoring, causing "what is stockholm" to return quality-of-life or tech-hub content instead of the actual definition. Root causes and fixes:
+
+1. **Chunk classification**: "means " in "Sweden means shorter working hours" falsely triggered DEFINITION type → removed from chunker
+2. **Chunk selection**: LOCATION chunks (containing geographic definitions) were low-priority → added as secondary type (+6 boost) in `select_chunks`
+3. **Definition scoring**: Rewrote `synthesize_definition` with scored first-pass ("entity is" pattern, "is a/an/the", "capital", "known for") and entity-as-subject fallback (+6 when entity in first 30 chars, +8 for "entity is/are")
+4. **Validation signals**: Added "capital", "largest", "known for", "known as" to DEFINITION expected signals
+5. **Chunk limit**: Increased per-doc selection from 5 to 8
+
+| File | What Changed |
+|------|-------------|
+| `src/answer/answer_synthesizer.cpp` | Rewrote `synthesize_definition` with scored first-pass and entity-subject fallback |
+| `src/answer/answer_validator.cpp` | Added definition signals: capital, largest, known for, known as |
+| `src/chunk/chunker.cpp` | Removed "means " from DEFINITION signals; added LOCATION as secondary type for DEFINITION |
+| `src/cli/commands.cpp` | Increased per-doc chunk selection from 5 to 8 |
+| `tests/test_qa_integration.sh` | Relaxed EV definition test keyword (battery → motor); added 8 new tests |
+
+### Integration Test Results
+
+All 75 tests pass: `Results: 75 passed, 0 failed, 75 total`
+
+New test cases added:
+- **Definition Quality** (5 tests): Stockholm returns "capital,sweden" not quality-of-life; database, Python, blockchain, EV definitions contain correct keywords
+- **Compression** (3 tests): STRICT scope → NONE compression; DEFINITION STRICT → NONE; NoSQL drawbacks → STRONG (high confidence + NORMAL scope)

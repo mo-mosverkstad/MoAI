@@ -87,7 +87,7 @@ ChunkType Chunker::classify_chunk(const std::string& paragraph) const {
     // Definition signals
     if (has_any(lower, {"is a ", "is an ", "refers to", "defined as",
                         "are organized", "collection of",
-                        "aims to", "studies how", "means "}))
+                        "aims to", "studies how"}))
         return ChunkType::DEFINITION;
 
     // Person signals
@@ -146,7 +146,7 @@ static std::unordered_set<int> preferred_types_for(Property prop) {
     };
     switch (prop) {
         case Property::LOCATION:    return s({ChunkType::LOCATION, ChunkType::GENERAL});
-        case Property::DEFINITION:  return s({ChunkType::DEFINITION, ChunkType::GENERAL});
+        case Property::DEFINITION:  return s({ChunkType::DEFINITION, ChunkType::LOCATION, ChunkType::GENERAL});
         case Property::TIME:        return s({ChunkType::TEMPORAL, ChunkType::HISTORY});
         case Property::HISTORY:     return s({ChunkType::HISTORY, ChunkType::TEMPORAL});
         case Property::FUNCTION:    return s({ChunkType::FUNCTION, ChunkType::PROCEDURE, ChunkType::DEFINITION});
@@ -197,14 +197,17 @@ std::vector<Chunk> Chunker::select_chunks(
     // Score each chunk by keyword relevance + type preference
     struct Scored { double score; size_t idx; };
     std::vector<Scored> scored;
+    // Secondary type: LOCATION chunks are strong for DEFINITION (geographic entities)
+    int secondary = (property == Property::DEFINITION) ? (int)ChunkType::LOCATION : -1;
     for (size_t i = 0; i < chunks.size(); i++) {
         auto& c = chunks[i];
         std::string lower = to_lower(c.text);
         double sc = 0.0;
         for (auto& kw : keywords)
             if (contains_word_lower(lower, kw)) sc += 3.0;
-        // Strong boost for exact type match, weak for fallback
+        // Strong boost for exact type match, medium for secondary, weak for fallback
         if (static_cast<int>(c.type) == primary) sc += 10.0;
+        else if (static_cast<int>(c.type) == secondary) sc += 6.0;
         else if (prefs.count(static_cast<int>(c.type))) sc += 1.0;
         scored.push_back({sc, i});
     }

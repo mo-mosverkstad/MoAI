@@ -295,15 +295,84 @@ Answer AnswerSynthesizer::synthesize_location(
 Answer AnswerSynthesizer::synthesize_definition(
     const InformationNeed& need, const std::vector<Evidence>& evidence) const
 {
-    auto filtered = filter_by_type(evidence, preferred_chunks_for(Property::DEFINITION));
+    std::string entity_lower = to_lower(need.entity);
+
+    // First: prefer DEFINITION-typed chunks with entity in opening "X is" pattern
+    const Evidence* best_def = nullptr;
+    double best_def_score = 0.0;
+    for (auto& e : evidence) {
+        if (e.type != ChunkType::DEFINITION && e.type != ChunkType::LOCATION) continue;
+        if (e.text.size() < 30) continue;
+        std::string lower = to_lower(e.text);
+        if (!entity_lower.empty()) {
+            auto pos = lower.find(entity_lower);
+            if (pos == std::string::npos || pos > 30) continue;
+        }
+        double sc = 0.0;
+        // Strong boost for "entity is" at the start
+        std::string is_pat = entity_lower + " is ";
+        if (!entity_lower.empty() && lower.find(is_pat) < 50) sc += 10.0;
+        for (auto& dp : {"is a ", "is an ", "is the ", "capital", "known for",
+                         "refers to", "defined as"})
+            if (lower.find(dp) != std::string::npos) sc += 3.0;
+        // Penalize non-definitional content
+        for (auto& np : {"expensive", "rent ", "cost", "salary", "startup",
+                         "tech hub", "ranking", "ranks", "ecosystem",
+                         "important for", "important because"})
+            if (lower.find(np) != std::string::npos) sc -= 4.0;
+        if (sc > best_def_score) { best_def = &e; best_def_score = sc; }
+    }
+    if (best_def && best_def_score > 5.0) {
+        std::string text = best_def->text;
+        if (text.size() > 500) text.resize(500);
+        return {text, compute_confidence(evidence, need.keywords), Property::DEFINITION};
+    }
+
+    // Fallback: score all segments, boosting definitional language
+    struct Scored { double score; std::string text; };
+    std::vector<Scored> all_scored;
+    for (auto& e : evidence) {
+        auto segs = split_into_segments(e.text);
+        for (auto& s : segs) {
+            if (s.size() < 20) continue;
+            if (!s.empty() && s[0] == '#') continue;
+            std::string lower = to_lower(s);
+            double sc = 0.0;
+            for (auto& k : need.keywords)
+                if (contains_word(lower, k)) sc += 3.0;
+            if (!entity_lower.empty() && contains_word(lower, entity_lower)) sc += 4.0;
+            // Definitional patterns
+            for (auto& dp : {"is a ", "is an ", "is the ", "refers to",
+                             "defined as", "known for", "known as",
+                             "collection of", "organized"})
+                if (lower.find(dp) != std::string::npos) sc += 5.0;
+            // Entity as subject: "X is/are ..." pattern
+            if (!entity_lower.empty()) {
+                auto epos = lower.find(entity_lower);
+                if (epos != std::string::npos && epos < 30) {
+                    sc += 6.0; // entity is the subject
+                    if (lower.find(entity_lower + " is ") != std::string::npos ||
+                        lower.find(entity_lower + " are ") != std::string::npos)
+                        sc += 8.0;
+                }
+            }
+            // Penalize non-definitional content
+            for (auto& np : {"expensive", "rent ", "cost", "salary",
+                             "startup", "tech hub", "ranking", "ranks"})
+                if (lower.find(np) != std::string::npos) sc -= 3.0;
+            if (sc > 0.0) all_scored.push_back({sc, s});
+        }
+    }
+    std::sort(all_scored.begin(), all_scored.end(),
+              [](auto& a, auto& b) { return a.score > b.score; });
     std::string text;
-    for (auto& e : filtered) {
-        auto sents = extract_sentences(e.text, need.keywords, 3);
-        for (auto& s : sents) { if (!text.empty()) text += " "; text += s; }
+    for (size_t i = 0; i < 4 && i < all_scored.size(); i++) {
+        if (!text.empty()) text += " ";
+        text += all_scored[i].text;
         if (text.size() > 500) break;
     }
     if (text.empty()) text = "No definition found.";
-    return {text, compute_confidence(filtered, need.keywords), Property::DEFINITION};
+    return {text, compute_confidence(evidence, need.keywords), Property::DEFINITION};
 }
 
 Answer AnswerSynthesizer::synthesize_temporal(

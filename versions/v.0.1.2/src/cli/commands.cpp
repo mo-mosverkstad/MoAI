@@ -12,6 +12,7 @@
 #include "../answer/answer_synthesizer.h"
 #include "../answer/answer_validator.h"
 #include "../answer/answer_scope.h"
+#include "../answer/answer_compressor.h"
 #include "../answer/question_planner.h"
 #include "../answer/self_ask.h"
 #include "../conversation/conversation_state.h"
@@ -287,7 +288,7 @@ int run_cli(int argc, char** argv) {
                 std::string text = reader.get_document_text(docId);
                 if (text.empty()) continue;
                 auto all_chunks = chunker.chunk_document(docId, text);
-                auto selected = Chunker::select_chunks(all_chunks, need.property, need.keywords, 5);
+                auto selected = Chunker::select_chunks(all_chunks, need.property, need.keywords, 8);
                 for (auto& c : selected)
                     evidence.push_back({c.docId, c.type, c.text, score});
             }
@@ -315,6 +316,14 @@ int run_cli(int argc, char** argv) {
                     note += " " + std::to_string(ev_analysis.agreement_pairs) + " agreement(s).";
                 answer.validation_note = note;
             }
+
+            // Agreement-based compression
+            AgreementCompressor compressor;
+            CompressionContext comp_ctx{
+                need.scope, answer.confidence,
+                ev_analysis.agreement, evidence.size()};
+            answer.text = compressor.compress(answer.text, comp_ctx);
+            answer.compression = compressor.decide_level(comp_ctx);
 
             // Dependent planning: attach prior answer as context
             if (!prior_answer_context.empty())
@@ -419,7 +428,8 @@ int run_cli(int argc, char** argv) {
                           << "      \"answer\": {\n"
                           << "        \"text\": \"" << escaped(a.text) << "\",\n"
                           << "        \"confidence\": " << std::fixed << std::setprecision(2) << a.confidence << ",\n"
-                          << "        \"validated\": " << (a.validated ? "true" : "false");
+                          << "        \"validated\": " << (a.validated ? "true" : "false") << ",\n"
+                          << "        \"compression\": \"" << compression_str(a.compression) << "\"";
                 if (!a.validation_note.empty())
                     std::cout << ",\n        \"note\": \"" << escaped(a.validation_note) << "\"";
                 if (!a.prior_context.empty())

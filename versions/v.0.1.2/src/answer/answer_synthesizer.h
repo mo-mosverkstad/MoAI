@@ -3,6 +3,7 @@
 #include <vector>
 #include "../query/information_need.h"
 #include "../chunk/chunker.h"
+#include "answer_compressor.h"
 
 struct Evidence {
     uint32_t docId;
@@ -20,6 +21,7 @@ struct Answer {
     bool validated = true;
     std::string validation_note;
     std::string prior_context;
+    CompressionLevel compression = CompressionLevel::NONE;
 };
 
 struct CompositeAnswer {
