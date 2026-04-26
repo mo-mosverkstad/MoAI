@@ -1,0 +1,35 @@
+# Climate Change
+
+Climate change refers to long-term shifts in global temperatures and weather patterns. While climate has changed naturally throughout Earth's history, current climate change is primarily driven by human activities, especially the burning of fossil fuels since the Industrial Revolution.
+
+## Definition
+
+Climate change is a significant and lasting change in the statistical distribution of weather patterns over periods ranging from decades to millions of years. The current period of climate change is characterized by global warming — a sustained increase in Earth's average surface temperature caused by rising concentrations of greenhouse gases in the atmosphere.
+
+## History and Timeline
+
+The greenhouse effect was first described by Joseph Fourier in 1824. In 1896, Svante Arrhenius calculated that doubling atmospheric CO2 would raise global temperatures by 5-6 degrees Celsius. Charles David Keeling began systematic CO2 measurements at Mauna Loa Observatory in 1958, establishing the famous Keeling Curve showing steadily rising CO2 levels. The Intergovernmental Panel on Climate Change (IPCC) was established in 1988. The Kyoto Protocol was adopted in 1997, and the Paris Agreement was signed in 2015, with nations committing to limit warming to 1.5-2 degrees Celsius above pre-industrial levels.
+
+## How Climate Change Works
+
+Climate change works through the greenhouse effect. Solar radiation passes through the atmosphere and warms the Earth's surface. The warmed surface emits infrared radiation back toward space. Greenhouse gases (CO2, methane, nitrous oxide, water vapor) absorb and re-emit this infrared radiation, trapping heat in the atmosphere. Human activities have increased atmospheric CO2 from 280 parts per million (pre-industrial) to over 420 ppm today. This enhanced greenhouse effect causes global temperatures to rise, leading to melting ice caps, rising sea levels, more extreme weather events, and shifts in ecosystems.
+
+## Advantages of Climate Action
+
+The benefits of taking action on climate change include:
+- Reduced air pollution leading to improved public health
+- Energy independence through renewable sources
+- New economic opportunities in clean energy, green technology, and sustainable agriculture
+- Preservation of biodiversity and natural ecosystems
+- Reduced risk of extreme weather disasters and associated economic losses
+- Long-term cost savings as renewable energy becomes cheaper than fossil fuels
+
+## Limitations of Climate Solutions
+
+The limitations and drawbacks of current climate change solutions include:
+- High upfront costs for transitioning energy infrastructure
+- Intermittency of renewable energy sources requires expensive storage solutions
+- Developing nations face economic barriers to adopting clean technology
+- Political resistance and lack of international coordination slow progress
+- Some solutions like carbon capture remain unproven at scale
+- Behavioral change is difficult: individual and corporate habits are slow to shift
