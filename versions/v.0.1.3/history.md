@@ -221,3 +221,68 @@ echo "metropolitan" >> config/vocabularies/chunk_signals.conf
 ### Integration Test Results
 
 All 75 tests pass: `Results: 75 passed, 0 failed, 75 total`
+
+---
+
+## Step 3: Planning Rules Externalization
+
+### Goal
+
+Extract self-ask expansion rules and question planner dependency rules from hardcoded switch/if-chains into an external rules file, so adding new planning logic requires only a config edit.
+
+### Solution
+
+A `planning_rules.conf` file with two sections parsed by a `PlanningRules` cached struct (same lazy-init pattern as Steps 1-2).
+
+### Rules File Format
+
+```
+[SELF_ASK]
+ADVANTAGES  -> DEFINITION : SHORT_FACT : definition
+ADVANTAGES  -> LOCATION   : SHORT_FACT : located, region
+
+[DEPENDENCIES]
+HISTORY     -> LOCATION
+ADVANTAGES  -> DEFINITION
+
+[PREFERRED_CHUNKS]
+LOCATION    -> LOCATION, GENERAL
+DEFINITION  -> DEFINITION, LOCATION, GENERAL
+```
+
+Adding a new rule or changing chunk type preferences is now a one-line config edit.
+
+### Files Created
+
+| File | Description |
+|------|-------------|
+| `config/vocabularies/planning_rules.conf` | 7 self-ask rules + 7 dependency rules + 10 preferred chunk mappings |
+| `src/common/rules_loader.h/.cpp` | PlanningRules cached struct, parses `->` arrow format |
+
+### Files Modified
+
+| File | What Changed |
+|------|-------------|
+| `src/answer/self_ask.cpp` | Rewritten to iterate PlanningRules::get().self_ask instead of hardcoded switch |
+| `src/answer/question_planner.cpp` | Rewritten to iterate PlanningRules::get().dependencies instead of hardcoded if-chains |
+| `src/answer/answer_synthesizer.cpp` | `preferred_chunks_for()` now reads from PlanningRules::get().preferred_chunks |
+| `src/chunk/chunker.cpp` | `preferred_types_for()` now reads from PlanningRules::get().preferred_chunks (removed duplicate mapping) |
+| `CMakeLists.txt` | Added rules_loader.cpp |
+
+### Additional Externalizations (Step 3 continued)
+
+**Preferred chunk type mappings**: Extracted `preferred_chunks_for()` (answer_synthesizer.cpp) and `preferred_types_for()` (chunker.cpp) — two duplicate hardcoded switch statements — into `[PREFERRED_CHUNKS]` section of planning_rules.conf. Both now read from `PlanningRules::get().preferred_chunks`.
+
+**Chunk classification types**: Added `[TYPES]` section to chunk_signals.conf listing the check order. `classify_chunk()` now iterates dynamically instead of hardcoded if-chain. Adding a new ChunkType is a config-only edit.
+
+**Hybrid fusion weights**: `hybrid_search.cpp` line 96 now reads `retrieval.bm25_weight` / `retrieval.ann_weight` from config instead of hardcoded 0.7/0.3.
+
+**Neural query templates**: Extracted 22 training templates from `neural_query_analyzer.cpp` into `config/vocabularies/query_templates.conf`. Format: `prefix | suffix | intent | answer_type`. Adding new question patterns for training is now a config edit.
+
+**Stop words and non-entity words**: Extracted 3 duplicate stop word lists (from `query_analyzer.cpp` and 2 in `neural_query_analyzer.cpp`) plus the non-entity word list into `config/vocabularies/stop_words.conf`. All three files now read from the same single source.
+
+**Query analyzer word lists**: Extracted clause-splitting triggers, scope inference hints (STRICT/EXPANDED), and form detection hints (EXPLANATION/SUMMARY) from hardcoded if-chains in `query_analyzer.cpp` into `config/vocabularies/query_prototypes.conf`. Adding a new scope trigger like `"detailed"` is now a config edit.
+
+### Integration Test Results
+
+All 75 tests pass: `Results: 75 passed, 0 failed, 75 total`

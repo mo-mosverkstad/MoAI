@@ -1,4 +1,5 @@
 #include "self_ask.h"
+#include "../common/rules_loader.h"
 #include <cctype>
 
 static std::string to_lower_sa(const std::string& s) {
@@ -8,53 +9,19 @@ static std::string to_lower_sa(const std::string& s) {
     return r;
 }
 
-// Self-ask rules (deterministic):
-//   ADVANTAGES  → needs DEFINITION + LOCATION
-//   COMPARISON  → needs DEFINITION of each entity
-//   LIMITATIONS → needs USAGE context
-//   HISTORY     → needs TEMPORAL + DEFINITION
-//   FUNCTION    → needs DEFINITION
 std::vector<InformationNeed> SelfAskModule::expand(const InformationNeed& need) const {
     std::vector<InformationNeed> derived;
-    std::string entity = need.entity;
+    auto& rules = PlanningRules::get();
 
-    auto make = [&](Property p, AnswerForm f, std::vector<std::string> kw) {
+    for (auto& rule : rules.self_ask) {
+        if (rule.trigger != need.property) continue;
         InformationNeed n;
-        n.entity = entity;
-        n.property = p;
-        n.form = f;
-        n.keywords = kw;
-        n.keywords.push_back(entity);
-        return n;
-    };
-
-    switch (need.property) {
-        case Property::ADVANTAGES:
-            derived.push_back(make(Property::DEFINITION, AnswerForm::SHORT_FACT,
-                {"definition"}));
-            derived.push_back(make(Property::LOCATION, AnswerForm::SHORT_FACT,
-                {"located", "region"}));
-            break;
-        case Property::COMPARISON:
-            derived.push_back(make(Property::DEFINITION, AnswerForm::SHORT_FACT,
-                {"definition"}));
-            break;
-        case Property::LIMITATIONS:
-            derived.push_back(make(Property::USAGE, AnswerForm::EXPLANATION,
-                {"used for", "application"}));
-            break;
-        case Property::HISTORY:
-            derived.push_back(make(Property::TIME, AnswerForm::SHORT_FACT,
-                {"year", "century"}));
-            derived.push_back(make(Property::DEFINITION, AnswerForm::SHORT_FACT,
-                {"definition"}));
-            break;
-        case Property::FUNCTION:
-            derived.push_back(make(Property::DEFINITION, AnswerForm::SHORT_FACT,
-                {"definition"}));
-            break;
-        default:
-            break;
+        n.entity = need.entity;
+        n.property = rule.sub_property;
+        n.form = rule.form;
+        n.keywords = rule.keywords;
+        n.keywords.push_back(need.entity);
+        derived.push_back(n);
     }
     return derived;
 }

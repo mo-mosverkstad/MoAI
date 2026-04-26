@@ -1,6 +1,8 @@
 #ifdef HAS_TORCH
 #include "neural_query_analyzer.h"
 #include "../inverted/tokenizer.h"
+#include "../common/rules_loader.h"
+#include "../common/vocab_loader.h"
 #include <algorithm>
 #include <random>
 #include <iostream>
@@ -131,38 +133,8 @@ std::vector<QuerySample> NeuralQueryAnalyzer::generate_training_data(
     std::vector<QuerySample> samples;
     std::mt19937 rng(42);
 
-    // Question templates per intent/answer_type
-    struct Template {
-        std::string prefix;
-        std::string suffix;
-        QueryIntent intent;
-        AnswerType answer_type;
-    };
-
-    std::vector<Template> templates = {
-        {"where is ",           "",                QueryIntent::FACTUAL,     AnswerType::LOCATION},
-        {"where is ",           " located",        QueryIntent::FACTUAL,     AnswerType::LOCATION},
-        {"what country is ",    " in",             QueryIntent::FACTUAL,     AnswerType::LOCATION},
-        {"what is ",            "",                QueryIntent::FACTUAL,     AnswerType::DEFINITION},
-        {"what is a ",          "",                QueryIntent::FACTUAL,     AnswerType::DEFINITION},
-        {"what are ",           "",                QueryIntent::FACTUAL,     AnswerType::DEFINITION},
-        {"define ",             "",                QueryIntent::FACTUAL,     AnswerType::DEFINITION},
-        {"who is ",             "",                QueryIntent::FACTUAL,     AnswerType::PERSON_PROFILE},
-        {"who was ",            "",                QueryIntent::FACTUAL,     AnswerType::PERSON_PROFILE},
-        {"who invented ",       "",                QueryIntent::FACTUAL,     AnswerType::PERSON_PROFILE},
-        {"who created ",        "",                QueryIntent::FACTUAL,     AnswerType::PERSON_PROFILE},
-        {"when was ",           " invented",       QueryIntent::FACTUAL,     AnswerType::TEMPORAL},
-        {"when was ",           " created",        QueryIntent::FACTUAL,     AnswerType::TEMPORAL},
-        {"when did ",           " happen",         QueryIntent::FACTUAL,     AnswerType::TEMPORAL},
-        {"what year was ",      " invented",       QueryIntent::FACTUAL,     AnswerType::TEMPORAL},
-        {"how does ",           " work",           QueryIntent::EXPLANATION, AnswerType::PROCEDURE},
-        {"how do ",             " work",           QueryIntent::EXPLANATION, AnswerType::PROCEDURE},
-        {"how to use ",         "",                QueryIntent::PROCEDURAL,  AnswerType::PROCEDURE},
-        {"explain ",            "",                QueryIntent::EXPLANATION, AnswerType::SUMMARY},
-        {"describe ",           "",                QueryIntent::EXPLANATION, AnswerType::SUMMARY},
-        {"tell me about ",      "",                QueryIntent::GENERAL,     AnswerType::SUMMARY},
-        {"difference between ", " and something",  QueryIntent::COMPARISON,  AnswerType::COMPARISON},
-    };
+    // Load templates from config
+    auto& loaded = PlanningRules::get().query_templates;
 
     for (auto& doc : doc_texts) {
         auto entities = extract_entities(doc);
@@ -183,7 +155,7 @@ std::vector<QuerySample> NeuralQueryAnalyzer::generate_training_data(
             std::string entity_lower = to_lower(entity);
 
             // Generate queries from templates
-            for (auto& tmpl : templates) {
+            for (auto& tmpl : loaded) {
                 QuerySample s;
                 s.text = tmpl.prefix + entity_lower + tmpl.suffix;
                 s.intent = tmpl.intent;
@@ -366,14 +338,11 @@ std::string NeuralQueryAnalyzer::extract_entity_from_tags(
 
     // Fallback: if no entity tagged, use longest non-stop keyword
     if (entity.empty()) {
-        static const std::unordered_set<std::string> sw = {
-            "a","an","the","is","are","was","were","what","which","who",
-            "whom","how","when","where","why","do","does","did","will",
-            "would","can","could","should","may","might","tell","me",
-            "explain","describe","define","show","please","about",
-            "have","has","had","not","no","and","or","but","if","to",
-            "in","on","of","for","with","from","by","at","as"
-        };
+        static const auto sw = []() {
+            auto m = VocabLoader::load("../config/vocabularies/stop_words.conf");
+            auto& words = VocabLoader::get(m, "STOP_WORDS");
+            return std::unordered_set<std::string>(words.begin(), words.end());
+        }();
         for (auto& w : words) {
             if (sw.count(w) == 0 && w.size() > entity.size())
                 entity = w;
@@ -410,14 +379,11 @@ QueryAnalysis NeuralQueryAnalyzer::analyze(const std::string& query) const {
 
     // Keywords: all non-stop words
     Tokenizer tok;
-    static const std::unordered_set<std::string> sw = {
-        "a","an","the","is","are","was","were","what","which","who",
-        "whom","how","when","where","why","do","does","did","will",
-        "would","can","could","should","may","might","tell","me",
-        "explain","describe","define","show","please","about",
-        "have","has","had","not","no","and","or","but","if","to",
-        "in","on","of","for","with","from","by","at","as"
-    };
+    static const auto sw = []() {
+        auto m = VocabLoader::load("../config/vocabularies/stop_words.conf");
+        auto& words = VocabLoader::get(m, "STOP_WORDS");
+        return std::unordered_set<std::string>(words.begin(), words.end());
+    }();
     for (auto& w : tok.tokenize(query)) {
         std::string lower = to_lower(w);
         if (sw.count(lower) == 0 && lower.size() > 1)

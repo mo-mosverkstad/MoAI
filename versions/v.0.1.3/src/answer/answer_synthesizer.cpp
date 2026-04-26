@@ -2,6 +2,7 @@
 #include "answer_scope.h"
 #include "../common/config.h"
 #include "../common/vocab_loader.h"
+#include "../common/rules_loader.h"
 #include <algorithm>
 #include <cctype>
 #include <unordered_set>
@@ -159,19 +160,12 @@ static std::vector<std::string> split_into_segments(const std::string& text, siz
 
 // Map Property to preferred ChunkTypes
 static std::vector<ChunkType> preferred_chunks_for(Property prop) {
-    switch (prop) {
-        case Property::LOCATION:    return {ChunkType::LOCATION, ChunkType::GENERAL};
-        case Property::DEFINITION:  return {ChunkType::DEFINITION, ChunkType::GENERAL};
-        case Property::TIME:        return {ChunkType::TEMPORAL, ChunkType::HISTORY};
-        case Property::HISTORY:     return {ChunkType::HISTORY, ChunkType::TEMPORAL};
-        case Property::FUNCTION:    return {ChunkType::FUNCTION, ChunkType::PROCEDURE, ChunkType::DEFINITION};
-        case Property::COMPOSITION: return {ChunkType::DEFINITION, ChunkType::GENERAL};
-        case Property::USAGE:       return {ChunkType::USAGE, ChunkType::PROCEDURE, ChunkType::GENERAL};
-        case Property::ADVANTAGES:  return {ChunkType::ADVANTAGES, ChunkType::GENERAL};
-        case Property::LIMITATIONS: return {ChunkType::LIMITATIONS, ChunkType::GENERAL};
-        case Property::COMPARISON:  return {ChunkType::ADVANTAGES, ChunkType::LIMITATIONS, ChunkType::GENERAL};
-        default:                    return {};
-    }
+    auto& pc = PlanningRules::get().preferred_chunks;
+    auto it = pc.find(static_cast<int>(prop));
+    if (it == pc.end()) return {};
+    std::vector<ChunkType> result;
+    for (int c : it->second) result.push_back(static_cast<ChunkType>(c));
+    return result;
 }
 
 // ── CompositeAnswer ──

@@ -185,8 +185,11 @@ All word lists are externalized to `config/vocabularies/`:
 | `chunk_signals.conf` | 12 ChunkType signal lists | `chunker.cpp` (ChunkVocab) |
 | `validator_signals.conf` | 9 Property signal lists | `answer_validator.cpp` (ValidatorConfig) |
 | `synth_words.conf` | 14 scoring word lists | `answer_synthesizer.cpp` (SynthVocab) |
-| `evidence_domains.conf` | 4 domain vocabs + negations + 14 opposite pairs | `evidence_normalizer.cpp` (EvidenceVocab) |
+| `evidence_domains.conf` | [DOMAINS] type list + domain vocabs + negations + 14 opposite pairs | `evidence_normalizer.cpp` (EvidenceVocab) |
+| `planning_rules.conf` | 7 self-ask rules + 7 dependency rules + 10 preferred chunk mappings | `self_ask.cpp` + `question_planner.cpp` + `answer_synthesizer.cpp` + `chunker.cpp` (PlanningRules) |
 | `query_prototypes.conf` | 10 property prototype lists | (prepared for query_analyzer.cpp) |
+| `query_templates.conf` | 22 neural training templates (prefix/suffix/intent/answer_type) | `neural_query_analyzer.cpp` via PlanningRules |
+| `stop_words.conf` | Stop words + non-entity words | `query_analyzer.cpp` (QueryVocab) + `neural_query_analyzer.cpp` |
 
 Format: `[SECTION]` headers with comma-separated words. Opposites use `word1 | word2` pipe syntax. Loaded by `VocabLoader` — if a file is missing, a warning is logged to stderr. No inline defaults are duplicated in source code; the `.conf` files are the single source of truth.
 
@@ -275,6 +278,7 @@ Both auto-detected at runtime. System degrades gracefully.
 |------|---------|
 | `config.h/.cpp` | Config singleton: loads key=value file, typed getters with defaults |
 | `vocab_loader.h/.cpp` | VocabLoader: parses [SECTION]/comma vocabulary files with fallback defaults |
+| `rules_loader.h/.cpp` | PlanningRules: parses self-ask and dependency rules from planning_rules.conf |
 | `varint.h/.cpp` | Variable-length integer encoding for compact index storage |
 | `file_utils.h/.cpp` | File I/O helpers |
 | `types.h` | Type aliases: DocID, TermID, Offset |
@@ -345,8 +349,8 @@ Both auto-detected at runtime. System degrades gracefully.
 | `answer_synthesizer.h/.cpp` | 11 typed synthesizers with SynthConfig + SynthVocab (scoring words loaded from synth_words.conf) |
 | `answer_validator.h/.cpp` | Self-ask validation with signal words loaded from validator_signals.conf via ValidatorConfig |
 | `evidence_normalizer.h/.cpp` | NormalizedClaim model, domain keywords and opposites loaded from evidence_domains.conf via EvidenceVocab |
-| `question_planner.h/.cpp` | Dependency-aware topological sort |
-| `self_ask.h/.cpp` | Internal sub-question generation and coverage checking |
+| `question_planner.h/.cpp` | Dependency-aware topological sort, rules loaded from planning_rules.conf via PlanningRules |
+| `self_ask.h/.cpp` | Sub-question generation, expansion rules loaded from planning_rules.conf via PlanningRules |
 
 ### 6.10 Conversation (`src/conversation/`)
 
@@ -515,7 +519,10 @@ v.0.1.3/
 |       +-- validator_signals.conf
 |       +-- synth_words.conf
 |       +-- evidence_domains.conf
+|       +-- planning_rules.conf
 |       +-- query_prototypes.conf
+|       +-- query_templates.conf
+|       +-- stop_words.conf
 +-- data/                      # 21 text documents across 7 topics
 |   +-- biology/               # animals, plants
 |   +-- computer_science/      # algorithms, databases, networking, security, python, blockchain

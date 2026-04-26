@@ -1,4 +1,5 @@
 #include "summarizer.h"
+#include "../common/vocab_loader.h"
 #include <algorithm>
 #include <cctype>
 #include <unordered_set>
@@ -6,21 +7,11 @@
 #include <map>
 
 static const std::unordered_set<std::string>& stop_words() {
-    static const std::unordered_set<std::string> sw = {
-        "a", "an", "the", "is", "are", "was", "were", "be", "been", "being",
-        "have", "has", "had", "do", "does", "did", "will", "would", "shall",
-        "should", "may", "might", "must", "can", "could",
-        "i", "me", "my", "we", "our", "you", "your", "he", "she", "it",
-        "they", "them", "their", "this", "that", "these", "those",
-        "what", "which", "who", "whom", "how", "when", "where", "why",
-        "not", "no", "nor", "but", "and", "or", "if", "then", "so",
-        "at", "by", "for", "with", "about", "from", "to", "in", "on",
-        "of", "as", "into", "through", "during", "before", "after",
-        "above", "below", "between", "out", "off", "over", "under",
-        "again", "further", "once", "here", "there", "all", "each",
-        "every", "both", "few", "more", "most", "other", "some", "such",
-        "than", "too", "very", "just", "also"
-    };
+    static const auto sw = []() {
+        auto m = VocabLoader::load("../config/vocabularies/stop_words.conf");
+        auto& words = VocabLoader::get(m, "STOP_WORDS");
+        return std::unordered_set<std::string>(words.begin(), words.end());
+    }();
     return sw;
 }
 

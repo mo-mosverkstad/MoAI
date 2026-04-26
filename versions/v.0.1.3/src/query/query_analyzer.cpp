@@ -1,5 +1,6 @@
 #include "query_analyzer.h"
 #include "../answer/answer_scope.h"
+#include "../common/vocab_loader.h"
 #include <algorithm>
 #include <cctype>
 #include <unordered_set>
@@ -10,22 +11,32 @@
 #include <filesystem>
 #endif
 
-static const std::unordered_set<std::string>& stop_words() {
-    static const std::unordered_set<std::string> sw = {
-        "a", "an", "the", "is", "are", "was", "were", "be", "been", "being",
-        "have", "has", "had", "do", "does", "did", "will", "would", "shall",
-        "should", "may", "might", "must", "can", "could",
-        "i", "me", "my", "we", "our", "you", "your", "he", "she", "it",
-        "they", "them", "their", "this", "that", "these", "those",
-        "what", "which", "who", "whom", "how", "when", "where", "why",
-        "not", "no", "nor", "but", "and", "or", "if", "then", "so",
-        "at", "by", "for", "with", "about", "from", "to", "in", "on",
-        "of", "as", "into", "through", "during", "before", "after",
-        "tell", "me", "explain", "describe", "define", "show",
-        "please", "could", "would", "about"
-    };
-    return sw;
-}
+struct QueryVocab {
+    std::unordered_set<std::string> stop_words;
+    std::unordered_set<std::string> non_entity_words;
+    std::vector<std::string> clause_split_triggers;
+    std::vector<std::string> scope_strict_hints;
+    std::vector<std::string> scope_expanded_hints;
+    std::vector<std::string> form_explanation_hints;
+    std::vector<std::string> form_summary_hints;
+
+    static const QueryVocab& get() {
+        static QueryVocab qv = []() {
+            auto sw = VocabLoader::load("../config/vocabularies/stop_words.conf");
+            auto qp = VocabLoader::load("../config/vocabularies/query_prototypes.conf");
+            QueryVocab v;
+            for (auto& w : VocabLoader::get(sw, "STOP_WORDS")) v.stop_words.insert(w);
+            for (auto& w : VocabLoader::get(sw, "NON_ENTITY_WORDS")) v.non_entity_words.insert(w);
+            v.clause_split_triggers = VocabLoader::get(qp, "CLAUSE_SPLIT_TRIGGERS");
+            v.scope_strict_hints    = VocabLoader::get(qp, "SCOPE_STRICT_HINTS");
+            v.scope_expanded_hints  = VocabLoader::get(qp, "SCOPE_EXPANDED_HINTS");
+            v.form_explanation_hints = VocabLoader::get(qp, "FORM_EXPLANATION_HINTS");
+            v.form_summary_hints    = VocabLoader::get(qp, "FORM_SUMMARY_HINTS");
+            return v;
+        }();
+        return qv;
+    }
+};
 
 static std::string to_lower(const std::string& s) {
     std::string r;
@@ -56,10 +67,10 @@ std::vector<std::string> RuleBasedQueryAnalyzer::split_clauses(const std::string
             size_t after = i + 5;
             while (after < lower.size() && lower[after] == ' ') after++;
             std::string rest = lower.substr(after);
-            if (contains(rest, "where") || contains(rest, "what") ||
-                contains(rest, "why") || contains(rest, "how") ||
-                contains(rest, "when") || contains(rest, "who") ||
-                rest.substr(0, 4) == "also" || rest.substr(0, 4) == "tell") {
+            bool should_split = false;
+            for (auto& trigger : QueryVocab::get().clause_split_triggers)
+                if (contains(rest, trigger)) { should_split = true; break; }
+            if (should_split) {
                 split = true;
                 i += 4; // skip " and"
             }
@@ -84,7 +95,7 @@ std::vector<std::string> RuleBasedQueryAnalyzer::split_clauses(const std::string
 }
 
 std::vector<std::string> RuleBasedQueryAnalyzer::extract_keywords(const std::string& clause) const {
-    auto& sw = stop_words();
+    auto& sw = QueryVocab::get().stop_words;
     std::vector<std::string> keywords;
     std::string word;
     for (char c : clause) {
@@ -101,25 +112,12 @@ std::vector<std::string> RuleBasedQueryAnalyzer::extract_keywords(const std::str
     return keywords;
 }
 
-// Words that describe properties but are not entities
-static const std::unordered_set<std::string>& non_entity_words() {
-    static const std::unordered_set<std::string> w = {
-        "important", "famous", "popular", "useful", "good", "bad",
-        "better", "worse", "best", "worst", "great", "large", "small",
-        "scalable", "reliable", "fast", "slow", "cheap", "expensive",
-        "suitable", "mainstream", "widely", "still", "connected",
-        "limitation", "limitations", "advantage", "advantages",
-        "benefit", "benefits", "drawback", "drawbacks",
-        "overview", "difference", "comparison", "beginner", "beginners"
-    };
-    return w;
-}
 
 std::string RuleBasedQueryAnalyzer::extract_entity(
     const std::string& clause, const std::vector<std::string>& keywords) const
 {
     if (keywords.empty()) return "";
-    auto& non_ent = non_entity_words();
+    auto& non_ent = QueryVocab::get().non_entity_words;
     // Prefer keywords that are not generic adjectives/property words
     std::string best;
     for (auto& k : keywords) {
@@ -196,25 +194,19 @@ AnswerForm RuleBasedQueryAnalyzer::detect_form(const std::string& clause, Proper
         return AnswerForm::EXPLANATION;
     if (prop == Property::LOCATION || prop == Property::TIME)
         return AnswerForm::SHORT_FACT;
-    if (contains(clause, "explain") || contains(clause, "describe") ||
-        contains(clause, "how") || contains(clause, "why"))
-        return AnswerForm::EXPLANATION;
-    if (contains(clause, "overview") || contains(clause, "tell me about") ||
-        contains(clause, "summarize"))
-        return AnswerForm::SUMMARY;
+    for (auto& h : QueryVocab::get().form_explanation_hints)
+        if (contains(clause, h)) return AnswerForm::EXPLANATION;
+    for (auto& h : QueryVocab::get().form_summary_hints)
+        if (contains(clause, h)) return AnswerForm::SUMMARY;
     return AnswerForm::SHORT_FACT;
 }
 
 AnswerScope RuleBasedQueryAnalyzer::infer_scope(const std::string& clause, AnswerForm form) const {
-    // 1. Explicit scope hints from query wording (always win)
-    if (contains(clause, "brief") || contains(clause, "short") ||
-        contains(clause, "quick") || contains(clause, "just"))
-        return AnswerScope::STRICT;
-
-    if (contains(clause, "in detail") || contains(clause, "explain") ||
-        contains(clause, "overview") || contains(clause, "describe") ||
-        contains(clause, "comprehensive") || contains(clause, "thorough"))
-        return AnswerScope::EXPANDED;
+    auto& qv = QueryVocab::get();
+    for (auto& h : qv.scope_strict_hints)
+        if (contains(clause, h)) return AnswerScope::STRICT;
+    for (auto& h : qv.scope_expanded_hints)
+        if (contains(clause, h)) return AnswerScope::EXPANDED;
 
     // 2. Form-based defaults (no query wording hint)
     //    Property-based defaults are applied later in the pipeline

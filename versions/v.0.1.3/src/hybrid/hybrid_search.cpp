@@ -1,4 +1,5 @@
 #include "hybrid_search.h"
+#include "../common/config.h"
 #include <unordered_map>
 #include <iostream>
 #include <algorithm>
@@ -93,7 +94,9 @@ HybridSearch::search(const std::string& query,
         // Normalize: bm25 to [0,1], ann cosine to [0,1]
         double bm25_norm = (max_bm25 > 0.0) ? r.bm25 / max_bm25 : 0.0;
         double ann_norm = (r.ann + 1.0) * 0.5;  // cosine [-1,1] -> [0,1]
-        r.score = 0.7 * bm25_norm + 0.3 * ann_norm;
+        double w_bm25 = Config::instance().get_double("retrieval.bm25_weight", 0.7);
+        double w_ann  = Config::instance().get_double("retrieval.ann_weight", 0.3);
+        r.score = w_bm25 * bm25_norm + w_ann * ann_norm;
         out.push_back(r);
     }
 

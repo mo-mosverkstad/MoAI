@@ -1,6 +1,7 @@
 #include "chunker.h"
 #include "../common/config.h"
 #include "../common/vocab_loader.h"
+#include "../common/rules_loader.h"
 #include <algorithm>
 #include <cctype>
 #include <unordered_set>
@@ -25,31 +26,39 @@ struct ChunkConfig {
 };
 
 struct ChunkVocab {
-    std::vector<std::string> location, loc_cap_ctx, loc_cap_req;
-    std::vector<std::string> advantages, limitations, usage, function;
-    std::vector<std::string> definition, person, temporal, procedure, history;
+    // Ordered list of types to check (first match wins)
+    std::vector<std::string> types;
+    // Type name -> signal words
+    std::unordered_map<std::string, std::vector<std::string>> signals;
+    // Special: LOCATION_CAPITAL requires both context and requires lists
+    std::vector<std::string> loc_cap_ctx, loc_cap_req;
 
     static const ChunkVocab& get() {
         static ChunkVocab cv = []() {
             auto m = VocabLoader::load("../config/vocabularies/chunk_signals.conf");
-            return ChunkVocab{
-                VocabLoader::get(m, "LOCATION"),
-                VocabLoader::get(m, "LOCATION_CAPITAL_CONTEXT"),
-                VocabLoader::get(m, "LOCATION_CAPITAL_REQUIRES"),
-                VocabLoader::get(m, "ADVANTAGES"),
-                VocabLoader::get(m, "LIMITATIONS"),
-                VocabLoader::get(m, "USAGE"),
-                VocabLoader::get(m, "FUNCTION"),
-                VocabLoader::get(m, "DEFINITION"),
-                VocabLoader::get(m, "PERSON"),
-                VocabLoader::get(m, "TEMPORAL"),
-                VocabLoader::get(m, "PROCEDURE"),
-                VocabLoader::get(m, "HISTORY"),
-            };
+            ChunkVocab v;
+            v.types = VocabLoader::get(m, "TYPES");
+            for (auto& t : v.types)
+                v.signals[t] = VocabLoader::get(m, t);
+            v.loc_cap_ctx = VocabLoader::get(m, "LOCATION_CAPITAL_CONTEXT");
+            v.loc_cap_req = VocabLoader::get(m, "LOCATION_CAPITAL_REQUIRES");
+            return v;
         }();
         return cv;
     }
 };
+
+static ChunkType name_to_chunk_type(const std::string& name) {
+    static const std::unordered_map<std::string, ChunkType> m = {
+        {"LOCATION", ChunkType::LOCATION}, {"DEFINITION", ChunkType::DEFINITION},
+        {"FUNCTION", ChunkType::FUNCTION}, {"USAGE", ChunkType::USAGE},
+        {"HISTORY", ChunkType::HISTORY}, {"TEMPORAL", ChunkType::TEMPORAL},
+        {"ADVANTAGES", ChunkType::ADVANTAGES}, {"LIMITATIONS", ChunkType::LIMITATIONS},
+        {"PERSON", ChunkType::PERSON}, {"PROCEDURE", ChunkType::PROCEDURE},
+    };
+    auto it = m.find(name);
+    return (it != m.end()) ? it->second : ChunkType::GENERAL;
+}
 
 static std::string to_lower(const std::string& s) {
     std::string r;
@@ -99,18 +108,20 @@ ChunkType Chunker::classify_chunk(const std::string& paragraph) const {
     std::string lower = to_lower(paragraph);
     auto& v = ChunkVocab::get();
 
-    if (has_any(lower, v.location)) return ChunkType::LOCATION;
-    if (has_any(lower, v.loc_cap_ctx) && has_any(lower, v.loc_cap_req))
-        return ChunkType::LOCATION;
-    if (has_any(lower, v.advantages))  return ChunkType::ADVANTAGES;
-    if (has_any(lower, v.limitations)) return ChunkType::LIMITATIONS;
-    if (has_any(lower, v.usage))       return ChunkType::USAGE;
-    if (has_any(lower, v.function))    return ChunkType::FUNCTION;
-    if (has_any(lower, v.definition))  return ChunkType::DEFINITION;
-    if (has_any(lower, v.person))      return ChunkType::PERSON;
-    if (has_any(lower, v.temporal))    return ChunkType::TEMPORAL;
-    if (has_any(lower, v.procedure))   return ChunkType::PROCEDURE;
-    if (has_any(lower, v.history))     return ChunkType::HISTORY;
+    for (auto& type_name : v.types) {
+        // Special handling: LOCATION also checks capital+context
+        if (type_name == "LOCATION") {
+            auto it = v.signals.find("LOCATION");
+            if (it != v.signals.end() && has_any(lower, it->second))
+                return ChunkType::LOCATION;
+            if (has_any(lower, v.loc_cap_ctx) && has_any(lower, v.loc_cap_req))
+                return ChunkType::LOCATION;
+            continue;
+        }
+        auto it = v.signals.find(type_name);
+        if (it != v.signals.end() && has_any(lower, it->second))
+            return name_to_chunk_type(type_name);
+    }
     return ChunkType::GENERAL;
 }
 
@@ -135,24 +146,10 @@ std::vector<Chunk> Chunker::chunk_document(uint32_t docId,
 
 // Property → preferred ChunkTypes mapping
 static std::unordered_set<int> preferred_types_for(Property prop) {
-    auto s = [](std::initializer_list<ChunkType> ts) {
-        std::unordered_set<int> r;
-        for (auto t : ts) r.insert(static_cast<int>(t));
-        return r;
-    };
-    switch (prop) {
-        case Property::LOCATION:    return s({ChunkType::LOCATION, ChunkType::GENERAL});
-        case Property::DEFINITION:  return s({ChunkType::DEFINITION, ChunkType::LOCATION, ChunkType::GENERAL});
-        case Property::TIME:        return s({ChunkType::TEMPORAL, ChunkType::HISTORY});
-        case Property::HISTORY:     return s({ChunkType::HISTORY, ChunkType::TEMPORAL});
-        case Property::FUNCTION:    return s({ChunkType::FUNCTION, ChunkType::PROCEDURE, ChunkType::DEFINITION});
-        case Property::COMPOSITION: return s({ChunkType::DEFINITION, ChunkType::GENERAL});
-        case Property::USAGE:       return s({ChunkType::USAGE, ChunkType::PROCEDURE, ChunkType::GENERAL});
-        case Property::ADVANTAGES:  return s({ChunkType::ADVANTAGES, ChunkType::GENERAL});
-        case Property::LIMITATIONS: return s({ChunkType::LIMITATIONS, ChunkType::GENERAL});
-        case Property::COMPARISON:  return s({ChunkType::ADVANTAGES, ChunkType::LIMITATIONS, ChunkType::GENERAL});
-        default:                    return std::unordered_set<int>{};
-    }
+    auto& pc = PlanningRules::get().preferred_chunks;
+    auto it = pc.find(static_cast<int>(prop));
+    if (it == pc.end()) return {};
+    return std::unordered_set<int>(it->second.begin(), it->second.end());
 }
 
 static bool contains_word_lower(const std::string& text_lower, const std::string& word) {
