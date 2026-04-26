@@ -22,16 +22,16 @@ struct QueryVocab {
 
     static const QueryVocab& get() {
         static QueryVocab qv = []() {
-            auto sw = VocabLoader::load("../config/vocabularies/stop_words.conf");
-            auto qp = VocabLoader::load("../config/vocabularies/query_prototypes.conf");
+            auto sw = VocabLoader::load("../config/vocabularies/language.conf");
+            auto pr = VocabLoader::load("../config/vocabularies/pipeline_rules.conf");
             QueryVocab v;
             for (auto& w : VocabLoader::get(sw, "STOP_WORDS")) v.stop_words.insert(w);
             for (auto& w : VocabLoader::get(sw, "NON_ENTITY_WORDS")) v.non_entity_words.insert(w);
-            v.clause_split_triggers = VocabLoader::get(qp, "CLAUSE_SPLIT_TRIGGERS");
-            v.scope_strict_hints    = VocabLoader::get(qp, "SCOPE_STRICT_HINTS");
-            v.scope_expanded_hints  = VocabLoader::get(qp, "SCOPE_EXPANDED_HINTS");
-            v.form_explanation_hints = VocabLoader::get(qp, "FORM_EXPLANATION_HINTS");
-            v.form_summary_hints    = VocabLoader::get(qp, "FORM_SUMMARY_HINTS");
+            v.clause_split_triggers = VocabLoader::get(pr, "CLAUSE_SPLIT_TRIGGERS");
+            v.scope_strict_hints    = VocabLoader::get(pr, "SCOPE_STRICT_HINTS");
+            v.scope_expanded_hints  = VocabLoader::get(pr, "SCOPE_EXPANDED_HINTS");
+            v.form_explanation_hints = VocabLoader::get(pr, "FORM_EXPLANATION_HINTS");
+            v.form_summary_hints    = VocabLoader::get(pr, "FORM_SUMMARY_HINTS");
             return v;
         }();
         return qv;

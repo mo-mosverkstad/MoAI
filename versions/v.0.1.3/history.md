@@ -286,3 +286,77 @@ Adding a new rule or changing chunk type preferences is now a one-line config ed
 ### Integration Test Results
 
 All 75 tests pass: `Results: 75 passed, 0 failed, 75 total`
+
+
+---
+
+## Step 4: Vocabulary Consolidation
+
+### Goal
+
+Reduce 8 vocabulary files to 4, organized by concept instead of pipeline stage. Eliminate cross-file redundancy and make it clear where to edit when improving a property.
+
+### Problem
+
+The 8 files from Steps 2-3 were organized by pipeline stage (chunk_signals, validator_signals, synth_words, etc.). This meant:
+- Improving LOCATION required editing 4 different files
+- Similar words appeared in multiple files with slight variations
+- A user couldn't tell which file to edit for a given purpose
+
+### Solution
+
+Consolidate into 4 files organized by concept:
+
+| New File | What It Contains | Replaces |
+|----------|-----------------|----------|
+| `properties.conf` | All per-property word lists with role prefixes (CHUNK_, QUERY_, VALIDATE_, SYNTH_) | chunk_signals, query_prototypes (property sections), validator_signals, synth_words |
+| `pipeline_rules.conf` | Self-ask rules, dependencies, preferred chunks, scope/form hints, clause split triggers | planning_rules, query_prototypes (rule sections) |
+| `domains.conf` | Evidence domain vocabularies, negations, opposites | evidence_domains (renamed) |
+| `language.conf` | Stop words, non-entity words, neural training templates | stop_words, query_templates |
+
+### Key Design Principle
+
+**Group by property, not by pipeline stage.** All LOCATION words live under the LOCATION heading in `properties.conf`:
+
+```
+# ══ LOCATION ══
+[CHUNK_LOCATION]        ← chunk classification
+[QUERY_LOCATION]        ← query analysis
+[VALIDATE_LOCATION]     ← answer validation
+[SYNTH_LOC_WORDS]       ← answer synthesis
+[SYNTH_LOC_NOUNS]
+[SYNTH_LOC_COMPARE]
+[SYNTH_LOC_PENALTIES]
+```
+
+### Files Modified
+
+| File | What Changed |
+|------|-------------|
+| `src/chunk/chunker.cpp` | Loads from `properties.conf` with `CHUNK_` prefix |
+| `src/answer/answer_validator.cpp` | Loads from `properties.conf` with `VALIDATE_` prefix |
+| `src/answer/answer_synthesizer.cpp` | Loads from `properties.conf` with `SYNTH_` prefix |
+| `src/answer/evidence_normalizer.cpp` | Loads from `domains.conf` |
+| `src/common/rules_loader.cpp` | Loads from `pipeline_rules.conf` and `language.conf` |
+| `src/query/query_analyzer.cpp` | Loads from `language.conf` and `pipeline_rules.conf` |
+| `src/query/neural_query_analyzer.cpp` | Loads from `language.conf` |
+| `src/summarizer/summarizer.cpp` | Loads from `language.conf` |
+
+### **Summary — 8 files → 4 files:**
+
+| Before (8 files by pipeline stage) | After (4 files by concept) |
+|-------------------------------------|---------------------------|
+| chunk_signals.conf | → `properties.conf` (CHUNK_* sections) |
+| validator_signals.conf | → `properties.conf` (VALIDATE_* sections) |
+| synth_words.conf | → `properties.conf` (SYNTH_* sections) |
+| query_prototypes.conf (property parts) | → `properties.conf` (QUERY_* sections) |
+| planning_rules.conf | → `pipeline_rules.conf` |
+| query_prototypes.conf (rule parts) | → `pipeline_rules.conf` |
+| evidence_domains.conf | → `domains.conf` |
+| stop_words.conf + query_templates.conf | → `language.conf` |
+
+Now improving LOCATION means editing one section of `properties.conf` instead of hunting across 4 files.
+
+### Integration Test Results
+
+All 75 tests pass: `Results: 75 passed, 0 failed, 75 total`

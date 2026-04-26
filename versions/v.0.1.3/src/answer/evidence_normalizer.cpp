@@ -18,7 +18,7 @@ struct EvidenceVocab {
 
     static const EvidenceVocab& get() {
         static EvidenceVocab ev = []() {
-            auto m = VocabLoader::load("../config/vocabularies/evidence_domains.conf");
+            auto m = VocabLoader::load("../config/vocabularies/domains.conf");
             EvidenceVocab v;
             // Load domain types dynamically from [DOMAINS] section
             for (auto& domain : VocabLoader::get(m, "DOMAINS")) {

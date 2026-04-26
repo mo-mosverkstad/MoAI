@@ -339,7 +339,7 @@ std::string NeuralQueryAnalyzer::extract_entity_from_tags(
     // Fallback: if no entity tagged, use longest non-stop keyword
     if (entity.empty()) {
         static const auto sw = []() {
-            auto m = VocabLoader::load("../config/vocabularies/stop_words.conf");
+            auto m = VocabLoader::load("../config/vocabularies/language.conf");
             auto& words = VocabLoader::get(m, "STOP_WORDS");
             return std::unordered_set<std::string>(words.begin(), words.end());
         }();
@@ -380,7 +380,7 @@ QueryAnalysis NeuralQueryAnalyzer::analyze(const std::string& query) const {
     // Keywords: all non-stop words
     Tokenizer tok;
     static const auto sw = []() {
-        auto m = VocabLoader::load("../config/vocabularies/stop_words.conf");
+        auto m = VocabLoader::load("../config/vocabularies/language.conf");
         auto& words = VocabLoader::get(m, "STOP_WORDS");
         return std::unordered_set<std::string>(words.begin(), words.end());
     }();

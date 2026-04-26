@@ -8,7 +8,7 @@
 
 static const std::unordered_set<std::string>& stop_words() {
     static const auto sw = []() {
-        auto m = VocabLoader::load("../config/vocabularies/stop_words.conf");
+        auto m = VocabLoader::load("../config/vocabularies/language.conf");
         auto& words = VocabLoader::get(m, "STOP_WORDS");
         return std::unordered_set<std::string>(words.begin(), words.end());
     }();

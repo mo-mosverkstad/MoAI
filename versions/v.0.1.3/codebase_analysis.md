@@ -180,16 +180,12 @@ vim config/vocabularies/chunk_signals.conf
 
 All word lists are externalized to `config/vocabularies/`:
 
-| File | Sections | Used By |
+| File | Contents | Used By |
 |------|----------|--------|
-| `chunk_signals.conf` | 12 ChunkType signal lists | `chunker.cpp` (ChunkVocab) |
-| `validator_signals.conf` | 9 Property signal lists | `answer_validator.cpp` (ValidatorConfig) |
-| `synth_words.conf` | 14 scoring word lists | `answer_synthesizer.cpp` (SynthVocab) |
-| `evidence_domains.conf` | [DOMAINS] type list + domain vocabs + negations + 14 opposite pairs | `evidence_normalizer.cpp` (EvidenceVocab) |
-| `planning_rules.conf` | 7 self-ask rules + 7 dependency rules + 10 preferred chunk mappings | `self_ask.cpp` + `question_planner.cpp` + `answer_synthesizer.cpp` + `chunker.cpp` (PlanningRules) |
-| `query_prototypes.conf` | 10 property prototype lists | (prepared for query_analyzer.cpp) |
-| `query_templates.conf` | 22 neural training templates (prefix/suffix/intent/answer_type) | `neural_query_analyzer.cpp` via PlanningRules |
-| `stop_words.conf` | Stop words + non-entity words | `query_analyzer.cpp` (QueryVocab) + `neural_query_analyzer.cpp` |
+| `properties.conf` | Per-property word lists with role prefixes (CHUNK_, QUERY_, VALIDATE_, SYNTH_) | chunker, validator, synthesizer |
+| `pipeline_rules.conf` | Self-ask rules, dependencies, preferred chunks, scope/form hints, clause triggers | rules_loader, query_analyzer |
+| `domains.conf` | Evidence domain vocabularies ([DOMAINS] type list), negations, opposites | evidence_normalizer |
+| `language.conf` | Stop words, non-entity words, neural training templates | query_analyzer, neural_query_analyzer, summarizer, rules_loader |
 
 Format: `[SECTION]` headers with comma-separated words. Opposites use `word1 | word2` pipe syntax. Loaded by `VocabLoader` — if a file is missing, a warning is logged to stderr. No inline defaults are duplicated in source code; the `.conf` files are the single source of truth.
 
@@ -514,15 +510,11 @@ SegmentReader -> Vocabulary.load() -> EncoderTrainer.load(encoder.pt)
 v.0.1.3/
 +-- config/
 |   +-- default.conf           # 80+ tunable parameters
-|   +-- vocabularies/          # externalized word lists
-|       +-- chunk_signals.conf
-|       +-- validator_signals.conf
-|       +-- synth_words.conf
-|       +-- evidence_domains.conf
-|       +-- planning_rules.conf
-|       +-- query_prototypes.conf
-|       +-- query_templates.conf
-|       +-- stop_words.conf
+|   +-- vocabularies/          # externalized word lists (4 files)
+|       +-- properties.conf    # per-property words (chunk/query/validate/synth)
+|       +-- pipeline_rules.conf # self-ask, dependencies, preferred chunks, hints
+|       +-- domains.conf       # evidence domain keywords, negations, opposites
+|       +-- language.conf      # stop words, non-entity words, training templates
 +-- data/                      # 21 text documents across 7 topics
 |   +-- biology/               # animals, plants
 |   +-- computer_science/      # algorithms, databases, networking, security, python, blockchain

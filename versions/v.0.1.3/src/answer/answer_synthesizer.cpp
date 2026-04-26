@@ -69,22 +69,22 @@ struct SynthVocab {
 
     static const SynthVocab& get() {
         static SynthVocab sv = []() {
-            auto m = VocabLoader::load("../config/vocabularies/synth_words.conf");
+            auto m = VocabLoader::load("../config/vocabularies/properties.conf");
             return SynthVocab{
-                VocabLoader::get(m, "DEF_FIRST_PASS_PATTERNS"),
-                VocabLoader::get(m, "DEF_FIRST_PASS_PENALTIES"),
-                VocabLoader::get(m, "DEF_FALLBACK_PATTERNS"),
-                VocabLoader::get(m, "DEF_FALLBACK_PENALTIES"),
-                VocabLoader::get(m, "LOC_CHUNK_COMPARE_WORDS"),
-                VocabLoader::get(m, "LOC_WORDS"),
-                VocabLoader::get(m, "LOC_NOUNS"),
-                VocabLoader::get(m, "LOC_NON_LOC_PENALTIES"),
-                VocabLoader::get(m, "ADVANTAGES_BOOST"),
-                VocabLoader::get(m, "LIMITATIONS_BOOST"),
-                VocabLoader::get(m, "USAGE_BOOST"),
-                VocabLoader::get(m, "HISTORY_SIGNALS"),
-                VocabLoader::get(m, "HISTORY_BOOST"),
-                VocabLoader::get(m, "COMPARISON_BOOST"),
+                VocabLoader::get(m, "SYNTH_DEF_PATTERNS"),
+                VocabLoader::get(m, "SYNTH_DEF_PENALTIES"),
+                VocabLoader::get(m, "SYNTH_DEF_FALLBACK_PATTERNS"),
+                VocabLoader::get(m, "SYNTH_DEF_FALLBACK_PENALTIES"),
+                VocabLoader::get(m, "SYNTH_LOC_COMPARE"),
+                VocabLoader::get(m, "SYNTH_LOC_WORDS"),
+                VocabLoader::get(m, "SYNTH_LOC_NOUNS"),
+                VocabLoader::get(m, "SYNTH_LOC_PENALTIES"),
+                VocabLoader::get(m, "SYNTH_ADVANTAGES_BOOST"),
+                VocabLoader::get(m, "SYNTH_LIMITATIONS_BOOST"),
+                VocabLoader::get(m, "SYNTH_USAGE_BOOST"),
+                VocabLoader::get(m, "SYNTH_HISTORY_SIGNALS"),
+                VocabLoader::get(m, "SYNTH_HISTORY_BOOST"),
+                VocabLoader::get(m, "SYNTH_COMPARISON_BOOST"),
             };
         }();
         return sv;

@@ -35,13 +35,13 @@ struct ChunkVocab {
 
     static const ChunkVocab& get() {
         static ChunkVocab cv = []() {
-            auto m = VocabLoader::load("../config/vocabularies/chunk_signals.conf");
+            auto m = VocabLoader::load("../config/vocabularies/properties.conf");
             ChunkVocab v;
-            v.types = VocabLoader::get(m, "TYPES");
+            v.types = VocabLoader::get(m, "CHUNK_TYPES");
             for (auto& t : v.types)
-                v.signals[t] = VocabLoader::get(m, t);
-            v.loc_cap_ctx = VocabLoader::get(m, "LOCATION_CAPITAL_CONTEXT");
-            v.loc_cap_req = VocabLoader::get(m, "LOCATION_CAPITAL_REQUIRES");
+                v.signals[t] = VocabLoader::get(m, "CHUNK_" + t);
+            v.loc_cap_ctx = VocabLoader::get(m, "CHUNK_LOCATION_CAPITAL_CONTEXT");
+            v.loc_cap_req = VocabLoader::get(m, "CHUNK_LOCATION_CAPITAL_REQUIRES");
             return v;
         }();
         return cv;

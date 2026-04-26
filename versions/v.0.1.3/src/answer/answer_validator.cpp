@@ -31,16 +31,16 @@ struct ValidatorConfig {
             v.vol_div = c.get_double("confidence.volume_divisor", 3.0);
 
             // Load signal words from vocabulary file
-            auto m = VocabLoader::load("../config/vocabularies/validator_signals.conf");
-            v.signals[(int)Property::LOCATION]    = VocabLoader::get(m, "LOCATION");
-            v.signals[(int)Property::DEFINITION]  = VocabLoader::get(m, "DEFINITION");
-            v.signals[(int)Property::FUNCTION]    = VocabLoader::get(m, "FUNCTION");
-            v.signals[(int)Property::ADVANTAGES]  = VocabLoader::get(m, "ADVANTAGES");
-            v.signals[(int)Property::LIMITATIONS] = VocabLoader::get(m, "LIMITATIONS");
-            v.signals[(int)Property::USAGE]       = VocabLoader::get(m, "USAGE");
-            v.signals[(int)Property::HISTORY]     = VocabLoader::get(m, "HISTORY");
-            v.signals[(int)Property::TIME]        = VocabLoader::get(m, "TIME");
-            v.signals[(int)Property::COMPARISON]  = VocabLoader::get(m, "COMPARISON");
+            auto m = VocabLoader::load("../config/vocabularies/properties.conf");
+            v.signals[(int)Property::LOCATION]    = VocabLoader::get(m, "VALIDATE_LOCATION");
+            v.signals[(int)Property::DEFINITION]  = VocabLoader::get(m, "VALIDATE_DEFINITION");
+            v.signals[(int)Property::FUNCTION]    = VocabLoader::get(m, "VALIDATE_FUNCTION");
+            v.signals[(int)Property::ADVANTAGES]  = VocabLoader::get(m, "VALIDATE_ADVANTAGES");
+            v.signals[(int)Property::LIMITATIONS] = VocabLoader::get(m, "VALIDATE_LIMITATIONS");
+            v.signals[(int)Property::USAGE]       = VocabLoader::get(m, "VALIDATE_USAGE");
+            v.signals[(int)Property::HISTORY]     = VocabLoader::get(m, "VALIDATE_HISTORY");
+            v.signals[(int)Property::TIME]        = VocabLoader::get(m, "VALIDATE_TIME");
+            v.signals[(int)Property::COMPARISON]  = VocabLoader::get(m, "VALIDATE_COMPARISON");
             return v;
         }();
         return vc;

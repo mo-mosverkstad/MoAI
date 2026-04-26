@@ -71,9 +71,9 @@ static AnswerType parse_answer_type(const std::string& s) {
 const PlanningRules& PlanningRules::get() {
     static PlanningRules rules = []() {
         PlanningRules r;
-        std::ifstream f("../config/vocabularies/planning_rules.conf");
+        std::ifstream f("../config/vocabularies/pipeline_rules.conf");
         if (!f.is_open()) {
-            std::cerr << "[WARN] Planning rules file not found: ../config/vocabularies/planning_rules.conf\n";
+            std::cerr << "[WARN] Pipeline rules file not found: ../config/vocabularies/pipeline_rules.conf\n";
             return r;
         }
         std::string section, line;
@@ -126,7 +126,7 @@ const PlanningRules& PlanningRules::get() {
         }
 
         // Load query templates from separate file
-        std::ifstream tf("../config/vocabularies/query_templates.conf");
+        std::ifstream tf("../config/vocabularies/language.conf");
         if (tf.is_open()) {
             std::string tsec, tline;
             while (std::getline(tf, tline)) {
