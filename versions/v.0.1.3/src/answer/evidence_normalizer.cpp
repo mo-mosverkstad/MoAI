@@ -1,6 +1,8 @@
 #include "evidence_normalizer.h"
+#include "../common/vocab_loader.h"
 #include <algorithm>
 #include <cctype>
+#include <sstream>
 
 static std::string to_lower_en(const std::string& s) {
     std::string r;
@@ -9,51 +11,37 @@ static std::string to_lower_en(const std::string& s) {
     return r;
 }
 
-// Domain keyword vocabularies (controlled, extendable)
-static const std::vector<std::string> GEO_KEYWORDS = {
-    "east", "west", "north", "south",
-    "eastern", "western", "northern", "southern",
-    "coast", "sea", "lake", "river", "ocean", "island",
-    "border", "capital", "continent", "peninsula",
-    "sweden", "europe", "asia", "pacific", "atlantic", "baltic",
-    "located", "situated"
-};
+struct EvidenceVocab {
+    std::vector<std::vector<std::string>> domain_vocabs;
+    std::vector<std::string> negations;
+    std::vector<std::pair<std::string, std::string>> opposites;
 
-static const std::vector<std::string> TECH_KEYWORDS = {
-    "database", "sql", "nosql", "relational", "distributed",
-    "protocol", "tcp", "network", "internet", "encryption",
-    "algorithm", "scalable", "efficient", "complexity",
-    "blockchain", "decentralized", "consensus",
-    "python", "programming", "interpreted", "compiled"
-};
+    static const EvidenceVocab& get() {
+        static EvidenceVocab ev = []() {
+            auto m = VocabLoader::load("../config/vocabularies/evidence_domains.conf");
+            EvidenceVocab v;
+            // Load domain types dynamically from [DOMAINS] section
+            for (auto& domain : VocabLoader::get(m, "DOMAINS")) {
+                auto& words = VocabLoader::get(m, domain);
+                if (!words.empty()) v.domain_vocabs.push_back(words);
+            }
+            v.negations = VocabLoader::get(m, "NEGATION");
 
-static const std::vector<std::string> SCIENCE_KEYWORDS = {
-    "energy", "electric", "solar", "renewable", "fossil",
-    "battery", "voltage", "current", "photovoltaic",
-    "antibiotic", "bacteria", "resistance", "penicillin",
-    "climate", "greenhouse", "carbon", "temperature",
-    "planet", "mars", "orbit", "atmosphere"
-};
-
-static const std::vector<std::string> ECON_KEYWORDS = {
-    "inflation", "price", "economy", "gdp", "debt",
-    "interest", "monetary", "fiscal", "currency"
-};
-
-static const std::vector<std::string> NEGATION_MARKERS = {
-    "not ", "no ", "never ", "neither ", "without ", "lack ",
-    "cannot ", "unable ", "impossible "
-};
-
-// Directional opposites for contradiction detection
-static const std::vector<std::pair<std::string, std::string>> OPPOSITES = {
-    {"east", "west"}, {"eastern", "western"},
-    {"north", "south"}, {"northern", "southern"},
-    {"increase", "decrease"}, {"rising", "falling"},
-    {"advantage", "disadvantage"}, {"benefit", "drawback"},
-    {"cheap", "expensive"}, {"fast", "slow"},
-    {"safe", "dangerous"}, {"reliable", "unreliable"},
-    {"efficient", "inefficient"}, {"simple", "complex"}
+            // Parse opposites: "word1 | word2"
+            for (auto& entry : VocabLoader::get(m, "OPPOSITES")) {
+                auto bar = entry.find('|');
+                if (bar != std::string::npos) {
+                    std::string a = entry.substr(0, bar);
+                    std::string b = entry.substr(bar + 1);
+                    while (!a.empty() && a.back() == ' ') a.pop_back();
+                    while (!b.empty() && b.front() == ' ') b.erase(b.begin());
+                    if (!a.empty() && !b.empty()) v.opposites.push_back({a, b});
+                }
+            }
+            return v;
+        }();
+        return ev;
+    }
 };
 
 NormalizedClaim EvidenceNormalizer::normalize(
@@ -65,20 +53,14 @@ NormalizedClaim EvidenceNormalizer::normalize(
     c.docId = ev.docId;
 
     std::string t = to_lower_en(ev.text);
+    auto& vocab = EvidenceVocab::get();
 
-    // Extract keywords from all domain vocabularies
-    auto extract = [&](const std::vector<std::string>& vocab) {
-        for (auto& kw : vocab)
+    for (auto& domain : vocab.domain_vocabs)
+        for (auto& kw : domain)
             if (t.find(kw) != std::string::npos)
                 c.keywords.insert(kw);
-    };
-    extract(GEO_KEYWORDS);
-    extract(TECH_KEYWORDS);
-    extract(SCIENCE_KEYWORDS);
-    extract(ECON_KEYWORDS);
 
-    // Extract negations
-    for (auto& n : NEGATION_MARKERS)
+    for (auto& n : vocab.negations)
         if (t.find(n) != std::string::npos)
             c.negations.insert(n);
 
@@ -87,10 +69,7 @@ NormalizedClaim EvidenceNormalizer::normalize(
 
 double agreement_score(const NormalizedClaim& a, const NormalizedClaim& b) {
     if (a.entity != b.entity) return 0.0;
-    // Different properties can't agree or disagree
     if (a.property != b.property) return 0.0;
-
-    // Negation mismatch = no agreement
     if (a.negations.empty() != b.negations.empty()) return 0.0;
 
     int overlap = 0;
@@ -99,25 +78,20 @@ double agreement_score(const NormalizedClaim& a, const NormalizedClaim& b) {
 
     int denom = static_cast<int>(std::max(a.keywords.size(), b.keywords.size()));
     if (denom == 0) return 0.0;
-
     return static_cast<double>(overlap) / denom;
 }
 
 bool contradicts(const NormalizedClaim& a, const NormalizedClaim& b) {
     if (a.entity != b.entity) return false;
     if (a.property != b.property) return false;
-    // Same document can't contradict itself
     if (a.docId == b.docId) return false;
 
-    // Negation conflict: one has negation, other doesn't
     if (a.negations.empty() != b.negations.empty()) return true;
 
-    // Directional/semantic opposites
-    for (auto& [x, y] : OPPOSITES) {
+    for (auto& [x, y] : EvidenceVocab::get().opposites) {
         if ((a.keywords.count(x) && b.keywords.count(y)) ||
             (a.keywords.count(y) && b.keywords.count(x)))
             return true;
     }
-
     return false;
 }

@@ -1,6 +1,7 @@
 #include "answer_synthesizer.h"
 #include "answer_scope.h"
 #include "../common/config.h"
+#include "../common/vocab_loader.h"
 #include <algorithm>
 #include <cctype>
 #include <unordered_set>
@@ -55,6 +56,37 @@ struct SynthConfig {
             return s;
         }();
         return sc;
+    }
+};
+
+struct SynthVocab {
+    std::vector<std::string> def_fp_patterns, def_fp_penalties;
+    std::vector<std::string> def_fb_patterns, def_fb_penalties;
+    std::vector<std::string> loc_chunk_compare, loc_words, loc_nouns, loc_non_loc_penalties;
+    std::vector<std::string> adv_boost, lim_boost, usage_boost;
+    std::vector<std::string> hist_signals, hist_boost, comp_boost;
+
+    static const SynthVocab& get() {
+        static SynthVocab sv = []() {
+            auto m = VocabLoader::load("../config/vocabularies/synth_words.conf");
+            return SynthVocab{
+                VocabLoader::get(m, "DEF_FIRST_PASS_PATTERNS"),
+                VocabLoader::get(m, "DEF_FIRST_PASS_PENALTIES"),
+                VocabLoader::get(m, "DEF_FALLBACK_PATTERNS"),
+                VocabLoader::get(m, "DEF_FALLBACK_PENALTIES"),
+                VocabLoader::get(m, "LOC_CHUNK_COMPARE_WORDS"),
+                VocabLoader::get(m, "LOC_WORDS"),
+                VocabLoader::get(m, "LOC_NOUNS"),
+                VocabLoader::get(m, "LOC_NON_LOC_PENALTIES"),
+                VocabLoader::get(m, "ADVANTAGES_BOOST"),
+                VocabLoader::get(m, "LIMITATIONS_BOOST"),
+                VocabLoader::get(m, "USAGE_BOOST"),
+                VocabLoader::get(m, "HISTORY_SIGNALS"),
+                VocabLoader::get(m, "HISTORY_BOOST"),
+                VocabLoader::get(m, "COMPARISON_BOOST"),
+            };
+        }();
+        return sv;
     }
 };
 
@@ -266,7 +298,7 @@ Answer AnswerSynthesizer::synthesize_location(
                 // Pick the one with more location words
                 std::string bl = to_lower(best_loc->text);
                 int cur_loc = 0, new_loc = 0;
-                for (auto& w : {"located", "coast", "eastern", "situated", "sea", "lake", "island"})
+                for (auto& w : SynthVocab::get().loc_chunk_compare)
                     { if (lower.find(w) != std::string::npos) new_loc++;
                       if (bl.find(w) != std::string::npos) cur_loc++; }
                 if (new_loc > cur_loc) best_loc = &e;
@@ -294,37 +326,21 @@ Answer AnswerSynthesizer::synthesize_location(
                 if (contains_word(lower, k)) sc += 3.0;
             if (!entity_lower.empty()) sc += 4.0; // entity already confirmed above
             // Location-specific language — count each match individually
-            static const std::vector<std::string> loc_words = {
-                "located", "coast", "eastern", "western", "southern", "northern",
-                "situated", "built across", "latitude", "longitude"
-            };
-            static const std::vector<std::string> loc_nouns = {
-                "sea", "ocean", "lake", "river", "island", "peninsula",
-                "region", "border", "strait"
-            };
+            auto& SV = SynthVocab::get();
+            auto& SC = SynthConfig::get();
             double loc_sc = 0.0;
-            for (auto& lw : loc_words)
-                if (lower.find(lw) != std::string::npos) loc_sc += 5.0;
-            for (auto& ln : loc_nouns)
-                if (contains_word(lower, ln)) loc_sc += 3.0;
-            // "capital" only counts as location when near entity
+            for (auto& lw : SV.loc_words)
+                if (lower.find(lw) != std::string::npos) loc_sc += SC.loc_word_boost;
+            for (auto& ln : SV.loc_nouns)
+                if (contains_word(lower, ln)) loc_sc += SC.loc_noun_boost;
             if (contains_word(lower, "capital") && !entity_lower.empty() &&
                 contains_word(lower, entity_lower))
-                loc_sc += 4.0;
+                loc_sc += SC.loc_capital_boost;
             sc += loc_sc;
-            // Penalize non-location content when no location words present
             if (loc_sc == 0.0) {
-                if (lower.find("important") != std::string::npos ||
-                    lower.find("nobel") != std::string::npos ||
-                    lower.find("museum") != std::string::npos ||
-                    lower.find("cultural") != std::string::npos ||
-                    lower.find("startup") != std::string::npos ||
-                    lower.find("tech hub") != std::string::npos ||
-                    lower.find("green area") != std::string::npos ||
-                    lower.find("nature park") != std::string::npos ||
-                    lower.find("ferry") != std::string::npos ||
-                    lower.find("airport") != std::string::npos)
-                    sc -= 5.0;
+                for (auto& np : SV.loc_non_loc_penalties)
+                    if (lower.find(np) != std::string::npos)
+                        sc += SC.loc_non_loc_penalty;
             }
             if (s.size() > 30 && s.size() < 300) sc += 0.5;
             if (!s.empty() && s[0] == '#') sc -= 2.0;
@@ -349,8 +365,8 @@ Answer AnswerSynthesizer::synthesize_definition(
     std::string entity_lower = to_lower(need.entity);
 
     const auto& SC = SynthConfig::get();
+    const auto& SV = SynthVocab::get();
 
-    // First: prefer DEFINITION-typed chunks with entity in opening "X is" pattern
     const Evidence* best_def = nullptr;
     double best_def_score = 0.0;
     for (auto& e : evidence) {
@@ -364,12 +380,9 @@ Answer AnswerSynthesizer::synthesize_definition(
         double sc = 0.0;
         std::string is_pat = entity_lower + " is ";
         if (!entity_lower.empty() && lower.find(is_pat) < 50) sc += SC.def_fp_is_boost;
-        for (auto& dp : {"is a ", "is an ", "is the ", "capital", "known for",
-                         "refers to", "defined as"})
+        for (auto& dp : SV.def_fp_patterns)
             if (lower.find(dp) != std::string::npos) sc += SC.def_fp_pattern_boost;
-        for (auto& np : {"expensive", "rent ", "cost", "salary", "startup",
-                         "tech hub", "ranking", "ranks", "ecosystem",
-                         "important for", "important because"})
+        for (auto& np : SV.def_fp_penalties)
             if (lower.find(np) != std::string::npos) sc += SC.def_fp_penalty;
         if (sc > best_def_score) { best_def = &e; best_def_score = sc; }
     }
@@ -392,10 +405,7 @@ Answer AnswerSynthesizer::synthesize_definition(
             for (auto& k : need.keywords)
                 if (contains_word(lower, k)) sc += SC.kw_score;
             if (!entity_lower.empty() && contains_word(lower, entity_lower)) sc += SC.entity_score;
-            // Definitional patterns
-            for (auto& dp : {"is a ", "is an ", "is the ", "refers to",
-                             "defined as", "known for", "known as",
-                             "collection of", "organized"})
+            for (auto& dp : SV.def_fb_patterns)
                 if (lower.find(dp) != std::string::npos) sc += SC.def_pattern_boost;
             // Entity as subject: "X is/are ..." pattern
             if (!entity_lower.empty()) {
@@ -407,9 +417,7 @@ Answer AnswerSynthesizer::synthesize_definition(
                         sc += SC.entity_is_boost;
                 }
             }
-            // Penalize non-definitional content
-            for (auto& np : {"expensive", "rent ", "cost", "salary",
-                             "startup", "tech hub", "ranking", "ranks"})
+            for (auto& np : SV.def_fb_penalties)
                 if (lower.find(np) != std::string::npos) sc += SC.non_def_penalty;
             if (sc > 0.0) all_scored.push_back({sc, s});
         }
@@ -570,9 +578,7 @@ Answer AnswerSynthesizer::synthesize_advantages(
 
     // Fallback: score segments, but filter to entity-mentioning segments
     auto segs = scored_segments(evidence, need.keywords, entity_lower,
-        {"advantage", "benefit", "strength", "widely", "proven", "mature",
-         "standardiz", "reliable", "powerful", "important", "significant",
-         "leading", "major", "innovation"}, 6, 600);
+        SynthVocab::get().adv_boost, 6, 600);
     // Filter to segments primarily about the entity (entity in first 50 chars)
     std::string text;
     for (auto& s : segs) {
@@ -610,8 +616,7 @@ Answer AnswerSynthesizer::synthesize_limitations(
     }
     // Fallback: score segments
     auto segs = scored_segments(evidence, need.keywords, to_lower(need.entity),
-        {"limitation", "drawback", "disadvantage", "lack", "not suitable",
-         "weaker", "less mature", "vendor lock", "costly"}, 6, 600);
+        SynthVocab::get().lim_boost, 6, 600);
     std::string text;
     for (auto& s : segs) { if (!text.empty()) text += " "; text += s; }
     if (text.empty()) text = "No limitations information found.";
@@ -629,8 +634,7 @@ Answer AnswerSynthesizer::synthesize_usage(
         }
     }
     auto segs = scored_segments(evidence, need.keywords, to_lower(need.entity),
-        {"used for", "use case", "beginner", "start with", "recommend",
-         "suitable", "learning path", "best for"}, 6, 600);
+        SynthVocab::get().usage_boost, 6, 600);
     std::string text;
     for (auto& s : segs) { if (!text.empty()) text += " "; text += s; }
     if (text.empty()) text = "No usage information found.";
@@ -652,8 +656,7 @@ Answer AnswerSynthesizer::synthesize_history(
                 if (pos == std::string::npos || pos > 200) continue;
             }
             int sig = 0;
-            for (auto& w : {"history", "founded", "century", "centuries",
-                            "origin", "heritage", "medieval", "political"})
+            for (auto& w : SynthVocab::get().hist_signals)
                 if (lower.find(w) != std::string::npos) sig++;
             if (sig > best_signals) { best_hist = &e; best_signals = sig; }
         }
@@ -666,8 +669,7 @@ Answer AnswerSynthesizer::synthesize_history(
     auto filtered = filter_by_type(evidence,
         {ChunkType::HISTORY, ChunkType::TEMPORAL, ChunkType::GENERAL});
     auto segs = scored_segments(filtered, need.keywords, to_lower(need.entity),
-        {"history", "origin", "founded", "century", "developed",
-         "introduced", "evolved", "heritage"}, 4, 500);
+        SynthVocab::get().hist_boost, 4, 500);
     std::string text;
     for (auto& s : segs) { if (!text.empty()) text += " "; text += s; }
     if (text.empty()) text = "No history information found.";
@@ -679,8 +681,7 @@ Answer AnswerSynthesizer::synthesize_comparison(
 {
     // For comparison, collect segments mentioning any of the keywords
     auto segs = scored_segments(evidence, need.keywords, to_lower(need.entity),
-        {"vs", "compare", "difference", "better", "worse", "more", "less",
-         "affordable", "expensive", "cheaper"}, 6, 600);
+        SynthVocab::get().comp_boost, 6, 600);
     std::string text;
     for (auto& s : segs) { if (!text.empty()) text += " "; text += s; }
     if (text.empty()) text = "No comparison information found.";

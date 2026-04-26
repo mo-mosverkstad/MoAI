@@ -1,5 +1,6 @@
 #include "chunker.h"
 #include "../common/config.h"
+#include "../common/vocab_loader.h"
 #include <algorithm>
 #include <cctype>
 #include <unordered_set>
@@ -20,6 +21,33 @@ struct ChunkConfig {
             };
         }();
         return cc;
+    }
+};
+
+struct ChunkVocab {
+    std::vector<std::string> location, loc_cap_ctx, loc_cap_req;
+    std::vector<std::string> advantages, limitations, usage, function;
+    std::vector<std::string> definition, person, temporal, procedure, history;
+
+    static const ChunkVocab& get() {
+        static ChunkVocab cv = []() {
+            auto m = VocabLoader::load("../config/vocabularies/chunk_signals.conf");
+            return ChunkVocab{
+                VocabLoader::get(m, "LOCATION"),
+                VocabLoader::get(m, "LOCATION_CAPITAL_CONTEXT"),
+                VocabLoader::get(m, "LOCATION_CAPITAL_REQUIRES"),
+                VocabLoader::get(m, "ADVANTAGES"),
+                VocabLoader::get(m, "LIMITATIONS"),
+                VocabLoader::get(m, "USAGE"),
+                VocabLoader::get(m, "FUNCTION"),
+                VocabLoader::get(m, "DEFINITION"),
+                VocabLoader::get(m, "PERSON"),
+                VocabLoader::get(m, "TEMPORAL"),
+                VocabLoader::get(m, "PROCEDURE"),
+                VocabLoader::get(m, "HISTORY"),
+            };
+        }();
+        return cv;
     }
 };
 
@@ -69,72 +97,20 @@ std::vector<std::string> Chunker::split_paragraphs(const std::string& text) cons
 
 ChunkType Chunker::classify_chunk(const std::string& paragraph) const {
     std::string lower = to_lower(paragraph);
+    auto& v = ChunkVocab::get();
 
-    // Location signals — require geographic context, not just "capital"
-    if (has_any(lower, {"located", "coast", "archipelago",
-                        "built across", "connected to", "situated",
-                        "eastern", "western", "southern", "northern",
-                        "island nation", "port city"}))
+    if (has_any(lower, v.location)) return ChunkType::LOCATION;
+    if (has_any(lower, v.loc_cap_ctx) && has_any(lower, v.loc_cap_req))
         return ChunkType::LOCATION;
-    // "capital" + geographic words = LOCATION; "capital" alone = not enough
-    if (has_any(lower, {"capital"}) &&
-        has_any(lower, {"island", "city", "region", "country", "bridge",
-                        "port", "sea", "lake", "coast", "located"}))
-        return ChunkType::LOCATION;
-
-    // Advantages signals
-    if (has_any(lower, {"advantage", "benefit", "strength", "why is",
-                        "still widely", "widely used", "proven",
-                        "mature ecosystem", "important for", "important because"}))
-        return ChunkType::ADVANTAGES;
-
-    // Limitations signals
-    if (has_any(lower, {"limitation", "drawback", "disadvantage", "weakness",
-                        "not suitable", "lack of", "vendor lock"}))
-        return ChunkType::LIMITATIONS;
-
-    // Usage signals
-    if (has_any(lower, {"used for", "use case", "suitable for", "application",
-                        "beginner", "start with", "recommend", "learning path"}))
-        return ChunkType::USAGE;
-
-    // Function / mechanism signals
-    if (has_any(lower, {"ensures", "mechanism", "how does", "how do",
-                        "three-way", "handshake", "retransmit",
-                        "flow control", "congestion", "checksum"}))
-        return ChunkType::FUNCTION;
-
-    // Definition signals
-    if (has_any(lower, {"is a ", "is an ", "refers to", "defined as",
-                        "are organized", "collection of",
-                        "aims to", "studies how"}))
-        return ChunkType::DEFINITION;
-
-    // Person signals
-    if (has_any(lower, {"born", "inventor", "founded by", "created by",
-                        "alan turing", "charles babbage", "ada lovelace",
-                        "blaise pascal"}))
-        return ChunkType::PERSON;
-
-    // Temporal signals
-    if (has_any(lower, {"century", "1642", "1947", "1990", "ancient", "early",
-                        "modern computing", "evolution",
-                        "emerged", "invented", "year ", "1960", "1970",
-                        "1980", "1989", "1991", "1995", "2000"}))
-        return ChunkType::TEMPORAL;
-
-    // Procedure signals
-    if (has_any(lower, {"step", "how to", "procedure", "process",
-                        "algorithm", "method", "technique"}))
-        return ChunkType::PROCEDURE;
-
-    // History signals
-    if (has_any(lower, {"history", "heritage", "medieval", "centuries",
-                        "political", "economic center", "founded",
-                        "origin", "developed", "introduced",
-                        "first described", "first practical", "first released"}))
-        return ChunkType::HISTORY;
-
+    if (has_any(lower, v.advantages))  return ChunkType::ADVANTAGES;
+    if (has_any(lower, v.limitations)) return ChunkType::LIMITATIONS;
+    if (has_any(lower, v.usage))       return ChunkType::USAGE;
+    if (has_any(lower, v.function))    return ChunkType::FUNCTION;
+    if (has_any(lower, v.definition))  return ChunkType::DEFINITION;
+    if (has_any(lower, v.person))      return ChunkType::PERSON;
+    if (has_any(lower, v.temporal))    return ChunkType::TEMPORAL;
+    if (has_any(lower, v.procedure))   return ChunkType::PROCEDURE;
+    if (has_any(lower, v.history))     return ChunkType::HISTORY;
     return ChunkType::GENERAL;
 }
 

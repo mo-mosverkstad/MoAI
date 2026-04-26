@@ -11,6 +11,7 @@ add_library(mysearch_lib
     src/common/file_utils.cpp
     src/common/varint.cpp
     src/common/config.cpp
+    src/common/vocab_loader.cpp
 
     src/storage/segment_writer.cpp
     src/storage/segment_reader.cpp

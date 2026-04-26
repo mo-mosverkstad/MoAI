@@ -1,6 +1,7 @@
 #include "answer_validator.h"
 #include "evidence_normalizer.h"
 #include "../common/config.h"
+#include "../common/vocab_loader.h"
 #include <algorithm>
 #include <cctype>
 #include <unordered_set>
@@ -11,23 +12,36 @@ struct ValidatorConfig {
     double fail_ratio, weak_ratio, fail_mult, weak_mult;
     double max_penalty, per_pair;
     double w_cov, w_vol, w_agr, w_pen, vol_div;
+    std::unordered_map<int, std::vector<std::string>> signals;
 
     static const ValidatorConfig& get() {
         static ValidatorConfig vc = []() {
             auto& c = Config::instance();
-            return ValidatorConfig{
-                c.get_double("validator.signal_ratio_fail", 0.0),
-                c.get_double("validator.signal_ratio_weak", 0.15),
-                c.get_double("validator.fail_confidence_multiplier", 0.3),
-                c.get_double("validator.weak_confidence_multiplier", 0.7),
-                c.get_double("confidence.max_contradiction_penalty", 0.4),
-                c.get_double("confidence.contradiction_penalty_per_pair", 0.15),
-                c.get_double("confidence.coverage_weight", 0.3),
-                c.get_double("confidence.volume_weight", 0.2),
-                c.get_double("confidence.agreement_weight", 0.3),
-                c.get_double("confidence.penalty_weight", 0.2),
-                c.get_double("confidence.volume_divisor", 3.0),
-            };
+            ValidatorConfig v;
+            v.fail_ratio = c.get_double("validator.signal_ratio_fail", 0.0);
+            v.weak_ratio = c.get_double("validator.signal_ratio_weak", 0.15);
+            v.fail_mult  = c.get_double("validator.fail_confidence_multiplier", 0.3);
+            v.weak_mult  = c.get_double("validator.weak_confidence_multiplier", 0.7);
+            v.max_penalty = c.get_double("confidence.max_contradiction_penalty", 0.4);
+            v.per_pair    = c.get_double("confidence.contradiction_penalty_per_pair", 0.15);
+            v.w_cov = c.get_double("confidence.coverage_weight", 0.3);
+            v.w_vol = c.get_double("confidence.volume_weight", 0.2);
+            v.w_agr = c.get_double("confidence.agreement_weight", 0.3);
+            v.w_pen = c.get_double("confidence.penalty_weight", 0.2);
+            v.vol_div = c.get_double("confidence.volume_divisor", 3.0);
+
+            // Load signal words from vocabulary file
+            auto m = VocabLoader::load("../config/vocabularies/validator_signals.conf");
+            v.signals[(int)Property::LOCATION]    = VocabLoader::get(m, "LOCATION");
+            v.signals[(int)Property::DEFINITION]  = VocabLoader::get(m, "DEFINITION");
+            v.signals[(int)Property::FUNCTION]    = VocabLoader::get(m, "FUNCTION");
+            v.signals[(int)Property::ADVANTAGES]  = VocabLoader::get(m, "ADVANTAGES");
+            v.signals[(int)Property::LIMITATIONS] = VocabLoader::get(m, "LIMITATIONS");
+            v.signals[(int)Property::USAGE]       = VocabLoader::get(m, "USAGE");
+            v.signals[(int)Property::HISTORY]     = VocabLoader::get(m, "HISTORY");
+            v.signals[(int)Property::TIME]        = VocabLoader::get(m, "TIME");
+            v.signals[(int)Property::COMPARISON]  = VocabLoader::get(m, "COMPARISON");
+            return v;
         }();
         return vc;
     }
@@ -40,34 +54,6 @@ static std::string to_lower_v(const std::string& s) {
     return r;
 }
 
-static const std::vector<std::string>& expected_signals(Property prop) {
-    static const std::unordered_map<int, std::vector<std::string>> m = {
-        {(int)Property::LOCATION,    {"located", "capital", "coast", "city", "region",
-                                      "sea", "island", "eastern", "western", "southern",
-                                      "northern", "situated", "built"}},
-        {(int)Property::DEFINITION,  {"is a", "is an", "refers to", "defined", "means",
-                                      "collection", "system", "organized",
-                                      "capital", "largest", "known for", "known as"}},
-        {(int)Property::FUNCTION,    {"ensures", "mechanism", "works", "provides",
-                                      "handles", "protocol", "process", "control"}},
-        {(int)Property::ADVANTAGES,  {"advantage", "benefit", "strength", "widely",
-                                      "proven", "reliable", "powerful", "mature",
-                                      "important", "significant", "leading", "major"}},
-        {(int)Property::LIMITATIONS, {"limitation", "drawback", "disadvantage", "lack",
-                                      "not suitable", "weaker", "costly", "vendor"}},
-        {(int)Property::USAGE,       {"used for", "use case", "beginner", "start with",
-                                      "recommend", "suitable", "learning"}},
-        {(int)Property::HISTORY,     {"history", "founded", "century", "origin",
-                                      "developed", "introduced", "heritage"}},
-        {(int)Property::TIME,        {"year", "century", "date", "period", "invented",
-                                      "introduced", "created"}},
-        {(int)Property::COMPARISON,  {"vs", "compare", "difference", "better", "worse",
-                                      "more", "less", "affordable"}},
-    };
-    auto it = m.find((int)prop);
-    static const std::vector<std::string> empty;
-    return it != m.end() ? it->second : empty;
-}
 
 void AnswerValidator::validate(Answer& answer, const InformationNeed& need) const {
     auto& vc = ValidatorConfig::get();
@@ -79,10 +65,12 @@ void AnswerValidator::validate(Answer& answer, const InformationNeed& need) cons
         return;
     }
 
-    std::string lower = to_lower_v(answer.text);
-    auto& signals = expected_signals(need.property);
+    auto it = vc.signals.find((int)need.property);
+    static const std::vector<std::string> empty;
+    auto& signals = (it != vc.signals.end()) ? it->second : empty;
     if (signals.empty()) { answer.validated = true; return; }
 
+    std::string lower = to_lower_v(answer.text);
     int matches = 0;
     for (auto& sig : signals)
         if (lower.find(sig) != std::string::npos) matches++;

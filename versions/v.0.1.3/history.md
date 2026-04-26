@@ -144,3 +144,80 @@ Also moved `answer_scope.h` inline functions to `answer_scope.cpp` (header now c
 ### Integration Test Results
 
 All 75 tests pass: `Results: 75 passed, 0 failed, 75 total`
+
+
+---
+
+## Step 2: Vocabulary Externalization
+
+### Goal
+
+Move all hardcoded word lists (chunk classification signals, validator signals, synthesizer scoring words, evidence domain keywords, opposite pairs) into external vocabulary files so they can be edited without touching source code or rebuilding.
+
+### Problem
+
+Adding or tuning vocabulary words required editing C++ source files, recompiling, and retesting. This made it impractical to ask an LLM to expand vocabularies or for a user to quickly tune word lists.
+
+### Solution
+
+A `VocabLoader` utility that parses `[SECTION]` / comma-separated word files. Each module has a cached `*Vocab` struct (same lazy-init pattern as Step 1) that loads its word lists from `config/vocabularies/*.conf` at first use. If a vocabulary file is missing, a warning is logged to stderr. No inline defaults are duplicated in source code — the `.conf` files are the single source of truth.
+
+### Vocabulary Files
+
+| File | Sections | Used By |
+|------|----------|---------|
+| `chunk_signals.conf` | LOCATION, LOCATION_CAPITAL_CONTEXT/REQUIRES, ADVANTAGES, LIMITATIONS, USAGE, FUNCTION, DEFINITION, PERSON, TEMPORAL, PROCEDURE, HISTORY | `chunker.cpp` (ChunkVocab) |
+| `validator_signals.conf` | LOCATION, DEFINITION, FUNCTION, ADVANTAGES, LIMITATIONS, USAGE, HISTORY, TIME, COMPARISON | `answer_validator.cpp` (ValidatorConfig) |
+| `synth_words.conf` | DEF_FIRST_PASS_PATTERNS/PENALTIES, DEF_FALLBACK_PATTERNS/PENALTIES, LOC_* (4 lists), ADVANTAGES/LIMITATIONS/USAGE/HISTORY/COMPARISON_BOOST, HISTORY_SIGNALS | `answer_synthesizer.cpp` (SynthVocab) |
+| `evidence_domains.conf` | GEO, TECH, SCIENCE, ECON, NEGATION, OPPOSITES | `evidence_normalizer.cpp` (EvidenceVocab) |
+| `query_prototypes.conf` | LOCATION, ADVANTAGES, LIMITATIONS, FUNCTION, USAGE, HISTORY, TIME, COMPARISON, DEFINITION, COMPOSITION | (prepared for future query_analyzer.cpp integration) |
+
+### File Format
+
+```
+# Comments start with #
+[SECTION_NAME]
+word1, word2, word3
+word4, word5
+
+# Opposites use pipe separator
+[OPPOSITES]
+east | west
+cheap | expensive
+```
+
+### Files Created
+
+| File | Description |
+|------|-------------|
+| `src/common/vocab_loader.h/.cpp` | VocabLoader: parses [SECTION]/comma files, load_or_default merge |
+| `config/vocabularies/chunk_signals.conf` | 12 sections, ~90 signal words |
+| `config/vocabularies/validator_signals.conf` | 9 sections, ~80 signal words |
+| `config/vocabularies/synth_words.conf` | 14 sections, ~100 scoring words |
+| `config/vocabularies/evidence_domains.conf` | 6 sections, ~80 keywords + 14 opposite pairs |
+| `config/vocabularies/query_prototypes.conf` | 10 sections, ~80 prototype words |
+
+### Files Modified
+
+| File | What Changed |
+|------|-------------|
+| `src/chunk/chunker.cpp` | Added ChunkVocab cached struct; classify_chunk reads from vocab |
+| `src/answer/answer_validator.cpp` | ValidatorConfig now includes signal words loaded from vocab; removed hardcoded expected_signals function |
+| `src/answer/answer_synthesizer.cpp` | Added SynthVocab cached struct; all word lists in definition/location/typed synthesizers read from vocab |
+| `src/answer/evidence_normalizer.cpp` | Added EvidenceVocab cached struct; domain keywords, negations, opposites loaded from vocab |
+| `CMakeLists.txt` | Added vocab_loader.cpp |
+
+### How It Works
+
+```bash
+# Add a new word to chunk LOCATION signals — no rebuild needed
+echo "metropolitan" >> config/vocabularies/chunk_signals.conf
+./mysearch ask "where is stockholm"  # picks up new word
+
+# Ask an LLM to expand vocabularies
+# "Add 20 more science domain keywords to config/vocabularies/evidence_domains.conf [SCIENCE] section"
+```
+
+### Integration Test Results
+
+All 75 tests pass: `Results: 75 passed, 0 failed, 75 total`

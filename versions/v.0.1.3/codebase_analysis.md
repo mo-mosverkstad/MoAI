@@ -169,9 +169,26 @@ The `Config` singleton is only accessed inside these cached structs and at start
 ```bash
 # Edit config — no rebuild needed
 vim config/default.conf
-# Change: scope.strict_max_chars = 100
-# Run: answer now truncated to 100 chars
+
+# Edit vocabularies — no rebuild needed
+vim config/vocabularies/chunk_signals.conf
+# Add: metropolitan   (to [LOCATION] section)
+# Run: new word immediately active
 ```
+
+### Vocabulary Files
+
+All word lists are externalized to `config/vocabularies/`:
+
+| File | Sections | Used By |
+|------|----------|--------|
+| `chunk_signals.conf` | 12 ChunkType signal lists | `chunker.cpp` (ChunkVocab) |
+| `validator_signals.conf` | 9 Property signal lists | `answer_validator.cpp` (ValidatorConfig) |
+| `synth_words.conf` | 14 scoring word lists | `answer_synthesizer.cpp` (SynthVocab) |
+| `evidence_domains.conf` | 4 domain vocabs + negations + 14 opposite pairs | `evidence_normalizer.cpp` (EvidenceVocab) |
+| `query_prototypes.conf` | 10 property prototype lists | (prepared for query_analyzer.cpp) |
+
+Format: `[SECTION]` headers with comma-separated words. Opposites use `word1 | word2` pipe syntax. Loaded by `VocabLoader` — if a file is missing, a warning is logged to stderr. No inline defaults are duplicated in source code; the `.conf` files are the single source of truth.
 
 ---
 
@@ -257,6 +274,7 @@ Both auto-detected at runtime. System degrades gracefully.
 | File | Purpose |
 |------|---------|
 | `config.h/.cpp` | Config singleton: loads key=value file, typed getters with defaults |
+| `vocab_loader.h/.cpp` | VocabLoader: parses [SECTION]/comma vocabulary files with fallback defaults |
 | `varint.h/.cpp` | Variable-length integer encoding for compact index storage |
 | `file_utils.h/.cpp` | File I/O helpers |
 | `types.h` | Type aliases: DocID, TermID, Offset |
@@ -316,7 +334,7 @@ Both auto-detected at runtime. System degrades gracefully.
 
 | File | Purpose |
 |------|---------|
-| `chunker.h/.cpp` | Split documents into paragraphs, classify by ChunkType (11 types), keyword+type-aware selection with configurable primary/secondary/fallback boosts |
+| `chunker.h/.cpp` | Split documents into paragraphs, classify by ChunkType via ChunkVocab (loaded from chunk_signals.conf), keyword+type-aware selection with configurable boosts |
 
 ### 6.9 Answer Synthesis (`src/answer/`)
 
@@ -324,9 +342,9 @@ Both auto-detected at runtime. System degrades gracefully.
 |------|---------|
 | `answer_scope.h/.cpp` | Scope policy functions with ScopeConfig cache |
 | `answer_compressor.h/.cpp` | Agreement-based compression with CompressorConfig cache |
-| `answer_synthesizer.h/.cpp` | 11 typed synthesizers with SynthConfig cached scoring weights |
-| `answer_validator.h/.cpp` | Self-ask validation with ValidatorConfig cache |
-| `evidence_normalizer.h/.cpp` | NormalizedClaim model, agreement/contradiction detection |
+| `answer_synthesizer.h/.cpp` | 11 typed synthesizers with SynthConfig + SynthVocab (scoring words loaded from synth_words.conf) |
+| `answer_validator.h/.cpp` | Self-ask validation with signal words loaded from validator_signals.conf via ValidatorConfig |
+| `evidence_normalizer.h/.cpp` | NormalizedClaim model, domain keywords and opposites loaded from evidence_domains.conf via EvidenceVocab |
 | `question_planner.h/.cpp` | Dependency-aware topological sort |
 | `self_ask.h/.cpp` | Internal sub-question generation and coverage checking |
 
@@ -492,6 +510,12 @@ SegmentReader -> Vocabulary.load() -> EncoderTrainer.load(encoder.pt)
 v.0.1.3/
 +-- config/
 |   +-- default.conf           # 80+ tunable parameters
+|   +-- vocabularies/          # externalized word lists
+|       +-- chunk_signals.conf
+|       +-- validator_signals.conf
+|       +-- synth_words.conf
+|       +-- evidence_domains.conf
+|       +-- query_prototypes.conf
 +-- data/                      # 21 text documents across 7 topics
 |   +-- biology/               # animals, plants
 |   +-- computer_science/      # algorithms, databases, networking, security, python, blockchain
