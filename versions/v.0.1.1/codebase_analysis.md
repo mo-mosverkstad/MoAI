@@ -84,7 +84,125 @@ The system operates at the **information-need level**: instead of classifying qu
 
 ---
 
-## 3. QA Pipeline Flow (ask command)
+## 3. Neural Learning Pipelines (Optional, requires libtorch)
+
+```
+ ┌─────────────────────────────────────────────────────────────┐
+ │                  Neural Learning Layer                       │
+ │                  (offline training, optional)                │
+ │                                                             │
+ │  ┌─────────────────────────┐  ┌──────────────────────────┐  │
+ │  │  Neural Sentence Encoder│  │ Neural Query Analyzer    │  │
+ │  │  (train_encoder)        │  │ (train-qa)               │  │
+ │  │                         │  │                          │  │
+ │  │  Transformer + InfoNCE  │  │ Multi-task Transformer   │  │
+ │  │  contrastive learning   │  │ intent + answer_type     │  │
+ │  │  on query-doc pairs     │  │ + BIO entity tagging     │  │
+ │  │                         │  │                          │  │
+ │  │  Output: encoder.pt     │  │ Output: qa_model.pt      │  │
+ │  │  Improves: HNSW vector  │  │ Improves: QueryAnalyzer  │  │
+ │  │  retrieval (Phase 2)    │  │ property/entity (Phase 1)│  │
+ │  └─────────────────────────┘  └──────────────────────────┘  │
+ └─────────────────────────────────────────────────────────────┘
+         │                                │
+         │ encoder.pt auto-detected       │ qa_model.pt auto-detected
+         ▼                                ▼
+  ┌──────────────┐                ┌───────────────┐
+  │ HNSW uses    │                │ QueryAnalyzer │
+  │ neural embeds│                │ uses neural   │
+  │ instead of   │                │ instead of    │
+  │ BoW vectors  │                │ rule-based    │
+  └──────────────┘                └───────────────┘
+```
+
+### 3.1 Neural Sentence Encoder Training (`train_encoder`)
+
+**Purpose**: Improves the **retrieval** stage (Phase 2) by replacing the random BoW embedding model with a trained Transformer sentence encoder.
+
+**Impact**:
+- The HNSW vector index uses semantically meaningful embeddings instead of bag-of-words vectors
+- Documents that are semantically similar to the query (even without exact keyword overlap) rank higher
+- Better document ranking for paraphrased or implicit queries like "Is Stockholm close to the sea?"
+
+**Architecture**:
+```
+Corpus documents
+  ↓
+Generate (query, document) pairs
+  ↓
+Transformer Encoder:
+  Token embedding → Sinusoidal positional encoding
+  → N Transformer encoder layers (4 heads, 2 layers)
+  → Mean pooling over token outputs
+  → L2 normalization
+  ↓
+InfoNCE contrastive loss:
+  L = -log(exp(sim(q, d+) / τ) / Σ exp(sim(q, di) / τ))
+  (τ = 0.07, in-batch negatives)
+  ↓
+AdamW optimizer, save encoder.pt
+```
+
+**Runtime**: When `encoder.pt` exists, the `ask` command automatically loads the neural encoder, builds HNSW with neural embeddings, and encodes queries using the neural encoder for ANN search.
+
+```bash
+./train_encoder --epochs 10 --dim 128
+```
+
+### 3.2 Neural Query Analyzer Training (`train-qa`)
+
+**Purpose**: Improves the **query analysis** stage (Phase 1) by replacing the rule-based property/entity detection with a learned neural multi-task classifier.
+
+**Architecture**:
+```
+Query text
+  ↓
+Token embedding → Sinusoidal positional encoding
+  → N Transformer encoder layers (4 heads, 2 layers)
+  ↓
+┌─────────────────┬──────────────────┬─────────────────┐
+│  Intent Head    │ Answer Type Head │  Entity Head    │
+│  (5 classes)    │ (7 classes)      │  (BIO tagging)  │
+│  mean-pooled    │ mean-pooled      │  per-token      │
+│  → Linear(5)   │ → Linear(7)      │  → Linear(3)   │
+└────────┬────────┴────────┬─────────┴────────┬────────┘
+         │                 │                  │
+    FACTUAL/          LOCATION/           B-entity
+    EXPLANATION/      DEFINITION/         I-entity
+    PROCEDURAL/       PERSON/             O (outside)
+    COMPARISON/       TEMPORAL/
+    GENERAL           PROCEDURE/
+                      COMPARISON/
+                      SUMMARY
+```
+
+**Training data**: ~27K+ samples auto-generated from the corpus using entity extraction and 22 question templates (e.g., "where is {entity}", "what is {entity}", "who invented {entity}").
+
+**Impact**:
+- Better entity extraction via learned BIO tagging (vs longest-keyword heuristic)
+- Better property detection for unusual phrasings
+- **Limitation**: Currently produces a single InformationNeed per query — does not support multi-need decomposition
+
+```bash
+./mysearch train-qa --epochs 30
+```
+
+### 3.3 Fallback Behavior
+
+Both neural models are optional and auto-detected at runtime:
+
+| Model File | Present | Absent |
+|------------|---------|--------|
+| `encoder.pt` | HNSW uses neural embeddings | HNSW uses BoW embeddings |
+| `qa_model.pt` | Neural query analyzer (single-need) | Rule-based analyzer (multi-need) |
+| Both absent | Full rule-based pipeline | |
+| Both present | Neural retrieval + neural analysis | |
+
+The system degrades gracefully — all features work without libtorch, just with lower quality.
+
+---
+
+## 4. QA Pipeline Flow (ask command)
 
 ```
 1. QueryAnalyzer.analyze(query)
@@ -127,7 +245,7 @@ The system operates at the **information-need level**: instead of classifying qu
 
 ---
 
-## 4. Module Descriptions
+## 5. Module Descriptions
 
 ### 4.1 Storage Layer (`src/storage/`)
 
@@ -225,7 +343,7 @@ The system operates at the **information-need level**: instead of classifying qu
 
 ---
 
-## 5. Key Algorithms and Concepts
+## 6. Key Algorithms and Concepts
 
 ### 5.1 BM25 (Best Matching 25)
 
@@ -369,7 +487,7 @@ Training data (~27K+ samples) is auto-generated from the corpus using entity ext
 
 ---
 
-## 6. Data Flow: Ingestion
+## 7. Data Flow: Ingestion
 
 ```
 Text files (data/)
@@ -389,7 +507,9 @@ SegmentWriter.finalize() → write binary files:
 
 ---
 
-## 7. Data Flow: Hybrid Index Build
+## 8. Data Flow: Hybrid Index Build
+
+### 8a. BoW Path (default, no libtorch)
 
 ```
 SegmentReader (existing segment)
@@ -406,9 +526,27 @@ HNSWIndex.add_point() → build navigable small world graph
 Save: vocab.txt + model.bin
 ```
 
+### 8b. Neural Path (after train_encoder)
+
+```
+SegmentReader (existing segment)
+  ↓
+Vocabulary.load(vocab.txt)
+  ↓
+EncoderTrainer.load(encoder.pt) → trained Transformer
+  ↓
+For each document:
+  Full text → Tokenize → Transformer encode → L2-normalized dense vector
+  ↓
+HNSWIndex.add_point() → build navigable small world graph
+  (semantically meaningful vectors, not random BoW)
+```
+
+The neural path produces higher-quality embeddings where semantically similar documents cluster together, even without shared keywords.
+
 ---
 
-## 8. File Structure
+## 9. File Structure
 
 ```
 v.0.1.1/
@@ -446,7 +584,7 @@ v.0.1.1/
 
 ---
 
-## 9. Build Configurations
+## 10. Build Configurations
 
 | Configuration | Description |
 |---------------|-------------|
@@ -458,7 +596,7 @@ Zero external dependencies for the core library. Only libtorch is optional.
 
 ---
 
-## 10. Test Coverage
+## 11. Test Coverage
 
 | Test Type | Count | What It Tests |
 |-----------|-------|---------------|
