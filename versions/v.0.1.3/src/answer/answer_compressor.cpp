@@ -2,6 +2,29 @@
 #include "../common/config.h"
 #include <vector>
 
+struct CompressorConfig {
+    double min_conf, min_agr;
+    size_t strong_ev_count;
+    double strong_ev_conf, ns_conf, ns_agr, el_conf, el_agr;
+
+    static const CompressorConfig& get() {
+        static CompressorConfig cc = []() {
+            auto& c = Config::instance();
+            return CompressorConfig{
+                c.get_double("compression.min_confidence", 0.6),
+                c.get_double("compression.min_agreement", 0.6),
+                c.get_size("compression.strong_evidence_count", 4),
+                c.get_double("compression.strong_evidence_confidence", 0.9),
+                c.get_double("compression.normal_strong_confidence", 0.85),
+                c.get_double("compression.normal_strong_agreement", 0.7),
+                c.get_double("compression.expanded_light_confidence", 0.85),
+                c.get_double("compression.expanded_light_agreement", 0.7),
+            };
+        }();
+        return cc;
+    }
+};
+
 static std::vector<std::string> split_sentences(const std::string& text) {
     std::vector<std::string> sents;
     std::string cur;
@@ -24,27 +47,18 @@ static std::vector<std::string> split_sentences(const std::string& text) {
 }
 
 CompressionLevel AgreementCompressor::decide_level(const CompressionContext& ctx) const {
-    auto& c = Config::instance();
-    double min_conf = c.get_double("compression.min_confidence", 0.6);
-    double min_agr  = c.get_double("compression.min_agreement", 0.6);
-    size_t strong_ev = c.get_size("compression.strong_evidence_count", 4);
-    double strong_ev_conf = c.get_double("compression.strong_evidence_confidence", 0.9);
-    double ns_conf = c.get_double("compression.normal_strong_confidence", 0.85);
-    double ns_agr  = c.get_double("compression.normal_strong_agreement", 0.7);
-    double el_conf = c.get_double("compression.expanded_light_confidence", 0.85);
-    double el_agr  = c.get_double("compression.expanded_light_agreement", 0.7);
-
-    if (ctx.confidence < min_conf) return CompressionLevel::NONE;
-    if (ctx.agreement < min_agr)   return CompressionLevel::NONE;
+    auto& cc = CompressorConfig::get();
+    if (ctx.confidence < cc.min_conf) return CompressionLevel::NONE;
+    if (ctx.agreement < cc.min_agr)   return CompressionLevel::NONE;
     if (ctx.scope == AnswerScope::STRICT) return CompressionLevel::NONE;
 
-    if (ctx.evidence_count >= strong_ev && ctx.confidence >= strong_ev_conf)
+    if (ctx.evidence_count >= cc.strong_ev_count && ctx.confidence >= cc.strong_ev_conf)
         return CompressionLevel::STRONG;
     if (ctx.scope == AnswerScope::NORMAL &&
-        ctx.confidence >= ns_conf && ctx.agreement >= ns_agr)
+        ctx.confidence >= cc.ns_conf && ctx.agreement >= cc.ns_agr)
         return CompressionLevel::STRONG;
     if (ctx.scope == AnswerScope::EXPANDED &&
-        ctx.confidence >= el_conf && ctx.agreement >= el_agr)
+        ctx.confidence >= cc.el_conf && ctx.agreement >= cc.el_agr)
         return CompressionLevel::LIGHT;
 
     return CompressionLevel::NONE;

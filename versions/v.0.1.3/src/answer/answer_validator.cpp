@@ -7,6 +7,32 @@
 #include <unordered_map>
 #include <cmath>
 
+struct ValidatorConfig {
+    double fail_ratio, weak_ratio, fail_mult, weak_mult;
+    double max_penalty, per_pair;
+    double w_cov, w_vol, w_agr, w_pen, vol_div;
+
+    static const ValidatorConfig& get() {
+        static ValidatorConfig vc = []() {
+            auto& c = Config::instance();
+            return ValidatorConfig{
+                c.get_double("validator.signal_ratio_fail", 0.0),
+                c.get_double("validator.signal_ratio_weak", 0.15),
+                c.get_double("validator.fail_confidence_multiplier", 0.3),
+                c.get_double("validator.weak_confidence_multiplier", 0.7),
+                c.get_double("confidence.max_contradiction_penalty", 0.4),
+                c.get_double("confidence.contradiction_penalty_per_pair", 0.15),
+                c.get_double("confidence.coverage_weight", 0.3),
+                c.get_double("confidence.volume_weight", 0.2),
+                c.get_double("confidence.agreement_weight", 0.3),
+                c.get_double("confidence.penalty_weight", 0.2),
+                c.get_double("confidence.volume_divisor", 3.0),
+            };
+        }();
+        return vc;
+    }
+};
+
 static std::string to_lower_v(const std::string& s) {
     std::string r;
     r.reserve(s.size());
@@ -44,11 +70,7 @@ static const std::vector<std::string>& expected_signals(Property prop) {
 }
 
 void AnswerValidator::validate(Answer& answer, const InformationNeed& need) const {
-    auto& c = Config::instance();
-    double fail_ratio = c.get_double("validator.signal_ratio_fail", 0.0);
-    double weak_ratio = c.get_double("validator.signal_ratio_weak", 0.15);
-    double fail_mult  = c.get_double("validator.fail_confidence_multiplier", 0.3);
-    double weak_mult  = c.get_double("validator.weak_confidence_multiplier", 0.7);
+    auto& vc = ValidatorConfig::get();
 
     if (answer.text.empty() || answer.text.find("not found") != std::string::npos) {
         answer.validated = false;
@@ -67,16 +89,16 @@ void AnswerValidator::validate(Answer& answer, const InformationNeed& need) cons
 
     double signal_ratio = static_cast<double>(matches) / signals.size();
 
-    if (signal_ratio <= fail_ratio) {
+    if (signal_ratio <= vc.fail_ratio) {
         answer.validated = false;
         answer.validation_note = "Answer does not appear to address " +
             std::string(property_str(need.property)) + " (0 signal words found).";
-        answer.confidence *= fail_mult;
-    } else if (signal_ratio < weak_ratio) {
+        answer.confidence *= vc.fail_mult;
+    } else if (signal_ratio < vc.weak_ratio) {
         answer.validated = true;
         answer.validation_note = "Weak property match (" +
             std::to_string(matches) + "/" + std::to_string(signals.size()) + " signals).";
-        answer.confidence *= weak_mult;
+        answer.confidence *= vc.weak_mult;
     } else {
         answer.validated = true;
     }
@@ -86,10 +108,7 @@ EvidenceAnalysis AnswerValidator::analyze_evidence(
     const std::vector<Evidence>& evidence,
     const std::string& entity) const
 {
-    auto& c = Config::instance();
-    double max_penalty = c.get_double("confidence.max_contradiction_penalty", 0.4);
-    double per_pair    = c.get_double("confidence.contradiction_penalty_per_pair", 0.15);
-
+    auto& vc = ValidatorConfig::get();
     EvidenceAnalysis result = {0.0, 0, 0, 0.0};
     if (evidence.size() < 2) { result.agreement = 0.5; return result; }
 
@@ -112,7 +131,7 @@ EvidenceAnalysis AnswerValidator::analyze_evidence(
 
     result.agreement = result.agreement_pairs > 0
         ? agreement_sum / result.agreement_pairs : 0.5;
-    result.confidence_penalty = std::min(max_penalty, result.contradiction_pairs * per_pair);
+    result.confidence_penalty = std::min(vc.max_penalty, result.contradiction_pairs * vc.per_pair);
     return result;
 }
 
@@ -122,12 +141,7 @@ double AnswerValidator::compute_refined_confidence(
     const std::vector<std::string>& keywords) const
 {
     if (evidence.empty() || keywords.empty()) return 0.0;
-    auto& c = Config::instance();
-    double w_cov = c.get_double("confidence.coverage_weight", 0.3);
-    double w_vol = c.get_double("confidence.volume_weight", 0.2);
-    double w_agr = c.get_double("confidence.agreement_weight", 0.3);
-    double w_pen = c.get_double("confidence.penalty_weight", 0.2);
-    double vol_div = c.get_double("confidence.volume_divisor", 3.0);
+    auto& vc = ValidatorConfig::get();
 
     std::unordered_set<std::string> found;
     for (auto& e : evidence) {
@@ -136,10 +150,10 @@ double AnswerValidator::compute_refined_confidence(
             if (lower.find(to_lower_v(k)) != std::string::npos) found.insert(k);
     }
     double coverage = static_cast<double>(found.size()) / keywords.size();
-    double volume = std::min(1.0, evidence.size() / vol_div);
+    double volume = std::min(1.0, evidence.size() / vc.vol_div);
     auto analysis = analyze_evidence(evidence, entity);
 
-    double confidence = w_cov * coverage + w_vol * volume +
-        w_agr * analysis.agreement + w_pen * (1.0 - analysis.confidence_penalty);
+    double confidence = vc.w_cov * coverage + vc.w_vol * volume +
+        vc.w_agr * analysis.agreement + vc.w_pen * (1.0 - analysis.confidence_penalty);
     return std::max(0.0, std::min(1.0, confidence));
 }

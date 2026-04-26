@@ -105,3 +105,42 @@ Config is auto-loaded from `../config/default.conf` relative to the binary. If t
 ### Integration Test Results
 
 All 75 tests pass: `Results: 75 passed, 0 failed, 75 total`
+
+
+---
+
+### Step 1b: Per-Module Cached Config Structs
+
+Refined the config access pattern. Instead of scattered `Config::instance().get_double(...)` calls throughout each function, each module now has a small cached struct that loads all its config values once at first use via a static lazy-init lambda.
+
+| Module | Cached Struct | Config Keys |
+|--------|--------------|-------------|
+| `answer_scope.cpp` | `ScopeConfig` | `scope.*` (8 values) |
+| `answer_compressor.cpp` | `CompressorConfig` | `compression.*` (8 values) |
+| `answer_validator.cpp` | `ValidatorConfig` | `validator.*` + `confidence.*` (11 values) |
+| `answer_synthesizer.cpp` | `SynthConfig` | `synth.*` + `proximity.*` (30 values) |
+| `chunker.cpp` | `ChunkConfig` | `chunk.*` (5 values) |
+
+Pattern used in each module:
+
+```cpp
+struct ModuleConfig {
+    double param1, param2;
+    static const ModuleConfig& get() {
+        static ModuleConfig mc = []() {
+            auto& c = Config::instance();
+            return ModuleConfig{
+                c.get_double("key1", default1),
+                c.get_double("key2", default2),
+            };
+        }();
+        return mc;
+    }
+};
+```
+
+Also moved `answer_scope.h` inline functions to `answer_scope.cpp` (header now contains declarations only), added to CMakeLists.txt.
+
+### Integration Test Results
+
+All 75 tests pass: `Results: 75 passed, 0 failed, 75 total`

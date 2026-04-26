@@ -4,6 +4,25 @@
 #include <cctype>
 #include <unordered_set>
 
+struct ChunkConfig {
+    size_t min_chunk_size;
+    double kw_boost, pri_boost, sec_boost, fb_boost;
+
+    static const ChunkConfig& get() {
+        static ChunkConfig cc = []() {
+            auto& c = Config::instance();
+            return ChunkConfig{
+                c.get_size("chunk.min_chunk_size", 10),
+                c.get_double("chunk.keyword_boost", 3.0),
+                c.get_double("chunk.primary_type_boost", 10.0),
+                c.get_double("chunk.secondary_type_boost", 6.0),
+                c.get_double("chunk.fallback_type_boost", 1.0),
+            };
+        }();
+        return cc;
+    }
+};
+
 static std::string to_lower(const std::string& s) {
     std::string r;
     r.reserve(s.size());
@@ -125,8 +144,7 @@ std::vector<Chunk> Chunker::chunk_document(uint32_t docId,
     std::vector<Chunk> chunks;
 
     for (uint32_t i = 0; i < paragraphs.size(); i++) {
-        size_t min_sz = Config::instance().get_size("chunk.min_chunk_size", 10);
-        if (paragraphs[i].size() < min_sz) continue;
+        if (paragraphs[i].size() < ChunkConfig::get().min_chunk_size) continue;
 
         Chunk c;
         c.docId = docId;
@@ -196,11 +214,7 @@ std::vector<Chunk> Chunker::select_chunks(
     int primary = primary_type(property);
     auto prefs = preferred_types_for(property);
 
-    auto& cfg = Config::instance();
-    double kw_boost  = cfg.get_double("chunk.keyword_boost", 3.0);
-    double pri_boost = cfg.get_double("chunk.primary_type_boost", 10.0);
-    double sec_boost = cfg.get_double("chunk.secondary_type_boost", 6.0);
-    double fb_boost  = cfg.get_double("chunk.fallback_type_boost", 1.0);
+    auto& cc = ChunkConfig::get();
 
     // Score each chunk by keyword relevance + type preference
     struct Scored { double score; size_t idx; };
@@ -211,10 +225,10 @@ std::vector<Chunk> Chunker::select_chunks(
         std::string lower = to_lower(c.text);
         double sc = 0.0;
         for (auto& kw : keywords)
-            if (contains_word_lower(lower, kw)) sc += kw_boost;
-        if (static_cast<int>(c.type) == primary) sc += pri_boost;
-        else if (static_cast<int>(c.type) == secondary) sc += sec_boost;
-        else if (prefs.count(static_cast<int>(c.type))) sc += fb_boost;
+            if (contains_word_lower(lower, kw)) sc += cc.kw_boost;
+        if (static_cast<int>(c.type) == primary) sc += cc.pri_boost;
+        else if (static_cast<int>(c.type) == secondary) sc += cc.sec_boost;
+        else if (prefs.count(static_cast<int>(c.type))) sc += cc.fb_boost;
         scored.push_back({sc, i});
     }
     std::sort(scored.begin(), scored.end(),

@@ -136,6 +136,34 @@ public:
 
 The synthesizer caches all config values in a static `SynthConfig` struct at first use to avoid per-call map lookups.
 
+### Config Access Pattern
+
+Each module has a small cached struct that loads its config values once at first use:
+
+```cpp
+struct ModuleConfig {
+    double param1, param2;
+    static const ModuleConfig& get() {
+        static ModuleConfig mc = []() {
+            auto& c = Config::instance();
+            return ModuleConfig{ c.get_double("key1", default1), ... };
+        }();
+        return mc;
+    }
+};
+```
+
+| Module | Struct | Values Cached |
+|--------|--------|---------------|
+| `answer_scope.cpp` | `ScopeConfig` | 8 |
+| `answer_compressor.cpp` | `CompressorConfig` | 8 |
+| `answer_validator.cpp` | `ValidatorConfig` | 11 |
+| `answer_synthesizer.cpp` | `SynthConfig` | 30 |
+| `chunker.cpp` | `ChunkConfig` | 5 |
+| `commands.cpp` | local variables | 7 |
+
+The `Config` singleton is only accessed inside these cached structs and at startup — never in hot paths.
+
 ### Usage
 
 ```bash
@@ -294,10 +322,10 @@ Both auto-detected at runtime. System degrades gracefully.
 
 | File | Purpose |
 |------|---------|
-| `answer_scope.h` | Scope policy functions reading from Config |
-| `answer_compressor.h/.cpp` | Agreement-based compression with configurable thresholds |
+| `answer_scope.h/.cpp` | Scope policy functions with ScopeConfig cache |
+| `answer_compressor.h/.cpp` | Agreement-based compression with CompressorConfig cache |
 | `answer_synthesizer.h/.cpp` | 11 typed synthesizers with SynthConfig cached scoring weights |
-| `answer_validator.h/.cpp` | Self-ask validation with configurable signal ratios and confidence multipliers |
+| `answer_validator.h/.cpp` | Self-ask validation with ValidatorConfig cache |
 | `evidence_normalizer.h/.cpp` | NormalizedClaim model, agreement/contradiction detection |
 | `question_planner.h/.cpp` | Dependency-aware topological sort |
 | `self_ask.h/.cpp` | Internal sub-question generation and coverage checking |
