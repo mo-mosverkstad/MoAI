@@ -439,9 +439,44 @@ bash ../tests/test_config_matrix.sh \
 | auto:hybrid:auto | 75 | 0 | 75 |
 
 Notes:
-- `bm25` fails 1 compression test (STRONG compression requires high agreement only achievable with hybrid)
-- `hnsw` fails 45 tests (semantic-only retrieval misses keyword-dependent answers — expected behavior)
+- `bm25` fails 1 compression test — see analysis below
+- `hnsw` fails 45 tests — see analysis below
 - All hybrid configurations pass 75/75
+
+### Why `rule:bm25:auto` scores 74/75
+
+The one failing test is "Compression field present in JSON" which queries "what are the drawbacks of NoSQL" and expects `compression = STRONG`.
+
+| | Hybrid | BM25-only |
+|---|--------|----------|
+| Confidence | 0.88 | 0.82 |
+| Scope | STRICT (adjusted from NORMAL) | NORMAL (not adjusted) |
+| Compression | STRONG | NONE |
+
+The STRONG compression rule requires: `NORMAL scope + confidence ≥ 0.85 + agreement ≥ 0.7`.
+
+With **hybrid**, the ANN score fusion boosts confidence to 0.88 (above 0.85 threshold). The confidence-based scope adjustment then compresses NORMAL → STRICT, but compression was already decided before scope adjustment — so it sees NORMAL + 0.88 confidence and triggers STRONG.
+
+With **BM25-only**, confidence is 0.82 (below 0.85 threshold). The scope stays NORMAL, but the compression rule's confidence threshold is not met → NONE.
+
+The difference is small (0.88 vs 0.82) and comes from the ANN fusion adding a semantic relevance signal that slightly boosts the refined confidence score. This is not a bug — it correctly shows that hybrid retrieval produces higher-confidence evidence than BM25 alone.
+
+### Why `rule:hnsw:auto` scores 30/75
+
+HNSW-only retrieval uses vector similarity instead of keyword matching. With `embedding.method = auto` (and no libtorch), this resolves to **BoW embeddings** — random projections of bag-of-words vectors that don't capture real semantic meaning.
+
+The result: HNSW-only with BoW embeddings is essentially **random retrieval**. It retrieves documents that happen to be close in a meaningless vector space, not documents that actually match the query.
+
+- The 30 tests that pass are queries where the correct document happens to be nearby in the random vector space, or where the answer is common enough that any retrieved document works.
+- The 45 failures are queries that depend on keyword matching (e.g., "where is stockholm" needs documents containing "stockholm").
+
+**Why hybrid works but HNSW-only doesn't:**
+- **Hybrid**: BM25 finds the right documents by keyword (0.7 weight), HNSW adds a small semantic boost (0.3 weight) → BM25 dominates → good results
+- **HNSW-only**: no keyword matching at all → wrong documents → wrong answers
+
+**This would improve with a trained neural encoder** (`embedding.method = transformer`). With real semantic embeddings, HNSW vectors would capture meaning, and `hnsw`-only retrieval would become viable. This is a key motivation for training the neural encoder.
+
+**Takeaway**: The matrix test correctly reveals that `hnsw + bow` is not a useful configuration, while `hnsw + transformer` (with a trained encoder) would be. The test serves as a quality gate for new algorithm combinations.
 
 ### Files Created
 
