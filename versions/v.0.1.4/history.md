@@ -356,3 +356,46 @@ One place. All factories called here. Pipeline code never changes when algorithm
 ### Integration Test Results
 
 All 75 tests pass: `Results: 75 passed, 0 failed, 75 total`
+
+
+---
+
+## Step 5: Config Schema Validation
+
+### Goal
+
+Fail fast on bad config with clear error messages, before any processing starts.
+
+### What It Checks
+
+| Check Type | Keys | Example Error |
+|-----------|------|---------------|
+| Algorithm names | `retrieval.retriever`, `query.analyzer`, `embedding.method` | `Unknown value for 'retrieval.retriever': 'colbert' — Valid options: bm25 hnsw hybrid` |
+| Positive values | `bm25.k1`, `bm25.top_k`, `retrieval.max_evidence`, etc. | `'bm25.k1' must be positive, got: -1` |
+| Range [0,1] | `retrieval.bm25_weight`, `compression.min_confidence`, `confidence.*_weight`, etc. | `'retrieval.bm25_weight' must be in [0, 1], got: 1.5` |
+
+Only validates keys that are explicitly set — missing keys use baked-in defaults (always valid).
+
+### Files Created
+
+| File | Description |
+|------|-------------|
+| `src/common/config_validator.h` | ConfigValidator::validate() with check_option, check_positive, check_range |
+
+### Files Modified
+
+| File | What Changed |
+|------|-------------|
+| `src/cli/main.cpp` | Calls ConfigValidator::validate() after config load, exits with error if invalid |
+
+### Implementation Scenario
+
+Adding a new algorithm: implement interface → register in factory → set config name. Zero pipeline changes.
+
+### Integration Test Results
+
+All 75 tests pass: `Results: 75 passed, 0 failed, 75 total`
+
+Bad config tested:
+- `retrieval.retriever = colbert` → `[CONFIG ERROR] Unknown value... Valid options: bm25 hnsw hybrid`
+- `retrieval.bm25_weight = 1.5` → `[CONFIG ERROR] must be in [0, 1], got: 1.5`

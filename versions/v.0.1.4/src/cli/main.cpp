@@ -3,10 +3,10 @@
 #include <filesystem>
 #include "commands.h"
 #include "../common/config.h"
+#include "../common/config_validator.h"
 
 int main(int argc, char** argv) {
     try {
-        // Load config: try ../config/default.conf, then ./config/default.conf
         auto& cfg = Config::instance();
         for (auto& p : {"../config/default.conf", "config/default.conf",
                         "../../config/default.conf"}) {
@@ -14,6 +14,10 @@ int main(int argc, char** argv) {
                 std::cerr << "Config loaded: " << p << "\n";
                 break;
             }
+        }
+        if (!ConfigValidator::validate()) {
+            std::cerr << "[FATAL] Config validation failed. Fix the errors above.\n";
+            return 1;
         }
         return run_cli(argc, argv);
     } catch (const std::exception& ex) {

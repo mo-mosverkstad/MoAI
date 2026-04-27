@@ -159,8 +159,9 @@ Each module has a cached struct loaded once at startup:
 
 ```
 1. Config loaded at startup (main.cpp)
+2. ConfigValidator::validate() — fail fast on bad config
 
-2. PipelineBuilder::build(reader, segdir, embeddir)
+3. PipelineBuilder::build(reader, segdir, embeddir)
    -> calls QueryAnalyzerFactory, RetrieverFactory
    -> returns assembled Pipeline
 
@@ -203,6 +204,7 @@ Each module has a cached struct loaded once at startup:
 | File | Purpose |
 |------|---------|
 | `config.h/.cpp` | Config singleton: key=value parser with inline comment support |
+| `config_validator.h` | ConfigValidator: checks algorithm names, positive values, ranges at startup |
 | `vocab_loader.h/.cpp` | VocabLoader: [SECTION]/comma vocabulary file parser |
 | `rules_loader.h/.cpp` | PlanningRules: self-ask, dependencies, preferred chunks, default forms, query templates |
 | `varint.h/.cpp` | Variable-length integer encoding |
