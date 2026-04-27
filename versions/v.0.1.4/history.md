@@ -223,3 +223,66 @@ query.analyzer = auto    # rule | neural | auto
 ### Integration Test Results
 
 All 75 tests pass: `Results: 75 passed, 0 failed, 75 total`
+
+
+---
+
+## Step 3: IEmbedder + EmbedderFactory
+
+### Goal
+
+Decouple embedding choice from retrieval. Previously `EmbeddingIndex` contained all BoW/neural detection logic with `#ifdef HAS_TORCH` blocks. Now it takes an `IEmbedder` and doesn't know or care which embedding method is used.
+
+### IEmbedder Interface
+
+```cpp
+struct IEmbedder {
+    virtual vector<float> embed(const string& text) = 0;
+    virtual size_t dim() const = 0;
+    virtual string name() const = 0;
+};
+```
+
+### Config
+
+```
+embedding.method = auto    # bow | transformer | auto
+```
+
+| Value | Behavior |
+|-------|----------|
+| `bow` | BoW feedforward net (no libtorch needed) |
+| `transformer` | Neural Transformer encoder (requires libtorch + encoder.pt) |
+| `auto` | Try transformer if model exists, fall back to BoW (default) |
+
+### Files Created
+
+| File | Description |
+|------|-------------|
+| `src/embedding/i_embedder.h` | IEmbedder interface |
+| `src/embedding/bow_embedder.h` | BoW embedder wrapping EmbeddingModel + Vocabulary + Tokenizer |
+| `src/embedding/transformer_embedder.h` | Transformer embedder wrapping EncoderTrainer (libtorch) |
+| `src/embedding/embedder_factory.h` | Config-driven factory with auto-detection |
+
+### Files Modified
+
+| File | What Changed |
+|------|-------------|
+| `src/retrieval/embedding_index.h` | Rewritten: takes IEmbedder from factory, removed all BoW/neural detection logic and `#ifdef HAS_TORCH` |
+| `config/default.conf` | Added `embedding.method = auto` |
+
+### Result
+
+`EmbeddingIndex` went from 95 lines (with `#ifdef` blocks, two model types, vocab loading) to 45 lines (just HNSW build + query forwarding). Embedding choice is now fully orthogonal to retrieval choice.
+
+Three pluggable algorithm slots now active:
+
+```
+query.analyzer = auto        # rule | neural | auto
+retrieval.retriever = hybrid  # bm25 | hnsw | hybrid
+embedding.method = auto       # bow | transformer | auto
+```
+
+### Integration Test Results
+
+All 75 tests pass: `Results: 75 passed, 0 failed, 75 total`

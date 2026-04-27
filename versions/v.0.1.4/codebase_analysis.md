@@ -69,6 +69,7 @@ The pipeline depends only on interfaces — never on concrete implementations. C
 |-----------|--------|----------------|
 | `IRetriever` | `search(keywords) → ScoredDoc[]` | BM25Retriever, HNSWRetriever, HybridRetriever |
 | `IQueryAnalyzer` | `analyze(query) → InformationNeed[]` | RuleBasedQueryAnalyzer, NeuralQueryAnalyzerAdapter |
+| `IEmbedder` | `embed(text) → vector<float>` | BoWEmbedder, TransformerEmbedder |
 
 ### Factories
 
@@ -76,6 +77,7 @@ The pipeline depends only on interfaces — never on concrete implementations. C
 |---------|-----------|--------|
 | `RetrieverFactory` | `retrieval.retriever` | bm25, hnsw, hybrid |
 | `QueryAnalyzerFactory` | `query.analyzer` | rule, neural, auto |
+| `EmbedderFactory` | `embedding.method` | bow, transformer, auto |
 
 ### How to Add a New Retrieval Algorithm
 
@@ -117,6 +119,7 @@ retrieval.retriever = my_algo
 |----------|-------------|
 | `query.*` | `analyzer` (rule/neural/auto), `weight.LOCATION` through `weight.DEFINITION` (prototype weights) |
 | `retrieval.*` | `retriever` (bm25/hnsw/hybrid), `bm25_weight`, `ann_weight`, `max_ranked_docs`, `max_evidence` |
+| `embedding.*` | `method` (bow/transformer/auto) |
 | `bm25.*` | `k1`, `b`, `top_k` |
 | `hnsw.*` | `M`, `ef_construction`, `ef_search` |
 | `chunk.*` | `max_per_doc`, `primary_type_boost`, `secondary_type_boost` |
@@ -197,7 +200,7 @@ Each module has a cached struct loaded once at startup:
 | File | Purpose |
 |------|---------|
 | `i_retriever.h` | IRetriever interface: search(), name(), supports_fallback(), fallback_search() |
-| `embedding_index.h` | Shared HNSW + embedding infrastructure (used by HNSW and Hybrid retrievers) |
+| `embedding_index.h` | Shared HNSW + IEmbedder infrastructure (embedding-agnostic) |
 | `bm25_retriever.h` | BM25-only retriever |
 | `hnsw_retriever.h` | HNSW-only retriever with BoW/neural embedding auto-detection |
 | `hybrid_retriever.h` | Hybrid retriever: BM25 + HNSW fusion |
@@ -248,6 +251,10 @@ Each module has a cached struct loaded once at startup:
 |------|---------|
 | `vocab.h/.cpp` | Term <-> ID mapping |
 | `embedding_model.h/.cpp` | BoW feedforward net |
+| `i_embedder.h` | IEmbedder interface: embed(), dim(), name() |
+| `bow_embedder.h` | BoW embedder wrapping EmbeddingModel + Vocabulary + Tokenizer |
+| `transformer_embedder.h` | Transformer embedder wrapping EncoderTrainer (libtorch) |
+| `embedder_factory.h` | Config-driven factory: reads `embedding.method` (bow \| transformer \| auto) |
 
 ### 6.7 Neural Encoder (`src/encoder/`, requires libtorch)
 
