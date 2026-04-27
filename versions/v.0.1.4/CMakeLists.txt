@@ -49,6 +49,8 @@ add_library(mysearch_lib
     src/answer/self_ask.cpp
     src/conversation/conversation_state.cpp
 
+    src/pipeline/pipeline.cpp
+
     src/tools/sandbox.cpp
 )
 

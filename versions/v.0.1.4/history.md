@@ -286,3 +286,73 @@ embedding.method = auto       # bow | transformer | auto
 ### Integration Test Results
 
 All 75 tests pass: `Results: 75 passed, 0 failed, 75 total`
+
+
+---
+
+## Step 4: Pipeline + PipelineBuilder
+
+### Goal
+
+One place assembles all components from config. `commands.cpp` becomes thin — just arg parsing and output formatting.
+
+### Before
+
+`commands.cpp` `ask` command: ~200 lines of interleaved setup, processing, and output.
+
+### After
+
+```cpp
+// commands.cpp ask command — the entire processing is now:
+auto pipeline = PipelineBuilder::build(reader, segdir, embeddir);
+PipelineOptions opts{json, force_brief, force_detailed};
+auto result = pipeline.run(query, opts);
+// ... output formatting only ...
+```
+
+### Pipeline struct
+
+```cpp
+class Pipeline {
+    unique_ptr<IQueryAnalyzer> analyzer_;
+    unique_ptr<IRetriever> retriever_;
+    Chunker, Synthesizer, Validator, Compressor, SelfAsk, Planner...
+
+    PipelineResult run(const string& query, const PipelineOptions& opts);
+};
+```
+
+### PipelineBuilder
+
+```cpp
+Pipeline PipelineBuilder::build(reader, segdir, embeddir) {
+    auto analyzer = QueryAnalyzerFactory::create(embeddir);
+    auto retriever = RetrieverFactory::create(reader, embeddir);
+    return Pipeline(move(analyzer), move(retriever), reader, conv_path);
+}
+```
+
+One place. All factories called here. Pipeline code never changes when algorithms change.
+
+### Files Created
+
+| File | Description |
+|------|-------------|
+| `src/pipeline/pipeline.h` | Pipeline struct with PipelineOptions, PipelineResult |
+| `src/pipeline/pipeline.cpp` | Pipeline::run() — the entire QA processing loop |
+| `src/pipeline/pipeline_builder.h` | PipelineBuilder::build() — assembles all components from config |
+
+### Files Modified
+
+| File | What Changed |
+|------|-------------|
+| `src/cli/commands.cpp` | Ask command: 200 lines → ~15 lines of setup + output formatting. Includes simplified. |
+| `CMakeLists.txt` | Added pipeline.cpp |
+
+### Result
+
+`commands.cpp` shrank from ~550 to ~376 lines. The ask command's processing logic (178 lines) moved entirely to `Pipeline::run()`. Adding a new algorithm now requires zero changes to commands.cpp.
+
+### Integration Test Results
+
+All 75 tests pass: `Results: 75 passed, 0 failed, 75 total`

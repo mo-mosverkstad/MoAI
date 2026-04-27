@@ -7,17 +7,7 @@
 #include "../inverted/search_engine.h"
 #include "../hybrid/hybrid_builder.h"
 #include "../hybrid/hybrid_search.h"
-#include "../query/query_analyzer_factory.h"
-#include "../chunk/chunker.h"
-#include "../answer/answer_synthesizer.h"
-#include "../answer/answer_validator.h"
-#include "../answer/answer_scope.h"
-#include "../answer/answer_compressor.h"
-#include "../common/config.h"
-#include "../retrieval/retriever_factory.h"
-#include "../answer/question_planner.h"
-#include "../answer/self_ask.h"
-#include "../conversation/conversation_state.h"
+#include "../pipeline/pipeline_builder.h"
 #ifdef HAS_TORCH
 #include "../encoder/encoder_trainer.h"
 #include "../query/neural_query_analyzer.h"
@@ -102,179 +92,16 @@ int run_cli(int argc, char** argv) {
         std::string embeddir = "../embeddings";
 
         SegmentReader reader(segdir);
+        auto pipeline = PipelineBuilder::build(reader, segdir, embeddir);
 
-        // Load config
-        auto& cfg = Config::instance();
-        size_t cfg_max_evidence = cfg.get_size("retrieval.max_evidence", 15);
-        size_t cfg_chunks_per_doc = cfg.get_size("chunk.max_per_doc", 8);
-        double cfg_support_thr = cfg.get_double("validator.support_coverage_threshold", 0.5);
+        PipelineOptions opts;
+        opts.json = json;
+        opts.force_brief = force_brief;
+        opts.force_detailed = force_detailed;
 
-        // 1. Analyze query
-        auto analyzer = QueryAnalyzerFactory::create(embeddir);
-        auto needs = analyzer->analyze(query);
-
-        // Apply conversation memory
-        std::string conv_path = segdir + "/../.conversation";
-        ConversationState conversation;
-        conversation.load(conv_path);
-        conversation.apply(needs);
-
-        // 2. Create retriever from config
-        auto retriever = RetrieverFactory::create(reader, embeddir);
-
-        Chunker chunker;
-        AnswerSynthesizer synthesizer;
-        CompositeAnswer composite;
-
-        // 3. Self-Ask: expand needs with support sub-needs
-        SelfAskModule self_ask;
-        std::vector<InformationNeed> expanded = needs;
-        for (auto& n : needs) {
-            auto support = self_ask.expand(n);
-            // Only add support needs that aren't already in the list
-            for (auto& s : support) {
-                bool dup = false;
-                for (auto& e : expanded)
-                    if (e.property == s.property && e.entity == s.entity)
-                        { dup = true; break; }
-                if (!dup) {
-                    s.is_support = true;
-                    expanded.push_back(s);
-                }
-            }
-        }
-
-        // Apply CLI scope override (--brief / --detailed)
-        if (force_brief || force_detailed) {
-            AnswerScope forced = force_brief ? AnswerScope::STRICT : AnswerScope::EXPANDED;
-            for (auto& n : expanded)
-                if (!n.is_support) n.scope = forced;
-        }
-
-        // 4. Plan question order (dependency-aware topological sort)
-        QuestionPlanner planner;
-        QuestionPlan plan = planner.build(expanded);
-        needs = plan.needs;
-
-        // 5. For each need: retrieve → chunk select → synthesize → validate
-        AnswerValidator validator;
-        std::string prior_answer_context;
-
-        for (auto& need : needs) {
-            // --- Retrieval ---
-            auto ranked_docs = retriever->search(need.keywords);
-
-            // --- Chunk & Select ---
-            std::vector<Evidence> evidence;
-            for (auto& sd : ranked_docs) {
-                std::string text = reader.get_document_text(sd.docId);
-                if (text.empty()) continue;
-                auto all_chunks = chunker.chunk_document(sd.docId, text);
-                auto selected = Chunker::select_chunks(all_chunks, need.property, need.keywords, cfg_chunks_per_doc);
-                for (auto& c : selected)
-                    evidence.push_back({c.docId, c.type, c.text, sd.score});
-            }
-
-            if (evidence.size() > cfg_max_evidence) evidence.resize(cfg_max_evidence);
-
-            // --- Self-Ask: check if evidence covers support sub-questions ---
-            auto support_needs = self_ask.expand(need);
-            std::vector<std::string> ev_texts;
-            for (auto& e : evidence) ev_texts.push_back(e.text);
-            double support_coverage = self_ask.check_support_coverage(support_needs, ev_texts);
-
-            // --- Synthesize ---
-            Answer answer = synthesizer.synthesize(need, evidence);
-
-            // Phase 3: Refined confidence using agreement + contradiction analysis
-            auto ev_analysis = validator.analyze_evidence(evidence, need.entity);
-            answer.confidence = validator.compute_refined_confidence(
-                evidence, need.entity, need.keywords);
-
-            if (ev_analysis.contradiction_pairs > 0) {
-                std::string note = std::to_string(ev_analysis.contradiction_pairs) +
-                    " contradiction(s) detected.";
-                if (ev_analysis.agreement_pairs > 0)
-                    note += " " + std::to_string(ev_analysis.agreement_pairs) + " agreement(s).";
-                answer.validation_note = note;
-            }
-
-            // Agreement-based compression
-            AgreementCompressor compressor;
-            CompressionContext comp_ctx{
-                need.scope, answer.confidence,
-                ev_analysis.agreement, evidence.size()};
-            answer.text = compressor.compress(answer.text, comp_ctx);
-            answer.compression = compressor.decide_level(comp_ctx);
-
-            // Dependent planning: attach prior answer as context
-            if (!prior_answer_context.empty())
-                answer.prior_context = prior_answer_context;
-
-            // Confidence-based scope adjustment
-            need.scope = adjust_scope_by_confidence(need.scope, answer.confidence);
-            answer.scope = need.scope;
-            // Re-apply scope truncation after adjustment
-            size_t max_chars = max_answer_chars(need.scope);
-            if (answer.text.size() > max_chars) {
-                size_t cut = answer.text.rfind('.', max_chars);
-                if (cut != std::string::npos && cut > max_chars / 2)
-                    answer.text.resize(cut + 1);
-                else
-                    answer.text.resize(max_chars);
-            }
-
-            // 6.2: Self-ask validation — does the answer address the property?
-            validator.validate(answer, need);
-
-            // Apply self-ask support coverage to confidence
-            if (support_coverage < cfg_support_thr && !support_needs.empty()) {
-                answer.confidence *= (0.5 + support_coverage);
-                std::string sc_note = "Self-ask coverage: " +
-                    std::to_string((int)(support_coverage * 100)) + "%.";
-                if (answer.validation_note.empty())
-                    answer.validation_note = sc_note;
-                else
-                    answer.validation_note += " " + sc_note;
-            }
-
-            // 6.2b: If validation failed and we used hybrid, retry with BM25-only
-            if (!answer.validated && retriever->supports_fallback()) {
-                std::vector<Evidence> bm25_evidence;
-                for (auto& sd : retriever->fallback_search(need.keywords)) {
-                    std::string text = reader.get_document_text(sd.docId);
-                    if (text.empty()) continue;
-                    auto all_chunks = chunker.chunk_document(sd.docId, text);
-                    auto selected = Chunker::select_chunks(
-                        all_chunks, need.property, need.keywords, 5);
-                    for (auto& c : selected)
-                        bm25_evidence.push_back({c.docId, c.type, c.text, sd.score});
-                }
-                if (bm25_evidence.size() > cfg_max_evidence) bm25_evidence.resize(cfg_max_evidence);
-
-                Answer retry = synthesizer.synthesize(need, bm25_evidence);
-                validator.validate(retry, need);
-
-                if (retry.validated || retry.confidence > answer.confidence) {
-                    answer = retry;
-                    answer.validation_note += " (retried with BM25-only)";
-                    if (!prior_answer_context.empty())
-                        answer.prior_context = prior_answer_context;
-                }
-            }
-
-            composite.parts.push_back(answer);
-
-            // 6.1: Store this answer as context for the next need
-            prior_answer_context = answer.text;
-
-            // Update conversation memory
-            conversation.update(need);
-        }
-
-        // 6. Save conversation memory for next invocation
-        if (!needs.empty())
-            conversation.save(conv_path);
+        auto result = pipeline.run(query, opts);
+        auto& needs = result.needs;
+        auto& composite = result.composite;
 
         // Filter: only show user-facing needs in output (not self-ask support)
         std::vector<size_t> user_indices;
@@ -295,7 +122,7 @@ int run_cli(int argc, char** argv) {
                 return r;
             };
             std::cout << "{\n  \"query\": \"" << escaped(query) << "\",\n"
-                      << "  \"retrieval\": \"" << retriever->name().c_str() << "\",\n"
+                      << "  \"retrieval\": \"" << result.retriever_name << "\",\n"
                       << "  \"needs\": [\n";
             for (size_t ui = 0; ui < user_indices.size(); ui++) {
                 size_t i = user_indices[ui];
@@ -331,8 +158,8 @@ int run_cli(int argc, char** argv) {
                       << "  \"confidence\": " << std::fixed << std::setprecision(2)
                       << composite.overall_confidence() << "\n}\n";
         } else {
-            if (retriever->name() != "bm25")
-                std::cerr << ("Retrieval: " + retriever->name() + "\n").c_str();
+            if (result.retriever_name != "bm25")
+                std::cerr << "Retrieval: " << result.retriever_name << "\n";
             for (size_t ui = 0; ui < user_indices.size(); ui++) {
                 size_t i = user_indices[ui];
                 auto& n = needs[i];

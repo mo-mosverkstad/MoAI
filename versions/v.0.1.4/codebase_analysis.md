@@ -160,34 +160,18 @@ Each module has a cached struct loaded once at startup:
 ```
 1. Config loaded at startup (main.cpp)
 
-2. RetrieverFactory::create(reader, embeddir)
-   -> reads retrieval.retriever from config
-   -> returns BM25Retriever, HNSWRetriever, or HybridRetriever
+2. PipelineBuilder::build(reader, segdir, embeddir)
+   -> calls QueryAnalyzerFactory, RetrieverFactory
+   -> returns assembled Pipeline
 
-3. QueryAnalyzerFactory::create(embeddir)
-   -> reads query.analyzer from config
-   -> returns RuleBasedQueryAnalyzer or NeuralQueryAnalyzerAdapter
+3. pipeline.run(query, opts)
+   a. analyzer->analyze(query)
+   b. ConversationState, SelfAsk expansion, scope override
+   c. QuestionPlanner topological sort
+   d. For each need: retrieve -> chunk -> synthesize -> validate -> compress
+   e. Returns PipelineResult
 
-4. analyzer->analyze(query)
-   -> clause splitting, property detection (from QUERY_* vocab + weights),
-      form detection (from DEFAULT_FORM rules), scope inference
-
-5. ConversationState.apply(needs)
-6. SelfAsk.expand() + CLI scope override
-7. QuestionPlanner.build() -> topological sort
-
-7. For each need:
-   a. retriever->search(keywords) -> ranked ScoredDocs
-   b. Chunker: chunk + select (cfg:chunk.max_per_doc)
-   c. AnswerSynthesizer.synthesize()
-   d. EvidenceNormalizer -> agreement/contradiction
-   e. Refined confidence (configurable weights)
-   f. AgreementCompressor.compress()
-   g. Scope adjustment + truncation
-   h. AnswerValidator.validate()
-   i. If failed: retriever->fallback_search() retry
-
-8. Output JSON (with retrieval name, compression) or plain text
+4. commands.cpp formats output (JSON or text)
 ```
 
 
@@ -195,7 +179,15 @@ Each module has a cached struct loaded once at startup:
 
 ## 6. Module Descriptions
 
-### 6.1 Retrieval (`src/retrieval/`) — NEW in v.0.1.4
+### 6.1 Pipeline (`src/pipeline/`) — NEW in v.0.1.4
+
+| File | Purpose |
+|------|---------|
+| `pipeline.h` | Pipeline struct (owns all components), PipelineOptions, PipelineResult |
+| `pipeline.cpp` | Pipeline::run() — the entire QA processing loop |
+| `pipeline_builder.h` | PipelineBuilder::build() — calls all factories, assembles Pipeline from config |
+
+### 6.2 Retrieval (`src/retrieval/`)
 
 | File | Purpose |
 |------|---------|
@@ -206,7 +198,7 @@ Each module has a cached struct loaded once at startup:
 | `hybrid_retriever.h` | Hybrid retriever: BM25 + HNSW fusion |
 | `retriever_factory.h` | Config-driven factory: reads `retrieval.retriever` (bm25 \| hnsw \| hybrid) |
 
-### 6.2 Configuration (`src/common/`)
+### 6.3 Configuration (`src/common/`)
 
 | File | Purpose |
 |------|---------|
@@ -217,7 +209,7 @@ Each module has a cached struct loaded once at startup:
 | `file_utils.h/.cpp` | File I/O helpers |
 | `types.h` | Type aliases |
 
-### 6.3 Storage (`src/storage/`)
+### 6.4 Storage (`src/storage/`)
 
 | File | Purpose |
 |------|---------|
@@ -226,7 +218,7 @@ Each module has a cached struct loaded once at startup:
 | `manifest.h/.cpp` | Segment metadata |
 | `wal.h/.cpp` | Write-ahead log |
 
-### 6.4 Inverted Index (`src/inverted/`)
+### 6.5 Inverted Index (`src/inverted/`)
 
 | File | Purpose |
 |------|---------|
@@ -238,14 +230,14 @@ Each module has a cached struct loaded once at startup:
 | `phrase_matcher.h/.cpp` | Position-aware phrase matching |
 | `search_engine.h/.cpp` | Full boolean + phrase search |
 
-### 6.5 Vector Index (`src/hnsw/`)
+### 6.6 Vector Index (`src/hnsw/`)
 
 | File | Purpose |
 |------|---------|
 | `hnsw_index.h/.cpp` | HNSW graph (M, efConstruction, efSearch configurable) |
 | `hnsw_node.h/.cpp` | Node with per-layer neighbor lists |
 
-### 6.6 Embedding (`src/embedding/`)
+### 6.7 Embedding (`src/embedding/`)
 
 | File | Purpose |
 |------|---------|
@@ -256,7 +248,7 @@ Each module has a cached struct loaded once at startup:
 | `transformer_embedder.h` | Transformer embedder wrapping EncoderTrainer (libtorch) |
 | `embedder_factory.h` | Config-driven factory: reads `embedding.method` (bow \| transformer \| auto) |
 
-### 6.7 Neural Encoder (`src/encoder/`, requires libtorch)
+### 6.8 Neural Encoder (`src/encoder/`, requires libtorch)
 
 | File | Purpose |
 |------|---------|
@@ -264,7 +256,7 @@ Each module has a cached struct loaded once at startup:
 | `encoder_trainer.h/.cpp` | InfoNCE contrastive training |
 | `train_main.cpp` | Training entry point |
 
-### 6.8 Query Analysis (`src/query/`)
+### 6.9 Query Analysis (`src/query/`)
 
 | File | Purpose |
 |------|---------|
@@ -274,13 +266,13 @@ Each module has a cached struct loaded once at startup:
 | `query_analyzer_factory.h` | Config-driven factory with NeuralQueryAnalyzerAdapter |
 | `neural_query_analyzer.h/.cpp` | Neural multi-task Transformer (libtorch) |
 
-### 6.9 Chunking (`src/chunk/`)
+### 6.10 Chunking (`src/chunk/`)
 
 | File | Purpose |
 |------|---------|
 | `chunker.h/.cpp` | Paragraph splitting, ChunkType classification (from properties.conf), type-aware selection |
 
-### 6.10 Answer Synthesis (`src/answer/`)
+### 6.11 Answer Synthesis (`src/answer/`)
 
 | File | Purpose |
 |------|---------|
@@ -292,7 +284,7 @@ Each module has a cached struct loaded once at startup:
 | `question_planner.h/.cpp` | Topological sort (from pipeline_rules.conf) |
 | `self_ask.h/.cpp` | Sub-question expansion (from pipeline_rules.conf) |
 
-### 6.11 Other
+### 6.12 Other
 
 | File | Purpose |
 |------|---------|
@@ -328,6 +320,7 @@ v.0.1.4/
 |   +-- hybrid/                     # legacy hybrid command
 |   +-- inverted/                   # tokenizer, BM25, boolean search, phrase matching
 |   +-- query/                      # InformationNeed model, query analyzers
+|   +-- pipeline/                    # Pipeline struct, PipelineBuilder, run() logic
 |   +-- retrieval/                  # IRetriever interface, BM25/HNSW/Hybrid retrievers, EmbeddingIndex, factory
 |   +-- storage/                    # binary segment reader/writer, WAL, manifest
 |   +-- summarizer/                 # extractive summarization
