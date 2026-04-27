@@ -13,12 +13,13 @@ MoAI ingests a directory of text documents and builds a compact binary index. It
 
 ## Architecture
 
-MoAI is a **pluggable algorithm platform**. The QA pipeline is fixed; retrieval and query analysis algorithms are interchangeable via interfaces and selected by configuration:
+MoAI is a **pluggable algorithm platform**. The QA pipeline is fixed; algorithms are interchangeable via interfaces and selected by configuration:
 
-- **IRetriever** — BM25, HNSW, Hybrid, or your own algorithm
-- **IQueryAnalyzer** — Rule-based or neural (multi-task Transformer)
+- **IRetriever** — BM25, HNSW, Hybrid, or your own retrieval algorithm
+- **IQueryAnalyzer** — Rule-based or neural (multi-task Transformer), or your own analyzer
+- **IEmbedder** — BoW feedforward net, Transformer encoder, or your own embedder
 
-All tuning parameters, vocabularies, and pipeline rules are externalized to configuration files — no rebuild needed to adjust behavior.
+A **PipelineBuilder** assembles all components from config at startup. All tuning parameters, vocabularies, and pipeline rules are externalized to configuration files — no rebuild needed to adjust behavior.
 
 ## Core Components
 
@@ -34,6 +35,7 @@ All tuning parameters, vocabularies, and pipeline rules are externalized to conf
 - **Self-ask + question planner** — Internal sub-question generation with dependency-aware topological sort.
 - **Conversation memory** — Carries entity context across follow-up questions.
 - **Confidence scoring** — Multi-factor score combining coverage, volume, agreement, and contradiction penalty.
+- **Config validation** — Fail fast on bad configuration with clear error messages.
 
 ## Build
 
@@ -54,7 +56,7 @@ cmake --build .
 
 ## Tests
 
-76+ GoogleTest unit tests and 75 QA integration tests.
+76+ GoogleTest unit tests, 75 QA integration tests, and configuration matrix tests.
 
 ```bash
 cmake .. -DBUILD_TESTS=ON
@@ -64,6 +66,9 @@ ctest --output-on-failure
 # QA integration tests
 ./mysearch ingest ../data && ./mysearch build-hnsw
 bash ../tests/test_qa_integration.sh
+
+# Configuration matrix tests (multiple algorithm combinations)
+bash ../tests/test_config_matrix.sh
 ```
 
 ## Versions
@@ -75,6 +80,6 @@ Each version is self-contained in `versions/v.X.Y.Z/` with its own source, confi
 | v.0.1.1 | InformationNeed model, hybrid retrieval, self-ask reasoning |
 | v.0.1.2 | AnswerScope, agreement-based compression, definition synthesis |
 | v.0.1.3 | Configuration and vocabulary externalization |
-| v.0.1.4 | Pluggable algorithm platform (IRetriever, IQueryAnalyzer) |
+| v.0.1.4 | Pluggable algorithm platform (IRetriever, IQueryAnalyzer, IEmbedder) |
 
 See each version's `README.md`, `codebase_analysis.md`, and `history.md` for details.

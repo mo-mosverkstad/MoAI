@@ -399,3 +399,52 @@ All 75 tests pass: `Results: 75 passed, 0 failed, 75 total`
 Bad config tested:
 - `retrieval.retriever = colbert` → `[CONFIG ERROR] Unknown value... Valid options: bm25 hnsw hybrid`
 - `retrieval.bm25_weight = 1.5` → `[CONFIG ERROR] must be in [0, 1], got: 1.5`
+
+
+---
+
+## Step 6: Configuration Matrix Testing
+
+### Goal
+
+Test all algorithm combinations automatically to verify the pluggable platform works correctly across configurations.
+
+### What Was Built
+
+`tests/test_config_matrix.sh` — a wrapper that runs `test_qa_integration.sh` with different config combinations and produces a summary report.
+
+### Usage
+
+```bash
+# Run default matrix (5 combinations)
+bash ../tests/test_config_matrix.sh
+
+# Run specific combinations (analyzer:retriever:embedding)
+bash ../tests/test_config_matrix.sh rule:bm25:auto rule:hybrid:bow
+
+# Run all sensible combinations
+bash ../tests/test_config_matrix.sh \
+    rule:bm25:auto rule:hybrid:auto rule:hybrid:bow \
+    rule:hnsw:auto auto:hybrid:auto
+```
+
+### Default Matrix Results
+
+| Combination | Passed | Failed | Total |
+|-------------|--------|--------|-------|
+| rule:bm25:auto | 74 | 1 | 75 |
+| rule:hybrid:auto | 75 | 0 | 75 |
+| rule:hybrid:bow | 75 | 0 | 75 |
+| rule:hnsw:auto | 30 | 45 | 75 |
+| auto:hybrid:auto | 75 | 0 | 75 |
+
+Notes:
+- `bm25` fails 1 compression test (STRONG compression requires high agreement only achievable with hybrid)
+- `hnsw` fails 45 tests (semantic-only retrieval misses keyword-dependent answers — expected behavior)
+- All hybrid configurations pass 75/75
+
+### Files Created
+
+| File | Description |
+|------|-------------|
+| `tests/test_config_matrix.sh` | Config matrix test runner with summary report |

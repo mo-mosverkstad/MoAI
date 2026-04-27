@@ -6,46 +6,20 @@ A fully self-contained, offline search engine and question-answering system writ
 
 MoAI ingests a directory of text documents and builds a compact binary index. It answers natural language questions using a cognitive **InformationNeed** model that identifies what the user actually needs (entity + property + answer form + scope).
 
-### Retrieval Modes (pluggable, config-selectable)
-
-```
-retrieval.retriever = hybrid    # bm25 | hnsw | hybrid
-```
-
-- **BM25** — Classic inverted-index retrieval with boolean queries and phrase matching, ranked by Okapi BM25.
-- **HNSW** — Semantic nearest-neighbor search using an HNSW vector index with BoW or neural embeddings.
-- **Hybrid** (default) — Fuses BM25 lexical scores with HNSW semantic scores. Configurable weights.
-
-### Query Analysis (pluggable, config-selectable)
-
-```
-query.analyzer = auto    # rule | neural | auto
-```
-
-- **Rule-based** — Clause splitting, semantic prototype scoring, entity extraction. All signal words and weights loaded from config files.
-- **Neural** (optional, requires libtorch) — Multi-task Transformer classifier with intent, answer type, and BIO entity heads.
-
-### Answer Pipeline
-
-- **AnswerScope** — STRICT / NORMAL / EXPANDED controls answer length. Inferred from query wording, property defaults, and confidence.
-- **Agreement-based compression** — Dynamically shortens answers when evidence strongly agrees.
-- **11 typed synthesizers** — Property-dispatched answer extraction (location, definition, function, advantages, limitations, etc.).
-- **Evidence agreement/contradiction** — NormalizedClaim-based analysis with domain vocabularies and opposite pairs.
-- **Self-ask + question planning** — Generates internal sub-questions, topologically sorts by dependency.
-- **Conversation memory** — Carries entity context across follow-up questions.
-
 ## Architecture: Pluggable Algorithm Platform
 
-```
-Config selects algorithms:
-  query.analyzer = auto          retrieval.retriever = hybrid
+Three algorithm slots are pluggable via interfaces and selected by configuration:
 
-         |                                |
-         v                                v
-  IQueryAnalyzer                   IRetriever
-    +-- RuleBased                    +-- BM25Retriever
-    +-- Neural                       +-- HNSWRetriever
-                                     +-- HybridRetriever
+```
+PipelineBuilder assembles all components from config at startup:
+
+  query.analyzer = auto         retrieval.retriever = hybrid       embedding.method = auto
+         |                                |                                |
+         v                                v                                v
+  IQueryAnalyzer                   IRetriever                       IEmbedder
+    +-- RuleBased                    +-- BM25Retriever                +-- BoWEmbedder
+    +-- Neural                       +-- HNSWRetriever ---uses--->    +-- TransformerEmbedder
+    +-- (your new analyzer)          +-- HybridRetriever --uses--->   +-- (your new embedder)
                                      +-- (your new retriever)
          |                                |
          v                                v
@@ -55,21 +29,51 @@ Config selects algorithms:
   +-------------------------------------------------+
 ```
 
-Adding a new retrieval algorithm: implement `IRetriever`, register in factory, set config. Zero pipeline changes.
+Adding a new algorithm: implement the interface, register in factory, set config. Zero pipeline changes.
+
+### Retrieval (pluggable)
+
+| Config Value | Algorithm |
+|-------------|-----------|
+| `bm25` | Lexical search only (Okapi BM25) |
+| `hnsw` | Semantic nearest-neighbor (HNSW vector index) |
+| `hybrid` | BM25 + HNSW fusion (default) |
+
+### Query Analysis (pluggable)
+
+| Config Value | Algorithm |
+|-------------|-----------|
+| `rule` | Rule-based clause splitting + semantic prototype scoring |
+| `neural` | Multi-task Transformer (intent + answer type + BIO entity) |
+| `auto` | Try neural if model exists, fall back to rule (default) |
+
+### Embedding (pluggable)
+
+| Config Value | Algorithm |
+|-------------|-----------|
+| `bow` | BoW feedforward net (no libtorch needed) |
+| `transformer` | Neural Transformer encoder (requires libtorch) |
+| `auto` | Try transformer if model exists, fall back to BoW (default) |
+
+### Answer Pipeline (fixed)
+
+- **AnswerScope** — STRICT / NORMAL / EXPANDED controls answer length
+- **Agreement-based compression** — Shortens answers when evidence strongly agrees
+- **11 typed synthesizers** — Property-dispatched answer extraction
+- **Evidence agreement/contradiction** — Domain-aware analysis
+- **Self-ask + question planning** — Sub-question generation with topological sort
+- **Conversation memory** — Entity context across follow-up questions
+- **Config validation** — Fail fast on bad config with clear error messages
 
 ## Configuration (No Rebuild Needed)
 
-All tuning parameters and vocabularies are external:
-
 | File | What It Controls |
 |------|-----------------|
-| `config/default.conf` | 80+ numeric parameters (weights, thresholds, limits) |
+| `config/default.conf` | Algorithm selection + 80+ tuning parameters |
 | `config/vocabularies/properties.conf` | Per-property word lists (chunk/query/validate/synth) |
 | `config/vocabularies/pipeline_rules.conf` | Self-ask rules, dependencies, preferred chunks, form defaults |
 | `config/vocabularies/domains.conf` | Evidence domain keywords, negations, opposites |
 | `config/vocabularies/language.conf` | Stop words, non-entity words, neural training templates |
-
-Edit any file → restart → new behavior. No recompilation.
 
 ## Build
 
@@ -81,7 +85,7 @@ cmake .. -DCMAKE_BUILD_TYPE=Release
 cmake --build .
 ```
 
-With libtorch (enables neural encoder and neural query analyzer):
+With libtorch:
 
 ```bash
 cmake .. -DUSE_TORCH=ON -DCMAKE_PREFIX_PATH=~/opt/libtorch
@@ -109,6 +113,9 @@ ctest --output-on-failure
 # Integration tests (75 QA benchmark queries)
 ./mysearch ingest ../data && ./mysearch build-hnsw
 bash ../tests/test_qa_integration.sh
+
+# Configuration matrix tests (5 combos × 75 = 375 test runs)
+bash ../tests/test_config_matrix.sh
 ```
 
 ## Documentation
@@ -116,6 +123,6 @@ bash ../tests/test_qa_integration.sh
 | File | Contents |
 |------|----------|
 | `build.md` | Build, test, and usage instructions |
-| `history.md` | Step-by-step change history for this version |
+| `history.md` | Step-by-step change history (6 steps) |
 | `codebase_analysis.md` | Full architecture analysis (10 sections) |
-| `todo.md` | Future refactoring plans |
+| `todo.md` | Design rationale and future plans |

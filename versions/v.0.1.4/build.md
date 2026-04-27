@@ -1,4 +1,4 @@
-# v.0.1.2 — Build & Usage Guide (WSL Ubuntu)
+# v.0.1.4 — Build & Usage Guide (WSL Ubuntu)
 
 ## 1. Prerequisites
 
@@ -12,40 +12,37 @@ sudo apt install -y build-essential cmake git unzip pkg-config
 ```bash
 wget https://download.pytorch.org/libtorch/cpu/libtorch-shared-with-deps-2.1.0%2Bcpu.zip
 unzip libtorch-shared-with-deps-2.1.0+cpu.zip
-mkdir -p ~/opt
-mv libtorch ~/opt/libtorch
+mkdir -p ~/opt && mv libtorch ~/opt/libtorch
 ```
 
 ---
 
 ## 2. Build
 
-Navigate to the v.0.1.2 directory first:
-
 ```bash
-cd versions/v.0.1.2
+cd versions/v.0.1.4
 mkdir build && cd build
 ```
 
-### Without libtorch (default, always works)
+### Without libtorch (default)
 
 ```bash
-cmake .. -DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTS=ON
+cmake .. -DCMAKE_BUILD_TYPE=Release
 cmake --build .
 ```
 
-### With libtorch (neural encoder + neural query analyzer)
+### With libtorch
 
 ```bash
-cmake .. -DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTS=ON \
+cmake .. -DCMAKE_BUILD_TYPE=Release \
          -DUSE_TORCH=ON -DCMAKE_PREFIX_PATH=~/opt/libtorch
 cmake --build .
 ```
 
-### Release build (no tests, optimized)
+### With tests
 
 ```bash
-cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=OFF
+cmake .. -DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTS=ON
 cmake --build .
 ```
 
@@ -53,430 +50,152 @@ cmake --build .
 
 ## 3. Run Tests
 
-### Unit tests (GoogleTest)
+### Unit tests (GoogleTest, 76+)
 
 ```bash
-# All unit tests
 ctest --output-on-failure
-
-# Or run the test binary directly
-./mysearch_tests
-
-# Specific test suites
-./mysearch_tests --gtest_filter="BM25Test.*"
-./mysearch_tests --gtest_filter="HNSWTest.*"
-./mysearch_tests --gtest_filter="SearchEngineTest.ANDQuery"
-
-# List all available tests
-./mysearch_tests --gtest_list_tests
 ```
 
-### QA integration tests
-
-The integration test script runs 75 benchmark queries against the QA pipeline
-and verifies that each answer has the correct property, contains expected
-content keywords, and passes validation. Requires `python3` for JSON parsing.
+### QA integration tests (75 queries)
 
 ```bash
-# First: ingest data and build HNSW index
 ./mysearch ingest ../data
 ./mysearch build-hnsw
-
-# Run integration tests
 bash ../tests/test_qa_integration.sh
 ```
 
-Expected output:
+### Configuration matrix tests
 
-```
-========================================
-MoAI v.0.1.1 QA Integration Tests
-========================================
+Tests the pluggable algorithm platform across different config combinations.
+Each combo is `analyzer:retriever:embedding`.
 
---- Sweden ---
-PASS Where is Stockholm (confidence=0.90)
-PASS Stockholm close to sea (implicit) (confidence=0.86)
-PASS Stockholm importance (multi, need 0) (confidence=0.90)
-PASS Stockholm importance (multi, need 1) (confidence=0.79)
+```bash
+# Run default matrix (5 combinations × 75 tests = 375 test runs)
+bash ../tests/test_config_matrix.sh
 
---- Databases ---
-PASS What is a database (confidence=0.91)
-PASS Drawbacks of NoSQL (confidence=0.88)
-PASS Databases for beginners (confidence=0.87)
-PASS Why SQL is widely used (confidence=...)
+# Run specific combinations
+bash ../tests/test_config_matrix.sh rule:bm25:auto rule:hybrid:bow
 
---- Networking ---
-PASS How TCP ensures reliability (confidence=0.76)
-PASS TCP reliability (explain) (confidence=0.85)
-PASS When networking became mainstream (confidence=0.57)
-
---- Physics ---
-PASS What is electricity (confidence=...)
-PASS How electricity works (confidence=...)
-PASS History of electricity (confidence=...)
-PASS Advantages of electricity (confidence=...)
-PASS Limitations of electricity (confidence=...)
-
---- Solar Energy ---
-PASS What is solar energy (confidence=...)
-PASS How solar panels work (confidence=...)
-PASS Advantages of solar energy (confidence=...)
-PASS Limitations of solar energy (confidence=...)
-
---- Japan ---
-PASS Where is Japan (confidence=0.99)
-PASS Why Japan is important (confidence=...)
-PASS Limitations of Japan (confidence=...)
-
---- Python ---
-PASS What is Python (confidence=...)
-PASS Advantages of Python (confidence=...)
-PASS Limitations of Python (confidence=...)
-PASS Python for beginners (confidence=...)
-
---- Climate Change ---
-PASS What is climate change (confidence=...)
-PASS How climate change works (confidence=...)
-PASS History of climate science (confidence=...)
-
---- Multi-need & Cross-topic ---
-PASS TCP definition + function (need 0) (confidence=...)
-PASS TCP definition + function (need 1) (confidence=...)
-PASS Algorithm scalability (confidence=0.85)
-
---- Validation ---
-PASS NoSQL limitations validated (confidence=0.88)
-PASS Stockholm location validated (confidence=0.90)
-PASS Japan location validated (confidence=0.99)
-
-========================================
-Results: 75 passed, 0 failed, 75 total
-========================================
+# Run all sensible combinations
+bash ../tests/test_config_matrix.sh \
+    rule:bm25:auto \
+    rule:hybrid:auto \
+    rule:hybrid:bow \
+    rule:hnsw:auto \
+    auto:hybrid:auto
 ```
 
-The test script checks:
-- **Property detection**: query maps to the correct property (LOCATION, DEFINITION, FUNCTION, etc.)
-- **Answer content**: answer text contains expected keywords (e.g., "eastern", "coast", "sea" for Stockholm location)
-- **Validation status**: self-ask validation passes for well-answered queries
-- **Multi-need decomposition**: compound queries produce multiple needs with correct properties
-- **Exit code**: 0 if all tests pass, 1 if any fail
+Example output:
+
+```
+COMBINATION                      PASSED   FAILED    TOTAL
+------------------------------ -------- -------- --------
+rule:bm25:auto                       74        1       75
+rule:hybrid:auto                     75        0       75
+rule:hybrid:bow                      75        0       75
+rule:hnsw:auto                       30       45       75
+auto:hybrid:auto                     75        0       75
+------------------------------ -------- -------- --------
+TOTAL                               329       46      375
+```
+
+Notes:
+- `hybrid` configurations pass 75/75 (the system is optimized for hybrid retrieval)
+- `bm25` fails 1 compression test (STRONG compression requires hybrid-level agreement)
+- `hnsw` fails 45 tests (semantic-only retrieval misses keyword-dependent answers)
 
 ---
 
-## 4. Usage
+## 4. Configuration
 
-All commands below assume you are inside the `build/` directory.
+All behavior is controlled by config files — no rebuild needed.
 
-### Step 1: Ingest documents
+### Algorithm selection (`config/default.conf`)
+
+```
+query.analyzer = auto        # rule | neural | auto
+retrieval.retriever = hybrid  # bm25 | hnsw | hybrid
+embedding.method = auto       # bow | transformer | auto
+```
+
+### Tuning parameters (`config/default.conf`)
+
+80+ parameters: BM25 k1/b, HNSW M/ef, fusion weights, scope limits, compression thresholds, confidence weights, scoring boosts, proximity thresholds, etc.
+
+### Vocabularies (`config/vocabularies/`)
+
+| File | What to edit |
+|------|-------------|
+| `properties.conf` | Add/remove signal words per property (chunk/query/validate/synth) |
+| `pipeline_rules.conf` | Add self-ask rules, dependencies, preferred chunks, form defaults |
+| `domains.conf` | Add evidence domain keywords, negations, opposites |
+| `language.conf` | Add stop words, non-entity words, training templates |
+
+---
+
+## 5. Usage
+
+All commands run from the `build/` directory.
+
+### Ingest + index
 
 ```bash
 ./mysearch ingest ../data
-# Ingested ../data -> ../segments/seg_000001
-```
-
-### Step 2: BM25 search (unchanged from v.0.1.0)
-
-```bash
-./mysearch search "database"
-./mysearch search 'stockholm AND capital'
-./mysearch search '"machine learning"' --json
-```
-
-### Step 3: Hybrid search (unchanged from v.0.1.0)
-
-```bash
 ./mysearch build-hnsw
-./mysearch hybrid "what is a database"
 ```
 
-> **Important:** If you modify any text files in `data/`, you must re-ingest
-> before the changes take effect. `build-hnsw` only rebuilds the HNSW index
-> from the existing segment — it does not re-read the source text files.
->
-> ```bash
-> ./mysearch ingest ../data    # re-read text files into segment
-> ./mysearch build-hnsw        # rebuild HNSW from new segment
-> ```
-
-### Step 4: Question-answering (NEW — InformationNeed pipeline)
-
-This is the main change in v.0.1.1, enhanced in v.0.1.2 with **AnswerScope**.
-The `ask` command decomposes a query into one or more **InformationNeeds**,
-infers an **AnswerScope** (STRICT / NORMAL / EXPANDED), and produces
-scope-controlled answers.
-
-#### AnswerScope (NEW in v.0.1.2)
-
-AnswerScope controls *how much* information is produced, inferred automatically
-from query wording:
-
-| Scope | Trigger Words | Max Length |
-|-------|--------------|------------|
-| STRICT | "brief", "short", "quick", "just", or SHORT_FACT form | ~200 chars |
-| NORMAL | (default for LIST, COMPARISON) | ~400 chars |
-| EXPANDED | "explain", "in detail", "describe", "comprehensive", or EXPLANATION form | ~700 chars |
-
-Scope is also determined by **property defaults**:
-
-| Property | Default Scope |
-|----------|---------------|
-| LOCATION, DEFINITION, TIME | STRICT |
-| FUNCTION, USAGE, ADVANTAGES, LIMITATIONS | NORMAL |
-| HISTORY, COMPARISON | EXPANDED |
-
-Scope auto-adjusts based on confidence:
-- High confidence (>0.85) + NORMAL → compresses to STRICT
-- Low confidence (<0.5) + STRICT → expands to NORMAL
-
-**Agreement-based compression** (NEW in Step 3): When evidence strongly agrees
-and confidence is high, answers are automatically shortened:
-
-| Condition | Effect |
-|-----------|--------|
-| NORMAL + confidence ≥ 0.85 + agreement ≥ 0.7 | Keep first sentence only |
-| EXPANDED + confidence ≥ 0.85 + agreement ≥ 0.7 | Keep first 2 sentences |
-| evidence ≥ 4 + confidence ≥ 0.9 | Keep first sentence only |
-| STRICT scope | Never compressed (already minimal) |
-
-Compression level appears in JSON output as `"compression": "NONE"` / `"LIGHT"` / `"STRONG"`.
-
-**CLI override flags** (always win over all other scope signals):
+### Question answering
 
 ```bash
---brief       Force STRICT scope (minimal answers)
---detailed    Force EXPANDED scope (detailed answers)
-```
-
-```bash
-# STRICT (property default for LOCATION)
 ./mysearch ask "where is stockholm"
-# [LOCATION / SHORT_FACT / STRICT] Entity: stockholm
-
-# EXPANDED (query wording "explain in detail")
-./mysearch ask "explain in detail where stockholm is"
-# [LOCATION / SHORT_FACT / EXPANDED] Entity: stockholm
-
-# NORMAL (property default for LIMITATIONS)
-./mysearch ask "what are the drawbacks of NoSQL"
-# [LIMITATIONS / LIST / NORMAL] Entity: nosql
-
-# --brief forces STRICT even for EXPLANATION queries
-./mysearch ask "explain how TCP ensures reliability" --brief
-# [FUNCTION / EXPLANATION / STRICT] Entity: ...
-
-# --detailed forces EXPANDED even for LOCATION queries
-./mysearch ask "where is stockholm" --detailed
-# [LOCATION / SHORT_FACT / EXPANDED] Entity: stockholm
-
-# Combine with --json
-./mysearch ask "where is stockholm" --detailed --json
+./mysearch ask "what is a database" --json
+./mysearch ask "explain how TCP works" --detailed
+./mysearch ask "where is stockholm" --brief
 ```
 
-#### Single-need queries
+### Switch algorithms (no rebuild)
 
 ```bash
-# Location (detected from semantic signals, not just "where")
+# Edit config/default.conf:
+#   retrieval.retriever = bm25
+# Then run — BM25-only retrieval
 ./mysearch ask "where is stockholm"
-# [LOCATION / SHORT_FACT] Entity: stockholm
-# Confidence: 1.00
-# Stockholm is Sweden's capital, built across 14 islands where Lake Malaren
-# meets the Baltic Sea. ...
 
-./mysearch ask "is stockholm close to the sea"
-# [LOCATION / SHORT_FACT] Entity: stockholm
-# (No "where" keyword — still detects LOCATION from "close to")
-
-# Definition
-./mysearch ask "what is a database"
-# [DEFINITION / SHORT_FACT] Entity: database
-
-# Temporal
-./mysearch ask "when was the transistor invented"
-# [TIME / SHORT_FACT] Entity: transistor
-
-# Function / mechanism
-./mysearch ask "how does TCP ensure reliability"
-# [FUNCTION / EXPLANATION] Entity: tcp
-
-# Advantages
-./mysearch ask "what are the benefits of SQL"
-# [ADVANTAGES / LIST] Entity: sql
-
-# Limitations
-./mysearch ask "what are the drawbacks of NoSQL"
-# [LIMITATIONS / LIST] Entity: nosql
-
-# Usage
-./mysearch ask "databases for beginners what should I start with"
-# [USAGE / LIST] Entity: databases
+# Edit config/default.conf:
+#   retrieval.retriever = hybrid
+# Then run — back to hybrid
+./mysearch ask "where is stockholm"
 ```
 
-#### Multi-need queries (NEW capability)
-
-The system splits compound questions into separate needs:
+### Other commands
 
 ```bash
-./mysearch ask "tell me where stockholm is and why it is important"
-# [LOCATION / SHORT_FACT] Entity: stockholm
-# Confidence: 1.00
-# Stockholm is Sweden's capital, built across 14 islands ...
-#
-# [HISTORY / EXPLANATION] Entity: stockholm
-# Confidence: ...
-# Stockholm has been the political and economic center of Sweden ...
-
-./mysearch ask "what is TCP and how does it work"
-# [DEFINITION / SHORT_FACT] Entity: tcp
-# ...
-#
-# [FUNCTION / EXPLANATION] Entity: tcp
-# ...
+./mysearch search "database"                    # BM25 search
+./mysearch search 'stockholm AND capital'       # Boolean search
+./mysearch hybrid "what is a database"          # Legacy hybrid command
 ```
-
-#### JSON output
-
-```bash
-./mysearch ask "tell me where stockholm is and why it is important" --json
-```
-
-Output:
-
-The output will contain a JSON object with a `needs` array — one entry per
-InformationNeed — each with entity, property, form, confidence, and answer text.
-Actual values depend on the indexed corpus.
-
-#### Conversation memory (follow-up questions)
-
-Conversation memory carries entity context across follow-up questions
-**within the same process**. Since each `./mysearch ask` invocation is a
-separate process, follow-up resolution works within multi-need queries
-(where clauses share entity context), but not across separate commands.
-
-Within a single multi-need query, entity propagation works:
-
-```bash
-# "why it is important" inherits entity "stockholm" from the first clause
-./mysearch ask "tell me where stockholm is and why it is important"
-# [LOCATION / SHORT_FACT] Entity: stockholm
-# Confidence: 0.95
-# It is the capital of Sweden and the seat of the Swedish government ...
-#
-# [HISTORY / EXPLANATION] Entity: stockholm
-# Confidence: ...
-# Stockholm is important because it is the seat of the Swedish government ...
-
-# Semicolon-separated sub-questions also share entity
-./mysearch ask "what is stockholm; why is it famous"
-```
-
-#### More examples to try
-
-```bash
-# Implicit location (no interrogative word)
-./mysearch ask "stockholm geography"
-
-# History
-./mysearch ask "tell me about the history of computing"
-
-# Comparison (detected from "vs" / "difference")
-./mysearch ask "difference between SQL and NoSQL"
-
-# Composition
-./mysearch ask "what are the types of databases"
-
-# 10 benchmark questions (Step 3)
-./mysearch ask "Stockholm vs Gothenburg: which is better for living"
-./mysearch ask "Why is SQL still widely used"
-./mysearch ask "What are the limitations of NoSQL databases"
-./mysearch ask "Explain how TCP ensures reliability"
-./mysearch ask "Give me an overview of database types and their use cases"
-./mysearch ask "Is Stockholm close to the sea"
-./mysearch ask "When did computer networking start becoming mainstream"
-./mysearch ask "What makes an algorithm scalable"
-./mysearch ask "Databases for beginners what should I start with"
-./mysearch ask "How is Sweden connected to continental Europe"
-```
-
-### Step 5 (optional, requires libtorch): Train neural encoder
-Improves retrieval (the hybrid search step):
-* Replaces the random BoW embedding model with a trained Transformer sentence encoder
-* The HNSW vector index will use semantically meaningful embeddings instead of bag-of-words vectors
-* Documents that are semantically similar to the query (even without exact keyword overlap) will rank higher
-* Impact: better document ranking, especially for paraphrased or implicit queries like "Is Stockholm close to the sea?"
-
-```bash
-./train_encoder --epochs 10 --dim 128
-./mysearch hybrid "what is a database"
-```
-
-### Step 6 (optional, requires libtorch): Train neural query analyzer
-Improves query analysis (the InformationNeed extraction step):
-* Replaces the rule-based property/entity detection with a neural multi-task classifier
-* Better entity extraction via BIO tagging (learned, not longest-keyword heuristic)
-* Better property detection for unusual phrasings
-* However: the neural analyzer currently produces a single InformationNeed per query — it doesn't support multi-need decomposition. So multi-clause queries like "tell me where stockholm is and why it is important" would lose the clause-splitting capability and produce only one need.
-
-```bash
-./mysearch train-qa --epochs 30
-./mysearch ask "when was the transistor invented"
-# stderr: "Using neural query analyzer"
-```
-
-Note: The neural analyzer currently produces a single InformationNeed per query
-(mapped from its legacy QueryAnalysis output). Multi-need decomposition is only
-available via the rule-based analyzer in this version.
 
 ---
 
-## 5. Quick Smoke Test (copy-paste)
-
-Run this block after building to verify everything works.
-**You must ingest before every test run if data files have changed.**
+## 6. Quick Smoke Test
 
 ```bash
-cmake .. -DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTS=ON \
-         -DUSE_TORCH=ON -DCMAKE_PREFIX_PATH=~/opt/libtorch
-cmake --build .
+cmake .. -DCMAKE_BUILD_TYPE=Release && cmake --build .
 
 ./mysearch ingest ../data
 ./mysearch build-hnsw
 
-# Run integration tests for regression
+# Integration tests
 bash ../tests/test_qa_integration.sh
 
-# Run manual test cases
-echo "=== Single-need ==="
+# Matrix tests
+bash ../tests/test_config_matrix.sh
+
+bash ../tests/test_config_matrix.sh auto:hybrid:auto
+
+# Manual queries
 ./mysearch ask "where is stockholm"
-./mysearch ask "what is a database"
-./mysearch ask "how does TCP work"
-./mysearch ask "what are the drawbacks of NoSQL"
-./mysearch ask "What makes an algorithm scalable"
-
-echo "=== Multi-need ==="
+./mysearch ask "what is a database" --json
 ./mysearch ask "tell me where stockholm is and why it is important"
-./mysearch ask "what is TCP and how does it work"
-
-echo "=== Conversation memory (within multi-need) ==="
-./mysearch ask "what is stockholm; why is it famous"
-
-echo "=== Benchmark questions ==="
-./mysearch ask "Stockholm vs Gothenburg: which is better for living"
-./mysearch ask "Why is SQL still widely used"
-./mysearch ask "Explain how TCP ensures reliability"
-./mysearch ask "Is Stockholm close to the sea"
-./mysearch ask "When did computer networking start becoming mainstream"
-./mysearch ask "Databases for beginners what should I start with"
-./mysearch ask "How is Sweden connected to continental Europe"
-
-echo "=== AnswerScope + Compression ==="
-./mysearch ask "where is stockholm"                          # STRICT (property default), compression: NONE
-./mysearch ask "explain in detail where stockholm is"        # EXPANDED (query wording)
-./mysearch ask "what are the drawbacks of NoSQL"             # NORMAL (property default)
-./mysearch ask "explain how TCP ensures reliability" --brief  # STRICT (CLI override)
-./mysearch ask "where is stockholm" --detailed               # EXPANDED (CLI override)
-./mysearch ask "where is stockholm" --detailed --json        # EXPANDED + JSON (shows compression field)
-
-echo "=== JSON ==="
-./mysearch ask "where is stockholm" --json
-./mysearch ask "tell me where stockholm is and why it is important" --json
+./mysearch ask "explain how TCP works" --detailed
 ```

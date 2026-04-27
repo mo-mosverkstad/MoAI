@@ -16,12 +16,17 @@ All tuning parameters are in `config/default.conf`. All vocabularies are in `con
                          |  [--brief/--detailed] |
                          +----------+-----------+
                                     |
+                         PipelineBuilder::build()
+                         assembles all components
+                         from config at startup
+                                    |
                     +---------------v---------------+
-                    |   Query Analysis (pluggable)   |
+                    |   Query Analysis (pluggable)   |  Phase 1
                     |                                |
                     |   IQueryAnalyzer interface      |
                     |     +-- RuleBasedQueryAnalyzer  |
                     |     +-- NeuralQueryAnalyzer     |
+                    |     +-- (your new analyzer)     |
                     |                                |
                     |   Selected by: query.analyzer   |
                     +---------------+---------------+
@@ -33,19 +38,30 @@ All tuning parameters are in `config/default.conf`. All vocabularies are in `con
                     +---------------+---------------+
                                     |
               +---------------------v---------------------+
-              |         Retrieval Layer (pluggable)         |
+              |         Retrieval Layer (pluggable)         |  Phase 2
               |                                            |
               |  IRetriever interface                       |
               |    +-- BM25Retriever                        |
-              |    +-- HNSWRetriever                        |
-              |    +-- HybridRetriever (BM25 + HNSW)       |
-              |    +-- (your new retriever here)            |
+              |    +-- HNSWRetriever ----+                  |
+              |    +-- HybridRetriever --+                  |
+              |    +-- (your new retriever)                 |
+              |                         |                  |
+              |              +----------v----------+       |
+              |              | Embedding (pluggable)|       |
+              |              |                     |       |
+              |              | IEmbedder interface  |       |
+              |              |  +-- BoWEmbedder     |       |
+              |              |  +-- TransformerEmb  |       |
+              |              |  +-- (your new emb)  |       |
+              |              |                     |       |
+              |              | embedding.method     |       |
+              |              +---------------------+       |
               |                                            |
               |  Selected by: retrieval.retriever = hybrid  |
               +---------------------+---------------------+
                                     |
               +---------------------v---------------------+
-              |         Answer Layer                        |
+              |         Answer Layer                        |  Phase 3
               |                                            |
               |  Chunker -> AnswerSynthesizer               |
               |  -> EvidenceNormalizer -> AgreementCompressor|
@@ -55,6 +71,11 @@ All tuning parameters are in `config/default.conf`. All vocabularies are in `con
                     +---------------v---------+
                     |  JSON / Text Output     |
                     +-------------------------+
+
+All three pluggable slots are config-driven:
+  query.analyzer = auto         # rule | neural | auto
+  retrieval.retriever = hybrid   # bm25 | hnsw | hybrid
+  embedding.method = auto        # bow | transformer | auto
 ```
 
 ---
