@@ -76,8 +76,20 @@ PipelineResult Pipeline::run(const std::string& query, const PipelineOptions& op
                 auto all_chunks = chunker_.chunk_document(sd.docId, text);
                 auto selected = Chunker::select_chunks(
                     all_chunks, need.property, need.keywords, chunks_per_doc_);
-                for (auto& c : selected)
-                    evidence.push_back({c.docId, c.type, c.text, sd.score});
+                for (auto& c : selected) {
+                    // Merge continuation: if chunk ends with ':', append next chunk's text
+                    std::string merged = c.text;
+                    size_t last = merged.find_last_not_of(" \t\r\n");
+                    if (last != std::string::npos && merged[last] == ':') {
+                        for (size_t j = 0; j < all_chunks.size(); j++) {
+                            if (all_chunks[j].chunkId == c.chunkId + 1) {
+                                merged += "\n" + all_chunks[j].text;
+                                break;
+                            }
+                        }
+                    }
+                    evidence.push_back({c.docId, c.type, merged, sd.score});
+                }
             }
             if (evidence.size() > max_evidence_) evidence.resize(max_evidence_);
         }

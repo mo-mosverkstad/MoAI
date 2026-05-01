@@ -99,3 +99,82 @@ Update all documentation to reflect the unified `moai` CLI. Remove all `mysearch
 
 - No remaining `mysearch` references in any documentation or test scripts
 - 75/75 integration tests pass
+
+---
+
+## Step 5: Final Verification
+
+### Goal
+
+Verify the complete CLI unification works correctly across all test dimensions.
+
+### Results
+
+| Check | Result |
+|-------|--------|
+| Build without libtorch | ✅ Only `moai` binary produced (no `train_encoder`) |
+| `./moai` usage output | ✅ All subcommands show `moai` prefix |
+| Unit tests (GoogleTest) | ✅ 76/76 pass |
+| Integration tests | ✅ 75/75 pass |
+| Config matrix (rule:hybrid:bow) | ✅ 75/75 pass |
+| Config matrix (rule:bm25:auto) | ✅ 74/75 (known: 1 compression test requires hybrid) |
+| Benchmark script | ✅ Works with `moai` binary |
+
+### v.0.1.6 Complete
+
+Single unified binary `moai` replaces both `mysearch` and `train_encoder`. All subcommands:
+
+```
+moai ingest <path>
+moai search <query>
+moai build-hnsw
+moai hybrid <query>
+moai ask <query> [--json] [--brief] [--detailed] [--profile]
+moai train-encoder [--epochs N] [--dim D] [--lr R]    # requires libtorch
+moai train-qa [--epochs N]                             # requires libtorch
+moai run <cmd> [args...]
+```
+
+---
+
+## Step 5b: Fix Entity Extraction + Answer Truncation
+
+### Problem
+
+`./moai ask "explain how TCP works"` produced:
+- Entity: `works` (wrong — should be `tcp`)
+- Answer truncated at "through several mechanisms:" (bullet-point list missing)
+
+### Root Causes
+
+1. **Entity extraction**: picked longest keyword (`works` > `tcp`) instead of recognizing `TCP` as an acronym
+2. **Chunk continuation**: the bullet-point list was a separate chunk that didn't get included because it scored low on keyword matching
+
+### Fixes
+
+| File | Change |
+|------|--------|
+| `config/vocabularies/language.conf` | Added common verbs to `NON_ENTITY_WORDS`: works, ensures, functions, operates, uses, provides, supports, etc. |
+| `src/query/query_analyzer.h` | Added `original_query` parameter to `extract_entity` |
+| `src/query/query_analyzer.cpp` | `extract_entity` now prefers tokens that were all-uppercase in the original query (acronym detection: TCP, SQL, etc.) |
+| `src/chunk/chunker.cpp` | `select_chunks` includes continuation chunks (next adjacent chunk when a selected chunk ends with `:`) |
+| `src/pipeline/pipeline.cpp` | Evidence building merges continuation text (if chunk ends with `:`, appends next chunk's text) |
+| `src/answer/answer_synthesizer.cpp` | Increased text limit from 500 to 1500 chars for explanation synthesis |
+
+### Result
+
+Before:
+```
+Entity: works
+## How TCP Ensures Reliability TCP (Transmission Control Protocol) ensures reliable data delivery through several mechanisms:
+```
+
+After:
+```
+Entity: tcp
+## How TCP Ensures Reliability TCP (Transmission Control Protocol) ensures reliable data delivery through several mechanisms: Three-way handshake: TCP establishes a connection using a SYN, SYN-ACK, ACK sequence... Retransmission: if a segment is lost or corrupted, TCP automatically retransmits it... Flow control: TCP uses a sliding window mechanism...
+```
+
+### Verification
+
+- 75/75 integration tests pass (no regressions)

@@ -461,9 +461,9 @@ Answer AnswerSynthesizer::synthesize_explanation(
                 if (contains_word(lower, k)) sc += 3.0;
             if (!entity_lower.empty() && contains_word(lower, entity_lower)) sc += 5.0;
             if (sc > 0.0) { if (!text.empty()) text += " "; text += s; }
-            if (text.size() > 500) break;
+            if (text.size() > 1500) break;
         }
-        if (text.size() > 500) break;
+        if (text.size() > 1500) break;
     }
     if (text.empty()) text = "No relevant explanation found.";
     return {text, compute_confidence(filtered, need.keywords), need.property};

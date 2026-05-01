@@ -140,18 +140,34 @@ std::vector<std::string> RuleBasedQueryAnalyzer::extract_keywords(const std::str
 
 
 std::string RuleBasedQueryAnalyzer::extract_entity(
-    const std::string& clause, const std::vector<std::string>& keywords) const
+    const std::string& clause, const std::vector<std::string>& keywords,
+    const std::string& original_query) const
 {
     if (keywords.empty()) return "";
     auto& non_ent = QueryVocab::get().non_entity_words;
-    // Prefer keywords that are not generic adjectives/property words
+
+    // Prefer acronyms (all-uppercase in original query, e.g. TCP, SQL, NoSQL)
+    std::string orig_lower = to_lower(original_query);
+    for (auto& k : keywords) {
+        if (non_ent.count(k)) continue;
+        auto pos = orig_lower.find(k);
+        if (pos != std::string::npos) {
+            bool all_upper = true;
+            for (size_t i = 0; i < k.size(); i++) {
+                if (!std::isupper(static_cast<unsigned char>(original_query[pos + i]))) {
+                    all_upper = false; break;
+                }
+            }
+            if (all_upper && k.size() >= 2) return k;
+        }
+    }
+
+    // Fall back to longest non-generic keyword
     std::string best;
     for (auto& k : keywords) {
         if (non_ent.count(k)) continue;
         if (k.size() > best.size()) best = k;
     }
-    // If all keywords are non-entity words, return empty to trigger
-    // shared entity propagation from previous clauses
     return best;
 }
 
@@ -209,7 +225,7 @@ std::vector<InformationNeed> RuleBasedQueryAnalyzer::analyze(const std::string& 
 
     for (auto& clause : clauses) {
         auto kw = extract_keywords(clause);
-        auto entity = extract_entity(clause, kw);
+        auto entity = extract_entity(clause, kw, query);
         if (entity.empty() && !shared_entity.empty()) {
             entity = shared_entity;
             // Inject shared entity into keywords so retrieval finds it

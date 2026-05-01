@@ -44,7 +44,8 @@ public:
 private:
     std::vector<std::string> split_clauses(const std::string& query) const;
     std::string extract_entity(const std::string& clause,
-                               const std::vector<std::string>& keywords) const;
+                               const std::vector<std::string>& keywords,
+                               const std::string& original_query) const;
     Property detect_property(const std::string& clause) const;
     AnswerForm detect_form(const std::string& clause, Property prop) const;
     AnswerScope infer_scope(const std::string& clause, AnswerForm form) const;

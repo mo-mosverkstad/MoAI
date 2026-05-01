@@ -208,7 +208,24 @@ std::vector<Chunk> Chunker::select_chunks(
               [](auto& a, auto& b) { return a.score > b.score; });
 
     std::vector<Chunk> result;
-    for (size_t i = 0; i < max_chunks && i < scored.size(); i++)
+    std::unordered_set<size_t> included;
+    for (size_t i = 0; i < max_chunks && i < scored.size(); i++) {
+        included.insert(scored[i].idx);
         result.push_back(chunks[scored[i].idx]);
+    }
+
+    // Continuation: if a selected chunk ends with ':', include the next chunk
+    std::vector<Chunk> continuations;
+    for (size_t idx : included) {
+        auto& text = chunks[idx].text;
+        size_t last = text.find_last_not_of(" \t\r\n");
+        if (last != std::string::npos && text[last] == ':') {
+            size_t next = idx + 1;
+            if (next < chunks.size() && !included.count(next))
+                continuations.push_back(chunks[next]);
+        }
+    }
+    for (auto& c : continuations) result.push_back(c);
+
     return result;
 }
