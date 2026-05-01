@@ -5,6 +5,15 @@
 #include <chrono>
 #include <mutex>
 
+struct QualityMetrics {
+    double avg_confidence = 0.0;
+    double avg_agreement = 0.0;
+    int validated_count = 0;
+    int total_count = 0;
+    bool fallback_used = false;
+    std::string compression = "NONE";
+};
+
 struct ProfileRecord {
     std::string query;
     std::unordered_map<std::string, double> timing_ms;
@@ -12,6 +21,7 @@ struct ProfileRecord {
     int needs_count = 0;
     double rss_before_mb = 0.0;
     double rss_after_mb = 0.0;
+    QualityMetrics quality;
 };
 
 class Profiler {
@@ -36,6 +46,9 @@ public:
 
     // Finalize current query and store the record
     void end_query();
+
+    // Record quality metrics
+    void record_quality(const QualityMetrics& q);
 
     // Record memory RSS (call before and after pipeline run)
     void record_rss_before();

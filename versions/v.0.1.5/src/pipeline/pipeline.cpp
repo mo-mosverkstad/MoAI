@@ -179,6 +179,25 @@ PipelineResult Pipeline::run(const std::string& query, const PipelineOptions& op
     if (!result.needs.empty())
         conversation.save(conv_path_);
 
+    // Record quality metrics for profiling
+    {
+        QualityMetrics q;
+        q.total_count = static_cast<int>(result.composite.parts.size());
+        double conf_sum = 0.0;
+        for (auto& a : result.composite.parts) {
+            conf_sum += a.confidence;
+            if (a.validated) q.validated_count++;
+            if (a.validation_note.find("fallback") != std::string::npos)
+                q.fallback_used = true;
+            if (a.compression != CompressionLevel::NONE)
+                q.compression = compression_str(a.compression);
+        }
+        q.avg_confidence = q.total_count > 0 ? conf_sum / q.total_count : 0.0;
+        // Agreement from last evidence analysis (approximation)
+        q.avg_agreement = result.composite.overall_confidence();
+        profiler.record_quality(q);
+    }
+
     profiler.record_needs_count(static_cast<int>(result.needs.size()));
     auto total_end = std::chrono::high_resolution_clock::now();
     profiler.record("Total",

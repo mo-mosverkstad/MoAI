@@ -109,3 +109,40 @@ The delta (rss_after - rss_before) shows per-query memory allocation. Useful for
 ### Integration Test Results
 
 All 75 tests pass: `Results: 75 passed, 0 failed, 75 total`
+
+
+---
+
+## Step 3: Quality Metrics in Profile
+
+### Goal
+
+Add answer quality signals to each profile record, enabling correlation analysis between performance and quality (e.g., "Does higher retrieval latency correlate with higher confidence?").
+
+### Quality Metrics Recorded
+
+| Metric | Description |
+|--------|-------------|
+| `confidence` | Average confidence across all needs |
+| `agreement` | Overall confidence (proxy for evidence agreement) |
+| `validated` | Count of validated needs / total needs |
+| `fallback_used` | Whether fallback retry was triggered |
+| `compression` | Compression level applied (NONE/LIGHT/STRONG) |
+
+### Output Format
+
+```json
+{"query":"what are the drawbacks of NoSQL","algorithms":{...},"timing_ms":{...},"needs_count":2,"memory_mb":{"rss_before":5.38,"rss_after":5.50},"quality":{"confidence":0.70,"agreement":0.70,"validated":2/2,"fallback_used":false,"compression":"STRONG"}}
+```
+
+### Files Modified
+
+| File | What Changed |
+|------|-------------|
+| `src/profiling/profiler.h` | Added QualityMetrics struct; added record_quality method |
+| `src/profiling/profiler.cpp` | Implemented record_quality; added quality fields to JSON output |
+| `src/pipeline/pipeline.cpp` | Compute and record quality metrics after processing loop |
+
+### Integration Test Results
+
+All 75 tests pass: `Results: 75 passed, 0 failed, 75 total`

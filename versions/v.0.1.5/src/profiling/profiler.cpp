@@ -41,6 +41,11 @@ void Profiler::record_needs_count(int count) {
     current_.needs_count = count;
 }
 
+void Profiler::record_quality(const QualityMetrics& q) {
+    if (!enabled_) return;
+    current_.quality = q;
+}
+
 void Profiler::record_rss_before() {
     if (!enabled_) return;
     current_.rss_before_mb = get_rss_mb();
@@ -88,5 +93,11 @@ void Profiler::write_record(const ProfileRecord& rec) {
     f << "},\"needs_count\":" << rec.needs_count
       << ",\"memory_mb\":{\"rss_before\":";
     f.precision(2);
-    f << rec.rss_before_mb << ",\"rss_after\":" << rec.rss_after_mb << "}}\n";
+    f << rec.rss_before_mb << ",\"rss_after\":" << rec.rss_after_mb
+      << "},\"quality\":{\"confidence\":" << rec.quality.avg_confidence
+      << ",\"agreement\":" << rec.quality.avg_agreement
+      << ",\"validated\":" << rec.quality.validated_count
+      << "/" << rec.quality.total_count
+      << ",\"fallback_used\":" << (rec.quality.fallback_used ? "true" : "false")
+      << ",\"compression\":\"" << rec.quality.compression << "\"}}\n";
 }
