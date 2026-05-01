@@ -77,3 +77,25 @@ moai run <cmd> [args...]
 - Clean rebuild produces single `./moai` binary (no `train_encoder` binary)
 - `./moai` (no args) shows updated usage with `moai` prefix
 - 75/75 integration tests pass
+
+---
+
+## Step 4: Update Documentation
+
+### Goal
+
+Update all documentation to reflect the unified `moai` CLI. Remove all `mysearch` and `train_encoder` references.
+
+### What Was Changed
+
+| File | Change |
+|------|--------|
+| `README.md` | Version → v.0.1.6, all `./mysearch` → `./moai` |
+| `build.md` | Version → v.0.1.6, all `./mysearch` → `./moai`, `./train_encoder` → `./moai train-encoder`, fixed typo (`profiling.jsonls` → `profiling.jsonl`) |
+| `codebase_analysis.md` | Version → v.0.1.6, noted unified CLI binary, `train_main.cpp` marked as legacy, file structure version updated |
+| Root `README.md` | `./mysearch` → `./moai` in test commands, added v.0.1.5 and v.0.1.6 to version table |
+
+### Verification
+
+- No remaining `mysearch` references in any documentation or test scripts
+- 75/75 integration tests pass

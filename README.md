@@ -64,7 +64,7 @@ cmake --build .
 ctest --output-on-failure
 
 # QA integration tests
-./mysearch ingest ../data && ./mysearch build-hnsw
+./moai ingest ../data && ./moai build-hnsw
 bash ../tests/test_qa_integration.sh
 
 # Configuration matrix tests (multiple algorithm combinations)
@@ -81,5 +81,7 @@ Each version is self-contained in `versions/v.X.Y.Z/` with its own source, confi
 | v.0.1.2 | AnswerScope, agreement-based compression, definition synthesis |
 | v.0.1.3 | Configuration and vocabulary externalization |
 | v.0.1.4 | Pluggable algorithm platform (IRetriever, IQueryAnalyzer, IEmbedder) |
+| v.0.1.5 | Performance profiling (per-query timing, RSS, quality metrics, benchmark runner) |
+| v.0.1.6 | CLI unification — single `moai` binary replaces `mysearch` + `train_encoder` |
 
 See each version's `README.md`, `codebase_analysis.md`, and `history.md` for details.

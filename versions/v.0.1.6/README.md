@@ -1,4 +1,4 @@
-# MoAI v.0.1.4 (Mini version of Artificial Intelligence)
+# MoAI v.0.1.6 (Mini version of Artificial Intelligence)
 
 A fully self-contained, offline search engine and question-answering system written from scratch in C++20. MoAI implements every component — from binary index storage to neural inference — without relying on external search libraries.
 
@@ -96,11 +96,11 @@ cmake --build .
 
 ```bash
 cd build
-./mysearch ingest ../data
-./mysearch build-hnsw
-./mysearch ask "what is stockholm"
-./mysearch ask "where is stockholm" --json
-./mysearch ask "explain how TCP works" --detailed
+./moai ingest ../data
+./moai build-hnsw
+./moai ask "what is stockholm"
+./moai ask "where is stockholm" --json
+./moai ask "explain how TCP works" --detailed
 ```
 
 ## Tests
@@ -111,7 +111,7 @@ cmake .. -DBUILD_TESTS=ON && cmake --build .
 ctest --output-on-failure
 
 # Integration tests (75 QA benchmark queries)
-./mysearch ingest ../data && ./mysearch build-hnsw
+./moai ingest ../data && ./moai build-hnsw
 bash ../tests/test_qa_integration.sh
 
 # Configuration matrix tests (5 combos × 75 = 375 test runs)
@@ -123,6 +123,6 @@ bash ../tests/test_config_matrix.sh
 | File | Contents |
 |------|----------|
 | `build.md` | Build, test, and usage instructions |
-| `history.md` | Step-by-step change history (6 steps) |
+| `history.md` | Step-by-step change history |
 | `codebase_analysis.md` | Full architecture analysis (10 sections) |
 | `todo.md` | Design rationale and future plans |

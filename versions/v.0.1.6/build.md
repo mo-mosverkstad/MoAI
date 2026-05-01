@@ -1,4 +1,4 @@
-# v.0.1.5 — Build & Usage Guide (WSL Ubuntu)
+# v.0.1.6 — Build & Usage Guide (WSL Ubuntu)
 
 ## 1. Prerequisites
 
@@ -20,7 +20,7 @@ mkdir -p ~/opt && mv libtorch ~/opt/libtorch
 ## 2. Build
 
 ```bash
-cd versions/v.0.1.5
+cd versions/v.0.1.6
 mkdir build && cd build
 ```
 
@@ -59,8 +59,8 @@ ctest --output-on-failure
 ### QA integration tests (75 queries)
 
 ```bash
-./mysearch ingest ../data
-./mysearch build-hnsw
+./moai ingest ../data
+./moai build-hnsw
 bash ../tests/test_qa_integration.sh
 ```
 
@@ -93,12 +93,7 @@ bash ../tests/benchmark.sh --retriever hnsw --analyzer rule --repeat 2
 bash ../tests/benchmark.sh --config rule:hybrid:bow --repeat 3
 
 # Custom query set
-# How to define my_queries.txt could be seen as below
 bash ../tests/benchmark.sh --queries my_queries.txt --repeat 10
-
-# Individual flags
-bash ../tests/benchmark.sh --retriever bm25 --repeat 3
-bash ../tests/benchmark.sh --analyzer rule --embedding bow --repeat 2
 
 # Combo format (analyzer:retriever:embedding)
 bash ../tests/benchmark.sh --config rule:hybrid:bow --repeat 3
@@ -147,8 +142,8 @@ Improves retrieval (the hybrid search step):
 * Impact: better document ranking, especially for paraphrased or implicit queries like "Is Stockholm close to the sea?"
 
 ```bash
-./train_encoder --epochs 10 --dim 128
-./mysearch hybrid "what is a database"
+./moai train-encoder --epochs 10 --dim 128
+./moai hybrid "what is a database"
 ```
 
 ### (optional, requires libtorch): Train neural query analyzer
@@ -159,8 +154,8 @@ Improves query analysis (the InformationNeed extraction step):
 * However: the neural analyzer currently produces a single InformationNeed per query — it doesn't support multi-need decomposition. So multi-clause queries like "tell me where stockholm is and why it is important" would lose the clause-splitting capability and produce only one need.
 
 ```bash
-./mysearch train-qa --epochs 30
-./mysearch ask "when was the transistor invented"
+./moai train-qa --epochs 30
+./moai ask "when was the transistor invented"
 # stderr: "Using neural query analyzer"
 ```
 
@@ -192,7 +187,7 @@ profiling.output_file = ../profiling.jsonl   # output path for JSON Lines
 Alternatively, use the `--profile` CLI flag for per-invocation profiling:
 
 ```bash
-./mysearch ask "where is stockholm" --profile
+./moai ask "where is stockholm" --profile
 # Prints timing summary to stderr:
 #   [Profile: Total=118.7ms Retriever=9.2ms QueryAnalyzer=23.0ms Chunker=5.9ms Synthesizer=5.1ms]
 # Also writes full JSON record to profiling.output_file
@@ -220,18 +215,18 @@ All commands run from the `build/` directory.
 ### Ingest + index
 
 ```bash
-./mysearch ingest ../data
-./mysearch build-hnsw
+./moai ingest ../data
+./moai build-hnsw
 ```
 
 ### Question answering
 
 ```bash
-./mysearch ask "where is stockholm"
-./mysearch ask "what is a database" --json
-./mysearch ask "explain how TCP works" --detailed
-./mysearch ask "where is stockholm" --brief
-./mysearch ask "where is stockholm" --profile    # with profiling
+./moai ask "where is stockholm"
+./moai ask "what is a database" --json
+./moai ask "explain how TCP works" --detailed
+./moai ask "where is stockholm" --brief
+./moai ask "where is stockholm" --profile    # with profiling
 cat ../profiling.jsonl
 ```
 
@@ -240,19 +235,19 @@ cat ../profiling.jsonl
 ```bash
 # Edit config/default.conf:
 #   retrieval.retriever = bm25
-./mysearch ask "where is stockholm"    # BM25-only
+./moai ask "where is stockholm"    # BM25-only
 
 # Edit config/default.conf:
 #   retrieval.retriever = hybrid
-./mysearch ask "where is stockholm"    # back to hybrid
+./moai ask "where is stockholm"    # back to hybrid
 ```
 
 ### Other commands
 
 ```bash
-./mysearch search "database"                    # BM25 search
-./mysearch search 'stockholm AND capital'       # Boolean search
-./mysearch hybrid "what is a database"          # Legacy hybrid command
+./moai search "database"                    # BM25 search
+./moai search 'stockholm AND capital'       # Boolean search
+./moai hybrid "what is a database"          # Legacy hybrid command
 ```
 
 ---
@@ -262,16 +257,16 @@ cat ../profiling.jsonl
 ```bash
 cmake .. -DCMAKE_BUILD_TYPE=Release && cmake --build .
 
-./mysearch ingest ../data
-./mysearch build-hnsw
+./moai ingest ../data
+./moai build-hnsw
 
-# Train neural encoder
-./train_encoder --epochs 10 --dim 128
+# Train neural encoder (requires libtorch)
+./moai train-encoder --epochs 10 --dim 128
 
-# Train neural query analyzer
-./mysearch train-qa --epochs 30
+# Train neural query analyzer (requires libtorch)
+./moai train-qa --epochs 30
 
-# Integration tests for all of test cases for one specific combination
+# Integration tests
 bash ../tests/test_qa_integration.sh
 
 # Default matrix (5 combinations × 75 tests = 375 test runs)
@@ -284,21 +279,16 @@ bash ../tests/test_config_matrix.sh rule:bm25:auto rule:hybrid:bow
 bash ../tests/benchmark.sh --repeat 2
 cat ../profiling.jsonl
 
-# Individual flags
-bash ../tests/benchmark.sh --retriever bm25 --repeat 3
-bash ../tests/benchmark.sh --analyzer rule --embedding bow --repeat 2
-
 # Combo format (analyzer:retriever:embedding)
 bash ../tests/benchmark.sh --config rule:hybrid:bow --repeat 3
 bash ../tests/benchmark.sh --config rule:bm25:auto --repeat 3
 
-
 # Manual queries
-./mysearch ask "where is stockholm"
-./mysearch ask "what is a database" --json
-./mysearch ask "explain how TCP works" --detailed
+./moai ask "where is stockholm"
+./moai ask "what is a database" --json
+./moai ask "explain how TCP works" --detailed
 
 # Profile testing
-./mysearch ask "where is stockholm" --profile
-cat ../profiling.jsonls
+./moai ask "where is stockholm" --profile
+cat ../profiling.jsonl
 ```

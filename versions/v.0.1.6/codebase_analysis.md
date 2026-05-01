@@ -1,10 +1,10 @@
-# MoAI v.0.1.5 — Codebase Analysis
+# MoAI v.0.1.6 — Codebase Analysis
 
 ## 1. System Overview
 
 MoAI is a fully self-contained, offline question-answering system written in C++20. It ingests text documents, builds a binary search index, and answers natural language questions using a cognitive **InformationNeed** model — without relying on LLMs or external search libraries.
 
-All tuning parameters are in `config/default.conf`. All vocabularies are in `config/vocabularies/` (4 files). Retrieval algorithms are pluggable via the `IRetriever` interface — config selects which one runs. Per-query performance profiling is available via `profiling.enabled = true`.
+All tuning parameters are in `config/default.conf`. All vocabularies are in `config/vocabularies/` (4 files). Retrieval algorithms are pluggable via the `IRetriever` interface — config selects which one runs. Per-query performance profiling is available via `profiling.enabled = true`. The unified CLI binary is `moai`.
 
 ---
 
@@ -319,7 +319,7 @@ Output: JSON Lines to `profiling.output_file` + brief summary to stderr.
 |------|---------|
 | `sentence_encoder.h/.cpp` | Transformer encoder with sinusoidal PE |
 | `encoder_trainer.h/.cpp` | InfoNCE contrastive training |
-| `train_main.cpp` | Training entry point |
+| `train_main.cpp` | Legacy training entry point (unused — absorbed into `moai train-encoder`) |
 
 ### 6.10 Query Analysis (`src/query/`)
 
@@ -364,7 +364,7 @@ Output: JSON Lines to `profiling.output_file` + brief summary to stderr.
 ## 7. File Structure
 
 ```
-v.0.1.4/
+v.0.1.6/
 +-- config/
 |   +-- default.conf               # 80+ tunable parameters
 |   +-- vocabularies/
