@@ -1,0 +1,38 @@
+# Animals
+
+Animals are multicellular organisms belonging to kingdom Animalia. They exist in diverse environments ranging from the deep ocean to forests, deserts, and polar regions.
+
+Multicellular organisms distinguished by movement, consumption of organic material, complex behavior, and nervous systems.
+
+## Mammals
+
+Mammals are warm-blooded vertebrates characterized by:
+- Fur or hair
+- Mammary glands
+- Live birth (mostly)
+
+Examples:
+- Elephants
+- Tigers
+- Bats
+- Whales
+
+## Birds
+
+Birds are feathered vertebrates with beaks known for:
+- Feathers
+- Hollow bones
+- Beaks
+- Ability to fly (most species)
+
+## Reptiles, Amphibians, and Fish
+
+Reptiles are cold-blooded animals with scales and include crocodiles, turtles, lizards, and snakes. Amphibians such as frogs and salamanders live both in water and on land, with a life cycle that includes metamorphosis. Fish represent the largest group of vertebrates and are aquatic animals that breathe through gills.
+
+## Behavioral Adaptations
+
+Animals exhibit complex behaviors:
+- Migration
+- Hibernation
+- Social organization (e.g., bees, wolves)
+- Communication via sound, scent, movement

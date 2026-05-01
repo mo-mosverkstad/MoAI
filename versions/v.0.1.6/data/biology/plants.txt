@@ -1,0 +1,30 @@
+# Plants
+
+Plants form the base of most food webs through photosynthesis. They convert sunlight, water, and carbon dioxide into oxygen and glucose.
+
+Photosynthetic organisms producing oxygen and forming base of food webs.
+
+## Types of Plants
+
+- Flowering plants (angiosperms)
+- Conifers (gymnosperms): cone-bearing plants like pine trees
+- Ferns: reproduce via spores
+- Mosses and liverworts: non-vascular plants
+- Algae: simple aquatic plants
+
+## Structures
+
+Typical plant structures include:
+- Roots: absorption of water and nutrients, and anchoring
+- Stems: transport of water and nutrients, structural support
+- Leaves: photosynthesis, gas exchange
+- Flowers: reproduction
+
+## Ecological Roles
+
+Plants provide:
+- Oxygen production
+- CO2 absorption
+- Habitat for animals
+- Soil stabilization
+- Food resources (fruits, seeds, leaves)
