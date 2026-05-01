@@ -60,6 +60,7 @@ void Profiler::end_query() {
     if (!enabled_) return;
     records_.push_back(current_);
     write_record(current_);
+    print_summary(current_);
 }
 
 void Profiler::write_record(const ProfileRecord& rec) {
@@ -96,8 +97,20 @@ void Profiler::write_record(const ProfileRecord& rec) {
     f << rec.rss_before_mb << ",\"rss_after\":" << rec.rss_after_mb
       << "},\"quality\":{\"confidence\":" << rec.quality.avg_confidence
       << ",\"agreement\":" << rec.quality.avg_agreement
-      << ",\"validated\":" << rec.quality.validated_count
-      << "/" << rec.quality.total_count
+      << ",\"validated_count\":" << rec.quality.validated_count
+      << ",\"total_count\":" << rec.quality.total_count
       << ",\"fallback_used\":" << (rec.quality.fallback_used ? "true" : "false")
       << ",\"compression\":\"" << rec.quality.compression << "\"}}\n";
+}
+
+void Profiler::print_summary(const ProfileRecord& rec) {
+    std::cerr << "[Profile: Total=" << std::fixed;
+    std::cerr.precision(1);
+    auto it = rec.timing_ms.find("Total");
+    if (it != rec.timing_ms.end()) std::cerr << it->second << "ms";
+    for (auto& [k, v] : rec.timing_ms) {
+        if (k == "Total") continue;
+        if (v >= 0.1) std::cerr << " " << k << "=" << v << "ms";
+    }
+    std::cerr << "]\n";
 }

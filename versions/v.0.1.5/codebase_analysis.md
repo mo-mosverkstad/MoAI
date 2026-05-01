@@ -11,14 +11,22 @@ All tuning parameters are in `config/default.conf`. All vocabularies are in `con
 ## 2. High-Level Architecture
 
 ```
-                         +----------------------+
-                         |      User Query      |
-                         |  [--brief/--detailed] |
-                         +----------+-----------+
+                         +------------------------+
+                         |       User Query       |
+                         | [--brief/--detailed]   |
+                         | [--json] [--profile]   |
+                         +----------+-------------+
                                     |
                          PipelineBuilder::build()
                          assembles all components
                          from config at startup
+                                    |
+  +-----------------------------+   |   +---------------------------+
+  |   Profiling (opt-in)        |   |   |                           |
+  |   ScopeTimers wrap each     |<--+-->|  ConfigValidator          |
+  |   phase, records timing     |       |  fail fast on bad config  |
+  |   + RSS + quality metrics   |       +---------------------------+
+  +-----------------------------+
                                     |
                     +---------------v---------------+
                     |   Query Analysis (pluggable)   |  Phase 1
@@ -69,13 +77,21 @@ All tuning parameters are in `config/default.conf`. All vocabularies are in `con
               +---------------------+---------------------+
                                     |
                     +---------------v---------+
-                    |  JSON / Text Output     |
+                    |  Output                 |
+                    |  - JSON / Text (stdout) |
+                    |  - Profile summary      |
+                    |    (stderr, if --profile)|
+                    |  - profiling.jsonl       |
+                    |    (file, if enabled)    |
                     +-------------------------+
 
 All three pluggable slots are config-driven:
   query.analyzer = auto         # rule | neural | auto
   retrieval.retriever = hybrid   # bm25 | hnsw | hybrid
   embedding.method = auto        # bow | transformer | auto
+
+Profiling (opt-in, zero overhead when disabled):
+  profiling.enabled = false     # or use --profile CLI flag
 ```
 
 ---
@@ -182,19 +198,27 @@ Each module has a cached struct loaded once at startup:
 ```
 1. Config loaded at startup (main.cpp)
 2. ConfigValidator::validate() — fail fast on bad config
+3. Profiler initialized (from config or --profile flag)
 
-3. PipelineBuilder::build(reader, segdir, embeddir)
+4. PipelineBuilder::build(reader, segdir, embeddir)
    -> calls QueryAnalyzerFactory, RetrieverFactory
    -> returns assembled Pipeline
 
-3. pipeline.run(query, opts)
-   a. analyzer->analyze(query)
-   b. ConversationState, SelfAsk expansion, scope override
-   c. QuestionPlanner topological sort
-   d. For each need: retrieve -> chunk -> synthesize -> validate -> compress
-   e. Returns PipelineResult
+5. pipeline.run(query, opts)
+   a. Profiler::begin_query() + record_rss_before()
+   b. [ScopeTimer: QueryAnalyzer] analyzer->analyze(query)
+   c. ConversationState, SelfAsk expansion, scope override
+   d. [ScopeTimer: SelfAsk+Planning] QuestionPlanner topological sort
+   e. For each need:
+      - [ScopeTimer: Retriever] retriever->search()
+      - [ScopeTimer: Chunker] chunk + select
+      - [ScopeTimer: Synthesizer] synthesize
+      - validate, compress, scope adjust, fallback retry
+   f. Record quality metrics + RSS after + Total timing
+   g. Profiler::end_query() -> write JSON Lines + print stderr summary
+   h. Returns PipelineResult
 
-4. commands.cpp formats output (JSON or text)
+6. commands.cpp formats output (JSON or text)
 ```
 
 
@@ -207,17 +231,25 @@ Each module has a cached struct loaded once at startup:
 | File | Purpose |
 |------|---------|
 | `pipeline.h` | Pipeline struct (owns all components), PipelineOptions, PipelineResult |
-| `pipeline.cpp` | Pipeline::run() — QA processing loop with ScopeTimer instrumentation |
+| `pipeline.cpp` | Pipeline::run() — QA processing loop with ScopeTimer instrumentation + quality recording |
 | `pipeline_builder.h` | PipelineBuilder::build() — calls all factories, assembles Pipeline |
 
 ### 6.2 Profiling (`src/profiling/`) — NEW in v.0.1.5
 
 | File | Purpose |
 |------|---------|
-| `profiler.h/.cpp` | Profiler singleton: timing records, RSS measurement, JSON Lines output |
+| `profiler.h/.cpp` | Profiler singleton: timing, RSS, quality metrics, JSON Lines output, stderr summary |
 | `scope_timer.h` | RAII ScopeTimer: records elapsed ms to Profiler on destruction |
 
-Enabled by `profiling.enabled = true`. Zero overhead when disabled. Output: one JSON object per query with timing + memory to `profiling.output_file`.
+Enabled by `profiling.enabled = true` in config or `--profile` CLI flag. Zero overhead when disabled.
+
+Per-query output includes:
+- Component timing (QueryAnalyzer, Retriever, Chunker, Synthesizer, SelfAsk+Planning, Total)
+- Memory RSS before/after (MB)
+- Quality metrics (confidence, agreement, validated count, fallback, compression)
+- Algorithm identities
+
+Output: JSON Lines to `profiling.output_file` + brief summary to stderr.
 
 ### 6.3 Retrieval (`src/retrieval/`)
 
@@ -362,6 +394,9 @@ v.0.1.4/
 +-- tests/
 |   +-- test_*.cpp                  # 76+ GoogleTest unit tests
 |   +-- test_qa_integration.sh      # 75 QA integration tests
+|   +-- test_config_matrix.sh       # Algorithm combination matrix tests
+|   +-- benchmark.sh                # Performance benchmark runner
+|   +-- benchmark_queries.txt       # 15 benchmark queries
 +-- CMakeLists.txt
 +-- build.md
 +-- history.md
@@ -387,12 +422,14 @@ v.0.1.4/
 |-----------|-------|---------------|
 | GoogleTest unit tests | 76+ | Varint, tokenization, query parsing, segment I/O, BM25, boolean/phrase search, HNSW recall, hybrid search |
 | QA integration tests | 75 | Property detection, answer content, validation, multi-need, definition quality, compression, edge cases |
+| Config matrix tests | 5×75 | Algorithm combinations (analyzer × retriever × embedding) |
+| Performance benchmark | 15×N | Per-component timing, memory, quality metrics with statistics (p50/p95/mean/max) |
 
 ---
 
 ## 10. Adding a New Retrieval Algorithm
 
-This is the primary extension point in v.0.1.4. Three files, zero pipeline changes:
+This is the primary extension point. Three files, zero pipeline changes:
 
 ### Step 1: Implement IRetriever
 

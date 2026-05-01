@@ -1,10 +1,10 @@
-# v.0.1.4 — Build & Usage Guide (WSL Ubuntu)
+# v.0.1.5 — Build & Usage Guide (WSL Ubuntu)
 
 ## 1. Prerequisites
 
 ```bash
 sudo apt update
-sudo apt install -y build-essential cmake git unzip pkg-config
+sudo apt install -y build-essential cmake git python3
 ```
 
 ### Optional: Install libtorch (for neural encoder + neural query analyzer)
@@ -20,7 +20,7 @@ mkdir -p ~/opt && mv libtorch ~/opt/libtorch
 ## 2. Build
 
 ```bash
-cd versions/v.0.1.4
+cd versions/v.0.1.5
 mkdir build && cd build
 ```
 
@@ -39,7 +39,7 @@ cmake .. -DCMAKE_BUILD_TYPE=Release \
 cmake --build .
 ```
 
-### With tests
+### With unit tests
 
 ```bash
 cmake .. -DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTS=ON
@@ -67,42 +67,77 @@ bash ../tests/test_qa_integration.sh
 ### Configuration matrix tests
 
 Tests the pluggable algorithm platform across different config combinations.
-Each combo is `analyzer:retriever:embedding`.
 
 ```bash
-# Run default matrix (5 combinations × 75 tests = 375 test runs)
+# Default matrix (5 combinations × 75 tests = 375 test runs)
 bash ../tests/test_config_matrix.sh
 
-# Run specific combinations
+# Specific combinations (analyzer:retriever:embedding)
 bash ../tests/test_config_matrix.sh rule:bm25:auto rule:hybrid:bow
-
-# Run all sensible combinations
-bash ../tests/test_config_matrix.sh \
-    rule:bm25:auto \
-    rule:hybrid:auto \
-    rule:hybrid:bow \
-    rule:hnsw:auto \
-    auto:hybrid:auto
 ```
+
+### Performance benchmark
+
+Runs queries multiple times with profiling and produces timing statistics.
+
+```bash
+# Default: 15 queries × 3 repeats
+bash ../tests/benchmark.sh
+
+# Custom repeat count
+bash ../tests/benchmark.sh --repeat 5
+
+# Test specific algorithm combinations
+bash ../tests/benchmark.sh --retriever bm25 --repeat 3
+bash ../tests/benchmark.sh --retriever hnsw --analyzer rule --repeat 2
+bash ../tests/benchmark.sh --config rule:hybrid:bow --repeat 3
+
+# Custom query set
+# How to define my_queries.txt could be seen as below
+bash ../tests/benchmark.sh --queries my_queries.txt --repeat 10
+
+# Individual flags
+bash ../tests/benchmark.sh --retriever bm25 --repeat 3
+bash ../tests/benchmark.sh --analyzer rule --embedding bow --repeat 2
+
+# Combo format (analyzer:retriever:embedding)
+bash ../tests/benchmark.sh --config rule:hybrid:bow --repeat 3
+bash ../tests/benchmark.sh --config rule:bm25:auto --repeat 3
+```
+
+The `--config` flag accepts `analyzer:retriever:embedding` combo format.
+Individual flags (`--retriever`, `--analyzer`, `--embedding`) also work.
+The profiling.jsonl file is cleared at the start of each benchmark run.
+
+**Custom query file format**: One query per line, plain text. Example `my_queries.txt`:
+
+```
+where is stockholm
+what is a database
+how does TCP ensure reliability
+what are the advantages of solar energy
+history of electric vehicles
+```
+
+The default query set is `tests/benchmark_queries.txt` (15 queries covering all property types).
 
 Example output:
 
 ```
-COMBINATION                      PASSED   FAILED    TOTAL
------------------------------- -------- -------- --------
-rule:bm25:auto                       74        1       75
-rule:hybrid:auto                     75        0       75
-rule:hybrid:bow                      75        0       75
-rule:hnsw:auto                       30       45       75
-auto:hybrid:auto                     75        0       75
------------------------------- -------- -------- --------
-TOTAL                               329       46      375
-```
+Component                 p50      p95     mean      max
+-------------------- -------- -------- -------- --------
+Total                  158.4ms   238.2ms   162.4ms   261.9ms
+QueryAnalyzer           34.9ms    77.0ms    37.9ms    82.9ms
+Retriever               29.7ms    63.0ms    32.4ms    79.7ms
+Chunker                  1.2ms     9.5ms     4.3ms    19.5ms
+Synthesizer              0.1ms    34.7ms     7.0ms    97.4ms
+SelfAsk+Planning         0.0ms     0.0ms     0.0ms     0.0ms
 
-Notes:
-- `hybrid` configurations pass 75/75 (the system is optimized for hybrid retrieval)
-- `bm25` fails 1 compression test (STRONG compression requires hybrid-level agreement)
-- `hnsw` fails 45 tests (semantic-only retrieval misses keyword-dependent answers)
+Queries:    30 runs
+Confidence: mean=0.71 min=0.40 max=0.85
+Memory:     mean delta=0.30MB max delta=0.50MB
+Algorithms: retriever=hybrid, analyzer=rule
+```
 
 ---
 
@@ -113,9 +148,25 @@ All behavior is controlled by config files — no rebuild needed.
 ### Algorithm selection (`config/default.conf`)
 
 ```
-query.analyzer = auto        # rule | neural | auto
-retrieval.retriever = hybrid  # bm25 | hnsw | hybrid
-embedding.method = auto       # bow | transformer | auto
+query.analyzer = auto         # rule | neural | auto
+retrieval.retriever = hybrid   # bm25 | hnsw | hybrid
+embedding.method = auto        # bow | transformer | auto
+```
+
+### Profiling (`config/default.conf`)
+
+```
+profiling.enabled = false              # true to collect data on every query
+profiling.output_file = ../profiling.jsonl   # output path for JSON Lines
+```
+
+Alternatively, use the `--profile` CLI flag for per-invocation profiling:
+
+```bash
+./mysearch ask "where is stockholm" --profile
+# Prints timing summary to stderr:
+#   [Profile: Total=118.7ms Retriever=9.2ms QueryAnalyzer=23.0ms Chunker=5.9ms Synthesizer=5.1ms]
+# Also writes full JSON record to profiling.output_file
 ```
 
 ### Tuning parameters (`config/default.conf`)
@@ -151,6 +202,8 @@ All commands run from the `build/` directory.
 ./mysearch ask "what is a database" --json
 ./mysearch ask "explain how TCP works" --detailed
 ./mysearch ask "where is stockholm" --brief
+./mysearch ask "where is stockholm" --profile    # with profiling
+cat ../profiling.jsonl
 ```
 
 ### Switch algorithms (no rebuild)
@@ -158,13 +211,11 @@ All commands run from the `build/` directory.
 ```bash
 # Edit config/default.conf:
 #   retrieval.retriever = bm25
-# Then run — BM25-only retrieval
-./mysearch ask "where is stockholm"
+./mysearch ask "where is stockholm"    # BM25-only
 
 # Edit config/default.conf:
 #   retrieval.retriever = hybrid
-# Then run — back to hybrid
-./mysearch ask "where is stockholm"
+./mysearch ask "where is stockholm"    # back to hybrid
 ```
 
 ### Other commands
@@ -185,17 +236,34 @@ cmake .. -DCMAKE_BUILD_TYPE=Release && cmake --build .
 ./mysearch ingest ../data
 ./mysearch build-hnsw
 
-# Integration tests
+# Integration tests for all of test cases for one specific combination
 bash ../tests/test_qa_integration.sh
 
-# Matrix tests
+# Default matrix (5 combinations × 75 tests = 375 test runs)
 bash ../tests/test_config_matrix.sh
 
-bash ../tests/test_config_matrix.sh auto:hybrid:auto
+# Specific combinations (analyzer:retriever:embedding)
+bash ../tests/test_config_matrix.sh rule:bm25:auto rule:hybrid:bow
+
+# Benchmark
+bash ../tests/benchmark.sh --repeat 2
+cat ../profiling.jsonl
+
+# Individual flags
+bash ../tests/benchmark.sh --retriever bm25 --repeat 3
+bash ../tests/benchmark.sh --analyzer rule --embedding bow --repeat 2
+
+# Combo format (analyzer:retriever:embedding)
+bash ../tests/benchmark.sh --config rule:hybrid:bow --repeat 3
+bash ../tests/benchmark.sh --config rule:bm25:auto --repeat 3
+
 
 # Manual queries
 ./mysearch ask "where is stockholm"
 ./mysearch ask "what is a database" --json
-./mysearch ask "tell me where stockholm is and why it is important"
 ./mysearch ask "explain how TCP works" --detailed
+
+# Profile testing
+./mysearch ask "where is stockholm" --profile
+cat ../profiling.jsonls
 ```

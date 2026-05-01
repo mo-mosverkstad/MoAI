@@ -8,6 +8,7 @@
 #include "../hybrid/hybrid_builder.h"
 #include "../hybrid/hybrid_search.h"
 #include "../pipeline/pipeline_builder.h"
+#include "../profiling/profiler.h"
 #ifdef HAS_TORCH
 #include "../encoder/encoder_trainer.h"
 #include "../query/neural_query_analyzer.h"
@@ -74,7 +75,7 @@ int run_cli(int argc, char** argv) {
     // Pipeline: Query → Analyze → InformationNeeds[] → Hybrid Retrieve → Chunk Select → Synthesize → Answer
     if (cmd == "ask") {
         if (argc < 3) {
-            std::cerr << "Usage: mysearch ask \"query\" [--json] [--brief] [--detailed]\n";
+            std::cerr << "Usage: mysearch ask \"query\" [--json] [--brief] [--detailed] [--profile]\n";
             return 1;
         }
 
@@ -82,16 +83,19 @@ int run_cli(int argc, char** argv) {
         bool json = false;
         bool force_brief = false;
         bool force_detailed = false;
+        bool force_profile = false;
         for (int i = 3; i < argc; i++) {
             std::string arg = argv[i];
             if (arg == "--json") json = true;
             else if (arg == "--brief") force_brief = true;
             else if (arg == "--detailed") force_detailed = true;
+            else if (arg == "--profile") force_profile = true;
         }
         std::string segdir = "../segments/seg_000001";
         std::string embeddir = "../embeddings";
 
         SegmentReader reader(segdir);
+        if (force_profile) Profiler::instance().set_enabled(true);
         auto pipeline = PipelineBuilder::build(reader, segdir, embeddir);
 
         PipelineOptions opts;

@@ -63,6 +63,7 @@ public:
 private:
     Profiler() = default;
     void write_record(const ProfileRecord& rec);
+    void print_summary(const ProfileRecord& rec);
 
     bool enabled_ = false;
     ProfileRecord current_;
