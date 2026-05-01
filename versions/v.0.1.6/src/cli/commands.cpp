@@ -24,16 +24,16 @@
 int run_cli(int argc, char** argv) {
     if (argc < 2) {
         std::cerr << "Usage:\n"
-                  << "  mysearch ingest <path>\n"
-                  << "  mysearch search <query>\n"
-                  << "  mysearch build-hnsw\n"
-                  << "  mysearch hybrid <query>\n"
-                  << "  mysearch ask <query>\n"
+                  << "  moai ingest <path>\n"
+                  << "  moai search <query>\n"
+                  << "  moai build-hnsw\n"
+                  << "  moai hybrid <query>\n"
+                  << "  moai ask <query> [--json] [--brief] [--detailed] [--profile]\n"
 #ifdef HAS_TORCH
-                  << "  mysearch train-encoder\n"
-                  << "  mysearch train-qa\n"
+                  << "  moai train-encoder [--epochs N] [--dim D] [--lr R]\n"
+                  << "  moai train-qa [--epochs N]\n"
 #endif
-                  << "  mysearch run <cmd> [args...]\n";
+                  << "  moai run <cmd> [args...]\n";
         return 1;
     }
 
@@ -75,7 +75,7 @@ int run_cli(int argc, char** argv) {
     // Pipeline: Query → Analyze → InformationNeeds[] → Hybrid Retrieve → Chunk Select → Synthesize → Answer
     if (cmd == "ask") {
         if (argc < 3) {
-            std::cerr << "Usage: mysearch ask \"query\" [--json] [--brief] [--detailed] [--profile]\n";
+            std::cerr << "Usage: moai ask \"query\" [--json] [--brief] [--detailed] [--profile]\n";
             return 1;
         }
 
@@ -194,7 +194,7 @@ int run_cli(int argc, char** argv) {
     // === Existing hybrid command (kept for backward compatibility) ===
     if (cmd == "hybrid") {
         if (argc < 3) {
-            std::cerr << "Usage: mysearch hybrid \"query\" [--json]\n";
+            std::cerr << "Usage: moai hybrid \"query\" [--json]\n";
             return 1;
         }
 
@@ -307,6 +307,44 @@ int run_cli(int argc, char** argv) {
     }
 
 #ifdef HAS_TORCH
+    if (cmd == "train-encoder") {
+        std::string segdir = "../segments/seg_000001";
+        std::string embeddir = "../embeddings";
+        int epochs = 10;
+        double lr = 3e-4;
+        int64_t dim = 128;
+        for (int i = 2; i < argc; i++) {
+            std::string arg = argv[i];
+            if (arg == "--epochs" && i + 1 < argc) epochs = std::stoi(argv[++i]);
+            else if (arg == "--lr" && i + 1 < argc) lr = std::stod(argv[++i]);
+            else if (arg == "--dim" && i + 1 < argc) dim = std::stoi(argv[++i]);
+            else if (arg == "--segdir" && i + 1 < argc) segdir = argv[++i];
+            else if (arg == "--embeddir" && i + 1 < argc) embeddir = argv[++i];
+        }
+        std::filesystem::create_directories(embeddir);
+        std::cerr << "Loading segment from " << segdir << "...\n";
+        SegmentReader reader(segdir);
+        std::cerr << "Building vocabulary...\n";
+        Vocabulary vocab;
+        vocab.build_from_terms(reader.all_terms());
+        vocab.save(embeddir + "/vocab.txt");
+        std::cerr << "Vocab size: " << vocab.size() << "\n";
+        std::cerr << "Initializing encoder (dim=" << dim << ")...\n";
+        EncoderTrainer trainer(vocab, dim, /*heads=*/4, /*layers=*/2, /*max_len=*/256);
+        std::cerr << "Training for " << epochs << " epochs...\n";
+        trainer.train(reader, epochs, lr, /*batch_size=*/4);
+        std::string model_path = embeddir + "/encoder.pt";
+        trainer.save(model_path);
+        std::cerr << "Model saved to " << model_path << "\n";
+        auto emb = trainer.encode("what is a database");
+        std::cerr << "Sample embedding dim=" << emb.size() << " [";
+        for (size_t i = 0; i < std::min<size_t>(5, emb.size()); i++)
+            std::cerr << emb[i] << (i + 1 < emb.size() ? ", " : "");
+        std::cerr << "...]\n";
+        std::cerr << "Done.\n";
+        return 0;
+    }
+
     if (cmd == "train-qa") {
         std::string segdir = "../segments/seg_000001";
         std::string embeddir = "../embeddings";

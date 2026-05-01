@@ -43,3 +43,37 @@ Unify the CLI entry point under the project name `moai`. All user-facing command
 - `./moai ingest ../data` — works
 - `./moai build-hnsw` — works
 - 75/75 integration tests pass
+
+---
+
+## Step 3: Absorb `train_encoder` into `moai train-encoder`
+
+### Goal
+
+Eliminate the standalone `train_encoder` binary. All training commands are now subcommands of `moai`.
+
+### What Was Changed
+
+| File | Change |
+|------|--------|
+| `src/cli/commands.cpp` | Added `train-encoder` subcommand (same logic as `train_main.cpp`): `--epochs`, `--dim`, `--lr`, `--segdir`, `--embeddir`. Updated all usage strings from `mysearch` to `moai`. |
+| `CMakeLists.txt` | Removed `add_executable(train_encoder ...)` and its `target_link_libraries`. |
+
+### Unified CLI
+
+```
+moai ingest <path>
+moai search <query>
+moai build-hnsw
+moai hybrid <query>
+moai ask <query> [--json] [--brief] [--detailed] [--profile]
+moai train-encoder [--epochs N] [--dim D] [--lr R]    # requires libtorch
+moai train-qa [--epochs N]                             # requires libtorch
+moai run <cmd> [args...]
+```
+
+### Verification
+
+- Clean rebuild produces single `./moai` binary (no `train_encoder` binary)
+- `./moai` (no args) shows updated usage with `moai` prefix
+- 75/75 integration tests pass

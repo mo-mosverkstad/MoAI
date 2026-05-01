@@ -77,9 +77,6 @@ if(USE_TORCH)
     target_link_libraries(moai_encoder PUBLIC "${TORCH_LIBRARIES}" moai_lib)
     target_compile_definitions(moai_encoder PUBLIC HAS_TORCH=1)
 
-    add_executable(train_encoder src/encoder/train_main.cpp)
-    target_link_libraries(train_encoder PRIVATE moai_encoder)
-
     target_link_libraries(moai PRIVATE moai_encoder)
     target_compile_definitions(moai PRIVATE HAS_TORCH=1)
 endif()
