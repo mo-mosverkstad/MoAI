@@ -11,6 +11,7 @@ PipelineResult Pipeline::run(const std::string& query, const PipelineOptions& op
     profiler.begin_query(query);
     profiler.record_algorithm("analyzer", analyzer_->name());
     profiler.record_algorithm("retriever", retriever_->name());
+    profiler.record_rss_before();
 
     // 1. Analyze query
     std::vector<InformationNeed> needs;
@@ -182,6 +183,7 @@ PipelineResult Pipeline::run(const std::string& query, const PipelineOptions& op
     auto total_end = std::chrono::high_resolution_clock::now();
     profiler.record("Total",
         std::chrono::duration<double, std::milli>(total_end - total_start).count());
+    profiler.record_rss_after();
     profiler.end_query();
 
     return result;

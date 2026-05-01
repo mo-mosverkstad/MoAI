@@ -3,6 +3,18 @@
 #include <fstream>
 #include <iostream>
 
+static double get_rss_mb() {
+#ifdef __linux__
+    std::ifstream f("/proc/self/statm");
+    if (!f.is_open()) return 0.0;
+    long pages_total, pages_rss;
+    f >> pages_total >> pages_rss;
+    return pages_rss * 4096.0 / (1024.0 * 1024.0); // pages -> MB
+#else
+    return 0.0;
+#endif
+}
+
 Profiler& Profiler::instance() {
     static Profiler p;
     return p;
@@ -27,6 +39,16 @@ void Profiler::record_algorithm(const std::string& slot, const std::string& name
 void Profiler::record_needs_count(int count) {
     if (!enabled_) return;
     current_.needs_count = count;
+}
+
+void Profiler::record_rss_before() {
+    if (!enabled_) return;
+    current_.rss_before_mb = get_rss_mb();
+}
+
+void Profiler::record_rss_after() {
+    if (!enabled_) return;
+    current_.rss_after_mb = get_rss_mb();
 }
 
 void Profiler::end_query() {
@@ -63,5 +85,8 @@ void Profiler::write_record(const ProfileRecord& rec) {
         f << v;
         first = false;
     }
-    f << "},\"needs_count\":" << rec.needs_count << "}\n";
+    f << "},\"needs_count\":" << rec.needs_count
+      << ",\"memory_mb\":{\"rss_before\":";
+    f.precision(2);
+    f << rec.rss_before_mb << ",\"rss_after\":" << rec.rss_after_mb << "}}\n";
 }

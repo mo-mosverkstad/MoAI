@@ -10,6 +10,8 @@ struct ProfileRecord {
     std::unordered_map<std::string, double> timing_ms;
     std::unordered_map<std::string, std::string> algorithms;
     int needs_count = 0;
+    double rss_before_mb = 0.0;
+    double rss_after_mb = 0.0;
 };
 
 class Profiler {
@@ -34,6 +36,10 @@ public:
 
     // Finalize current query and store the record
     void end_query();
+
+    // Record memory RSS (call before and after pipeline run)
+    void record_rss_before();
+    void record_rss_after();
 
     // Get all collected records
     const std::vector<ProfileRecord>& records() const { return records_; }

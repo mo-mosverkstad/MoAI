@@ -214,10 +214,10 @@ Each module has a cached struct loaded once at startup:
 
 | File | Purpose |
 |------|---------|
-| `profiler.h/.cpp` | Profiler singleton: begin_query, record, end_query, JSON Lines output |
+| `profiler.h/.cpp` | Profiler singleton: timing records, RSS measurement, JSON Lines output |
 | `scope_timer.h` | RAII ScopeTimer: records elapsed ms to Profiler on destruction |
 
-Enabled by `profiling.enabled = true`. Zero overhead when disabled. Output: one JSON object per query to `profiling.output_file`.
+Enabled by `profiling.enabled = true`. Zero overhead when disabled. Output: one JSON object per query with timing + memory to `profiling.output_file`.
 
 ### 6.3 Retrieval (`src/retrieval/`)
 

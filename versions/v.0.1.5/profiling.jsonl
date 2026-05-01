@@ -1,2 +1,1 @@
-{"query":"what is stockholm","algorithms":{"retriever":"hybrid","analyzer":"rule"},"timing_ms":{"Total":75.06,"Synthesizer":6.20,"Chunker":5.98,"Retriever":11.46,"SelfAsk+Planning":0.01,"QueryAnalyzer":25.65},"needs_count":1}
-{"query":"where is japan","algorithms":{"retriever":"hybrid","analyzer":"rule"},"timing_ms":{"Total":86.19,"Synthesizer":7.54,"Chunker":19.72,"Retriever":12.11,"SelfAsk+Planning":0.00,"QueryAnalyzer":24.27},"needs_count":1}
+{"query":"what is stockholm","algorithms":{"retriever":"hybrid","analyzer":"rule"},"timing_ms":{"Total":96.24,"Synthesizer":5.43,"Chunker":5.43,"Retriever":8.87,"SelfAsk+Planning":0.00,"QueryAnalyzer":32.63},"needs_count":1,"memory_mb":{"rss_before":5.38,"rss_after":5.75}}

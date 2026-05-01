@@ -73,3 +73,39 @@ QueryAnalyzer dominates (~33%) because it loads vocabularies on first call. Retr
 All 75 tests pass: `Results: 75 passed, 0 failed, 75 total`
 
 Profiling tested: enabled → 2 queries → correct JSON Lines output → disabled → no output file created.
+
+
+---
+
+## Step 2: Memory RSS Measurement
+
+### Goal
+
+Add before/after RSS (Resident Set Size) measurement to each profiled query, enabling memory usage analysis per algorithm configuration.
+
+### Implementation
+
+- Read `/proc/self/statm` (Linux/WSL) for RSS in pages, convert to MB
+- Call `record_rss_before()` at start of Pipeline::run()
+- Call `record_rss_after()` at end, before end_query()
+- Portable: returns 0.0 on non-Linux platforms (graceful degradation)
+
+### Output Format
+
+```json
+{"query":"what is stockholm","algorithms":{...},"timing_ms":{...},"needs_count":1,"memory_mb":{"rss_before":5.38,"rss_after":5.75}}
+```
+
+The delta (rss_after - rss_before) shows per-query memory allocation. Useful for comparing algorithm memory footprints across configurations.
+
+### Files Modified
+
+| File | What Changed |
+|------|-------------|
+| `src/profiling/profiler.h` | Added rss_before_mb/rss_after_mb to ProfileRecord; added record_rss_before/after methods |
+| `src/profiling/profiler.cpp` | Added get_rss_mb() reading /proc/self/statm; RSS fields in JSON output |
+| `src/pipeline/pipeline.cpp` | Added record_rss_before/after calls |
+
+### Integration Test Results
+
+All 75 tests pass: `Results: 75 passed, 0 failed, 75 total`
