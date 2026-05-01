@@ -76,7 +76,7 @@ printf "\nRunning"
 for run in $(seq 1 $REPEAT); do
     while IFS= read -r query || [ -n "$query" ]; do
         [ -z "$query" ] && continue
-        ./mysearch ask "$query" $PROFILE_FLAG < /dev/null > /dev/null 2>/dev/null
+        ./moai ask "$query" $PROFILE_FLAG < /dev/null > /dev/null 2>/dev/null
         printf "."
     done < "$QUERIES"
 done

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(mysearch LANGUAGES CXX)
+project(moai LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 option(BUILD_TESTS "Build tests" ON)
 option(USE_TORCH "Build with libtorch for neural encoder" OFF)
 
-add_library(mysearch_lib
+add_library(moai_lib
     src/common/file_utils.cpp
     src/common/varint.cpp
     src/common/config.cpp
@@ -56,10 +56,10 @@ add_library(mysearch_lib
     src/tools/sandbox.cpp
 )
 
-target_include_directories(mysearch_lib PUBLIC src)
+target_include_directories(moai_lib PUBLIC src)
 
-add_executable(mysearch src/cli/main.cpp src/cli/commands.cpp)
-target_link_libraries(mysearch PRIVATE mysearch_lib)
+add_executable(moai src/cli/main.cpp src/cli/commands.cpp)
+target_link_libraries(moai PRIVATE moai_lib)
 
 if(USE_TORCH)
     find_package(Torch REQUIRED)
@@ -68,20 +68,20 @@ if(USE_TORCH)
         add_compile_definitions(_GLIBCXX_USE_CXX11_ABI=0)
     endif()
 
-    add_library(mysearch_encoder
+    add_library(moai_encoder
         src/encoder/sentence_encoder.cpp
         src/encoder/encoder_trainer.cpp
         src/query/neural_query_analyzer.cpp
     )
-    target_include_directories(mysearch_encoder PUBLIC src)
-    target_link_libraries(mysearch_encoder PUBLIC "${TORCH_LIBRARIES}" mysearch_lib)
-    target_compile_definitions(mysearch_encoder PUBLIC HAS_TORCH=1)
+    target_include_directories(moai_encoder PUBLIC src)
+    target_link_libraries(moai_encoder PUBLIC "${TORCH_LIBRARIES}" moai_lib)
+    target_compile_definitions(moai_encoder PUBLIC HAS_TORCH=1)
 
     add_executable(train_encoder src/encoder/train_main.cpp)
-    target_link_libraries(train_encoder PRIVATE mysearch_encoder)
+    target_link_libraries(train_encoder PRIVATE moai_encoder)
 
-    target_link_libraries(mysearch PRIVATE mysearch_encoder)
-    target_compile_definitions(mysearch PRIVATE HAS_TORCH=1)
+    target_link_libraries(moai PRIVATE moai_encoder)
+    target_compile_definitions(moai PRIVATE HAS_TORCH=1)
 endif()
 
 if(BUILD_TESTS)
@@ -96,7 +96,7 @@ if(BUILD_TESTS)
 
     enable_testing()
 
-    add_executable(mysearch_tests
+    add_executable(moai_tests
         tests/test_varint.cpp
         tests/test_tokenizer.cpp
         tests/test_query_parser.cpp
@@ -106,7 +106,7 @@ if(BUILD_TESTS)
         tests/test_hnsw.cpp
         tests/test_hybrid.cpp
     )
-    target_link_libraries(mysearch_tests PRIVATE mysearch_lib GTest::gtest_main)
+    target_link_libraries(moai_tests PRIVATE moai_lib GTest::gtest_main)
     include(GoogleTest)
-    gtest_discover_tests(mysearch_tests)
+    gtest_discover_tests(moai_tests)
 endif()

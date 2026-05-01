@@ -4,8 +4,8 @@
 #
 # Usage:
 #   cd build
-#   ./mysearch ingest ../data
-#   ./mysearch build-hnsw
+#   ./moai ingest ../data
+#   ./moai build-hnsw
 #   bash ../tests/test_qa_integration.sh
 
 set +e
@@ -29,7 +29,7 @@ check() {
     TOTAL=$((TOTAL + 1))
 
     local output
-    output=$(./mysearch ask "$query" --json 2>/dev/null)
+    output=$(./moai ask "$query" --json 2>/dev/null)
     if [ $? -ne 0 ] || [ -z "$output" ]; then
         FAIL=$((FAIL + 1))
         printf "${RED}FAIL${NC} %s — command failed\n" "$desc"
@@ -455,7 +455,7 @@ check_compression() {
     local desc="$1" query="$2" expect_comp="$3"
     TOTAL=$((TOTAL + 1))
     local output
-    output=$(./mysearch ask "$query" --json 2>/dev/null)
+    output=$(./moai ask "$query" --json 2>/dev/null)
     if [ $? -ne 0 ] || [ -z "$output" ]; then
         FAIL=$((FAIL + 1))
         printf "${RED}FAIL${NC} %s — command failed\n" "$desc"
