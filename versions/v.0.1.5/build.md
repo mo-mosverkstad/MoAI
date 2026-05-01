@@ -139,6 +139,35 @@ Memory:     mean delta=0.30MB max delta=0.50MB
 Algorithms: retriever=hybrid, analyzer=rule
 ```
 
+### (optional, requires libtorch): Train neural encoder
+Improves retrieval (the hybrid search step):
+* Replaces the random BoW embedding model with a trained Transformer sentence encoder
+* The HNSW vector index will use semantically meaningful embeddings instead of bag-of-words vectors
+* Documents that are semantically similar to the query (even without exact keyword overlap) will rank higher
+* Impact: better document ranking, especially for paraphrased or implicit queries like "Is Stockholm close to the sea?"
+
+```bash
+./train_encoder --epochs 10 --dim 128
+./mysearch hybrid "what is a database"
+```
+
+### (optional, requires libtorch): Train neural query analyzer
+Improves query analysis (the InformationNeed extraction step):
+* Replaces the rule-based property/entity detection with a neural multi-task classifier
+* Better entity extraction via BIO tagging (learned, not longest-keyword heuristic)
+* Better property detection for unusual phrasings
+* However: the neural analyzer currently produces a single InformationNeed per query — it doesn't support multi-need decomposition. So multi-clause queries like "tell me where stockholm is and why it is important" would lose the clause-splitting capability and produce only one need.
+
+```bash
+./mysearch train-qa --epochs 30
+./mysearch ask "when was the transistor invented"
+# stderr: "Using neural query analyzer"
+```
+
+Note: The neural analyzer currently produces a single InformationNeed per query
+(mapped from its legacy QueryAnalysis output). Multi-need decomposition is only
+available via the rule-based analyzer in this version.
+
 ---
 
 ## 4. Configuration
@@ -235,6 +264,12 @@ cmake .. -DCMAKE_BUILD_TYPE=Release && cmake --build .
 
 ./mysearch ingest ../data
 ./mysearch build-hnsw
+
+# Train neural encoder
+./train_encoder --epochs 10 --dim 128
+
+# Train neural query analyzer
+./mysearch train-qa --epochs 30
 
 # Integration tests for all of test cases for one specific combination
 bash ../tests/test_qa_integration.sh
