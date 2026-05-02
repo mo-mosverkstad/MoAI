@@ -1,0 +1,61 @@
+# Rainforests
+
+## Definition
+
+Tropical rainforests are dense, warm, wet forests found near the equator. They receive at least 1,750 mm of rainfall per year (some exceed 10,000 mm) and maintain temperatures between 20-34°C year-round with minimal seasonal variation.
+
+## Distribution
+
+Tropical rainforests are found in three main regions:
+
+- Central and South America: Amazon basin (largest), Central American forests
+- Central and West Africa: Congo basin (second largest), West African forests
+- Southeast Asia and Oceania: Indonesia, Malaysia, Papua New Guinea, northeastern Australia
+
+Rainforests cover approximately 6% of Earth's land surface (down from 14% historically).
+
+## Structure
+
+Rainforests have distinct vertical layers:
+
+- Emergent layer (45-55 m): tallest trees that rise above the canopy, exposed to wind and sun
+- Canopy (25-45 m): continuous layer of treetops forming a "roof." Receives most sunlight. Most biodiversity lives here.
+- Understory (5-25 m): shade-tolerant trees and shrubs, receives only 2-5% of sunlight
+- Forest floor (0-5 m): very dark, decomposing leaves, fungi, insects. Surprisingly thin soil.
+
+## Biodiversity
+
+Rainforests contain over 50% of all species on Earth despite covering only 6% of land:
+
+- Amazon alone contains approximately 10% of all species on Earth
+- One hectare of rainforest may contain 300+ tree species (temperate forests: 10-20)
+- Insects: millions of species, many undescribed (one tree in Panama yielded 1,200 beetle species)
+- Plants: 80,000 plant species in the Amazon alone
+- Animals: jaguars, gorillas, orangutans, toucans, poison dart frogs, anacondas
+- New species discovered regularly (average 2 new species per week in the Amazon)
+
+## Ecosystem Services
+
+- Carbon storage: tropical forests store approximately 250 billion tonnes of carbon
+- Oxygen production: often called "lungs of the Earth" (though most oxygen is consumed locally)
+- Water cycle: trees release water vapor through transpiration, generating rainfall (the Amazon creates 50% of its own rain)
+- Medicine: 25% of modern medicines derive from rainforest plants (quinine, curare, vincristine)
+- Climate regulation: cooling effect through evapotranspiration
+
+## Deforestation
+
+Tropical deforestation is one of the most urgent environmental crises:
+
+- Rate: approximately 10 million hectares lost per year (2015-2020)
+- Amazon: lost approximately 17% of its forest in the last 50 years
+- Causes: cattle ranching (80% in Amazon), soy and palm oil plantations, logging, mining, road building
+- Consequences: biodiversity loss, carbon emissions (10% of global total), disrupted water cycles, indigenous displacement
+- Tipping point: scientists warn the Amazon may be approaching a point where it converts to savanna
+
+## Conservation
+
+- Protected areas: national parks, indigenous reserves, biological corridors
+- REDD+ (Reducing Emissions from Deforestation): financial incentives to keep forests standing
+- Sustainable forestry: selective logging with replanting
+- Consumer pressure: certification schemes (FSC timber, RSPO palm oil)
+- Indigenous land rights: indigenous-managed forests have lower deforestation rates

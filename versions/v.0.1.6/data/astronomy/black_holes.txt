@@ -1,0 +1,40 @@
+# Black Holes
+
+## Definition
+
+A black hole is a region of spacetime where gravity is so strong that nothing, not even light or other electromagnetic radiation, can escape once past the event horizon. Black holes are predicted by Einstein's general theory of relativity, which describes gravity as the curvature of spacetime caused by mass and energy.
+
+## Formation
+
+Black holes form through several mechanisms:
+
+- Stellar collapse: when a massive star (more than about 25 solar masses) exhausts its nuclear fuel, its core collapses under gravity. If the remaining core exceeds about 3 solar masses (the Tolman-Oppenheimer-Volkoff limit), it becomes a black hole.
+- Supermassive black hole formation: the origin of supermassive black holes (millions to billions of solar masses) is still debated. They may form from the merger of smaller black holes, direct collapse of massive gas clouds, or growth from stellar-mass seeds.
+- Primordial black holes: hypothetical black holes that may have formed in the extreme density of the early universe shortly after the Big Bang.
+
+## Structure
+
+Key features of a black hole:
+
+- Singularity: the point of theoretically infinite density at the center
+- Event horizon: the boundary beyond which escape is impossible. Its radius is the Schwarzschild radius: r = 2GM/c²
+- Photon sphere: the region where photons orbit the black hole
+- Accretion disk: matter spiraling into the black hole, heated to extreme temperatures
+- Relativistic jets: some black holes emit powerful jets of plasma at near-light speed
+
+## Types
+
+- Stellar black holes: 3-100 solar masses, formed from collapsed stars
+- Intermediate black holes: 100-100,000 solar masses, evidence is limited
+- Supermassive black holes: millions to billions of solar masses, found at the centers of most galaxies
+- Sagittarius A*: the supermassive black hole at the center of the Milky Way, approximately 4 million solar masses
+
+## Hawking Radiation
+
+In 1974, Stephen Hawking theorized that black holes emit thermal radiation due to quantum effects near the event horizon. This means black holes slowly lose mass and eventually evaporate, though for stellar-mass black holes this process would take far longer than the current age of the universe.
+
+## Observations
+
+- 2015: LIGO detects gravitational waves from merging black holes for the first time
+- 2019: Event Horizon Telescope captures the first image of a black hole (M87*, 6.5 billion solar masses)
+- 2022: First image of Sagittarius A*, the Milky Way's central black hole

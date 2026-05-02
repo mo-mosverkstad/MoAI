@@ -1,0 +1,52 @@
+# Cryptocurrency
+
+## Definition
+
+Cryptocurrency is a digital or virtual currency that uses cryptography for security and operates on decentralized networks based on blockchain technology. Unlike traditional currencies, cryptocurrencies are not issued or controlled by any central authority (government or bank).
+
+## Bitcoin
+
+Bitcoin was created in 2009 by an anonymous person or group using the pseudonym Satoshi Nakamoto. It was the first cryptocurrency and remains the largest by market capitalization.
+
+Key features:
+
+- Limited supply: maximum 21 million bitcoins will ever exist (approximately 19.5 million mined by 2024)
+- Mining: new bitcoins created by solving complex mathematical puzzles (proof of work)
+- Halving: mining reward halves approximately every 4 years (reduces inflation rate)
+- Pseudonymous: transactions are public but not directly linked to real identities
+- Irreversible: transactions cannot be reversed once confirmed
+
+## Blockchain Technology
+
+A blockchain is a distributed, immutable ledger that records all transactions:
+
+- Blocks: groups of transactions bundled together
+- Chain: each block contains a hash of the previous block, creating an unbreakable chain
+- Decentralization: copies maintained by thousands of nodes worldwide
+- Consensus mechanisms: rules for agreeing on the valid state of the ledger
+  - Proof of Work (PoW): miners compete to solve puzzles (Bitcoin) — energy-intensive
+  - Proof of Stake (PoS): validators stake cryptocurrency as collateral (Ethereum since 2022) — energy-efficient
+
+## Other Cryptocurrencies
+
+- Ethereum (2015): programmable blockchain supporting smart contracts and decentralized applications (DApps)
+- Stablecoins: pegged to fiat currencies (USDT, USDC) — designed to minimize volatility
+- Ripple (XRP): designed for fast international payments between financial institutions
+- Cardano, Solana, Polkadot: alternative smart contract platforms
+
+## Advantages
+
+- Borderless transactions: send money anywhere without intermediaries
+- Financial inclusion: accessible to anyone with internet access (1.4 billion unbanked adults)
+- Transparency: all transactions publicly verifiable
+- Censorship resistance: no single entity can freeze accounts or block transactions
+- Programmability: smart contracts automate complex financial agreements
+
+## Risks and Criticisms
+
+- Volatility: extreme price swings (Bitcoin has dropped 80%+ multiple times)
+- Energy consumption: Bitcoin mining uses approximately 150 TWh/year (comparable to a small country)
+- Illicit use: money laundering, ransomware payments, dark web transactions
+- Regulatory uncertainty: legal status varies by country
+- Scams and fraud: rug pulls, Ponzi schemes, exchange collapses (FTX, 2022)
+- Environmental impact: e-waste from obsolete mining hardware

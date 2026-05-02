@@ -1,0 +1,48 @@
+# Coffee
+
+## Origins
+
+Coffee originated in Ethiopia, where legend says a goat herder named Kaldi noticed his goats became energetic after eating berries from a certain tree around 850 AD. By the 15th century, coffee was cultivated in Yemen and traded throughout the Arab world. Coffeehouses (qahveh khaneh) became centers of social activity and intellectual exchange.
+
+## The Coffee Plant
+
+Coffee comes from the seeds (beans) of plants in the genus Coffea:
+
+- Coffea arabica: accounts for 60-70% of world production. Grown at higher altitudes, more complex flavor, lower caffeine (1.2-1.5%).
+- Coffea canephora (robusta): accounts for 30-40%. Grown at lower altitudes, stronger and more bitter, higher caffeine (2.2-2.7%).
+- Coffee belt: grown commercially between the Tropics of Cancer and Capricorn (Brazil, Vietnam, Colombia, Ethiopia, Indonesia are top producers).
+
+## Processing
+
+From cherry to cup:
+
+1. Harvesting: ripe coffee cherries picked by hand or machine
+2. Processing: removing fruit from the seed (washed, natural/dry, or honey process)
+3. Drying: reducing moisture content to 10-12%
+4. Milling: removing parchment layer, grading by size and density
+5. Roasting: green beans heated to 180-230°C, developing flavor through Maillard reaction and caramelization
+6. Grinding: particle size affects extraction (fine for espresso, coarse for French press)
+7. Brewing: hot water extracts soluble compounds from ground coffee
+
+## Brewing Methods
+
+- Espresso: high-pressure (9 bars) extraction through finely ground coffee, 25-30 seconds
+- Pour-over (V60, Chemex): water poured over grounds in a filter, clean and bright flavor
+- French press: coarse grounds steeped in hot water, full-bodied
+- Aeropress: pressure and immersion combined, versatile
+- Cold brew: grounds steeped in cold water for 12-24 hours, smooth and low-acid
+- Moka pot: stovetop pressure brewer, strong concentrated coffee
+
+## Caffeine
+
+Caffeine is a natural stimulant that blocks adenosine receptors in the brain, reducing drowsiness:
+
+- Average cup of coffee: 80-100 mg caffeine
+- Half-life: approximately 5 hours (varies by individual)
+- Effects: increased alertness, improved concentration, elevated mood
+- Safe daily intake: up to 400 mg for most adults (about 4 cups)
+- Withdrawal symptoms: headache, fatigue, irritability (peak at 24-48 hours)
+
+## Global Industry
+
+Coffee is the world's second most traded commodity after crude oil. Over 2.25 billion cups are consumed daily worldwide. The industry employs approximately 125 million people globally.

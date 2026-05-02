@@ -1,0 +1,42 @@
+# Chemical Reactions
+
+## Definition
+
+A chemical reaction is a process in which one or more substances (reactants) are converted into different substances (products). Chemical bonds are broken and new bonds are formed, but atoms are neither created nor destroyed (conservation of mass).
+
+## Types of Reactions
+
+- Synthesis (combination): A + B → AB (hydrogen + oxygen → water)
+- Decomposition: AB → A + B (water → hydrogen + oxygen via electrolysis)
+- Single replacement: A + BC → AC + B (zinc + hydrochloric acid → zinc chloride + hydrogen)
+- Double replacement: AB + CD → AD + CB (silver nitrate + sodium chloride → silver chloride + sodium nitrate)
+- Combustion: fuel + O₂ → CO₂ + H₂O + energy (burning methane, wood, gasoline)
+- Oxidation-reduction (redox): transfer of electrons between species
+
+## Reaction Rates
+
+Factors affecting how fast reactions occur:
+
+- Temperature: higher temperature increases molecular kinetic energy and collision frequency (roughly doubles rate per 10°C increase)
+- Concentration: more reactant molecules increase collision frequency
+- Surface area: smaller particles expose more surface for reaction
+- Catalysts: lower the activation energy without being consumed (enzymes are biological catalysts)
+- Pressure: affects gas-phase reactions (higher pressure increases concentration)
+
+## Activation Energy
+
+Every reaction requires a minimum energy input (activation energy) to begin. Catalysts lower this barrier, allowing reactions to proceed faster at lower temperatures. Enzymes can accelerate reactions by factors of 10⁶ to 10¹² compared to uncatalyzed rates.
+
+## Equilibrium
+
+Many reactions are reversible — products can reform reactants:
+
+- Dynamic equilibrium: forward and reverse reactions occur at equal rates
+- Le Chatelier's principle: if a system at equilibrium is disturbed, it shifts to counteract the disturbance
+- Equilibrium constant (K): ratio of product concentrations to reactant concentrations at equilibrium
+
+## Energy in Reactions
+
+- Exothermic reactions: release energy (combustion, neutralization) — products have less energy than reactants
+- Endothermic reactions: absorb energy (photosynthesis, melting ice) — products have more energy than reactants
+- Enthalpy (ΔH): heat change at constant pressure (negative = exothermic, positive = endothermic)

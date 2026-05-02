@@ -1,0 +1,60 @@
+# Photosynthesis
+
+## Definition
+
+Photosynthesis is the process by which plants, algae, and some bacteria convert light energy into chemical energy stored in glucose. It is the foundation of nearly all life on Earth, producing the oxygen we breathe and the food we eat.
+
+Overall equation: 6CO₂ + 6H₂O + light energy → C₆H₁₂O₆ + 6O₂
+
+## Where It Occurs
+
+Photosynthesis takes place in chloroplasts — organelles found in plant cells and algae:
+
+- Thylakoids: membrane-enclosed compartments where light reactions occur
+- Grana: stacks of thylakoids
+- Stroma: fluid surrounding thylakoids where the Calvin cycle occurs
+- Chlorophyll: green pigment that absorbs red and blue light, reflects green (why plants are green)
+- Accessory pigments: carotenoids (orange/yellow) and phycobilins absorb additional wavelengths
+
+## Light Reactions (Thylakoid Membranes)
+
+1. Chlorophyll absorbs light energy, exciting electrons to higher energy levels
+2. Water molecules are split (photolysis): 2H₂O → 4H⁺ + 4e⁻ + O₂ (oxygen released as byproduct)
+3. Excited electrons pass through an electron transport chain, releasing energy
+4. Energy used to pump H⁺ ions across the membrane, creating a gradient
+5. H⁺ ions flow back through ATP synthase, producing ATP
+6. NADP⁺ accepts electrons and H⁺ to form NADPH
+7. Products: ATP, NADPH, and O₂
+
+## Calvin Cycle (Stroma)
+
+Uses ATP and NADPH from light reactions to fix CO₂ into glucose:
+
+1. Carbon fixation: CO₂ attaches to RuBP (5-carbon molecule) via the enzyme RuBisCO
+2. Reduction: 3-carbon molecules (G3P) are produced using ATP and NADPH
+3. Regeneration: RuBP is regenerated to continue the cycle
+4. For every 3 CO₂ fixed, one G3P molecule is produced (6 CO₂ needed for one glucose)
+
+RuBisCO is the most abundant protein on Earth.
+
+## Global Importance
+
+- Produces all atmospheric oxygen (21% of atmosphere)
+- Removes approximately 120 billion tonnes of CO₂ from the atmosphere annually
+- Forms the base of nearly all food chains
+- Fossil fuels are ancient photosynthetic energy stored over millions of years
+- Photosynthesis has been occurring for approximately 3 billion years
+
+## Factors Affecting Photosynthesis
+
+- Light intensity: rate increases with light up to a saturation point
+- CO₂ concentration: higher CO₂ increases rate (up to a limit)
+- Temperature: optimal around 25-35°C for most plants; too hot denatures enzymes
+- Water availability: drought closes stomata, limiting CO₂ entry
+- Wavelength: red and blue light most effective; green light mostly reflected
+
+## C3, C4, and CAM Plants
+
+- C3 plants (most plants): standard Calvin cycle, less efficient in hot/dry conditions (photorespiration wastes energy)
+- C4 plants (corn, sugarcane): concentrate CO₂ before the Calvin cycle, more efficient in hot climates
+- CAM plants (cacti, succulents): open stomata at night to conserve water, fix CO₂ in the dark

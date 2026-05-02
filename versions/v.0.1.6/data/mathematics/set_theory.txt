@@ -1,0 +1,47 @@
+# Set Theory
+
+## Definition
+
+Set theory is the branch of mathematics that studies collections of objects (sets). Developed by Georg Cantor in the 1870s, it provides the foundation for virtually all of modern mathematics. Every mathematical object can be defined in terms of sets.
+
+## Basic Concepts
+
+- Set: a well-defined collection of distinct objects (elements/members)
+- Notation: A = {1, 2, 3, 4, 5} or A = {x : x is a positive integer less than 6}
+- Empty set (∅): the set with no elements
+- Subset: A ⊆ B means every element of A is also in B
+- Cardinality: the number of elements in a set (|A| = 5 for A = {1,2,3,4,5})
+
+## Set Operations
+
+- Union (A ∪ B): all elements in A or B (or both)
+- Intersection (A ∩ B): all elements in both A and B
+- Difference (A \ B): elements in A but not in B
+- Complement (A'): all elements not in A (relative to a universal set)
+- Cartesian product (A × B): all ordered pairs (a, b) where a ∈ A and b ∈ B
+
+## Infinite Sets
+
+Cantor's revolutionary discovery: not all infinities are equal.
+
+- Countably infinite: sets that can be put in one-to-one correspondence with natural numbers (integers, rationals)
+- Uncountably infinite: sets that cannot (real numbers, points on a line)
+- Cantor's diagonal argument (1891): proves the real numbers are uncountable
+- Continuum hypothesis: is there a set whose cardinality is strictly between that of the integers and the reals? (proved independent of standard axioms by Gödel and Cohen)
+
+## Paradoxes
+
+- Russell's paradox (1901): consider the set of all sets that don't contain themselves. Does it contain itself? (Led to axiomatic set theory)
+- Cantor's paradox: there is no set of all sets (its power set would be larger)
+- Banach-Tarski paradox: a solid ball can be decomposed and reassembled into two balls identical to the original (using the Axiom of Choice)
+
+## Axiomatic Set Theory
+
+Zermelo-Fraenkel set theory with the Axiom of Choice (ZFC) is the standard foundation:
+
+- Axiom of extensionality: sets are equal if they have the same elements
+- Axiom of pairing: for any two sets, there exists a set containing both
+- Axiom of union: the union of a collection of sets exists
+- Axiom of power set: the set of all subsets of a set exists
+- Axiom of infinity: an infinite set exists
+- Axiom of choice: for any collection of non-empty sets, a choice function exists

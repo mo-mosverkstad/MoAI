@@ -1,0 +1,46 @@
+# Sociolinguistics
+
+## Definition
+
+Sociolinguistics studies the relationship between language and society — how social factors such as class, gender, age, ethnicity, and region influence language use and variation.
+
+## Language Variation
+
+No language is uniform — all languages exhibit variation:
+
+- Regional dialects: geographic variation (American vs. British English, Bavarian vs. Standard German)
+- Social dialects (sociolects): variation based on social class, education, or occupation
+- Registers: variation based on context (formal academic writing vs. casual conversation)
+- Idiolects: each individual's unique way of speaking
+
+## Language and Social Class
+
+William Labov's studies in New York City (1966) showed that pronunciation varies systematically with social class. Higher social classes tend to use more prestige forms, while lower classes use more vernacular forms. People shift toward prestige forms in formal situations (style-shifting).
+
+## Language and Gender
+
+Research has identified patterns in gendered language use:
+
+- Women tend to use more prestige forms and standard grammar
+- Men tend to use more vernacular and non-standard forms
+- Women use more hedging language ("sort of," "I think")
+- Conversational patterns differ (interruption, topic control, back-channeling)
+- These are statistical tendencies, not absolute rules
+
+## Language Change
+
+All languages change over time, driven by social factors:
+
+- Innovation by young speakers: slang and new pronunciations often originate with youth
+- Prestige: speakers adopt features of socially prestigious groups
+- Contact: languages influence each other through bilingualism and migration
+- Simplification: complex grammatical features tend to simplify over generations
+
+## Language Policy and Planning
+
+Governments make decisions about language:
+
+- Official languages: which languages have legal status
+- Language education: which languages are taught in schools
+- Language revitalization: efforts to save endangered languages
+- Standardization: establishing official spelling, grammar, and vocabulary

@@ -1,0 +1,48 @@
+# Time and Calendars
+
+## Measuring Time
+
+Humans have measured time using natural cycles and increasingly precise instruments:
+
+- Sundials (1500 BC): shadow position indicates time of day
+- Water clocks (1400 BC): measured time by regulated water flow
+- Mechanical clocks (1300 AD): weight-driven mechanisms with escapements
+- Pendulum clocks (1656): Christiaan Huygens, accurate to 15 seconds per day
+- Quartz clocks (1927): vibrating quartz crystal, accurate to milliseconds per day
+- Atomic clocks (1955): cesium-133 atom vibrations, accurate to 1 second in 300 million years
+
+## Time Zones
+
+Before railways, each city set its own local time by the sun. Standard time zones were adopted in 1884 at the International Meridian Conference in Washington, D.C.
+
+- 24 time zones, each approximately 15 degrees of longitude wide
+- Greenwich Mean Time (GMT) / Coordinated Universal Time (UTC) is the reference
+- International Date Line: roughly follows 180° longitude in the Pacific Ocean
+- Some countries use half-hour or quarter-hour offsets (India: UTC+5:30, Nepal: UTC+5:45)
+- Daylight Saving Time: clocks advanced 1 hour in summer (controversial, being abolished in some regions)
+
+## Calendars
+
+- Egyptian calendar (3000 BC): 365 days, 12 months of 30 days plus 5 extra days
+- Julian calendar (45 BC): introduced by Julius Caesar, 365.25 days (leap year every 4 years)
+- Gregorian calendar (1582): corrected the Julian calendar's drift (omits leap years in most century years). Used worldwide today.
+- Islamic calendar: lunar, 354 or 355 days, months begin with the new moon crescent
+- Chinese calendar: lunisolar, basis for Chinese New Year and traditional festivals
+- Hebrew calendar: lunisolar, used for Jewish religious observances
+
+## The Second
+
+The second is the base unit of time in the International System of Units (SI):
+
+- Originally defined as 1/86,400 of a mean solar day
+- Since 1967: defined as 9,192,631,770 oscillations of the cesium-133 atom
+- Leap seconds: occasionally added to UTC to keep it synchronized with Earth's slowing rotation
+- Proposed redefinition: optical atomic clocks may redefine the second with even greater precision
+
+## Deep Time
+
+- Age of the universe: approximately 13.8 billion years
+- Age of Earth: approximately 4.54 billion years
+- Age of life on Earth: approximately 3.7 billion years
+- Age of modern humans: approximately 300,000 years
+- Recorded history: approximately 5,000 years

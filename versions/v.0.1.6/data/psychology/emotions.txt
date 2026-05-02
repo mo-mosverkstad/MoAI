@@ -1,0 +1,52 @@
+# Emotions
+
+## Definition
+
+Emotions are complex psychological states involving three components: a subjective experience (feeling), a physiological response (bodily changes), and a behavioral expression (actions or facial expressions). Emotions evolved to help organisms respond adaptively to important environmental events.
+
+## Basic Emotions
+
+Paul Ekman (1972) identified six universal basic emotions recognized across all cultures through facial expressions:
+
+- Happiness: signaled by smiling, associated with reward and social bonding
+- Sadness: signaled by frowning and tears, associated with loss
+- Fear: signaled by wide eyes and open mouth, associated with threat detection
+- Anger: signaled by furrowed brows and clenched jaw, associated with goal obstruction
+- Disgust: signaled by wrinkled nose, associated with contamination avoidance
+- Surprise: signaled by raised eyebrows, associated with unexpected events
+
+## Theories of Emotion
+
+- James-Lange theory (1884): we feel emotions because of bodily changes (we feel sad because we cry)
+- Cannon-Bard theory (1927): bodily changes and emotional experience occur simultaneously
+- Schachter-Singer two-factor theory (1962): emotion = physiological arousal + cognitive label
+- Appraisal theory (Lazarus): emotions result from how we evaluate (appraise) events
+- Constructionist theory (Barrett): emotions are constructed from basic affect (valence + arousal) plus conceptual knowledge
+
+## The Neuroscience of Emotion
+
+- Amygdala: rapid threat detection, fear conditioning, emotional memory
+- Prefrontal cortex: emotion regulation, decision-making involving emotions
+- Insula: interoception (awareness of bodily states), disgust
+- Anterior cingulate cortex: conflict monitoring, emotional pain
+- Ventral striatum: reward processing, pleasure
+
+## Emotional Intelligence
+
+Daniel Goleman (1995) popularized the concept of emotional intelligence (EQ):
+
+- Self-awareness: recognizing one's own emotions
+- Self-regulation: managing emotions effectively
+- Motivation: using emotions to drive goal pursuit
+- Empathy: understanding others' emotions
+- Social skills: managing relationships effectively
+
+## Emotion Regulation
+
+Strategies for managing emotions:
+
+- Cognitive reappraisal: reinterpreting a situation to change its emotional impact
+- Suppression: inhibiting emotional expression (less effective, more costly)
+- Mindfulness: observing emotions without judgment
+- Distraction: redirecting attention away from emotional stimuli
+- Problem-solving: addressing the source of negative emotions directly

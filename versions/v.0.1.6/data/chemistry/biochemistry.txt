@@ -1,0 +1,53 @@
+# Biochemistry
+
+## Definition
+
+Biochemistry is the study of chemical processes within and relating to living organisms. It bridges biology and chemistry, explaining life at the molecular level. All living things are composed of the same basic chemical building blocks.
+
+## The Molecules of Life
+
+Four major classes of biological macromolecules:
+
+- Proteins: polymers of amino acids. Functions include catalysis (enzymes), structure (collagen), transport (hemoglobin), immunity (antibodies), and signaling (hormones).
+- Nucleic acids: DNA and RNA. Store and transmit genetic information. DNA's double helix contains the instructions for building proteins.
+- Carbohydrates: sugars and starches. Provide energy (glucose), structural support (cellulose in plants, chitin in insects), and cell recognition.
+- Lipids: fats, oils, and membranes. Store energy, form cell membranes (phospholipid bilayer), and serve as signaling molecules (steroid hormones).
+
+## Enzymes
+
+Enzymes are biological catalysts — proteins that accelerate chemical reactions without being consumed:
+
+- Highly specific: each enzyme catalyzes one reaction or type of reaction
+- Active site: the region where substrate binds and reaction occurs (lock-and-key or induced-fit model)
+- Factors affecting activity: temperature, pH, substrate concentration, inhibitors
+- Naming convention: usually end in "-ase" (lipase breaks down lipids, protease breaks down proteins)
+- Speed: some enzymes catalyze millions of reactions per second (carbonic anhydrase: 10⁶/s)
+
+## Cellular Respiration
+
+The process by which cells extract energy from glucose:
+
+C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + energy (ATP)
+
+Three stages:
+
+1. Glycolysis: glucose split into two pyruvate molecules (cytoplasm, 2 ATP)
+2. Krebs cycle: pyruvate oxidized to CO₂ (mitochondrial matrix, 2 ATP)
+3. Electron transport chain: electrons passed along membrane proteins, driving ATP synthesis (mitochondrial membrane, 34 ATP)
+
+Total yield: approximately 38 ATP per glucose molecule.
+
+## Photosynthesis
+
+Plants convert light energy into chemical energy:
+
+6CO₂ + 6H₂O + light → C₆H₁₂O₆ + 6O₂
+
+Two stages:
+
+1. Light reactions: chlorophyll absorbs light, splits water, produces ATP and NADPH
+2. Calvin cycle: uses ATP and NADPH to fix CO₂ into glucose
+
+## ATP: The Energy Currency
+
+Adenosine triphosphate (ATP) is the universal energy carrier in cells. Energy is released when the terminal phosphate bond is broken (ATP → ADP + Pi). The human body produces and consumes approximately 40 kg of ATP daily, recycling each molecule thousands of times.

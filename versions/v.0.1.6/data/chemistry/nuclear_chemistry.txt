@@ -1,0 +1,54 @@
+# Nuclear Chemistry
+
+## Definition
+
+Nuclear chemistry studies the changes in atomic nuclei — reactions involving protons and neutrons rather than electrons. Nuclear reactions release millions of times more energy than chemical reactions because they involve the strong nuclear force.
+
+## Radioactivity
+
+Radioactivity is the spontaneous emission of particles or energy from unstable atomic nuclei. Discovered by Henri Becquerel in 1896 and studied extensively by Marie and Pierre Curie.
+
+Types of radioactive decay:
+
+- Alpha decay (α): nucleus emits a helium-4 nucleus (2 protons + 2 neutrons). Reduces atomic number by 2. Stopped by paper or skin.
+- Beta decay (β): neutron converts to proton (or vice versa), emitting an electron (or positron). Changes atomic number by 1. Stopped by aluminum foil.
+- Gamma radiation (γ): high-energy electromagnetic radiation emitted after other decay. No change in atomic number. Requires lead or thick concrete to stop.
+
+## Half-Life
+
+The half-life is the time required for half of a radioactive sample to decay:
+
+- Carbon-14: 5,730 years (used for archaeological dating up to ~50,000 years)
+- Uranium-238: 4.5 billion years (used for dating rocks and the age of Earth)
+- Iodine-131: 8 days (used in thyroid cancer treatment)
+- Polonium-210: 138 days (extremely toxic, used to assassinate Alexander Litvinenko in 2006)
+- Francium-223: 22 minutes (most unstable naturally occurring element)
+
+## Nuclear Fission
+
+Fission splits a heavy nucleus into lighter nuclei, releasing enormous energy:
+
+- Uranium-235 absorbs a neutron and splits into two smaller nuclei plus 2-3 neutrons
+- Chain reaction: released neutrons cause further fissions
+- Critical mass: minimum amount of fissile material needed to sustain a chain reaction
+- Nuclear power plants: controlled fission heats water to produce steam that drives turbines
+- Nuclear weapons: uncontrolled chain reaction releases energy explosively
+
+## Nuclear Fusion
+
+Fusion combines light nuclei into heavier ones, releasing even more energy than fission:
+
+- Powers the Sun: hydrogen nuclei fuse into helium at 15 million°C
+- Requires extreme temperature and pressure to overcome electrostatic repulsion
+- Produces no long-lived radioactive waste and uses abundant fuel (hydrogen isotopes)
+- ITER (France): international project attempting to achieve sustained fusion by the 2030s
+- Currently no commercial fusion power plants exist
+
+## Applications
+
+- Nuclear power: provides approximately 10% of world electricity (440 reactors in 32 countries)
+- Medical imaging: PET scans use positron-emitting isotopes
+- Cancer treatment: radiation therapy targets tumors
+- Carbon dating: determines age of organic materials
+- Smoke detectors: contain americium-241 (alpha emitter)
+- Food irradiation: gamma rays kill bacteria without making food radioactive

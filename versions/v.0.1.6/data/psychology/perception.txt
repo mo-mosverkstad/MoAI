@@ -1,0 +1,51 @@
+# Perception
+
+## Definition
+
+Perception is the process by which the brain organizes and interprets sensory information to give it meaning. It is not a passive recording of reality but an active construction — the brain fills in gaps, makes assumptions, and sometimes creates illusions.
+
+## Visual Perception
+
+The visual system processes light entering the eyes:
+
+- Retina: contains photoreceptors (rods for dim light, cones for color)
+- Optic nerve: transmits signals to the brain
+- Visual cortex: processes features (edges, motion, color, faces)
+- Ventral stream ("what" pathway): object recognition
+- Dorsal stream ("where" pathway): spatial location and movement
+
+## Gestalt Principles
+
+The Gestalt psychologists identified rules the brain uses to organize visual information:
+
+- Proximity: objects near each other are grouped together
+- Similarity: similar objects are grouped together
+- Closure: the brain completes incomplete figures
+- Continuity: we perceive smooth, continuous patterns rather than abrupt changes
+- Figure-ground: we separate objects (figure) from their background (ground)
+- Common fate: objects moving in the same direction are grouped together
+
+## Depth Perception
+
+The brain uses multiple cues to perceive three-dimensional space:
+
+- Binocular cues: require both eyes (retinal disparity, convergence)
+- Monocular cues: work with one eye (linear perspective, texture gradient, relative size, overlap, shadow, motion parallax)
+
+## Optical Illusions
+
+Illusions reveal how the brain constructs perception:
+
+- Müller-Lyer illusion: lines of equal length appear different due to arrow-like endings
+- Ponzo illusion: identical lines appear different sizes due to converging lines (railroad tracks)
+- Necker cube: ambiguous figure that flips between two interpretations
+- Rubin's vase: figure-ground reversal (vase or two faces)
+- Change blindness: failure to notice large changes in a visual scene
+
+## Other Senses
+
+- Auditory perception: sound localization, speech perception, music perception
+- Haptic perception: touch, pressure, temperature, pain
+- Olfaction: smell — directly connected to memory and emotion (limbic system)
+- Gustation: taste — five basic tastes (sweet, sour, salty, bitter, umami)
+- Proprioception: awareness of body position without looking

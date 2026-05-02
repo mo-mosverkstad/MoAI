@@ -1,0 +1,48 @@
+# Supply and Demand
+
+## The Law of Demand
+
+The law of demand states that, all else being equal, as the price of a good increases, the quantity demanded decreases, and vice versa. This inverse relationship is represented by a downward-sloping demand curve.
+
+Factors that shift the demand curve:
+
+- Income changes: higher income increases demand for normal goods
+- Consumer preferences: changes in taste or fashion
+- Price of related goods: substitutes and complements
+- Population changes: more consumers increase total demand
+- Expectations: anticipated price increases can raise current demand
+
+## The Law of Supply
+
+The law of supply states that, all else being equal, as the price of a good increases, the quantity supplied increases. Producers are willing to supply more at higher prices because it is more profitable.
+
+Factors that shift the supply curve:
+
+- Input costs: higher costs of labor or materials decrease supply
+- Technology: improvements in production technology increase supply
+- Number of sellers: more producers increase market supply
+- Government policies: taxes decrease supply; subsidies increase supply
+- Natural events: droughts, disasters can reduce supply
+
+## Market Equilibrium
+
+Market equilibrium occurs where the supply and demand curves intersect. At this point, the quantity supplied equals the quantity demanded, and there is no tendency for the price to change.
+
+- Surplus: when price is above equilibrium, quantity supplied exceeds quantity demanded
+- Shortage: when price is below equilibrium, quantity demanded exceeds quantity supplied
+- Price mechanism: surpluses push prices down; shortages push prices up, moving toward equilibrium
+
+## Elasticity
+
+Price elasticity of demand measures how responsive quantity demanded is to price changes:
+
+- Elastic demand (|E| > 1): quantity changes more than proportionally to price (luxury goods)
+- Inelastic demand (|E| < 1): quantity changes less than proportionally to price (necessities like insulin)
+- Unit elastic (|E| = 1): quantity changes proportionally to price
+
+## Market Structures
+
+- Perfect competition: many sellers, identical products, no barriers to entry (agricultural commodities)
+- Monopolistic competition: many sellers, differentiated products (restaurants, clothing)
+- Oligopoly: few large sellers dominate the market (airlines, telecommunications)
+- Monopoly: single seller controls the entire market (utilities, patented drugs)

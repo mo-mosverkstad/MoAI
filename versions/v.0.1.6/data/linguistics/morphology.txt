@@ -1,0 +1,39 @@
+# Morphology
+
+## Definition
+
+Morphology is the study of the internal structure of words — how words are formed from smaller meaningful units called morphemes. It examines word formation processes and the rules governing them.
+
+## Morphemes
+
+A morpheme is the smallest unit of meaning in a language:
+
+- Free morphemes: can stand alone as words (cat, run, happy)
+- Bound morphemes: must attach to another morpheme (un-, -ing, -s, -ness)
+- Prefixes: attach before the root (un-happy, re-write, pre-view)
+- Suffixes: attach after the root (happi-ness, teach-er, walk-ed)
+- Infixes: inserted within a word (rare in English, common in Tagalog)
+
+## Word Formation Processes
+
+- Derivation: creating new words by adding affixes (happy → unhappiness)
+- Compounding: combining two free morphemes (blackboard, sunflower, earthquake)
+- Blending: combining parts of two words (smoke + fog = smog, breakfast + lunch = brunch)
+- Clipping: shortening a word (advertisement → ad, telephone → phone)
+- Acronyms: words formed from initial letters (NASA, scuba, laser)
+- Back-formation: creating a new word by removing an affix (editor → edit, television → televise)
+- Borrowing: adopting words from other languages (sushi, kindergarten, piano)
+
+## Inflection vs. Derivation
+
+- Inflection: changes grammatical properties without creating a new word (walk/walks/walked/walking)
+- Derivation: creates a new word with different meaning or category (teach → teacher, happy → unhappy)
+
+## Morphological Typology
+
+Languages differ in how much information they pack into words:
+
+- Isolating languages (Chinese): one morpheme per word, no inflection
+- Agglutinative languages (Turkish, Finnish): words built from many clearly separable morphemes
+- Fusional languages (Latin, Russian): morphemes fuse together, one affix carries multiple meanings
+- Polysynthetic languages (Inuktitut): entire sentences expressed as single complex words

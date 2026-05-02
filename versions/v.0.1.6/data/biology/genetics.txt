@@ -1,0 +1,49 @@
+# Genetics and DNA
+
+## What is DNA
+
+DNA (deoxyribonucleic acid) is the molecule that carries genetic instructions for the development, functioning, growth, and reproduction of all known organisms. DNA was first identified by Friedrich Miescher in 1869, and its double helix structure was determined by James Watson and Francis Crick in 1953, based on X-ray crystallography data from Rosalind Franklin.
+
+## Structure of DNA
+
+DNA is a double helix composed of two polynucleotide chains that coil around each other. Each nucleotide consists of:
+
+- A sugar molecule (deoxyribose)
+- A phosphate group
+- One of four nitrogenous bases: adenine (A), thymine (T), guanine (G), cytosine (C)
+
+Base pairing rules: A pairs with T (two hydrogen bonds), G pairs with C (three hydrogen bonds). The human genome contains approximately 3.2 billion base pairs organized into 23 pairs of chromosomes.
+
+## How Genes Work
+
+A gene is a segment of DNA that contains instructions for making a specific protein:
+
+1. Transcription: DNA is copied into messenger RNA (mRNA) in the cell nucleus
+2. Translation: ribosomes read mRNA and assemble amino acids into proteins
+3. The genetic code: three-letter codons specify which amino acid to add (64 codons code for 20 amino acids)
+
+Humans have approximately 20,000-25,000 protein-coding genes, which make up only about 1.5% of the total genome. The remaining DNA was once called "junk DNA" but is now known to have regulatory and structural functions.
+
+## Inheritance
+
+Gregor Mendel established the basic laws of inheritance in 1866 through experiments with pea plants:
+
+- Law of Segregation: each organism carries two alleles for each trait; these separate during gamete formation
+- Law of Independent Assortment: genes for different traits are inherited independently
+- Dominant and recessive alleles: dominant alleles mask the expression of recessive alleles
+
+## Genetic Disorders
+
+- Sickle cell disease: a single nucleotide mutation in the hemoglobin gene
+- Cystic fibrosis: mutations in the CFTR gene affect chloride ion transport
+- Down syndrome: trisomy 21 (three copies of chromosome 21)
+- Huntington's disease: expansion of CAG repeats in the huntingtin gene
+- Color blindness: mutations in genes on the X chromosome affecting cone cells
+
+## Modern Genetics
+
+- Human Genome Project (1990-2003): sequenced the entire human genome
+- CRISPR-Cas9: a gene-editing tool that allows precise modification of DNA sequences
+- Genetic testing: identifies mutations associated with disease risk
+- Gene therapy: treating diseases by replacing or modifying defective genes
+- Epigenetics: heritable changes in gene expression without changes to DNA sequence

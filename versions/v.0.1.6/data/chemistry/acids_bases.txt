@@ -1,0 +1,57 @@
+# Acids and Bases
+
+## Definition
+
+Acids and bases are fundamental chemical substances that react with each other in neutralization reactions. Several definitions exist:
+
+- Arrhenius (1884): acids produce H⁺ ions in water; bases produce OH⁻ ions
+- Brønsted-Lowry (1923): acids donate protons (H⁺); bases accept protons
+- Lewis (1923): acids accept electron pairs; bases donate electron pairs
+
+## The pH Scale
+
+pH measures the concentration of hydrogen ions in a solution:
+
+- pH = -log[H⁺]
+- Scale runs from 0 to 14
+- pH 7: neutral (pure water)
+- pH < 7: acidic (more H⁺ ions)
+- pH > 7: basic/alkaline (fewer H⁺ ions)
+- Each unit represents a 10-fold change in H⁺ concentration
+
+Common pH values:
+
+- Battery acid: pH 0
+- Lemon juice: pH 2
+- Vinegar: pH 3
+- Coffee: pH 5
+- Pure water: pH 7
+- Baking soda: pH 9
+- Ammonia: pH 11
+- Bleach: pH 13
+
+## Strong vs. Weak
+
+- Strong acids: completely dissociate in water (HCl, H₂SO₄, HNO₃)
+- Weak acids: partially dissociate (acetic acid, carbonic acid, citric acid)
+- Strong bases: completely dissociate (NaOH, KOH)
+- Weak bases: partially dissociate (ammonia NH₃, baking soda NaHCO₃)
+
+## Neutralization
+
+When an acid reacts with a base, they produce water and a salt:
+
+HCl + NaOH → NaCl + H₂O (hydrochloric acid + sodium hydroxide → table salt + water)
+
+## Buffer Solutions
+
+Buffers resist changes in pH when small amounts of acid or base are added. They consist of a weak acid and its conjugate base (or vice versa). Blood is buffered at pH 7.35-7.45 by the carbonic acid/bicarbonate system — even small deviations can be life-threatening.
+
+## Applications
+
+- Stomach acid (HCl, pH 1.5-3.5): digests food and kills bacteria
+- Antacids: neutralize excess stomach acid (calcium carbonate, magnesium hydroxide)
+- Batteries: sulfuric acid in lead-acid batteries
+- Cleaning products: ammonia and sodium hydroxide dissolve grease
+- Food preservation: acetic acid (vinegar), citric acid
+- Industrial processes: sulfuric acid is the most produced chemical worldwide

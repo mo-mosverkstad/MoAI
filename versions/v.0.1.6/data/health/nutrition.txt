@@ -1,0 +1,50 @@
+# Nutrition
+
+## Macronutrients
+
+The three macronutrients provide energy (calories) for the body:
+
+- Carbohydrates (4 kcal/g): the body's primary energy source. Found in grains, fruits, vegetables, and legumes. Complex carbohydrates (whole grains, fiber) are digested slowly; simple carbohydrates (sugar) are absorbed quickly.
+
+- Proteins (4 kcal/g): essential for building and repairing tissues, making enzymes and hormones. Composed of 20 amino acids, 9 of which are essential (must come from food). Complete protein sources include meat, fish, eggs, and dairy. Plant sources can be combined to provide all essential amino acids.
+
+- Fats (9 kcal/g): provide energy storage, insulation, and cell membrane structure. Types include:
+  - Saturated fats: solid at room temperature (butter, coconut oil), associated with increased cardiovascular risk
+  - Unsaturated fats: liquid at room temperature (olive oil, fish oil), generally heart-healthy
+  - Trans fats: artificially hydrogenated, strongly associated with heart disease, banned in many countries
+
+## Micronutrients
+
+Vitamins and minerals needed in small amounts:
+
+- Vitamin A: vision, immune function (carrots, sweet potatoes)
+- Vitamin C: collagen synthesis, antioxidant (citrus fruits, peppers)
+- Vitamin D: calcium absorption, bone health (sunlight, fatty fish)
+- Iron: oxygen transport in blood (red meat, spinach, legumes)
+- Calcium: bone and teeth structure (dairy, leafy greens)
+- Potassium: nerve and muscle function (bananas, potatoes)
+- Zinc: immune function, wound healing (meat, nuts, seeds)
+
+## Water
+
+Water is essential for life. The human body is approximately 60% water. Water regulates body temperature, transports nutrients, removes waste, and lubricates joints. Adults typically need 2-3 liters of water per day from all sources (food and beverages).
+
+## Dietary Guidelines
+
+General principles of healthy eating:
+
+- Eat a variety of fruits and vegetables (at least 5 servings per day)
+- Choose whole grains over refined grains
+- Limit added sugars to less than 10% of daily calories
+- Limit sodium intake to less than 2,300 mg per day
+- Choose lean protein sources
+- Limit saturated fat to less than 10% of daily calories
+- Avoid trans fats entirely
+
+## Malnutrition
+
+Malnutrition includes both undernutrition and overnutrition:
+
+- Undernutrition: insufficient calories or nutrients, affecting approximately 800 million people worldwide
+- Obesity: excess body fat (BMI ≥ 30), affecting over 650 million adults globally
+- Micronutrient deficiencies: iron deficiency is the most common, affecting 2 billion people

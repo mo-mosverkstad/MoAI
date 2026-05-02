@@ -1,0 +1,56 @@
+# The Internet
+
+## Definition
+
+The Internet is a global network of interconnected computer networks that communicate using the TCP/IP protocol suite. It enables billions of devices worldwide to exchange data, access information, and communicate in real time.
+
+## History
+
+- 1969: ARPANET connects four US universities (UCLA, Stanford, UCSB, University of Utah)
+- 1971: Ray Tomlinson sends the first email using the @ symbol
+- 1973: TCP/IP protocol developed by Vint Cerf and Bob Kahn
+- 1983: ARPANET adopts TCP/IP — the birth of the modern Internet
+- 1989: Tim Berners-Lee proposes the World Wide Web at CERN
+- 1991: First website goes live (info.cern.ch)
+- 1993: Mosaic browser makes the web accessible to non-technical users
+- 1995: Amazon, eBay, and commercial Internet services launch
+- 1998: Google founded
+- 2004: Facebook launches, beginning the social media era
+- 2007: iPhone launches, beginning the mobile Internet era
+
+## How It Works
+
+- Packet switching: data is broken into small packets that travel independently across the network
+- IP addresses: unique numerical identifiers for every device (IPv4: 32-bit, IPv6: 128-bit)
+- DNS (Domain Name System): translates human-readable names (google.com) to IP addresses
+- Routers: forward packets between networks toward their destination
+- ISPs (Internet Service Providers): connect end users to the global network
+- Undersea cables: carry over 95% of intercontinental data traffic
+
+## The World Wide Web
+
+The web is a system of interlinked documents accessed via the Internet (the web is not the Internet — it runs on top of it):
+
+- HTML: markup language for creating web pages
+- HTTP/HTTPS: protocol for transferring web content
+- URLs: addresses for locating web resources
+- Hyperlinks: connections between web pages
+- Web browsers: software for viewing web content (Chrome, Firefox, Safari)
+- Search engines: index and retrieve web content (Google processes 8.5 billion searches daily)
+
+## Internet Statistics (2024)
+
+- Over 5.4 billion Internet users (67% of world population)
+- Over 1.1 billion websites (fewer than 200 million active)
+- Over 330 million domain names registered
+- Global Internet traffic: approximately 400 exabytes per month
+- Average person spends nearly 7 hours online daily
+
+## Impact on Society
+
+- Communication: email, messaging, video calls connect people globally
+- Commerce: e-commerce, digital payments, gig economy
+- Education: online courses, digital libraries, remote learning
+- Entertainment: streaming video, gaming, social media
+- Democracy: access to information, but also misinformation and surveillance concerns
+- Privacy: data collection, tracking, and the challenge of digital rights

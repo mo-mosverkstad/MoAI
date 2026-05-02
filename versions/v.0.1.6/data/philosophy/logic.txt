@@ -1,0 +1,30 @@
+# Logic
+
+## Definition
+
+Logic is the study of correct reasoning and valid argumentation. It provides formal methods for evaluating whether conclusions follow necessarily from premises.
+
+## Propositional Logic
+
+Propositional logic deals with statements that are either true or false:
+
+- Conjunction (AND): p ∧ q is true only when both p and q are true
+- Disjunction (OR): p ∨ q is true when at least one of p or q is true
+- Negation (NOT): ¬p is true when p is false
+- Implication (IF-THEN): p → q is false only when p is true and q is false
+
+## Logical Fallacies
+
+Common errors in reasoning:
+
+- Ad hominem: attacking the person rather than the argument
+- Straw man: misrepresenting an opponent's argument
+- Appeal to authority: claiming truth because an authority said so
+- False dilemma: presenting only two options when more exist
+- Circular reasoning: using the conclusion as a premise
+- Post hoc ergo propter hoc: assuming causation from correlation
+- Slippery slope: claiming one event inevitably leads to extreme consequences
+
+## Applications
+
+Logic is essential in mathematics (proofs), computer science (programming, circuit design), law (legal reasoning), and artificial intelligence.

@@ -1,0 +1,44 @@
+# Exoplanets
+
+## Definition
+
+An exoplanet is a planet that orbits a star other than the Sun. The first confirmed exoplanet orbiting a Sun-like star was 51 Pegasi b, discovered in 1995 by Michel Mayor and Didier Queloz (Nobel Prize 2019). As of 2024, over 5,500 exoplanets have been confirmed.
+
+## Detection Methods
+
+- Radial velocity (Doppler): measures the star's wobble caused by an orbiting planet's gravitational pull. Detects the planet's minimum mass and orbital period.
+- Transit method: measures the tiny dimming of a star as a planet passes in front of it. Reveals the planet's size and orbital period. The Kepler space telescope discovered over 2,600 planets using this method.
+- Direct imaging: photographing the planet directly (extremely difficult due to the star's glare). Works best for large, young planets far from their star.
+- Gravitational microlensing: a planet's gravity bends light from a background star.
+- Astrometry: measuring the star's precise position shift due to a planet's gravity.
+
+## Types of Exoplanets
+
+- Hot Jupiters: gas giants orbiting very close to their star (orbital periods of days). Example: 51 Pegasi b.
+- Super-Earths: rocky planets 1-10 times Earth's mass. No equivalent in our Solar System.
+- Mini-Neptunes: planets between Earth and Neptune in size, likely with thick atmospheres.
+- Earth-like planets: rocky planets in the habitable zone where liquid water could exist.
+- Rogue planets: planets not bound to any star, drifting through interstellar space.
+
+## The Habitable Zone
+
+The habitable zone (Goldilocks zone) is the region around a star where temperatures allow liquid water on a planet's surface:
+
+- Too close: water evaporates (Venus)
+- Too far: water freezes (Mars is at the outer edge)
+- Just right: liquid water possible (Earth)
+- The habitable zone depends on the star's luminosity and the planet's atmosphere
+
+## Notable Exoplanets
+
+- Proxima Centauri b: nearest known exoplanet (4.24 light-years), in the habitable zone of a red dwarf
+- TRAPPIST-1 system: seven Earth-sized planets, three in the habitable zone (39 light-years away)
+- Kepler-452b: "Earth's cousin," similar size and orbital period in a Sun-like star's habitable zone
+- HD 209458 b: first exoplanet observed transiting its star, first with atmosphere detected
+
+## Search for Life
+
+- Biosignatures: atmospheric gases (oxygen, methane, ozone) that could indicate biological activity
+- James Webb Space Telescope (launched 2021): can analyze exoplanet atmospheres for biosignatures
+- Drake equation: estimates the number of communicating civilizations in our galaxy
+- Fermi paradox: if intelligent life is common, why haven't we detected it?

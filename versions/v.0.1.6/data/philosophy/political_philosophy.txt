@@ -1,0 +1,44 @@
+# Political Philosophy
+
+## Definition
+
+Political philosophy examines fundamental questions about government, justice, rights, liberty, and the relationship between individuals and the state.
+
+## Social Contract Theory
+
+The idea that political authority derives from agreement among individuals:
+
+- Thomas Hobbes (1588-1679): without government, life would be "solitary, poor, nasty, brutish, and short." People surrender freedoms to a sovereign for security. Leviathan (1651).
+- John Locke (1632-1704): government exists to protect natural rights (life, liberty, property). Citizens may overthrow governments that violate these rights. Two Treatises of Government (1689).
+- Jean-Jacques Rousseau (1712-1778): legitimate authority rests on the general will. "Man is born free, and everywhere he is in chains." The Social Contract (1762).
+
+## Theories of Justice
+
+- Utilitarianism (Bentham, Mill): just institutions maximize overall welfare
+- Libertarianism (Nozick): justice requires respecting individual rights, especially property; minimal state
+- Egalitarianism (Rawls): just institutions are those chosen behind a "veil of ignorance." Difference principle: inequalities are just only if they benefit the least advantaged.
+- Communitarianism (MacIntyre, Sandel): justice must account for community values and traditions
+- Capabilities approach (Sen, Nussbaum): justice requires ensuring people have real freedoms to achieve well-being
+
+## Liberty
+
+- Negative liberty (Berlin): freedom from interference by others
+- Positive liberty (Berlin): freedom to achieve one's potential, self-mastery
+- Mill's harm principle: the only justification for limiting liberty is to prevent harm to others
+- Paradox of tolerance (Popper): unlimited tolerance leads to the disappearance of tolerance
+
+## Forms of Government
+
+- Direct democracy: citizens vote on laws directly (ancient Athens, Swiss referendums)
+- Representative democracy: citizens elect representatives who make laws
+- Constitutional monarchy: monarch as head of state with limited powers (UK, Sweden, Japan)
+- Authoritarianism: concentrated power with limited political freedoms
+- Totalitarianism: state controls all aspects of public and private life
+
+## Contemporary Issues
+
+- Global justice: do wealthy nations owe obligations to the global poor?
+- Immigration: what rights do states have to control borders?
+- Civil disobedience: when is breaking the law morally justified?
+- Free speech limits: hate speech, misinformation, platform regulation
+- Democratic backsliding: erosion of democratic norms and institutions

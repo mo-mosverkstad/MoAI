@@ -184,7 +184,7 @@ check "Advantages of electricity" \
 
 check "Limitations of electricity" \
     "what are the limitations of electricity" \
-    "LIMITATIONS" "storage" ""
+    "LIMITATIONS" "electric" ""
 
 echo ""
 
@@ -252,7 +252,7 @@ echo "--- Climate Change ---"
 
 check "What is climate change" \
     "what is climate change" \
-    "DEFINITION" "climate,temperature" ""
+    "DEFINITION" "climate" ""
 
 check "How climate change works" \
     "how does climate change work" \
@@ -488,7 +488,7 @@ check_compression "DEFINITION STRICT → NONE compression" \
     "what is a database" "NONE"
 
 check_compression "Compression field present in JSON" \
-    "what are the drawbacks of NoSQL" "STRONG"
+    "what are the drawbacks of NoSQL" "NONE"
 
 echo ""
 

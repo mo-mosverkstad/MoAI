@@ -1,0 +1,51 @@
+# Chess
+
+## Overview
+
+Chess is a two-player strategy board game played on an 8×8 grid. It is one of the world's oldest and most popular games, with an estimated 600 million regular players. Chess is often called "the game of kings" and has been studied extensively as a model of strategic thinking.
+
+## History
+
+- 6th century AD: originated in India as chaturanga (four divisions of the military)
+- 7th century: spread to Persia (shatranj), then to the Arab world
+- 10th century: reached Europe through Moorish Spain and trade routes
+- 15th century: modern rules established in Spain (queen and bishop gained current powers)
+- 1886: first official World Chess Championship (Wilhelm Steinitz)
+- 1997: IBM's Deep Blue defeats world champion Garry Kasparov
+- 2017: AlphaZero learns chess from scratch in 4 hours and defeats the strongest chess engine
+
+## The Pieces
+
+Each player starts with 16 pieces:
+
+- King (1): moves one square in any direction; must be protected (checkmate loses the game)
+- Queen (1): moves any number of squares in any direction (most powerful piece)
+- Rook (2): moves any number of squares horizontally or vertically
+- Bishop (2): moves any number of squares diagonally
+- Knight (2): moves in an L-shape (2+1 squares), can jump over other pieces
+- Pawn (8): moves forward one square (two on first move), captures diagonally
+
+## Basic Strategy
+
+- Control the center: pieces in the center control more squares
+- Develop pieces: move pieces off the back rank early in the game
+- King safety: castle early to protect the king
+- Pawn structure: pawns cannot move backward; their structure shapes the game
+- Material advantage: capturing more valuable pieces than you lose
+- Tactics: forks, pins, skewers, discovered attacks, sacrifices
+
+## World Champions
+
+- Wilhelm Steinitz (1886-1894): first official champion, developed positional play
+- José Raúl Capablanca (1921-1927): Cuban prodigy known for elegant endgame technique
+- Bobby Fischer (1972-1975): American who defeated Soviet dominance during the Cold War
+- Garry Kasparov (1985-2000): widely considered the greatest player of all time
+- Magnus Carlsen (2013-2023): Norwegian prodigy, highest-rated player in history (2882)
+
+## Chess and Computers
+
+- 1950: Claude Shannon describes how a computer could play chess
+- 1997: Deep Blue defeats Kasparov (brute-force search, 200 million positions per second)
+- 2017: AlphaZero uses neural networks and self-play (no human knowledge)
+- Modern engines (Stockfish, Leela Chess Zero) far exceed human ability
+- Online chess: Chess.com and Lichess have over 100 million users combined

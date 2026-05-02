@@ -1,0 +1,49 @@
+# Stress and Coping
+
+## What is Stress
+
+Stress is the body's response to demands or threats (stressors). Hans Selye (1936) defined stress as "the non-specific response of the body to any demand." Moderate stress can enhance performance, but chronic stress damages physical and mental health.
+
+## The Stress Response
+
+The fight-or-flight response (Walter Cannon, 1915):
+
+1. Threat perceived by the brain (amygdala)
+2. Hypothalamus activates the sympathetic nervous system
+3. Adrenal glands release adrenaline (epinephrine) and cortisol
+4. Heart rate increases, blood pressure rises, breathing quickens
+5. Blood flow redirected to muscles, digestion suppressed
+6. Pupils dilate, senses sharpen
+
+## General Adaptation Syndrome (Selye)
+
+Three stages of prolonged stress:
+
+1. Alarm: initial fight-or-flight response, body mobilizes resources
+2. Resistance: body adapts to ongoing stress, appears to cope but resources are depleting
+3. Exhaustion: prolonged stress depletes resources, leading to illness and breakdown
+
+## Types of Stressors
+
+- Acute stressors: short-term threats (exams, job interviews, near-accidents)
+- Chronic stressors: ongoing pressures (poverty, caregiving, toxic relationships)
+- Daily hassles: minor irritations that accumulate (traffic, deadlines, noise)
+- Life events: major changes requiring adaptation (divorce, bereavement, job loss, moving)
+
+## Health Effects of Chronic Stress
+
+- Cardiovascular disease: elevated blood pressure, increased heart attack risk
+- Immune suppression: increased susceptibility to infections and slower wound healing
+- Mental health: depression, anxiety, burnout
+- Digestive problems: irritable bowel syndrome, ulcers
+- Cognitive impairment: memory problems, difficulty concentrating
+- Accelerated aging: shortened telomeres
+
+## Coping Strategies
+
+- Problem-focused coping: directly addressing the source of stress (planning, seeking information, taking action)
+- Emotion-focused coping: managing emotional response to stress (reappraisal, acceptance, humor)
+- Social support: seeking help, comfort, and advice from others
+- Exercise: reduces cortisol, releases endorphins, improves mood
+- Mindfulness meditation: reduces rumination and physiological stress response
+- Cognitive-behavioral techniques: identifying and challenging stress-inducing thoughts

@@ -1,0 +1,49 @@
+# Globalization
+
+## Definition
+
+Globalization is the increasing interconnection of the world's economies, cultures, and populations through cross-border trade, investment, technology, and migration. It has accelerated dramatically since the 1980s due to advances in transportation, communication, and trade liberalization.
+
+## Dimensions of Globalization
+
+- Economic globalization: international trade, foreign direct investment, global supply chains, financial integration
+- Cultural globalization: spread of ideas, values, media, food, and fashion across borders
+- Political globalization: international organizations, treaties, and governance structures
+- Technological globalization: spread of technology, internet connectivity, and digital platforms
+
+## History
+
+- Silk Road (200 BC - 1450 AD): ancient trade routes connecting China, Central Asia, and Europe
+- Age of Exploration (1500s): European maritime trade creates first global connections
+- First wave of globalization (1870-1914): steamships, telegraph, gold standard enable massive trade growth
+- Interwar deglobalization (1914-1945): World Wars and protectionism reverse integration
+- Bretton Woods era (1945-1971): IMF, World Bank, GATT rebuild international economic order
+- Hyperglobalization (1990-2008): fall of communism, WTO, internet, China's rise
+- Slowbalization (2008-present): financial crisis, trade wars, pandemic disrupt global integration
+
+## Benefits
+
+- Economic growth: trade has contributed to unprecedented global prosperity
+- Poverty reduction: integration into global markets lifted billions from poverty
+- Consumer choice: access to diverse products at lower prices
+- Technology transfer: developing countries gain access to advanced technologies
+- Cultural exchange: exposure to diverse perspectives and ideas
+
+## Criticisms
+
+- Job displacement: manufacturing jobs moved from developed to developing countries
+- Rising inequality: benefits concentrated among skilled workers and capital owners
+- Environmental damage: increased production and transportation raise emissions
+- Cultural homogenization: local traditions displaced by global (often Western) culture
+- Race to the bottom: countries compete by lowering labor and environmental standards
+- Financial contagion: crises spread rapidly across interconnected economies
+
+## Global Supply Chains
+
+Modern products are assembled from components made in multiple countries:
+
+- An iPhone contains parts from over 40 countries
+- A typical car has 30,000 parts from hundreds of suppliers worldwide
+- COVID-19 exposed vulnerabilities: semiconductor shortages, shipping disruptions
+- Reshoring and nearshoring: trend toward bringing production closer to home markets
+- Just-in-time vs. just-in-case: shifting from efficiency to resilience

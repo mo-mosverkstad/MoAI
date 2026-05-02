@@ -1,0 +1,50 @@
+# Thermodynamics
+
+## Definition
+
+Thermodynamics is the branch of physics that deals with heat, work, temperature, and their relation to energy and entropy. It describes how thermal energy is converted to and from other forms of energy and how it affects matter.
+
+## The Four Laws
+
+- Zeroth Law: if two systems are each in thermal equilibrium with a third system, they are in thermal equilibrium with each other. (Defines temperature.)
+- First Law (Conservation of Energy): energy cannot be created or destroyed, only transformed. The change in internal energy equals heat added minus work done (ΔU = Q - W).
+- Second Law: the total entropy of an isolated system always increases over time. Heat flows spontaneously from hot to cold, never the reverse. No heat engine can be 100% efficient.
+- Third Law: as temperature approaches absolute zero (0 K = -273.15°C), entropy approaches a minimum. It is impossible to reach absolute zero in a finite number of steps.
+
+## Entropy
+
+Entropy is a measure of disorder or the number of microscopic configurations consistent with a macroscopic state:
+
+- A shuffled deck has higher entropy than a sorted deck
+- Ice melting increases entropy (ordered crystal → disordered liquid)
+- The universe's entropy is always increasing (arrow of time)
+- Life creates local order but increases total entropy (through heat dissipation)
+- Heat death of the universe: maximum entropy state where no useful work can be extracted
+
+## Heat Engines
+
+Devices that convert thermal energy into mechanical work:
+
+- Carnot engine: theoretical maximum efficiency = 1 - T_cold/T_hot (in Kelvin)
+- Steam engine: water heated to steam expands against a piston
+- Internal combustion engine: fuel burned inside cylinders drives pistons
+- Jet engine: compressed air mixed with fuel, ignited, expelled at high speed
+- No real engine can exceed Carnot efficiency (Second Law)
+
+## Applications
+
+- Power generation: coal, gas, nuclear plants all use heat engines
+- Refrigeration: heat pumps move thermal energy from cold to hot (requires work input)
+- Chemical engineering: predicting reaction spontaneity and equilibrium
+- Materials science: phase transitions, crystal growth
+- Cosmology: heat death, black hole thermodynamics
+- Biology: metabolism, ATP synthesis, protein folding
+
+## Statistical Mechanics
+
+Ludwig Boltzmann (1870s) connected thermodynamics to the microscopic behavior of atoms:
+
+- Temperature is the average kinetic energy of molecules
+- Pressure is the force of molecular collisions on container walls
+- Entropy S = k_B ln(W), where W is the number of microstates
+- The Second Law is not absolute but overwhelmingly probable for large numbers of particles

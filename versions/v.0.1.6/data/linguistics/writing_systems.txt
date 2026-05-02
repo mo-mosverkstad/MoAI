@@ -1,0 +1,31 @@
+# Writing Systems
+
+## Definition
+
+A writing system is a method of visually representing verbal communication. Writing was invented independently at least three times in human history: in Mesopotamia (c. 3400 BC), China (c. 1200 BC), and Mesoamerica (c. 600 BC).
+
+## Types of Writing Systems
+
+- Logographic: each symbol represents a word or morpheme (Chinese characters, Egyptian hieroglyphs)
+- Syllabic: each symbol represents a syllable (Japanese kana, Cherokee syllabary)
+- Alphabetic: each symbol represents a consonant or vowel sound (Latin, Cyrillic, Greek, Arabic)
+- Abugida: consonant symbols with inherent vowels modified by diacritics (Devanagari, Thai, Ethiopic)
+- Abjad: primarily consonants are written; vowels are optional (Arabic, Hebrew)
+
+## History of Writing
+
+- c. 3400 BC: Sumerian cuneiform in Mesopotamia — began as pictographs on clay tablets
+- c. 3200 BC: Egyptian hieroglyphs — used for monumental inscriptions
+- c. 1200 BC: Chinese oracle bone script — earliest Chinese writing on turtle shells
+- c. 1050 BC: Phoenician alphabet — ancestor of Greek, Latin, Arabic, and Hebrew scripts
+- c. 800 BC: Greek alphabet — first to systematically represent vowels
+- c. 114 AD: Paper invented in China by Cai Lun
+- 1440: Gutenberg's printing press revolutionizes written communication
+
+## The Latin Alphabet
+
+The Latin (Roman) alphabet is the most widely used writing system in the world, used by approximately 70% of the world's population. It originated from the Etruscan alphabet, which derived from Greek, which derived from Phoenician. The basic Latin alphabet has 26 letters, but many languages add diacritics or additional letters.
+
+## Digital Writing
+
+The Unicode standard (first published 1991) aims to encode every character from every writing system. As of 2023, Unicode contains over 149,000 characters covering 161 scripts, enabling digital communication in virtually all written languages.

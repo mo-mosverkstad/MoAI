@@ -1,0 +1,67 @@
+# Psychotherapy Approaches
+
+## Definition
+
+Psychotherapy (talk therapy) is the treatment of mental health conditions through psychological methods. A trained therapist helps individuals understand their thoughts, feelings, and behaviors, and develop strategies for change. Research shows psychotherapy is effective for most mental health conditions.
+
+## Cognitive-Behavioral Therapy (CBT)
+
+The most researched and widely practiced form of psychotherapy:
+
+- Core principle: thoughts, feelings, and behaviors are interconnected; changing maladaptive thoughts changes emotions and behavior
+- Cognitive restructuring: identifying and challenging distorted thinking patterns
+- Behavioral experiments: testing beliefs through real-world actions
+- Exposure therapy: gradually confronting feared situations
+- Typically short-term (12-20 sessions), structured, and goal-oriented
+- Strong evidence for depression, anxiety, PTSD, OCD, eating disorders, insomnia
+
+## Psychodynamic Therapy
+
+Based on psychoanalytic principles but more focused and shorter-term:
+
+- Explores unconscious patterns and past experiences that influence current behavior
+- Examines defense mechanisms and transference (projecting feelings onto the therapist)
+- Focuses on insight — understanding the roots of emotional suffering
+- Free association: saying whatever comes to mind without censoring
+- Effective for depression, anxiety, personality disorders, and relationship difficulties
+
+## Humanistic/Person-Centered Therapy
+
+Developed by Carl Rogers:
+
+- Core conditions: unconditional positive regard, empathy, and genuineness
+- Non-directive: therapist follows the client's lead rather than imposing structure
+- Focus on present experience and personal growth
+- Belief that clients have innate capacity for self-healing given the right conditions
+- Effective for depression, relationship issues, and personal development
+
+## Dialectical Behavior Therapy (DBT)
+
+Developed by Marsha Linehan for borderline personality disorder:
+
+- Combines CBT with mindfulness and acceptance strategies
+- Four skill modules: mindfulness, distress tolerance, emotion regulation, interpersonal effectiveness
+- Includes individual therapy, group skills training, phone coaching, and therapist consultation team
+- Effective for BPD, self-harm, suicidal behavior, substance abuse, eating disorders
+
+## Family and Couples Therapy
+
+- Systemic therapy: views problems as arising from relationship patterns, not individuals
+- Emotionally Focused Therapy (EFT): helps couples identify and change negative interaction cycles
+- Structural family therapy: restructures family organization and boundaries
+- Gottman method: research-based approach to strengthening relationships
+
+## Acceptance and Commitment Therapy (ACT)
+
+- Psychological flexibility: being present, open to experience, and doing what matters
+- Acceptance: allowing difficult thoughts and feelings without trying to eliminate them
+- Cognitive defusion: seeing thoughts as mental events rather than literal truths
+- Values clarification: identifying what truly matters and committing to value-guided action
+- Effective for chronic pain, anxiety, depression, substance abuse
+
+## Group Therapy
+
+- Multiple clients meet together with one or more therapists
+- Benefits: social support, normalization, learning from others, practicing social skills
+- Types: psychoeducational groups, process groups, support groups, skills training groups
+- Particularly effective for substance abuse, social anxiety, grief, and trauma

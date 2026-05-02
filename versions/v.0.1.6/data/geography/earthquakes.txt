@@ -1,0 +1,54 @@
+# Earthquakes and Plate Tectonics
+
+## Plate Tectonics
+
+Earth's outer shell (lithosphere) is divided into several large tectonic plates that float on the semi-fluid asthenosphere below. These plates move at rates of 1-15 cm per year, driven by convection currents in the mantle.
+
+Major tectonic plates:
+
+- Pacific Plate: the largest, mostly oceanic
+- North American Plate: includes most of North America and the western Atlantic
+- Eurasian Plate: includes Europe and most of Asia
+- African Plate: includes Africa and surrounding ocean floor
+- Antarctic Plate: includes Antarctica and surrounding ocean floor
+- South American Plate: includes South America and the western South Atlantic
+- Indo-Australian Plate: includes India, Australia, and surrounding ocean floor
+
+## Plate Boundaries
+
+- Divergent boundaries: plates move apart, creating new crust (Mid-Atlantic Ridge, East African Rift)
+- Convergent boundaries: plates collide. Oceanic plate subducts under continental plate (Andes), or two continental plates collide (Himalayas)
+- Transform boundaries: plates slide past each other horizontally (San Andreas Fault)
+
+## How Earthquakes Occur
+
+Earthquakes occur when stress accumulated along fault lines is suddenly released as seismic waves. The point where the rupture begins is the focus (hypocenter), and the point directly above on the surface is the epicenter.
+
+Types of seismic waves:
+
+- P-waves (primary): compressional waves, fastest, travel through solids and liquids
+- S-waves (secondary): shear waves, slower, travel only through solids
+- Surface waves: slowest but most destructive, travel along Earth's surface
+
+## Measuring Earthquakes
+
+- Richter scale (1935): measures magnitude based on seismograph readings (logarithmic — each whole number is 10× more amplitude)
+- Moment magnitude scale (Mw): replaced Richter for large earthquakes, measures total energy released
+- Modified Mercalli Intensity scale: measures effects on people and structures (I to XII)
+
+## Major Historical Earthquakes
+
+- 1556 Shaanxi, China: magnitude ~8.0, approximately 830,000 deaths (deadliest recorded)
+- 1906 San Francisco: magnitude 7.9, destroyed much of the city by fire
+- 1960 Valdivia, Chile: magnitude 9.5, the most powerful earthquake ever recorded
+- 2004 Indian Ocean: magnitude 9.1, triggered tsunami killing approximately 230,000 people
+- 2011 Tōhoku, Japan: magnitude 9.1, caused the Fukushima nuclear disaster
+
+## Earthquake Prediction and Preparedness
+
+Earthquakes cannot currently be predicted with precision. Preparedness measures include:
+
+- Building codes: earthquake-resistant construction (base isolation, reinforced concrete)
+- Early warning systems: detect P-waves seconds before destructive S-waves arrive
+- Seismic hazard maps: identify high-risk zones for land-use planning
+- Emergency preparedness: evacuation plans, emergency supplies, public education

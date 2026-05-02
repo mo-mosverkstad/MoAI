@@ -1,0 +1,47 @@
+# Philosophy of Mind
+
+## The Mind-Body Problem
+
+The central question: how do mental states (thoughts, feelings, consciousness) relate to physical states (brain activity)? This is one of the oldest and most difficult problems in philosophy.
+
+## Dualism
+
+Mind and body are fundamentally different:
+
+- Substance dualism (Descartes): the mind is a non-physical substance that interacts with the brain. Problem: how does a non-physical mind causally affect a physical body?
+- Property dualism: the brain is physical, but mental properties (qualia, consciousness) are non-physical properties that emerge from physical processes.
+- Interactionism: mind and body causally interact (Descartes proposed the pineal gland as the point of interaction)
+
+## Physicalism
+
+Everything is physical, including the mind:
+
+- Identity theory (Place, Smart): mental states are identical to brain states. Pain just IS C-fiber firing.
+- Functionalism (Putnam): mental states are defined by their causal roles, not their physical composition. A mind could be implemented in silicon, not just carbon.
+- Eliminative materialism (Churchlands): folk psychological concepts (beliefs, desires) are fundamentally mistaken and will be replaced by neuroscience.
+
+## Consciousness
+
+- The hard problem (Chalmers): why does brain activity feel like something from the inside? Why isn't it all "dark" processing?
+- Qualia: the subjective, qualitative character of experience (the redness of red, the painfulness of pain)
+- The explanatory gap: even a complete physical description of the brain seems to leave out consciousness
+- Philosophical zombies: could there be beings physically identical to us but lacking inner experience?
+- Integrated Information Theory (Tononi): consciousness corresponds to integrated information (phi)
+- Global Workspace Theory (Baars): consciousness arises when information is broadcast widely across the brain
+
+## Free Will
+
+- Hard determinism: all events are determined by prior causes; free will is an illusion
+- Libertarianism (metaphysical): humans have genuine free will not determined by physical causes
+- Compatibilism (most popular among philosophers): free will is compatible with determinism — we are free when we act on our own desires without external coercion
+- Neuroscience challenge: Libet's experiments (1983) showed brain activity precedes conscious decision by ~350ms
+
+## Personal Identity
+
+What makes you the same person over time?
+
+- Psychological continuity (Locke): identity consists in continuity of memory and personality
+- Biological continuity: identity consists in continuity of the living organism
+- Narrative identity: we are the stories we tell about ourselves
+- Ship of Theseus: if every part is replaced, is it still the same entity?
+- Teleporter problem: if you're disassembled and reassembled elsewhere, is it still you?

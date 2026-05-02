@@ -1,0 +1,44 @@
+# Architecture
+
+## Definition
+
+Architecture is the art and science of designing and constructing buildings and other physical structures. It balances aesthetic considerations with functional requirements, structural engineering, and environmental sustainability.
+
+## Architectural Styles Through History
+
+- Ancient Egyptian (3000-300 BC): pyramids, temples with massive columns, post-and-lintel construction
+- Classical Greek (800-100 BC): the Parthenon, Doric/Ionic/Corinthian column orders, mathematical proportions
+- Roman (100 BC-400 AD): arches, domes, concrete, the Colosseum, the Pantheon
+- Gothic (1100-1500): pointed arches, flying buttresses, ribbed vaults, stained glass (Notre-Dame, Chartres)
+- Renaissance (1400-1600): symmetry, proportion, classical revival (Brunelleschi's dome in Florence)
+- Baroque (1600-1750): grandeur, dramatic lighting, ornate decoration (Palace of Versailles)
+- Neoclassical (1750-1850): return to Greek and Roman forms (US Capitol, British Museum)
+- Art Nouveau (1890-1910): organic forms, curved lines (Gaudí's Sagrada Família)
+- Modernism (1920-1970): "form follows function," minimal ornamentation, glass and steel (Bauhaus, Le Corbusier)
+- Postmodernism (1970-present): playful references to historical styles, rejection of strict modernist rules
+
+## Famous Buildings
+
+- Great Pyramid of Giza (2560 BC): the oldest of the Seven Wonders, 146.5 meters tall originally
+- Hagia Sophia (537 AD): Istanbul, massive dome spanning 31 meters, was the world's largest cathedral for nearly 1,000 years
+- Taj Mahal (1653): Agra, India, white marble mausoleum, considered the finest example of Mughal architecture
+- Eiffel Tower (1889): Paris, 330 meters tall, iron lattice structure built for the World's Fair
+- Sydney Opera House (1973): iconic expressionist design by Jørn Utzon
+- Burj Khalifa (2010): Dubai, tallest building in the world at 828 meters
+
+## Structural Systems
+
+- Load-bearing walls: walls support the weight of the structure (traditional masonry)
+- Frame structures: skeleton of columns and beams carries loads (steel and concrete frames)
+- Tensile structures: cables and membranes under tension (suspension bridges, tent roofs)
+- Shell structures: thin curved surfaces that are strong due to their shape (domes, vaults)
+
+## Sustainable Architecture
+
+Modern architecture increasingly focuses on environmental sustainability:
+
+- Passive solar design: orienting buildings to maximize natural heating and lighting
+- Green roofs: vegetation on rooftops for insulation and stormwater management
+- Cross-ventilation: natural airflow reduces need for mechanical cooling
+- Recycled and local materials: reducing embodied energy and transportation emissions
+- Net-zero energy buildings: produce as much energy as they consume annually

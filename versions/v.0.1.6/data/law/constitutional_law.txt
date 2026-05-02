@@ -1,0 +1,37 @@
+# Constitutional Law
+
+## Definition
+
+Constitutional law is the body of law that defines the structure of government, the distribution of power among its branches, and the fundamental rights of citizens. A constitution is the supreme law of a nation — all other laws must conform to it.
+
+## Key Principles
+
+- Separation of powers: dividing government into legislative, executive, and judicial branches to prevent concentration of power
+- Checks and balances: each branch can limit the others (presidential veto, judicial review, legislative override)
+- Federalism: division of power between national and regional governments
+- Rule of law: government officials are bound by law, not above it
+- Judicial review: courts can declare laws unconstitutional (established in Marbury v. Madison, 1803)
+
+## Fundamental Rights
+
+Most constitutions protect individual rights:
+
+- Freedom of speech and press
+- Freedom of religion
+- Right to privacy
+- Right to due process and fair trial
+- Protection against unreasonable search and seizure
+- Equal protection under the law
+- Right to vote
+- Protection against cruel and unusual punishment
+
+## Notable Constitutions
+
+- United States Constitution (1787): the oldest written national constitution still in force. Contains 7 articles and 27 amendments. The Bill of Rights (first 10 amendments) was ratified in 1791.
+- French Declaration of the Rights of Man (1789): established principles of popular sovereignty and individual rights during the French Revolution.
+- German Basic Law (1949): created after World War II with strong protections for human dignity and democratic principles.
+- South African Constitution (1996): widely regarded as one of the most progressive, with extensive socioeconomic rights.
+
+## Constitutional Amendment
+
+Constitutions can be changed through formal amendment processes, which are typically more difficult than passing ordinary legislation to ensure stability. The US Constitution requires two-thirds of Congress and three-fourths of state legislatures to ratify an amendment.

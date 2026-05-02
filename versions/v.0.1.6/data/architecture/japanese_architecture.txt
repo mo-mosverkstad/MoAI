@@ -1,0 +1,40 @@
+# Japanese Architecture
+
+## Overview
+
+Japanese architecture has a history spanning thousands of years, shaped by the country's climate, geography, earthquakes, and cultural values. It emphasizes harmony with nature, simplicity, and the beauty of natural materials, particularly wood.
+
+## Traditional Features
+
+- Wood construction: Japan's abundant forests made timber the primary building material
+- Post-and-beam structure: flexible joints absorb earthquake energy
+- Sliding doors (fusuma and shoji): create flexible, reconfigurable interior spaces
+- Tatami mats: standardized floor modules that define room proportions
+- Engawa: covered verandas connecting interior and garden
+- Asymmetry: deliberate imperfection reflecting wabi-sabi aesthetics
+- Integration with nature: gardens visible from every room
+
+## Building Types
+
+- Shinto shrines: characterized by torii gates, raised floors, and thatched or copper roofs. Ise Grand Shrine is rebuilt every 20 years using traditional methods.
+- Buddhist temples: influenced by Chinese architecture, featuring pagodas, main halls, and bell towers. Horyuji Temple (607 AD) contains the world's oldest surviving wooden buildings.
+- Castles: defensive structures with stone foundations and wooden superstructures. Himeji Castle (1609) is the finest surviving example with its white plaster walls.
+- Tea houses: small, rustic structures designed for the tea ceremony, embodying wabi-sabi simplicity
+- Machiya: traditional wooden townhouses in Kyoto with narrow frontages and deep interiors
+
+## Modern Japanese Architecture
+
+Japan has produced many internationally acclaimed modern architects:
+
+- Kenzo Tange (1913-2005): combined modernism with Japanese traditions (Hiroshima Peace Memorial Museum)
+- Tadao Ando (born 1941): known for minimalist concrete buildings that frame nature (Church of the Light)
+- Toyo Ito (born 1941): fluid, organic forms (Sendai Mediatheque)
+- Kengo Kuma (born 1954): uses natural materials and transparency (National Stadium for 2020 Olympics)
+
+## Earthquake Resistance
+
+Japan's architecture has evolved to withstand frequent earthquakes:
+
+- Traditional: flexible wooden joints that absorb seismic energy
+- Modern: base isolation systems, tuned mass dampers, and steel-reinforced concrete
+- Pagodas: their central pillar (shinbashira) acts as a natural damper — no five-story pagoda has ever collapsed in an earthquake

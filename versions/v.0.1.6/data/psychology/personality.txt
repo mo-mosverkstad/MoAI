@@ -1,0 +1,47 @@
+# Personality
+
+## Definition
+
+Personality refers to the characteristic patterns of thoughts, feelings, and behaviors that make a person unique and relatively consistent across situations and over time. Personality psychology seeks to understand individual differences and predict behavior.
+
+## The Big Five (OCEAN)
+
+The most widely accepted model of personality traits:
+
+- Openness to experience: curiosity, creativity, preference for novelty vs. routine
+- Conscientiousness: organization, self-discipline, goal-directed behavior vs. carelessness
+- Extraversion: sociability, assertiveness, positive emotions vs. introversion
+- Agreeableness: cooperation, trust, empathy vs. antagonism
+- Neuroticism: emotional instability, anxiety, moodiness vs. emotional stability
+
+These traits are normally distributed in the population, relatively stable after age 30, and approximately 50% heritable.
+
+## Psychoanalytic Theory
+
+Sigmund Freud (1856-1939) proposed that personality is shaped by unconscious conflicts:
+
+- Id: primitive drives seeking immediate gratification (pleasure principle)
+- Ego: rational mediator between id and reality (reality principle)
+- Superego: internalized moral standards (conscience)
+- Defense mechanisms: unconscious strategies to reduce anxiety (repression, projection, denial, sublimation)
+- Psychosexual stages: oral, anal, phallic, latency, genital
+
+## Humanistic Theories
+
+- Carl Rogers: people have an innate drive toward self-actualization. Healthy development requires unconditional positive regard.
+- Abraham Maslow: self-actualized people are creative, spontaneous, accepting, and have peak experiences.
+
+## Personality Assessment
+
+- Self-report questionnaires: NEO-PI-R (Big Five), MMPI (clinical), Myers-Briggs (popular but less scientific)
+- Projective tests: Rorschach inkblots, Thematic Apperception Test (TAT)
+- Behavioral observation: systematic recording of behavior in natural or controlled settings
+- Informant reports: ratings by people who know the individual well
+
+## Nature vs. Nurture
+
+Twin studies show that personality traits are approximately:
+
+- 50% genetic (identical twins raised apart show similar personalities)
+- 50% environmental (but mostly non-shared environment — unique experiences, not family)
+- Shared family environment has surprisingly little effect on adult personality

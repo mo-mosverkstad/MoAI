@@ -1,0 +1,42 @@
+# The Solar System
+
+## Overview
+
+The Solar System consists of the Sun and everything gravitationally bound to it, including eight planets, dwarf planets, moons, asteroids, comets, and interplanetary dust. It formed approximately 4.6 billion years ago from the gravitational collapse of a giant molecular cloud.
+
+## The Sun
+
+The Sun is a G-type main-sequence star (G2V) that contains 99.86% of the Solar System's mass. It is composed primarily of hydrogen (73%) and helium (25%). Nuclear fusion in its core converts hydrogen into helium, releasing enormous energy. The Sun's surface temperature is approximately 5,500°C, while its core reaches 15 million°C.
+
+## The Planets
+
+The eight planets, in order from the Sun:
+
+- Mercury: smallest planet, no atmosphere, extreme temperature variations (-180°C to 430°C)
+- Venus: hottest planet (462°C average), thick CO₂ atmosphere, retrograde rotation
+- Earth: only known planet with liquid water on its surface and life
+- Mars: the Red Planet, thin CO₂ atmosphere, largest volcano (Olympus Mons) and canyon (Valles Marineris) in the Solar System
+- Jupiter: largest planet, Great Red Spot storm, 95 known moons including Ganymede (largest moon in the Solar System)
+- Saturn: famous ring system made of ice and rock particles, 146 known moons
+- Uranus: rotates on its side (98° axial tilt), ice giant with methane atmosphere
+- Neptune: windiest planet (2,100 km/h winds), ice giant, 16 known moons
+
+## Dwarf Planets
+
+Pluto was reclassified as a dwarf planet in 2006 by the International Astronomical Union. Other dwarf planets include Eris, Haumea, Makemake, and Ceres (the largest object in the asteroid belt).
+
+## Small Bodies
+
+- Asteroid belt: located between Mars and Jupiter, contains millions of rocky bodies
+- Kuiper belt: beyond Neptune, contains icy bodies including Pluto
+- Oort cloud: a theoretical spherical shell of icy objects at the outer edge of the Solar System
+- Comets: icy bodies that develop tails when approaching the Sun
+
+## Exploration
+
+- 1957: Sputnik 1, first artificial satellite
+- 1969: Apollo 11, first humans on the Moon
+- 1977: Voyager 1 and 2 launched, now in interstellar space
+- 1997: Mars Pathfinder lands on Mars
+- 2015: New Horizons flies by Pluto
+- 2020: Perseverance rover lands on Mars with Ingenuity helicopter

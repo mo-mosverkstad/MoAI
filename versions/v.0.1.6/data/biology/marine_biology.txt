@@ -1,0 +1,57 @@
+# Marine Biology
+
+## Definition
+
+Marine biology is the scientific study of organisms that live in the ocean and other saltwater environments. The ocean covers 71% of Earth's surface and contains an estimated 2.2 million species, of which only about 240,000 have been described.
+
+## Ocean Life Zones
+
+- Intertidal zone: between high and low tide marks. Organisms must tolerate air exposure, wave action, and temperature changes (barnacles, mussels, sea stars, crabs).
+- Pelagic zone (open water): divided by depth into epipelagic (0-200m, sunlit), mesopelagic (200-1000m, twilight), bathypelagic (1000-4000m, dark), abyssopelagic (4000-6000m).
+- Benthic zone (ocean floor): organisms living on or in the seafloor (corals, sponges, worms, sea cucumbers).
+- Hydrothermal vents: superheated water (up to 400°C) supports chemosynthetic ecosystems independent of sunlight.
+
+## Coral Reefs
+
+Often called "rainforests of the sea":
+
+- Built by tiny coral polyps that secrete calcium carbonate skeletons
+- Cover less than 0.1% of ocean floor but support 25% of all marine species
+- Great Barrier Reef (Australia): largest living structure on Earth (2,300 km long)
+- Threats: ocean warming causes bleaching (corals expel symbiotic algae), ocean acidification dissolves skeletons, pollution, overfishing
+- 50% of the world's coral reefs have been lost since 1950
+
+## Marine Mammals
+
+- Cetaceans: whales, dolphins, porpoises. Blue whale is the largest animal ever (30 meters, 150 tonnes).
+- Pinnipeds: seals, sea lions, walruses
+- Sirenians: manatees, dugongs (herbivorous)
+- Sea otters: smallest marine mammal, use tools (rocks to crack shells)
+- Polar bears: classified as marine mammals (depend on sea ice for hunting seals)
+
+## Deep Sea
+
+The deep ocean (below 200m) is the largest habitat on Earth:
+
+- Complete darkness below 1,000m
+- Extreme pressure: 1 atmosphere per 10 meters depth (Mariana Trench: 1,086 atm)
+- Near-freezing temperatures (1-4°C)
+- Bioluminescence: 90% of deep-sea organisms produce their own light
+- Giant squid: up to 13 meters long, lives at 300-1,000m depth
+- Anglerfish: uses bioluminescent lure to attract prey in darkness
+
+## Plankton
+
+Microscopic organisms that form the base of marine food webs:
+
+- Phytoplankton: photosynthetic (diatoms, coccolithophores). Produce 50% of Earth's oxygen.
+- Zooplankton: animal plankton (copepods, krill, jellyfish larvae). Krill alone weigh more than all humans combined.
+- Plankton blooms: rapid population growth visible from space (satellite ocean color monitoring)
+
+## Threats to Marine Life
+
+- Overfishing: 34% of fish stocks overfished (FAO, 2020)
+- Plastic pollution: 8 million tonnes enter oceans annually; microplastics found in deepest trenches
+- Climate change: warming, acidification, deoxygenation
+- Habitat destruction: bottom trawling, coastal development, mangrove loss
+- Invasive species: ballast water transport, canal connections (lionfish in Atlantic)

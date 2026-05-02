@@ -1,0 +1,47 @@
+# Classical Music
+
+## Overview
+
+Classical music is a broad term referring to the Western art music tradition spanning from the medieval period to the present day. It is characterized by its use of formal musical structures, written notation, and orchestral instrumentation.
+
+## Historical Periods
+
+- Medieval (500-1400): Gregorian chant, early polyphony, troubadour songs
+- Renaissance (1400-1600): complex polyphony, madrigals, Palestrina, Josquin des Prez
+- Baroque (1600-1750): ornate style, basso continuo, Bach, Handel, Vivaldi
+- Classical (1750-1820): clarity and balance, sonata form, Mozart, Haydn, early Beethoven
+- Romantic (1820-1900): emotional expression, expanded orchestra, Chopin, Wagner, Tchaikovsky
+- Modern (1900-present): experimentation, atonality, Stravinsky, Schoenberg, minimalism
+
+## The Orchestra
+
+A modern symphony orchestra typically contains 70-100 musicians organized into four sections:
+
+- Strings: violins, violas, cellos, double basses (largest section, ~60 players)
+- Woodwinds: flutes, oboes, clarinets, bassoons
+- Brass: trumpets, French horns, trombones, tubas
+- Percussion: timpani, snare drum, cymbals, xylophone, and many others
+
+## Major Composers
+
+- Johann Sebastian Bach (1685-1750): German composer, master of counterpoint, wrote The Well-Tempered Clavier and the Brandenburg Concertos
+- Wolfgang Amadeus Mozart (1756-1791): Austrian prodigy, composed over 600 works including The Magic Flute and Symphony No. 40
+- Ludwig van Beethoven (1770-1827): German composer who bridged Classical and Romantic eras, composed nine symphonies despite progressive deafness
+- Pyotr Ilyich Tchaikovsky (1840-1893): Russian composer known for Swan Lake, The Nutcracker, and the 1812 Overture
+
+## Musical Forms
+
+- Symphony: a large-scale orchestral work, typically in four movements
+- Concerto: a work for solo instrument accompanied by orchestra
+- Sonata: a composition for one or two instruments, usually in three or four movements
+- Opera: a dramatic work combining singing, orchestral music, and theater
+- Chamber music: compositions for small ensembles (string quartets, piano trios)
+
+## How Music Works
+
+Music is organized sound with four fundamental elements:
+
+- Melody: a sequence of notes that form a recognizable tune
+- Harmony: the combination of simultaneously sounded notes (chords)
+- Rhythm: the pattern of beats and time values
+- Timbre: the quality of sound that distinguishes different instruments

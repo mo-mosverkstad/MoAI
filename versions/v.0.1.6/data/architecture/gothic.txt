@@ -1,0 +1,33 @@
+# Gothic Architecture
+
+## Overview
+
+Gothic architecture is a style that flourished in Europe from the mid-12th century to the 16th century. It originated in France and is characterized by pointed arches, ribbed vaults, flying buttresses, and large stained glass windows. The style was primarily used for cathedrals and churches.
+
+## Key Features
+
+- Pointed arches: distribute weight more efficiently than rounded Roman arches, allowing taller and thinner walls
+- Ribbed vaults: intersecting arched ribs support the ceiling, concentrating weight at specific points
+- Flying buttresses: external arched supports that transfer the thrust of the roof away from the walls
+- Large windows: thin walls enabled by buttresses allow enormous stained glass windows
+- Verticality: emphasis on height to inspire awe and direct the eye heavenward
+- Rose windows: large circular windows with radiating tracery, often on the west facade
+
+## Famous Gothic Buildings
+
+- Notre-Dame de Paris (1163-1345): pioneered the flying buttress, 69-meter spire
+- Chartres Cathedral (1194-1220): famous for its 176 stained glass windows
+- Cologne Cathedral (1248-1880): took over 600 years to complete, 157-meter twin spires
+- Westminster Abbey (1245-1517): coronation church of English monarchs
+- Milan Cathedral (1386-1965): largest Gothic cathedral in Italy, 3,400 statues
+- Sainte-Chapelle, Paris (1248): walls almost entirely of stained glass
+
+## Construction
+
+Gothic cathedrals were engineering marvels built without modern tools:
+
+- Construction typically took 100-300 years
+- Master masons directed teams of stonecutters, carpenters, and laborers
+- Scaffolding and wooden centering supported arches during construction
+- Stone was quarried locally when possible, transported by river when not
+- No formal engineering calculations — builders relied on experience and geometric rules

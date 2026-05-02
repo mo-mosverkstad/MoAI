@@ -1,0 +1,57 @@
+# Autism Spectrum Disorder
+
+## Definition
+
+Autism spectrum disorder (ASD) is a neurodevelopmental condition characterized by differences in social communication, restricted interests, and repetitive behaviors. It is called a "spectrum" because it varies widely in severity and presentation. Approximately 1 in 36 children in the United States is diagnosed with ASD (CDC, 2023).
+
+## Core Characteristics
+
+Social communication differences:
+
+- Difficulty reading social cues (facial expressions, body language, tone of voice)
+- Challenges with reciprocal conversation (turn-taking, staying on topic)
+- Reduced eye contact or atypical use of gestures
+- Difficulty understanding sarcasm, irony, or figurative language
+- Challenges forming and maintaining friendships
+
+Restricted and repetitive behaviors:
+
+- Intense, focused interests in specific topics
+- Repetitive movements (hand-flapping, rocking, spinning)
+- Insistence on sameness and routines; distress at unexpected changes
+- Sensory sensitivities (hypersensitivity or hyposensitivity to sounds, textures, lights)
+
+## Diagnosis
+
+- Typically diagnosed in early childhood (ages 2-4), though some are diagnosed later
+- No medical test exists; diagnosis is based on behavioral observation and developmental history
+- DSM-5 (2013) merged previous categories (autistic disorder, Asperger's syndrome, PDD-NOS) into one spectrum
+- Severity levels: Level 1 (requiring support), Level 2 (requiring substantial support), Level 3 (requiring very substantial support)
+
+## Causes
+
+- Strongly genetic: heritability estimated at 80-90%
+- Hundreds of genes contribute, each with small effect
+- No single cause identified; likely involves gene-environment interactions
+- Advanced parental age is a risk factor
+- Vaccines do NOT cause autism — this claim has been thoroughly debunked by extensive research
+
+## Strengths
+
+Many autistic individuals have notable strengths:
+
+- Exceptional attention to detail and pattern recognition
+- Strong memory for facts and systems
+- Honesty and directness in communication
+- Deep expertise in areas of special interest
+- Logical and systematic thinking
+- Loyalty and consistency in relationships
+
+## Support and Intervention
+
+- Early intervention: speech therapy, occupational therapy, social skills training
+- Applied Behavior Analysis (ABA): structured teaching of skills (controversial within autistic community)
+- Speech-language therapy: improving communication abilities
+- Sensory integration therapy: managing sensory sensitivities
+- Accommodations: structured environments, visual schedules, noise-reducing headphones
+- Neurodiversity movement: advocates acceptance of autism as natural variation rather than disorder to be cured

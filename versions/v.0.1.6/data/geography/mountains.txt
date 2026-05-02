@@ -1,0 +1,49 @@
+# Mountains
+
+## Definition
+
+A mountain is a landform that rises prominently above its surroundings, generally with steep slopes and a peak or ridge. Mountains cover approximately 22% of Earth's land surface and are home to 15% of the world's population.
+
+## How Mountains Form
+
+- Fold mountains: formed by tectonic plate collision compressing and folding rock layers (Himalayas, Alps, Andes). The most common type.
+- Volcanic mountains: built from erupted lava and ash (Mount Fuji, Mount Kilimanjaro, Mount Rainier)
+- Fault-block mountains: formed when blocks of rock are pushed up along fault lines (Sierra Nevada, Tetons)
+- Dome mountains: formed by magma pushing up overlying rock without erupting (Black Hills, South Dakota)
+
+## Major Mountain Ranges
+
+- Himalayas (Asia): highest range, formed by collision of Indian and Eurasian plates (still rising ~5 mm/year). Contains all 14 peaks above 8,000 m.
+- Andes (South America): longest continental range (7,000 km). Highest peak: Aconcagua (6,961 m).
+- Alps (Europe): 1,200 km across 8 countries. Highest peak: Mont Blanc (4,808 m).
+- Rocky Mountains (North America): 4,800 km from New Mexico to British Columbia.
+- Ural Mountains (Russia): traditional boundary between Europe and Asia.
+- Great Dividing Range (Australia): 3,500 km along the eastern coast.
+
+## Highest Peaks
+
+- Mount Everest (8,849 m): highest above sea level, Nepal/China border. First summited by Edmund Hillary and Tenzing Norgay (1953).
+- K2 (8,611 m): second highest, more dangerous than Everest (1 death per 4 summits historically)
+- Kangchenjunga (8,586 m): third highest, India/Nepal border
+- Mauna Kea (Hawaii): tallest from base to peak (10,203 m from ocean floor), but only 4,207 m above sea level
+- Chimborazo (Ecuador): summit is the farthest point from Earth's center (due to equatorial bulge)
+
+## Mountain Environments
+
+Altitude creates distinct climate zones (similar to traveling from equator to poles):
+
+- Montane forest: lower slopes, dense forest
+- Subalpine: transition zone, stunted trees
+- Alpine: above treeline, grasses, mosses, lichens
+- Nival: permanent snow and ice
+
+Temperature drops approximately 6.5°C per 1,000 m of elevation gain.
+
+## Importance
+
+- Water towers: mountains supply freshwater to over half the world's population (snowmelt, glaciers, springs)
+- Biodiversity hotspots: isolation creates unique species (mountain gorillas, snow leopards, alpine flowers)
+- Climate regulation: influence weather patterns, create rain shadows
+- Cultural significance: sacred in many traditions (Mount Olympus, Mount Sinai, Mount Kailash)
+- Recreation: skiing, hiking, climbing, tourism
+- Resources: minerals, timber, hydroelectric power

@@ -1,0 +1,48 @@
+# Social Psychology
+
+## Definition
+
+Social psychology studies how people's thoughts, feelings, and behaviors are influenced by the actual, imagined, or implied presence of others. It examines how social situations shape individual behavior.
+
+## Conformity
+
+People tend to align their behavior with group norms:
+
+- Asch conformity experiments (1951): participants gave obviously wrong answers to match the group (37% conformed)
+- Informational influence: conforming because we believe others have better information
+- Normative influence: conforming to be accepted and avoid rejection
+- Factors increasing conformity: group size, unanimity, public responses, collectivist culture
+
+## Obedience
+
+Stanley Milgram's experiments (1963) showed that ordinary people would administer apparently lethal electric shocks when instructed by an authority figure. 65% of participants delivered the maximum 450-volt shock. Factors increasing obedience: proximity of authority, distance from victim, institutional legitimacy.
+
+## Bystander Effect
+
+The more people present during an emergency, the less likely any individual is to help:
+
+- Diffusion of responsibility: each person assumes someone else will act
+- Pluralistic ignorance: people look to others for cues and interpret inaction as evidence that help isn't needed
+- Kitty Genovese case (1964): widely reported (though later disputed) as an example of bystander apathy
+
+## Attitudes and Persuasion
+
+- Cognitive dissonance (Festinger, 1957): discomfort from holding contradictory beliefs motivates attitude change
+- Elaboration Likelihood Model: persuasion occurs through central route (careful thinking) or peripheral route (superficial cues)
+- Foot-in-the-door: agreeing to a small request increases compliance with a larger one
+- Door-in-the-face: refusing a large request increases compliance with a smaller one
+
+## Group Dynamics
+
+- Groupthink (Janis): desire for harmony leads to poor decisions (Bay of Pigs, Challenger disaster)
+- Social loafing: individuals exert less effort in groups than alone
+- Deindividuation: loss of self-awareness in groups can lead to impulsive behavior
+- Group polarization: group discussion tends to push opinions toward extremes
+
+## Prejudice and Discrimination
+
+- Stereotypes: generalized beliefs about group members
+- Prejudice: negative attitudes toward a group
+- Discrimination: negative behavior toward group members
+- Implicit bias: unconscious associations that affect judgment
+- Contact hypothesis (Allport): intergroup contact under equal conditions reduces prejudice

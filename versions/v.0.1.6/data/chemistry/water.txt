@@ -1,0 +1,49 @@
+# Water (H₂O)
+
+## Properties
+
+Water is a polar molecule consisting of two hydrogen atoms covalently bonded to one oxygen atom. It is the most abundant substance on Earth's surface and is essential for all known forms of life.
+
+Physical properties of water:
+
+- Boiling point: 100°C (212°F) at standard atmospheric pressure
+- Freezing point: 0°C (32°F) at standard atmospheric pressure
+- Density: maximum at 4°C (approximately 1 g/cm³)
+- Specific heat capacity: 4.184 J/(g·°C), one of the highest of any common substance
+- Surface tension: 72.8 mN/m at 20°C, among the highest of non-metallic liquids
+
+## Unique Properties
+
+Water has several anomalous properties that are crucial for life:
+
+- Ice floats: water expands when it freezes, making ice less dense than liquid water. This insulates lakes and oceans, allowing aquatic life to survive winter.
+- High specific heat: water resists temperature changes, moderating Earth's climate and stabilizing body temperature in organisms.
+- Universal solvent: water dissolves more substances than any other common liquid due to its polarity.
+- Cohesion and adhesion: hydrogen bonding gives water strong cohesive forces, enabling capillary action in plants.
+
+## The Water Cycle
+
+The water cycle (hydrological cycle) describes the continuous movement of water on, above, and below Earth's surface:
+
+1. Evaporation: water transforms from liquid to vapor, primarily from oceans
+2. Transpiration: plants release water vapor through their leaves
+3. Condensation: water vapor cools and forms clouds
+4. Precipitation: water falls as rain, snow, sleet, or hail
+5. Runoff and infiltration: water flows into rivers or seeps into groundwater
+
+## Water on Earth
+
+- Oceans contain 97.5% of Earth's water (saltwater)
+- Freshwater accounts for only 2.5%, of which 68.7% is locked in ice caps and glaciers
+- Groundwater represents 30.1% of freshwater
+- Surface water (lakes, rivers) represents only 0.3% of freshwater
+- The atmosphere contains about 0.001% of total water
+
+## Water Treatment
+
+Municipal water treatment typically involves:
+
+- Coagulation and flocculation: chemicals cause particles to clump together
+- Sedimentation: heavy particles settle to the bottom
+- Filtration: water passes through sand, gravel, and charcoal filters
+- Disinfection: chlorine, ozone, or UV light kills remaining microorganisms

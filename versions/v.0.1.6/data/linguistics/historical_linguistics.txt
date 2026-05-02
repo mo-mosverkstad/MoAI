@@ -1,0 +1,45 @@
+# Historical Linguistics
+
+## Definition
+
+Historical linguistics studies how languages change over time. It reconstructs earlier stages of languages, establishes genetic relationships between languages, and identifies the mechanisms of language change.
+
+## The Comparative Method
+
+The primary tool for establishing language relationships:
+
+1. Identify potential cognates: words in different languages that appear similar in form and meaning
+2. Establish systematic sound correspondences between languages
+3. Reconstruct proto-forms: the ancestral words from which cognates descended
+4. Build a family tree showing how languages diverged
+
+Example: English "father," German "Vater," Latin "pater," Sanskrit "pitar" — all descend from Proto-Indo-European *ph₂tḗr.
+
+## Sound Change
+
+Sound changes are regular — they affect all instances of a sound in the same environment:
+
+- Grimm's Law (1822): systematic consonant shift from Proto-Indo-European to Germanic languages (p→f, t→θ, k→h)
+- Great Vowel Shift (1400-1700): English long vowels shifted upward (name was pronounced "nah-meh," bite was "bee-teh")
+- Lenition: consonants weaken over time (Latin aqua → Spanish agua → French eau)
+- Assimilation: sounds become more similar to neighboring sounds (Latin impossibilis from in- + possibilis)
+
+## Language Families
+
+Major language families established through the comparative method:
+
+- Indo-European: English, Hindi, Russian, Greek, Persian — descended from a language spoken c. 4500 BC
+- Sino-Tibetan: Chinese, Tibetan, Burmese
+- Austronesian: Malay, Hawaiian, Malagasy — spread across the Pacific
+- Afroasiatic: Arabic, Hebrew, Amharic, Somali
+- Uralic: Finnish, Hungarian, Estonian
+
+## Proto-Indo-European
+
+The reconstructed ancestor of the Indo-European family, spoken approximately 4500-2500 BC, probably in the Pontic-Caspian steppe. No written records exist, but linguists have reconstructed much of its vocabulary, grammar, and sound system through systematic comparison of daughter languages.
+
+## Dating Language Change
+
+- Glottochronology: estimates divergence dates based on rates of vocabulary replacement (controversial)
+- Written records: earliest texts provide firm dates for language states
+- Archaeological correlation: linking language spread to material culture

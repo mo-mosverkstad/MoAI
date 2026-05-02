@@ -1,0 +1,52 @@
+# Evolution
+
+## Definition
+
+Evolution is the change in heritable characteristics of biological populations over successive generations. It is the unifying theory of biology, explaining the diversity of life on Earth through natural processes over billions of years.
+
+## Darwin's Theory of Natural Selection
+
+Charles Darwin published On the Origin of Species in 1859, proposing natural selection as the mechanism of evolution:
+
+1. Variation: individuals within a population differ in their traits
+2. Inheritance: traits are passed from parents to offspring
+3. Overproduction: more offspring are produced than can survive
+4. Differential survival: individuals with advantageous traits are more likely to survive and reproduce
+5. Accumulation: over many generations, beneficial traits become more common in the population
+
+"Survival of the fittest" (Herbert Spencer's phrase) means survival of the best-adapted, not necessarily the strongest.
+
+## Evidence for Evolution
+
+- Fossil record: shows progressive changes in organisms over time, transitional forms (Tiktaalik: fish-to-tetrapod, Archaeopteryx: dinosaur-to-bird)
+- Comparative anatomy: homologous structures (human arm, whale flipper, bat wing share the same bone structure)
+- Embryology: vertebrate embryos look remarkably similar in early development
+- Molecular biology: DNA sequences show relatedness (humans share 98.7% DNA with chimpanzees, 85% with mice, 60% with bananas)
+- Biogeography: island species resemble nearby mainland species (Darwin's finches on Galápagos)
+- Direct observation: antibiotic resistance in bacteria, pesticide resistance in insects, Darwin's finches beak changes during droughts
+
+## Mechanisms of Evolution
+
+- Natural selection: differential survival and reproduction based on fitness
+- Genetic drift: random changes in allele frequency (stronger in small populations)
+- Gene flow: movement of genes between populations through migration
+- Mutation: random changes in DNA that create new genetic variation
+- Sexual selection: traits that increase mating success (peacock's tail, bird song)
+
+## Human Evolution
+
+- 7 million years ago: human and chimpanzee lineages diverge
+- 4 million years ago: Australopithecus (bipedal, small brain) — "Lucy" (3.2 million years)
+- 2 million years ago: Homo erectus (larger brain, stone tools, fire use, left Africa)
+- 300,000 years ago: Homo sapiens appears in Africa
+- 70,000 years ago: humans migrate out of Africa, eventually reaching all continents
+- 40,000 years ago: cave art, complex tools, language fully developed
+- All living humans are one species with remarkably low genetic diversity (recent common ancestor)
+
+## Common Misconceptions
+
+- Evolution is not "just a theory" — in science, a theory is a well-supported explanation (like the theory of gravity)
+- Humans did not evolve from modern apes — we share a common ancestor
+- Evolution has no goal or direction — it does not progress toward "higher" forms
+- Evolution does not occur in individuals — populations evolve over generations
+- Natural selection is not random — mutation is random, but selection is not

@@ -1,0 +1,53 @@
+# Printing and Books
+
+## History of Writing Materials
+
+- Clay tablets (3400 BC): Sumerians pressed cuneiform into wet clay
+- Papyrus (3000 BC): Egyptians made sheets from the papyrus plant
+- Parchment (200 BC): animal skins prepared for writing, more durable than papyrus
+- Paper (105 AD): invented in China by Cai Lun using bark, hemp, and rags
+- Paper reached the Islamic world by the 8th century and Europe by the 12th century
+
+## The Printing Press
+
+Johannes Gutenberg invented the movable-type printing press in Mainz, Germany around 1440. This is considered one of the most important inventions in human history.
+
+Key innovations:
+
+- Movable metal type: individual letters cast in lead alloy, reusable
+- Oil-based ink: adhered better to metal type than water-based inks
+- Adapted wine/olive press: applied even pressure to paper
+
+Impact:
+
+- Gutenberg Bible (1455): first major book printed, approximately 180 copies
+- Books became 80% cheaper within 50 years
+- Literacy rates increased dramatically
+- Enabled the Protestant Reformation (Luther's 95 Theses spread rapidly)
+- Accelerated the Scientific Revolution by enabling rapid sharing of discoveries
+- Standardized languages through printed grammars and dictionaries
+
+## Modern Printing
+
+- Lithography (1796): printing from a flat stone or metal plate
+- Rotary press (1843): continuous printing on rolls of paper at high speed
+- Offset printing (1875): image transferred to a rubber blanket then to paper
+- Laser printing (1969): Xerox develops the first laser printer
+- Inkjet printing (1976): drops of ink sprayed onto paper
+- 3D printing (1984): additive manufacturing layer by layer
+
+## The Book Industry
+
+- ISBN system: International Standard Book Number identifies every published book
+- Approximately 2.2 million new books published worldwide annually
+- E-books: digital books readable on devices (Kindle launched 2007)
+- Audiobooks: fastest-growing segment of the publishing industry
+- Print-on-demand: books printed individually as ordered, reducing waste
+- Self-publishing: authors bypass traditional publishers (Amazon KDP)
+
+## Libraries
+
+- Library of Alexandria (3rd century BC): largest library of the ancient world, estimated 400,000 scrolls
+- Library of Congress (1800): largest library in the world, over 170 million items
+- Public library movement: Andrew Carnegie funded 2,509 libraries worldwide (1883-1929)
+- Digital libraries: Project Gutenberg (1971) offers over 70,000 free e-books

@@ -1,0 +1,37 @@
+# Contract Law
+
+## Definition
+
+Contract law governs agreements between parties that create mutual legal obligations. A valid contract requires offer, acceptance, consideration (something of value exchanged), capacity (legal ability to contract), and legality (lawful purpose).
+
+## Formation
+
+- Offer: a clear proposal to enter into an agreement on specific terms
+- Acceptance: unqualified agreement to the terms of the offer
+- Consideration: each party must provide something of value (money, services, goods, promises)
+- Intention: parties must intend to create legal relations
+- Capacity: parties must be of legal age and sound mind
+
+## Types of Contracts
+
+- Express contracts: terms explicitly stated (written or oral)
+- Implied contracts: terms inferred from conduct or circumstances
+- Bilateral contracts: both parties make promises (most common)
+- Unilateral contracts: one party makes a promise in exchange for an act
+- Void contracts: have no legal effect from the beginning
+- Voidable contracts: valid but can be cancelled by one party (e.g., due to misrepresentation)
+
+## Breach of Contract
+
+A breach occurs when a party fails to perform their contractual obligations:
+
+- Material breach: a significant failure that defeats the purpose of the contract
+- Minor breach: a partial failure that doesn't destroy the contract's value
+- Anticipatory breach: one party indicates they will not perform before the deadline
+
+## Remedies
+
+- Damages: monetary compensation for losses caused by the breach
+- Specific performance: court orders the breaching party to fulfill the contract
+- Rescission: cancellation of the contract, returning parties to their pre-contract positions
+- Injunction: court order preventing a party from doing something

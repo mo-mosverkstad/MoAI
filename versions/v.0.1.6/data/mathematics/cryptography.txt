@@ -1,0 +1,45 @@
+# Mathematical Cryptography
+
+## Definition
+
+Cryptography is the science of secure communication in the presence of adversaries. Modern cryptography relies heavily on mathematical problems that are easy to compute in one direction but extremely difficult to reverse (one-way functions).
+
+## Symmetric Encryption
+
+The same key is used for both encryption and decryption:
+
+- Caesar cipher: shift each letter by a fixed number (ancient, trivially breakable)
+- AES (Advanced Encryption Standard): current standard, uses 128/192/256-bit keys. Encrypts data in 128-bit blocks through multiple rounds of substitution and permutation.
+- Problem: how do two parties securely share the key? (Key distribution problem)
+
+## Asymmetric (Public-Key) Encryption
+
+Uses a pair of keys — public key (shared openly) and private key (kept secret):
+
+- RSA (1977): security based on the difficulty of factoring large numbers. Multiply two large primes (easy) vs. factor their product (extremely hard for 2048+ bit numbers).
+- Elliptic Curve Cryptography (ECC): based on the discrete logarithm problem on elliptic curves. Provides equivalent security to RSA with much smaller keys (256-bit ECC ≈ 3072-bit RSA).
+- Diffie-Hellman key exchange (1976): allows two parties to establish a shared secret over an insecure channel using modular exponentiation.
+
+## Hash Functions
+
+A hash function maps input of any size to a fixed-size output (digest):
+
+- Properties: deterministic, fast to compute, infeasible to reverse, small input change produces completely different output (avalanche effect)
+- SHA-256: produces 256-bit hash, used in Bitcoin and digital signatures
+- Applications: password storage, data integrity verification, digital signatures, blockchain
+
+## Digital Signatures
+
+Prove that a message was created by a known sender and was not altered:
+
+1. Sender hashes the message
+2. Sender encrypts the hash with their private key (creating the signature)
+3. Recipient decrypts the signature with sender's public key
+4. Recipient hashes the received message and compares — if they match, the message is authentic and unaltered
+
+## Quantum Cryptography
+
+- Quantum Key Distribution (QKD): uses quantum mechanics to detect eavesdropping (BB84 protocol)
+- Quantum threat: Shor's algorithm on a quantum computer could break RSA and ECC
+- Post-quantum cryptography: new algorithms resistant to quantum attacks (lattice-based, hash-based, code-based)
+- NIST standardization (2024): selected CRYSTALS-Kyber and CRYSTALS-Dilithium as post-quantum standards

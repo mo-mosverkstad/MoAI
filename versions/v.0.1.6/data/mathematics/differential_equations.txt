@@ -1,0 +1,40 @@
+# Differential Equations
+
+## Definition
+
+A differential equation is a mathematical equation that relates a function to its derivatives. Differential equations describe how quantities change over time or space and are fundamental to physics, engineering, biology, and economics.
+
+## Types
+
+- Ordinary differential equations (ODEs): involve functions of one variable and their derivatives (dy/dx = f(x,y))
+- Partial differential equations (PDEs): involve functions of multiple variables and their partial derivatives (∂u/∂t = k∂²u/∂x²)
+- Linear vs. nonlinear: linear equations have solutions that can be superposed; nonlinear equations are generally much harder to solve
+- Order: determined by the highest derivative present (first-order, second-order, etc.)
+
+## Famous Differential Equations
+
+- Newton's second law: F = ma, or m(d²x/dt²) = F(x,t) — describes motion of objects
+- Heat equation: ∂u/∂t = k∂²u/∂x² — describes how temperature distributes over time
+- Wave equation: ∂²u/∂t² = c²∂²u/∂x² — describes propagation of waves (sound, light, water)
+- Schrödinger equation: iℏ∂ψ/∂t = Ĥψ — fundamental equation of quantum mechanics
+- Navier-Stokes equations: describe fluid flow (one of the Millennium Prize Problems — existence and smoothness of solutions is unproven)
+- Maxwell's equations: describe electromagnetism (four coupled PDEs)
+- Lotka-Volterra equations: model predator-prey population dynamics
+
+## Solution Methods
+
+- Separation of variables: rearrange so each variable is on one side
+- Integrating factors: multiply by a function to make the equation exact
+- Characteristic equation: convert linear ODEs to algebraic equations
+- Laplace transform: convert differential equations to algebraic equations in a transformed domain
+- Numerical methods: when analytical solutions don't exist (Euler's method, Runge-Kutta)
+- Finite element method: approximate solutions to PDEs by dividing the domain into small elements
+
+## Applications
+
+- Physics: motion, heat transfer, electromagnetism, quantum mechanics, general relativity
+- Engineering: circuit analysis, structural mechanics, control systems, fluid dynamics
+- Biology: population growth, epidemiology (SIR model), neural activity
+- Economics: economic growth models, option pricing (Black-Scholes equation)
+- Chemistry: reaction kinetics, diffusion
+- Climate science: atmospheric and ocean circulation models

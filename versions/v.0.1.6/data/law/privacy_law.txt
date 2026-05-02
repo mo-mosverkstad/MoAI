@@ -1,0 +1,36 @@
+# Privacy Law
+
+## Definition
+
+Privacy law protects individuals' right to control their personal information and to be free from unwarranted intrusion into their private lives. In the digital age, privacy law has become increasingly important as technology enables unprecedented collection and use of personal data.
+
+## Data Protection Regulations
+
+- GDPR (General Data Protection Regulation, EU, 2018): the world's strongest data protection law. Applies to any organization processing EU residents' data. Key principles: lawfulness, purpose limitation, data minimization, accuracy, storage limitation, integrity, and accountability.
+- CCPA (California Consumer Privacy Act, 2020): gives California residents rights over their personal data including the right to know, delete, and opt out of sale.
+- LGPD (Brazil, 2020): Brazil's general data protection law, modeled on GDPR.
+- PIPA (South Korea): one of the strictest data protection laws in Asia.
+
+## Key Rights Under GDPR
+
+- Right to access: individuals can request copies of their personal data
+- Right to rectification: correction of inaccurate data
+- Right to erasure ("right to be forgotten"): deletion of personal data under certain conditions
+- Right to data portability: receiving data in a machine-readable format
+- Right to object: opposing certain types of data processing
+- Right not to be subject to automated decision-making: including profiling
+
+## Consent
+
+Under modern privacy law, processing personal data generally requires valid consent:
+
+- Freely given: not coerced or bundled with unrelated services
+- Specific: for a clearly defined purpose
+- Informed: the individual understands what they're consenting to
+- Unambiguous: a clear affirmative action (not pre-ticked boxes)
+
+## Enforcement
+
+- GDPR fines: up to €20 million or 4% of global annual revenue (whichever is higher)
+- Notable fines: Meta (€1.2 billion, 2023), Amazon (€746 million, 2021), Google (€50 million, 2019)
+- Data protection authorities: independent bodies in each EU member state enforce GDPR

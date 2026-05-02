@@ -1,0 +1,51 @@
+# Diabetes
+
+## Definition
+
+Diabetes mellitus is a chronic metabolic disease characterized by elevated blood glucose (blood sugar) levels. It occurs when the body cannot produce enough insulin or cannot effectively use the insulin it produces. Approximately 537 million adults worldwide have diabetes (2021), and this number is projected to reach 783 million by 2045.
+
+## Types
+
+- Type 1 diabetes (5-10% of cases): an autoimmune condition where the immune system destroys insulin-producing beta cells in the pancreas. Usually diagnosed in childhood or adolescence. Requires lifelong insulin injections. Not preventable.
+
+- Type 2 diabetes (90-95% of cases): the body becomes resistant to insulin or doesn't produce enough. Strongly associated with obesity, physical inactivity, and genetics. Usually develops in adults over 40, but increasingly seen in younger people. Often preventable through lifestyle changes.
+
+- Gestational diabetes: develops during pregnancy in women without prior diabetes. Usually resolves after delivery but increases future risk of Type 2 diabetes.
+
+## How Insulin Works
+
+- Insulin is a hormone produced by the pancreas
+- When blood glucose rises (after eating), insulin signals cells to absorb glucose for energy
+- Insulin also signals the liver to store excess glucose as glycogen
+- Without insulin, glucose accumulates in the blood while cells starve for energy
+
+## Symptoms
+
+- Frequent urination (polyuria)
+- Excessive thirst (polydipsia)
+- Unexplained weight loss (Type 1)
+- Increased hunger (polyphagia)
+- Fatigue and weakness
+- Blurred vision
+- Slow-healing wounds
+- Numbness or tingling in hands/feet
+
+## Complications
+
+Uncontrolled diabetes damages blood vessels and nerves over time:
+
+- Cardiovascular disease: 2-4× increased risk of heart attack and stroke
+- Nephropathy: kidney damage, potentially requiring dialysis (leading cause of kidney failure)
+- Retinopathy: damage to retinal blood vessels, leading cause of blindness in working-age adults
+- Neuropathy: nerve damage causing pain, numbness, and loss of sensation in extremities
+- Foot problems: poor circulation and neuropathy can lead to ulcers and amputation
+- Increased infection risk
+
+## Management
+
+- Blood glucose monitoring: regular testing to maintain target levels (HbA1c below 7%)
+- Insulin therapy: essential for Type 1, sometimes needed for Type 2
+- Oral medications: metformin (first-line for Type 2), sulfonylureas, SGLT2 inhibitors, GLP-1 agonists
+- Diet: controlling carbohydrate intake, balanced meals, consistent timing
+- Exercise: improves insulin sensitivity, helps control weight
+- Weight loss: losing 5-10% of body weight significantly improves Type 2 diabetes

@@ -1,0 +1,60 @@
+# Ancient Greece
+
+## Overview
+
+Ancient Greek civilization (c. 800 BC - 146 BC) laid the foundations of Western culture in philosophy, science, mathematics, art, literature, theater, democracy, and athletics. Despite never being a unified nation, the Greek city-states (poleis) shared language, religion, and cultural identity.
+
+## City-States
+
+- Athens: birthplace of democracy, philosophy, and theater. Population ~300,000 at its peak (including slaves and non-citizens).
+- Sparta: militaristic society focused on discipline and warfare. Boys entered military training at age 7.
+- Corinth: wealthy trading city controlling the isthmus between mainland Greece and the Peloponnese.
+- Thebes: briefly dominant after defeating Sparta (371 BC).
+
+## Athenian Democracy
+
+Athens developed the world's first democracy (from demos = people, kratos = power) around 508 BC under Cleisthenes:
+
+- All male citizens over 18 could vote directly on laws and policies (direct democracy)
+- Assembly (Ekklesia): met 40 times per year, any citizen could speak
+- Council of 500 (Boule): prepared agenda, selected by lottery
+- Jury courts: large juries (201-501 citizens) decided legal cases
+- Limitations: women, slaves, and foreigners (approximately 80% of population) were excluded
+
+## Philosophy
+
+Greek philosophy shaped Western thought for over 2,000 years:
+
+- Pre-Socratics: sought natural explanations for the world (Thales, Heraclitus, Democritus — who proposed atoms)
+- Socrates (470-399 BC): questioned everything through dialogue (Socratic method). Executed for "corrupting the youth."
+- Plato (428-348 BC): Theory of Forms, The Republic, founded the Academy
+- Aristotle (384-322 BC): logic, biology, ethics, politics, physics. Tutor to Alexander the Great.
+- Epicurus: happiness through simple pleasures and freedom from fear
+- Stoics (Zeno): virtue and reason, acceptance of what cannot be changed
+
+## Science and Mathematics
+
+- Pythagoras (c. 570-495 BC): Pythagorean theorem, mathematics as the language of nature
+- Euclid (c. 300 BC): Elements — systematic geometry, standard textbook for 2,000 years
+- Archimedes (287-212 BC): buoyancy, levers, pi calculation, war machines
+- Hippocrates (460-370 BC): father of medicine, Hippocratic Oath, natural causes of disease
+- Eratosthenes (276-194 BC): calculated Earth's circumference with remarkable accuracy
+
+## Alexander the Great
+
+Alexander III of Macedon (356-323 BC) conquered the largest empire the world had seen by age 30:
+
+- Conquered Persia, Egypt, Central Asia, and reached India
+- Founded over 20 cities (including Alexandria in Egypt)
+- Spread Greek culture across the known world (Hellenistic period)
+- Died at 32, possibly from fever, in Babylon
+- His empire fragmented after his death into successor kingdoms
+
+## Legacy
+
+- Democracy: model for modern representative government
+- Philosophy: foundation of Western intellectual tradition
+- Science: empirical observation and rational inquiry
+- Olympics: athletic competition revived in 1896
+- Theater: tragedy (Sophocles, Euripides) and comedy (Aristophanes)
+- Architecture: columns and proportions still used worldwide

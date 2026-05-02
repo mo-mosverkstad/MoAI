@@ -1,0 +1,51 @@
+# Labor Law
+
+## Definition
+
+Labor law (also called employment law) governs the relationship between employers, employees, and trade unions. It establishes minimum standards for working conditions, wages, and workplace safety, and protects workers' rights to organize and bargain collectively.
+
+## Core Areas
+
+- Individual employment law: the contract between employer and employee
+- Collective labor law: relations between employers and trade unions
+- Workplace safety: regulations preventing occupational injuries and illness
+- Anti-discrimination: prohibiting unfair treatment based on protected characteristics
+- Wage and hour law: minimum wage, overtime, and working time regulations
+
+## Workers' Rights
+
+Fundamental labor rights recognized internationally (ILO conventions):
+
+- Freedom of association: right to form and join trade unions
+- Collective bargaining: right to negotiate terms of employment as a group
+- Elimination of forced labor: prohibition of slavery and compulsory labor
+- Abolition of child labor: minimum age requirements for employment
+- Non-discrimination: equal treatment regardless of race, gender, religion, or disability
+
+## Employment Contracts
+
+Key terms typically covered:
+
+- Job description and duties
+- Compensation and benefits
+- Working hours and leave entitlements
+- Notice period for termination
+- Non-compete and confidentiality clauses
+- Grounds for dismissal
+
+## Workplace Safety
+
+Employers have a duty to provide a safe working environment:
+
+- Risk assessments: identifying and mitigating workplace hazards
+- Safety training: educating workers about risks and procedures
+- Protective equipment: providing necessary safety gear
+- Incident reporting: documenting and investigating workplace accidents
+- Occupational health: monitoring exposure to harmful substances
+
+## History
+
+- 1833: UK Factory Act limits child labor
+- 1938: US Fair Labor Standards Act establishes minimum wage and overtime
+- 1948: Universal Declaration of Human Rights includes labor rights
+- 1970: US Occupational Safety and Health Act creates OSHA

@@ -1,0 +1,51 @@
+# Bridges
+
+## Types of Bridges
+
+Bridges are structures that span physical obstacles such as rivers, valleys, or roads. The main types are:
+
+- Beam bridges: the simplest type, a horizontal beam supported at each end. Limited to short spans (up to about 75 meters without intermediate supports).
+- Arch bridges: use a curved structure to transfer weight to abutments at each end. Can span longer distances than beam bridges. The Romans built stone arch bridges that still stand today.
+- Suspension bridges: the deck is hung from cables suspended between tall towers. Capable of the longest spans (over 2,000 meters). Examples: Golden Gate Bridge, Akashi Kaikyo Bridge.
+- Cable-stayed bridges: cables run directly from towers to the deck in a fan or harp pattern. More economical than suspension bridges for medium spans. Example: Millau Viaduct.
+- Truss bridges: use triangular units to distribute loads efficiently. Common for railway bridges.
+- Cantilever bridges: built from structures that project horizontally and are supported on only one end. Example: Forth Bridge in Scotland.
+
+## Famous Bridges
+
+- Pont du Gard (19 BC): Roman aqueduct bridge in France, 49 meters high, still standing after 2,000 years
+- Tower Bridge (1894): London, combined bascule and suspension bridge
+- Golden Gate Bridge (1937): San Francisco, 1,280-meter main span, iconic Art Deco design
+- Akashi Kaikyo Bridge (1998): Japan, longest suspension bridge at 1,991-meter main span
+- Millau Viaduct (2004): France, tallest bridge in the world at 343 meters (taller than the Eiffel Tower)
+- Danyang-Kunshan Grand Bridge (2010): China, longest bridge in the world at 164.8 km
+
+## Forces on Bridges
+
+Bridges must resist several types of forces:
+
+- Compression: pushing forces that shorten structural members
+- Tension: pulling forces that stretch structural members
+- Shear: forces that cause parts to slide relative to each other
+- Torsion: twisting forces
+- Dead load: the weight of the bridge itself
+- Live load: traffic, pedestrians, and other temporary loads
+- Environmental loads: wind, earthquakes, temperature changes, ice
+
+## Bridge Failures
+
+Notable bridge failures and lessons learned:
+
+- Tacoma Narrows Bridge (1940): collapsed due to wind-induced resonance (aeroelastic flutter), leading to improved aerodynamic design
+- Silver Bridge (1967): eyebar chain failure killed 46 people, led to the National Bridge Inspection Standards
+- I-35W Mississippi River Bridge (2007): gusset plate failure during rush hour, highlighted the need for infrastructure maintenance
+
+## Modern Bridge Engineering
+
+Modern bridges use advanced materials and techniques:
+
+- High-performance concrete: stronger and more durable than conventional concrete
+- Carbon fiber reinforced polymers: lightweight, corrosion-resistant
+- Seismic isolation: bearings that absorb earthquake energy
+- Structural health monitoring: sensors continuously measure stress, vibration, and deformation
+- Wind tunnel testing: scale models tested for aerodynamic stability

@@ -1,0 +1,37 @@
+# Stars and Stellar Evolution
+
+## What is a Star
+
+A star is a luminous sphere of plasma held together by gravity. Stars generate energy through nuclear fusion in their cores, primarily converting hydrogen into helium. The nearest star to Earth (besides the Sun) is Proxima Centauri, located 4.24 light-years away.
+
+## Stellar Classification
+
+Stars are classified by their spectral type (temperature and color):
+
+- O-type: blue, hottest (>30,000 K), very massive and short-lived
+- B-type: blue-white (10,000-30,000 K)
+- A-type: white (7,500-10,000 K), examples include Sirius and Vega
+- F-type: yellow-white (6,000-7,500 K)
+- G-type: yellow (5,200-6,000 K), the Sun is a G2V star
+- K-type: orange (3,700-5,200 K)
+- M-type: red, coolest (<3,700 K), most common type, includes red dwarfs
+
+## Stellar Life Cycle
+
+The life of a star depends primarily on its mass:
+
+1. Nebula: a cloud of gas and dust begins to collapse under gravity
+2. Protostar: the collapsing cloud heats up as gravitational energy converts to thermal energy
+3. Main sequence: hydrogen fusion begins in the core; the star spends most of its life here
+4. Red giant/supergiant: hydrogen in the core is exhausted; the star expands and cools
+5. Final stages depend on mass:
+   - Low mass (<8 solar masses): sheds outer layers as a planetary nebula, leaving a white dwarf
+   - High mass (>8 solar masses): explodes as a supernova, leaving a neutron star or black hole
+
+## Supernovae
+
+A supernova is a powerful stellar explosion that occurs at the end of a massive star's life or when a white dwarf accumulates too much mass. Supernovae briefly outshine entire galaxies and produce heavy elements (gold, platinum, uranium) through nucleosynthesis. The Crab Nebula is the remnant of a supernova observed by Chinese astronomers in 1054 AD.
+
+## Neutron Stars
+
+Neutron stars are the collapsed cores of massive stars after supernova explosions. They are incredibly dense — a teaspoon of neutron star material would weigh about 6 billion tons. Pulsars are rapidly rotating neutron stars that emit beams of electromagnetic radiation.

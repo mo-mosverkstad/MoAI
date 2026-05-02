@@ -1,0 +1,55 @@
+# Cardiovascular Disease
+
+## Overview
+
+Cardiovascular disease (CVD) is the leading cause of death globally, responsible for approximately 17.9 million deaths per year (32% of all deaths). CVD refers to conditions affecting the heart and blood vessels.
+
+## Types
+
+- Coronary artery disease (CAD): narrowing of arteries supplying the heart due to plaque buildup (atherosclerosis). Can cause angina (chest pain) or heart attack (myocardial infarction).
+- Stroke: interruption of blood supply to the brain. Ischemic stroke (blocked artery, 87%) or hemorrhagic stroke (burst blood vessel, 13%).
+- Heart failure: the heart cannot pump blood efficiently enough to meet the body's needs. Affects approximately 64 million people worldwide.
+- Arrhythmias: abnormal heart rhythms (atrial fibrillation is the most common, affecting 33 million people).
+- Peripheral artery disease: narrowed arteries reduce blood flow to limbs.
+- Aortic aneurysm: weakening and bulging of the aorta wall.
+
+## Risk Factors
+
+Modifiable:
+
+- High blood pressure (hypertension): the single largest risk factor, affects 1.3 billion people
+- High cholesterol: LDL ("bad") cholesterol builds up in artery walls
+- Smoking: doubles cardiovascular risk, damages blood vessel lining
+- Diabetes: high blood sugar damages blood vessels over time
+- Obesity: especially abdominal fat, increases strain on the heart
+- Physical inactivity: regular exercise reduces risk by 30-50%
+- Unhealthy diet: high in saturated fat, salt, and processed foods
+- Excessive alcohol: raises blood pressure and triglycerides
+
+Non-modifiable:
+
+- Age: risk increases significantly after 55 (men) or 65 (women)
+- Family history: genetic predisposition
+- Sex: men have higher risk at younger ages; women's risk increases after menopause
+
+## Heart Attack
+
+A heart attack occurs when a coronary artery is completely blocked, cutting off blood supply to heart muscle:
+
+Symptoms:
+
+- Chest pain or pressure (may radiate to arm, jaw, or back)
+- Shortness of breath
+- Cold sweat, nausea, lightheadedness
+- Women may have atypical symptoms (fatigue, indigestion, back pain)
+
+Treatment: call emergency services immediately. Aspirin, clot-dissolving drugs, angioplasty with stent placement, or bypass surgery.
+
+## Prevention
+
+- Regular exercise: at least 150 minutes of moderate activity per week
+- Healthy diet: Mediterranean diet reduces CVD risk by 30%
+- Blood pressure control: target below 130/80 mmHg
+- Cholesterol management: statins reduce heart attack risk by 25-35%
+- Smoking cessation: risk drops significantly within 1-2 years of quitting
+- Weight management: maintaining healthy BMI (18.5-24.9)

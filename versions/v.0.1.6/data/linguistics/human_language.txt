@@ -1,0 +1,49 @@
+# Human Language
+
+## What is Language
+
+Language is a structured system of communication consisting of grammar and vocabulary. It is the primary means by which humans convey meaning, both in spoken and written form. There are approximately 7,000 languages spoken in the world today, though nearly half are endangered.
+
+## Language Families
+
+Languages are grouped into families based on common ancestry:
+
+- Indo-European: the largest family, including English, Spanish, Hindi, Russian, and Persian. Spoken by about 3.2 billion people.
+- Sino-Tibetan: includes Mandarin Chinese, Cantonese, Burmese, and Tibetan. About 1.4 billion speakers.
+- Afroasiatic: includes Arabic, Hebrew, Amharic, and Somali. About 500 million speakers.
+- Austronesian: includes Malay, Indonesian, Tagalog, and Hawaiian. About 400 million speakers.
+- Dravidian: includes Tamil, Telugu, Kannada, and Malayalam. About 250 million speakers.
+- Niger-Congo: the largest African family, includes Swahili, Yoruba, and Zulu. About 700 million speakers.
+
+## Levels of Linguistic Analysis
+
+- Phonetics: the physical sounds of speech
+- Phonology: how sounds function within a particular language
+- Morphology: the structure of words (prefixes, suffixes, roots)
+- Syntax: the rules governing sentence structure
+- Semantics: the meaning of words and sentences
+- Pragmatics: how context influences interpretation
+
+## Writing Systems
+
+Major types of writing systems:
+
+- Alphabets: symbols represent individual sounds (Latin, Cyrillic, Greek, Arabic)
+- Syllabaries: symbols represent syllables (Japanese hiragana and katakana)
+- Logographic: symbols represent words or morphemes (Chinese characters)
+- Abugidas: consonant-vowel combinations (Devanagari, Thai, Ethiopic)
+
+The oldest known writing system is Sumerian cuneiform, developed around 3400 BC in Mesopotamia.
+
+## Language Change
+
+All living languages change over time:
+
+- Sound changes: pronunciation shifts (the Great Vowel Shift in English, 1400-1700)
+- Grammatical changes: Old English had grammatical gender and case endings; Modern English does not
+- Vocabulary changes: new words are coined, borrowed, or lost
+- Semantic shift: word meanings change over time ("nice" originally meant "foolish" in Middle English)
+
+## Endangered Languages
+
+A language is considered endangered when children no longer learn it as their first language. UNESCO estimates that one language dies approximately every two weeks. Languages with fewer than 1,000 speakers are critically endangered. Language death results in the loss of unique cultural knowledge, oral traditions, and ways of understanding the world.

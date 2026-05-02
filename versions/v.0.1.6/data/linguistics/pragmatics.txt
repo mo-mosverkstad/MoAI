@@ -1,0 +1,49 @@
+# Pragmatics
+
+## Definition
+
+Pragmatics is the study of how context contributes to meaning in communication. While semantics deals with literal meaning, pragmatics examines how speakers use language in real situations and how listeners interpret intended meaning beyond what is explicitly said.
+
+## Speech Acts
+
+J.L. Austin and John Searle showed that language doesn't just describe — it performs actions:
+
+- Assertives: stating facts ("The Earth is round")
+- Directives: requesting or commanding ("Please close the door")
+- Commissives: making promises or commitments ("I will be there at 5")
+- Expressives: expressing feelings ("Congratulations!" "I'm sorry")
+- Declarations: changing reality through utterance ("I now pronounce you married," "You're fired")
+
+## Grice's Cooperative Principle
+
+Paul Grice proposed that conversation is governed by a cooperative principle with four maxims:
+
+- Quality: be truthful, don't say what you believe to be false
+- Quantity: be informative, say neither too much nor too little
+- Relation: be relevant to the current topic
+- Manner: be clear, brief, and orderly
+
+## Implicature
+
+When speakers deliberately violate maxims, they generate implicatures — meanings beyond what is literally said:
+
+- "How was the concert?" "Well, the venue was nice." (implicates: the music was bad)
+- "Can you pass the salt?" (literally a question about ability, pragmatically a request)
+- "Some students passed the exam." (implicates: not all students passed)
+
+## Deixis
+
+Deictic expressions require context to interpret:
+
+- Person deixis: I, you, we (who is speaking/addressed)
+- Spatial deixis: here, there, this, that (location relative to speaker)
+- Temporal deixis: now, then, yesterday, tomorrow (time relative to utterance)
+
+## Politeness Theory
+
+Brown and Levinson's politeness theory explains how speakers manage social relationships:
+
+- Positive politeness: showing solidarity and approval ("Great idea!")
+- Negative politeness: showing respect for autonomy ("Would you mind if...?")
+- Face-threatening acts: requests, criticisms, and disagreements that threaten social face
+- Indirectness: using hints and implications to soften face-threatening acts

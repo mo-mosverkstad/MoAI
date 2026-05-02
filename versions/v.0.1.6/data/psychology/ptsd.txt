@@ -1,0 +1,53 @@
+# Post-Traumatic Stress Disorder (PTSD)
+
+## Definition
+
+Post-traumatic stress disorder is a mental health condition triggered by experiencing or witnessing a terrifying event. While it is normal to have temporary difficulty coping after trauma, PTSD occurs when symptoms persist for months or years and significantly impair daily functioning.
+
+## Causes and Risk Factors
+
+Events that can trigger PTSD:
+
+- Combat and military service
+- Sexual assault or abuse
+- Physical violence or assault
+- Serious accidents (car crashes, industrial accidents)
+- Natural disasters (earthquakes, floods, hurricanes)
+- Terrorist attacks
+- Childhood abuse or neglect
+- Witnessing death or serious injury
+
+Risk factors: prior trauma, family history of mental illness, lack of social support, severity and duration of trauma, female sex (twice the risk of males).
+
+## Symptoms
+
+PTSD symptoms fall into four clusters:
+
+- Intrusion: flashbacks (reliving the trauma), nightmares, intrusive memories, intense distress at reminders
+- Avoidance: avoiding thoughts, feelings, places, people, or activities associated with the trauma
+- Negative alterations in cognition and mood: persistent negative beliefs, emotional numbness, detachment from others, inability to experience positive emotions, distorted blame
+- Arousal and reactivity: hypervigilance, exaggerated startle response, irritability, difficulty concentrating, sleep disturbance, reckless behavior
+
+## Prevalence
+
+- Approximately 6% of the US population will have PTSD at some point in their lives
+- About 15-30% of combat veterans develop PTSD
+- Women are approximately twice as likely as men to develop PTSD
+- Most people exposed to trauma do NOT develop PTSD (resilience is the norm)
+
+## Neurobiology
+
+- Amygdala: hyperactive, triggering exaggerated fear responses
+- Prefrontal cortex: underactive, reducing ability to regulate fear
+- Hippocampus: reduced volume, impairing contextualization of memories
+- HPA axis: dysregulated stress hormone (cortisol) response
+- Norepinephrine system: elevated, contributing to hyperarousal
+
+## Treatment
+
+- Cognitive Processing Therapy (CPT): identifying and challenging trauma-related thoughts
+- Prolonged Exposure (PE): gradually confronting trauma memories and avoided situations
+- EMDR (Eye Movement Desensitization and Reprocessing): processing traumatic memories while following bilateral stimulation
+- Medications: SSRIs (sertraline, paroxetine) are first-line pharmacotherapy
+- Group therapy: connecting with others who share similar experiences
+- Stellate ganglion block: emerging treatment showing promise for hyperarousal symptoms

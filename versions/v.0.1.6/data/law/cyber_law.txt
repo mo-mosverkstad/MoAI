@@ -1,0 +1,43 @@
+# Cyber Law
+
+## Definition
+
+Cyber law (also called internet law or digital law) is the legal framework governing the use of the internet, digital communications, and information technology. It addresses crimes committed online, electronic commerce, data protection, and digital rights.
+
+## Cybercrime
+
+Types of criminal activity conducted through computers or networks:
+
+- Hacking: unauthorized access to computer systems
+- Phishing: fraudulent attempts to obtain sensitive information by impersonating trusted entities
+- Ransomware: malware that encrypts data and demands payment for decryption
+- Identity theft: stealing personal information to commit fraud
+- DDoS attacks: overwhelming servers with traffic to disrupt services
+- Cyberstalking: using technology to harass or threaten individuals
+
+## E-Commerce Law
+
+Legal framework for online business transactions:
+
+- Electronic signatures: legally equivalent to handwritten signatures in most jurisdictions
+- Consumer protection: right to return online purchases within 14 days (EU), clear pricing, delivery obligations
+- Terms of service: binding agreements between platforms and users
+- Payment regulations: PCI DSS compliance, fraud prevention, chargebacks
+- Cross-border transactions: jurisdiction issues when buyer and seller are in different countries
+
+## Content Regulation
+
+- Section 230 (US): platforms generally not liable for user-generated content
+- Digital Services Act (EU, 2022): requires platforms to remove illegal content and be transparent about algorithms
+- Right to be forgotten: individuals can request removal of outdated personal information from search results
+- Hate speech laws: vary significantly by country (strict in Germany, broader protections in the US)
+- Copyright online: DMCA takedown notices, content ID systems, safe harbor provisions
+
+## Jurisdiction Challenges
+
+The internet's borderless nature creates unique legal challenges:
+
+- Which country's laws apply to a website accessible worldwide?
+- How can courts enforce judgments against parties in other jurisdictions?
+- Conflicts between different nations' laws (e.g., EU privacy vs. US surveillance)
+- Extradition for cybercrimes committed across borders

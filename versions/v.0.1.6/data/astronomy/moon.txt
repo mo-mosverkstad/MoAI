@@ -1,0 +1,45 @@
+# The Moon
+
+## Overview
+
+The Moon is Earth's only natural satellite and the fifth-largest moon in the Solar System. It is the brightest and largest object in Earth's night sky. The Moon's gravitational influence produces ocean tides, stabilizes Earth's axial tilt, and has gradually slowed Earth's rotation.
+
+## Physical Properties
+
+- Distance from Earth: average 384,400 km (about 30 Earth diameters)
+- Diameter: 3,474 km (about 27% of Earth's diameter)
+- Mass: 1/81 of Earth's mass
+- Surface gravity: 1/6 of Earth's (1.62 m/s²)
+- No atmosphere (no weather, no sound, extreme temperature swings: -173°C to 127°C)
+- No magnetic field
+- Orbital period: 27.3 days (same as rotation period — tidally locked, always showing the same face to Earth)
+
+## Formation
+
+The leading theory (Giant Impact Hypothesis) proposes that the Moon formed approximately 4.5 billion years ago when a Mars-sized body (Theia) collided with the early Earth. The impact ejected debris into orbit, which coalesced to form the Moon. Evidence: Moon's composition is similar to Earth's mantle, Moon has a very small iron core.
+
+## Surface Features
+
+- Maria (seas): dark, flat areas of solidified lava (not actual water). Cover about 16% of the surface.
+- Highlands: bright, heavily cratered ancient terrain
+- Craters: formed by asteroid and meteorite impacts over billions of years. Largest: South Pole-Aitken basin (2,500 km diameter, 8 km deep)
+- Regolith: layer of loose, fragmented material covering the surface (2-20 meters deep)
+- No tectonic activity or erosion — footprints from Apollo astronauts will last millions of years
+
+## Lunar Exploration
+
+- 1959: Luna 2 (USSR) — first spacecraft to reach the Moon
+- 1966: Luna 9 (USSR) — first soft landing
+- 1969: Apollo 11 (USA) — Neil Armstrong and Buzz Aldrin become first humans on the Moon ("That's one small step for man, one giant leap for mankind")
+- 1969-1972: Six Apollo missions land 12 astronauts on the Moon, returning 382 kg of samples
+- 2019: Chang'e 4 (China) — first landing on the far side of the Moon
+- Artemis program (NASA): plans to return humans to the Moon in the 2020s
+
+## Tides
+
+The Moon's gravity creates tidal bulges in Earth's oceans:
+
+- High tides: on the side facing the Moon and the opposite side
+- Low tides: at 90° to the Moon's direction
+- Spring tides: extra-high tides when Sun and Moon align (new and full moon)
+- Neap tides: smaller tides when Sun and Moon are at right angles (quarter moons)

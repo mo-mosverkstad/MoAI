@@ -1,0 +1,34 @@
+# Translation
+
+## Definition
+
+Translation is the process of converting text or speech from one language (the source language) into another (the target language) while preserving meaning, style, and intent. It is both an art and a science, requiring deep knowledge of both languages and cultures.
+
+## Types of Translation
+
+- Literary translation: novels, poetry, drama — requires creativity and cultural sensitivity
+- Technical translation: manuals, patents, scientific papers — requires subject expertise
+- Legal translation: contracts, laws, court documents — requires precision and legal knowledge
+- Medical translation: clinical trials, patient information — errors can be life-threatening
+- Localization: adapting software, websites, and products for specific markets
+
+## Translation Challenges
+
+- Untranslatable words: concepts that exist in one language but not another (German Schadenfreude, Japanese wabi-sabi, Danish hygge)
+- Idioms: "it's raining cats and dogs" cannot be translated literally
+- Cultural references: jokes, allusions, and customs that don't transfer across cultures
+- Ambiguity: words with multiple meanings require context to translate correctly
+- Register and tone: matching the formality level of the original
+
+## Machine Translation
+
+- Rule-based MT (1950s-1990s): linguistic rules manually coded by experts
+- Statistical MT (1990s-2010s): learned patterns from parallel texts (Google Translate originally)
+- Neural MT (2016-present): deep learning models trained on millions of sentence pairs. Dramatically improved quality but still struggles with context, idioms, and rare languages.
+
+## History
+
+- Rosetta Stone (196 BC): same text in Egyptian hieroglyphics, Demotic, and Greek — enabled decipherment
+- Bible translation: one of the earliest and most influential translation projects. The Septuagint (3rd century BC) translated Hebrew scriptures into Greek.
+- Martin Luther's German Bible (1534): standardized the German language
+- United Nations: all documents translated into 6 official languages (Arabic, Chinese, English, French, Russian, Spanish)

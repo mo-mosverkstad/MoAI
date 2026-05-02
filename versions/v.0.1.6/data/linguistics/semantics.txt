@@ -1,0 +1,34 @@
+# Semantics
+
+## Definition
+
+Semantics is the study of meaning in language. It examines how words, phrases, and sentences convey meaning, and how meaning is composed from smaller units.
+
+## Types of Meaning
+
+- Denotation: the literal, dictionary meaning of a word ("dog" = a four-legged canine animal)
+- Connotation: the emotional or cultural associations of a word ("home" suggests warmth and comfort)
+- Reference: the relationship between a word and the thing it refers to in the world
+
+## Semantic Relations
+
+Words relate to each other in systematic ways:
+
+- Synonymy: words with similar meanings (big/large, happy/glad)
+- Antonymy: words with opposite meanings (hot/cold, alive/dead)
+- Hyponymy: one word is a subtype of another (rose is a hyponym of flower)
+- Meronymy: part-whole relationships (wheel is a meronym of car)
+- Polysemy: one word with multiple related meanings (bank = riverbank or financial institution)
+- Homonymy: different words that sound the same (bat = animal or sports equipment)
+
+## Compositional Semantics
+
+The meaning of a sentence is built from the meanings of its parts:
+
+- The principle of compositionality (Frege): the meaning of a complex expression is determined by the meanings of its parts and how they are combined
+- Predicate logic: formal representation of sentence meaning using predicates and arguments
+- Thematic roles: the semantic relationships between verbs and their arguments (agent, patient, instrument)
+
+## Pragmatics vs. Semantics
+
+Semantics deals with literal meaning; pragmatics deals with meaning in context. "Can you pass the salt?" semantically asks about ability, but pragmatically functions as a request.

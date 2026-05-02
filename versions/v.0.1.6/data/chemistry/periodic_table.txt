@@ -1,0 +1,44 @@
+# The Periodic Table
+
+## Overview
+
+The periodic table is a tabular arrangement of chemical elements organized by atomic number, electron configuration, and recurring chemical properties. It was first proposed by Dmitri Mendeleev in 1869, who arranged elements by atomic weight and predicted the existence of undiscovered elements.
+
+## Structure
+
+The modern periodic table has 118 confirmed elements arranged in 7 periods (rows) and 18 groups (columns). Elements in the same group share similar chemical properties because they have the same number of valence electrons.
+
+Major groups include:
+
+- Group 1 (Alkali metals): lithium, sodium, potassium — highly reactive, soft metals
+- Group 2 (Alkaline earth metals): beryllium, magnesium, calcium — reactive metals
+- Group 17 (Halogens): fluorine, chlorine, bromine — highly reactive nonmetals
+- Group 18 (Noble gases): helium, neon, argon — extremely stable, rarely react
+
+## Chemical Bonding
+
+Atoms bond together to achieve stable electron configurations:
+
+- Ionic bonds: transfer of electrons between atoms (e.g., NaCl — sodium chloride)
+- Covalent bonds: sharing of electron pairs between atoms (e.g., H₂O — water)
+- Metallic bonds: delocalized electrons shared among metal atoms
+- Hydrogen bonds: weak attraction between a hydrogen atom and an electronegative atom
+
+## Periodic Trends
+
+Properties that vary predictably across the periodic table:
+
+- Atomic radius: decreases across a period (left to right), increases down a group
+- Ionization energy: increases across a period, decreases down a group
+- Electronegativity: increases across a period, decreases down a group
+- Electron affinity: generally increases across a period
+
+## History of Element Discovery
+
+- Ancient elements: gold, silver, copper, iron, lead, tin, mercury (known since antiquity)
+- 1669: Hennig Brand discovers phosphorus, the first element discovered by a known individual
+- 1774: Joseph Priestley isolates oxygen
+- 1789: Antoine Lavoisier publishes the first modern list of chemical elements
+- 1869: Mendeleev publishes his periodic table
+- 1898: Marie and Pierre Curie discover radium and polonium
+- 2016: Elements 113, 115, 117, and 118 officially named (nihonium, moscovium, tennessine, oganesson)

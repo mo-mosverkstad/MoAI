@@ -1,0 +1,49 @@
+# Organic Chemistry
+
+## Definition
+
+Organic chemistry is the study of the structure, properties, composition, reactions, and synthesis of carbon-containing compounds. Carbon's ability to form four covalent bonds and create long chains makes it uniquely suited to form the complex molecules necessary for life.
+
+## Hydrocarbons
+
+Hydrocarbons are compounds containing only carbon and hydrogen:
+
+- Alkanes: single bonds only (methane CH₄, ethane C₂H₆, propane C₃H₈)
+- Alkenes: contain at least one carbon-carbon double bond (ethylene C₂H₄)
+- Alkynes: contain at least one carbon-carbon triple bond (acetylene C₂H₂)
+- Aromatic compounds: contain benzene rings (benzene C₆H₆, toluene)
+
+## Functional Groups
+
+Functional groups determine the chemical behavior of organic molecules:
+
+- Hydroxyl (-OH): alcohols, e.g., ethanol
+- Carboxyl (-COOH): carboxylic acids, e.g., acetic acid
+- Amino (-NH₂): amines, e.g., methylamine
+- Carbonyl (C=O): aldehydes and ketones
+- Ester (-COO-): formed from acid and alcohol, found in fats and fragrances
+- Ether (-O-): oxygen between two carbon groups
+
+## Polymers
+
+Polymers are large molecules made of repeating subunits called monomers:
+
+- Polyethylene: plastic bags, bottles — made from ethylene monomers
+- Polystyrene: packaging foam, disposable cups
+- Nylon: synthetic fiber — a polyamide used in textiles and engineering
+- DNA: a natural polymer — the genetic material of all living organisms
+- Proteins: polymers of amino acids — perform most cellular functions
+
+## Organic Reactions
+
+Major types of organic reactions:
+
+- Substitution: one atom or group replaces another
+- Addition: atoms add across a double or triple bond
+- Elimination: atoms are removed to form a double bond
+- Oxidation-reduction: transfer of electrons between molecules
+- Polymerization: monomers join to form polymers
+
+## Importance
+
+Organic chemistry is essential to pharmaceuticals, petrochemicals, food science, materials science, and biochemistry. Nearly all drugs are organic compounds, and the petrochemical industry converts crude oil into fuels, plastics, and synthetic materials.

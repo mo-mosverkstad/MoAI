@@ -1,0 +1,51 @@
+# Telecommunications
+
+## Definition
+
+Telecommunications is the transmission of information over significant distances by electronic means. It encompasses telephone, radio, television, internet, and satellite communications — the infrastructure that connects the modern world.
+
+## History
+
+- 1837: Samuel Morse demonstrates the electric telegraph
+- 1876: Alexander Graham Bell patents the telephone
+- 1895: Guglielmo Marconi demonstrates wireless telegraphy (radio)
+- 1927: First transatlantic telephone call (radio link)
+- 1956: First transatlantic telephone cable (TAT-1)
+- 1962: Telstar — first active communications satellite
+- 1969: ARPANET — precursor to the internet
+- 1983: First cellular phone call (Motorola DynaTAC)
+- 1991: GSM digital mobile standard launched in Europe
+- 2007: iPhone launches the smartphone era
+- 2019: First 5G networks deployed
+
+## Mobile Generations
+
+- 1G (1980s): analog voice only (AMPS)
+- 2G (1991): digital voice, SMS text messaging (GSM, CDMA)
+- 3G (2001): mobile internet, video calls (UMTS, CDMA2000). Up to 2 Mbps.
+- 4G/LTE (2009): high-speed mobile broadband, streaming video. Up to 100 Mbps.
+- 5G (2019): ultra-fast, low latency, massive device connectivity. Up to 10 Gbps. Enables IoT, autonomous vehicles, remote surgery.
+
+## How Mobile Networks Work
+
+- Base stations (cell towers): provide radio coverage over a geographic area (cell)
+- Cells: geographic areas served by one base station (range: 100m to 35km depending on technology)
+- Handoff: seamless transfer of a call between cells as the user moves
+- Spectrum: radio frequencies allocated by governments for different services
+- MIMO (Multiple Input Multiple Output): multiple antennas increase capacity and speed
+- Beamforming: directing radio signals toward specific users rather than broadcasting in all directions
+
+## Fiber Optics
+
+- Light pulses travel through thin glass fibers at near-light speed
+- Capacity: a single fiber can carry terabits per second
+- Submarine cables: over 400 cables on the ocean floor carry 95% of intercontinental data
+- Total length of submarine cables: over 1.3 million km
+- Advantages over copper: higher bandwidth, longer distances, immune to electromagnetic interference
+
+## Satellite Communications
+
+- Geostationary orbit (GEO): 35,786 km altitude, appears stationary (TV broadcasting, weather)
+- Medium Earth orbit (MEO): GPS satellites at ~20,200 km
+- Low Earth orbit (LEO): 160-2,000 km, low latency (Starlink: 5,000+ satellites for global internet)
+- Latency: GEO ~600ms round trip, LEO ~20-40ms round trip

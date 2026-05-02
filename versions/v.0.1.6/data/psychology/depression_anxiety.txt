@@ -1,0 +1,66 @@
+# Depression and Anxiety Disorders
+
+## Major Depressive Disorder
+
+Major depression is more than ordinary sadness — it is a persistent condition that affects how a person thinks, feels, and functions. It is the leading cause of disability worldwide, affecting approximately 280 million people.
+
+Symptoms (at least 5 for 2+ weeks):
+
+- Persistent sad, empty, or hopeless mood
+- Loss of interest or pleasure in activities (anhedonia)
+- Significant weight change or appetite disturbance
+- Insomnia or hypersomnia
+- Psychomotor agitation or retardation
+- Fatigue or loss of energy
+- Feelings of worthlessness or excessive guilt
+- Difficulty concentrating or making decisions
+- Recurrent thoughts of death or suicide
+
+Causes: combination of genetic vulnerability (40% heritability), neurochemical imbalances (serotonin, norepinephrine, dopamine), stressful life events, and cognitive patterns (negative thinking styles).
+
+Treatment: antidepressant medications (SSRIs, SNRIs), cognitive-behavioral therapy (CBT), interpersonal therapy, exercise, electroconvulsive therapy (ECT) for severe cases.
+
+## Generalized Anxiety Disorder (GAD)
+
+Excessive, uncontrollable worry about multiple areas of life for at least 6 months:
+
+- Restlessness or feeling on edge
+- Easy fatigue
+- Difficulty concentrating
+- Irritability
+- Muscle tension
+- Sleep disturbance
+
+Affects approximately 3-5% of the population. More common in women.
+
+## Panic Disorder
+
+Recurrent unexpected panic attacks — sudden surges of intense fear with physical symptoms:
+
+- Racing heart, chest pain
+- Shortness of breath, choking sensation
+- Dizziness, numbness, tingling
+- Fear of dying or losing control
+- Derealization (feeling of unreality)
+
+Attacks peak within minutes. Fear of future attacks leads to avoidance behavior (agoraphobia).
+
+## Social Anxiety Disorder
+
+Intense fear of social situations where one might be judged, embarrassed, or humiliated:
+
+- Fear of speaking in public, meeting new people, eating in front of others
+- Physical symptoms: blushing, sweating, trembling, nausea
+- Avoidance of feared situations
+- Affects approximately 7% of the population
+- Often begins in adolescence
+
+## Obsessive-Compulsive Disorder (OCD)
+
+Characterized by intrusive, unwanted thoughts (obsessions) and repetitive behaviors (compulsions):
+
+- Common obsessions: contamination, harm, symmetry, forbidden thoughts
+- Common compulsions: washing, checking, counting, ordering, mental rituals
+- Compulsions temporarily reduce anxiety but reinforce the cycle
+- Affects approximately 2-3% of the population
+- Treatment: Exposure and Response Prevention (ERP), SSRIs

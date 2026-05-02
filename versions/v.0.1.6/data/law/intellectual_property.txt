@@ -1,0 +1,45 @@
+# Intellectual Property Law
+
+## Definition
+
+Intellectual property (IP) law protects creations of the mind — inventions, literary and artistic works, designs, symbols, names, and images used in commerce. IP rights give creators exclusive control over the use of their creations for a limited period.
+
+## Patents
+
+A patent grants the inventor exclusive rights to make, use, and sell an invention for a limited period (typically 20 years from filing).
+
+Requirements for patentability:
+
+- Novelty: the invention must be new
+- Non-obviousness: it must not be obvious to someone skilled in the field
+- Utility: it must have a practical application
+- Disclosure: the inventor must describe the invention in sufficient detail for others to reproduce it
+
+## Copyright
+
+Copyright protects original works of authorship including literature, music, art, film, and software. It arises automatically upon creation — no registration required (though registration provides additional benefits).
+
+- Duration: typically life of the author plus 70 years
+- Rights protected: reproduction, distribution, public performance, adaptation
+- Fair use: limited use for criticism, commentary, education, and parody without permission
+- Public domain: works whose copyright has expired are free for anyone to use
+
+## Trademarks
+
+A trademark is a sign (word, logo, sound, color) that distinguishes goods or services of one business from another.
+
+- Registration provides nationwide protection and legal presumption of ownership
+- Duration: potentially indefinite, as long as the mark is used and renewed
+- Infringement: using a confusingly similar mark on related goods or services
+- Famous marks: receive broader protection against dilution (e.g., Coca-Cola, Apple)
+
+## Trade Secrets
+
+A trade secret is confidential business information that provides a competitive advantage (formulas, processes, customer lists). Unlike patents, trade secrets have no expiration but lose protection if disclosed. The Coca-Cola formula is the most famous trade secret.
+
+## International IP Protection
+
+- WIPO (World Intellectual Property Organization): administers international IP treaties
+- TRIPS Agreement: WTO agreement setting minimum IP protection standards for member nations
+- Paris Convention: international protection for patents and trademarks
+- Berne Convention: international protection for copyright

@@ -1,0 +1,53 @@
+# Rivers
+
+## Definition
+
+A river is a natural flowing watercourse that moves water from higher to lower elevations, eventually reaching an ocean, lake, or another river. Rivers are vital to human civilization — providing water, food, transportation, energy, and fertile land.
+
+## Major Rivers of the World
+
+- Nile (Africa): 6,650 km, longest river (disputed with Amazon). Flows north through 11 countries to the Mediterranean. Sustained ancient Egyptian civilization.
+- Amazon (South America): 6,400 km, largest by discharge (209,000 m³/s — 20% of all river water entering the ocean). Drains 7 million km² of rainforest.
+- Yangtze (China): 6,300 km, longest in Asia. Three Gorges Dam is the world's largest hydroelectric facility.
+- Mississippi-Missouri (North America): 6,275 km system, drains 40% of the continental United States.
+- Congo (Africa): 4,700 km, deepest river (220 m). Second-largest by discharge.
+- Ganges (India): 2,525 km, sacred in Hinduism. Supports 400 million people in its basin.
+- Danube (Europe): 2,850 km, flows through 10 countries — more than any other river.
+
+## River Features
+
+- Source: where a river begins (spring, glacier, lake, or wetland)
+- Tributary: a smaller river that flows into a larger one
+- Confluence: where two rivers meet
+- Meander: a curve or bend in a river (forms on flat terrain)
+- Floodplain: flat area adjacent to a river that floods periodically
+- Delta: fan-shaped deposit of sediment where a river meets the sea (Nile Delta, Mississippi Delta)
+- Estuary: where a river meets the sea, mixing fresh and salt water (tidal influence)
+- Watershed (drainage basin): the entire area that drains into a river system
+
+## The Water Cycle and Rivers
+
+Rivers are part of the global water cycle:
+
+1. Evaporation from oceans and lakes
+2. Precipitation falls on land
+3. Runoff collects in streams and rivers
+4. Rivers carry water back to the ocean
+5. Groundwater slowly feeds rivers between rain events (baseflow)
+
+## Human Use of Rivers
+
+- Drinking water: rivers supply water to billions of people
+- Agriculture: irrigation from rivers feeds much of the world's population
+- Hydroelectric power: dams convert river flow to electricity (16% of world electricity)
+- Transportation: rivers have been highways of commerce for millennia
+- Fishing: freshwater fish provide protein for hundreds of millions
+- Recreation: swimming, boating, fishing, tourism
+
+## Threats to Rivers
+
+- Pollution: industrial waste, agricultural runoff, sewage
+- Damming: over 57,000 large dams worldwide fragment river ecosystems
+- Over-extraction: some rivers (Colorado, Yellow) no longer reach the sea in dry years
+- Climate change: altered precipitation patterns, glacier melt, increased flooding and drought
+- Invasive species: disrupt native ecosystems (Asian carp in Mississippi, zebra mussels in Great Lakes)

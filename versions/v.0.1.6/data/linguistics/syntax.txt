@@ -1,0 +1,34 @@
+# Syntax
+
+## Definition
+
+Syntax is the study of how words combine to form phrases, clauses, and sentences. It examines the rules that govern sentence structure in natural languages.
+
+## Sentence Structure
+
+Most languages organize sentences around a basic word order:
+
+- SVO (Subject-Verb-Object): English, Chinese, Spanish — "The cat chased the mouse"
+- SOV (Subject-Object-Verb): Japanese, Korean, Hindi — "The cat the mouse chased"
+- VSO (Verb-Subject-Object): Arabic, Irish, Welsh — "Chased the cat the mouse"
+
+## Phrase Structure
+
+Sentences are built from hierarchical phrases:
+
+- Noun phrase (NP): a noun and its modifiers ("the big red ball")
+- Verb phrase (VP): a verb and its complements ("quickly ate the cake")
+- Prepositional phrase (PP): a preposition and its object ("in the garden")
+- Adjective phrase (AP): an adjective and its modifiers ("very tall")
+
+## Transformations
+
+Noam Chomsky proposed that sentences have deep structure (meaning) and surface structure (form). Transformational rules convert deep structures into surface structures:
+
+- Passive transformation: "The dog bit the man" → "The man was bitten by the dog"
+- Question formation: "She is happy" → "Is she happy?"
+- Relativization: "The man who I saw left"
+
+## Universal Grammar
+
+Chomsky argued that all humans are born with an innate language faculty — Universal Grammar — that constrains the possible forms human languages can take. This explains why children acquire language rapidly despite limited input.

@@ -1,0 +1,57 @@
+# Geometry
+
+## Definition
+
+Geometry is the branch of mathematics concerned with the properties and relations of points, lines, surfaces, and solids. The word comes from Greek: geo (earth) + metron (measurement). Euclid's Elements (300 BC) systematized geometry and remained the standard textbook for over 2,000 years.
+
+## Euclidean Geometry
+
+Based on five postulates (axioms), including the parallel postulate:
+
+- Two points determine a unique line
+- A line segment can be extended indefinitely
+- A circle can be drawn with any center and radius
+- All right angles are equal
+- Parallel postulate: through a point not on a line, exactly one parallel line exists
+
+## Fundamental Shapes
+
+- Triangle: three sides, angles sum to 180°. Types: equilateral, isosceles, scalene, right.
+- Pythagorean theorem: in a right triangle, a² + b² = c² (where c is the hypotenuse)
+- Circle: all points equidistant from center. Area = πr², circumference = 2πr
+- Quadrilaterals: four-sided polygons (square, rectangle, parallelogram, trapezoid, rhombus)
+- Regular polygons: all sides and angles equal (pentagon, hexagon, octagon)
+
+## Area and Volume Formulas
+
+- Rectangle: A = length × width
+- Triangle: A = ½ × base × height
+- Circle: A = πr²
+- Sphere: V = (4/3)πr³, surface area = 4πr²
+- Cylinder: V = πr²h
+- Cone: V = (1/3)πr²h
+
+## Non-Euclidean Geometry
+
+Geometries that reject the parallel postulate:
+
+- Hyperbolic geometry (Lobachevsky, Bolyai, 1830s): through a point, infinitely many parallel lines exist. Space has negative curvature (saddle-shaped).
+- Elliptic/spherical geometry (Riemann): no parallel lines exist (all great circles on a sphere intersect). Space has positive curvature.
+- General relativity uses non-Euclidean geometry: massive objects curve spacetime.
+
+## Topology
+
+Topology studies properties preserved under continuous deformation (stretching, bending — not tearing or gluing):
+
+- A coffee mug and a donut are topologically equivalent (both have one hole)
+- Möbius strip: a surface with only one side and one edge
+- Klein bottle: a closed surface with no inside or outside (cannot exist in 3D without self-intersection)
+- Euler characteristic: V - E + F = 2 for any convex polyhedron (vertices - edges + faces)
+
+## Applications
+
+- Architecture and engineering: structural design, surveying
+- Computer graphics: 3D modeling, rendering, animation
+- Navigation: GPS, cartography, geodesy
+- Physics: spacetime geometry, crystallography
+- Art: perspective drawing, tessellations (M.C. Escher)

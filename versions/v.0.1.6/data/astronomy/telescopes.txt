@@ -1,0 +1,44 @@
+# Telescopes
+
+## Definition
+
+A telescope is an optical instrument that collects and magnifies light (or other electromagnetic radiation) from distant objects, making them appear closer and brighter. Telescopes are the primary tool of observational astronomy.
+
+## History
+
+- 1608: Hans Lippershey applies for a patent for the first telescope in the Netherlands
+- 1609: Galileo Galilei builds his own telescope and observes the Moon, Jupiter's moons, and Venus's phases
+- 1668: Isaac Newton builds the first reflecting telescope (Newtonian reflector)
+- 1789: William Herschel builds a 1.2-meter reflector, discovers Uranus
+- 1897: Yerkes Observatory 1-meter refractor — largest refracting telescope ever built
+- 1990: Hubble Space Telescope launched into orbit
+- 2021: James Webb Space Telescope launched (largest space telescope)
+
+## Types of Optical Telescopes
+
+- Refracting telescopes: use lenses to focus light. Limited by chromatic aberration and lens size/weight.
+- Reflecting telescopes: use mirrors to focus light. Can be made much larger than refractors. Most modern research telescopes are reflectors.
+- Catadioptric telescopes: combine lenses and mirrors (Schmidt-Cassegrain, Maksutov).
+
+## Key Properties
+
+- Aperture: diameter of the primary lens or mirror — determines light-gathering power and resolution
+- Focal length: distance from lens/mirror to focal point — determines magnification
+- Resolution: ability to distinguish fine detail (limited by aperture and atmospheric turbulence)
+- Light-gathering power: proportional to aperture squared (a 10-meter telescope gathers 4× more light than a 5-meter)
+
+## Major Telescopes
+
+- Hubble Space Telescope (1990): 2.4-meter mirror in orbit, revolutionized astronomy with deep-field images
+- Keck Observatory (1993): twin 10-meter segmented mirrors on Mauna Kea, Hawaii
+- Very Large Telescope (VLT, 1998): four 8.2-meter telescopes in Chile, can work together as interferometer
+- James Webb Space Telescope (2021): 6.5-meter gold-coated mirror, observes in infrared, orbits at L2 point 1.5 million km from Earth
+- Extremely Large Telescope (under construction): 39-meter primary mirror, expected first light ~2028
+
+## Non-Optical Telescopes
+
+- Radio telescopes: detect radio waves (Arecibo 305m, FAST 500m, Very Large Array)
+- X-ray telescopes: must be in space (Chandra, XMM-Newton)
+- Gamma-ray telescopes: detect highest-energy photons (Fermi)
+- Gravitational wave detectors: LIGO, Virgo (not traditional telescopes but detect spacetime ripples)
+- Neutrino detectors: IceCube at the South Pole

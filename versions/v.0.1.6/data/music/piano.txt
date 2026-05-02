@@ -1,0 +1,40 @@
+# The Piano
+
+## History
+
+The piano was invented by Bartolomeo Cristofori in Florence, Italy, around 1700. He called it "gravicembalo col piano e forte" (harpsichord with soft and loud), later shortened to pianoforte and then piano. Unlike the harpsichord, the piano could vary its volume based on how hard the keys were struck.
+
+## How It Works
+
+The piano is a keyboard instrument that produces sound through hammers striking strings:
+
+- 88 keys (52 white, 36 black) spanning over 7 octaves
+- Each key activates a felt-covered hammer that strikes one to three strings
+- Strings vibrate and transmit sound through a wooden soundboard
+- Dampers stop the strings from vibrating when keys are released
+- Sustain pedal lifts all dampers, allowing strings to ring freely
+- Soft pedal (una corda) shifts hammers to strike fewer strings
+
+## Types of Pianos
+
+- Grand piano: horizontal strings, superior tone and action (concert grands are 2.7 meters long)
+- Upright piano: vertical strings, more compact for homes and studios
+- Digital piano: electronic instrument that samples or models acoustic piano sound
+- Electric piano: electromechanical instrument (Fender Rhodes, Wurlitzer)
+
+## Famous Pianists
+
+- Frédéric Chopin (1810-1849): Polish composer who wrote almost exclusively for piano
+- Franz Liszt (1811-1886): Hungarian virtuoso who expanded piano technique to its limits
+- Sergei Rachmaninoff (1873-1943): Russian composer-pianist with legendary technique and large hands
+- Glenn Gould (1932-1982): Canadian pianist famous for his Bach interpretations
+- Vladimir Horowitz (1903-1989): considered one of the greatest pianists of the 20th century
+- Martha Argerich (born 1941): Argentine pianist renowned for her passionate performances
+
+## The Piano in Different Genres
+
+- Classical: solo recitals, concertos, chamber music, art song accompaniment
+- Jazz: stride piano, bebop, Bill Evans' impressionistic style, Thelonious Monk
+- Blues and boogie-woogie: left-hand bass patterns, right-hand improvisation
+- Rock and pop: Elton John, Billy Joel, Stevie Wonder
+- Ragtime: syncopated piano music, Scott Joplin's "The Entertainer"

@@ -1,0 +1,48 @@
+# Vaccines
+
+## How Vaccines Work
+
+Vaccines train the immune system to recognize and fight specific pathogens without causing the disease. They introduce a harmless form of the pathogen (or a piece of it) to stimulate an immune response. The immune system then creates memory cells that provide rapid protection if the real pathogen is encountered later.
+
+## Types of Vaccines
+
+- Live attenuated: weakened form of the pathogen (MMR, chickenpox, oral polio)
+- Inactivated: killed pathogen (flu shot, hepatitis A, rabies)
+- Subunit/conjugate: purified pieces of the pathogen (hepatitis B, HPV, pertussis)
+- Toxoid: inactivated toxin produced by the pathogen (tetanus, diphtheria)
+- mRNA: genetic instructions for making a viral protein (COVID-19 Pfizer and Moderna vaccines)
+- Viral vector: harmless virus delivers genetic material from the target pathogen (COVID-19 AstraZeneca, Ebola)
+
+## History of Vaccination
+
+- 1796: Edward Jenner demonstrates that cowpox infection protects against smallpox
+- 1885: Louis Pasteur develops the rabies vaccine
+- 1921: BCG vaccine for tuberculosis introduced
+- 1955: Jonas Salk's polio vaccine licensed
+- 1967: WHO launches the Smallpox Eradication Programme
+- 1980: WHO declares smallpox eradicated — the first disease eliminated by vaccination
+- 1988: Global Polio Eradication Initiative launched
+- 2020: COVID-19 mRNA vaccines developed in under one year
+
+## Herd Immunity
+
+Herd immunity occurs when a sufficient proportion of a population is immune to a disease, making its spread unlikely. The threshold varies by disease:
+
+- Measles: approximately 95% immunity needed (highly contagious, R₀ ≈ 12-18)
+- Polio: approximately 80-85% immunity needed
+- COVID-19: estimated 70-90% depending on variant
+
+## Vaccine Safety
+
+Vaccines undergo rigorous testing before approval:
+
+- Phase I: small group (20-100), tests safety and dosage
+- Phase II: larger group (hundreds), tests efficacy and side effects
+- Phase III: thousands of participants, confirms effectiveness and monitors adverse reactions
+- Post-market surveillance: ongoing monitoring after approval
+
+Common side effects are mild and temporary: soreness at injection site, low-grade fever, fatigue. Serious adverse events are extremely rare (typically less than 1 in a million doses).
+
+## Impact
+
+Vaccines prevent an estimated 4-5 million deaths per year worldwide. Diseases that were once common killers — smallpox, polio, measles, diphtheria — have been eliminated or dramatically reduced through vaccination programs.

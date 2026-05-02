@@ -1,0 +1,55 @@
+# Ecology and Ecosystems
+
+## What is Ecology
+
+Ecology is the scientific study of interactions between organisms and their environment. It examines how organisms relate to each other and to the physical world around them, from individual organisms to the entire biosphere.
+
+## Levels of Ecological Organization
+
+- Organism: a single living individual
+- Population: all individuals of one species in an area
+- Community: all populations of different species in an area
+- Ecosystem: the community plus its physical environment (soil, water, climate)
+- Biome: a large geographic area with similar climate and organisms (desert, rainforest, tundra)
+- Biosphere: all ecosystems on Earth combined
+
+## Energy Flow
+
+Energy flows through ecosystems in one direction:
+
+- Producers (autotrophs): plants and algae convert sunlight to chemical energy through photosynthesis
+- Primary consumers (herbivores): eat producers (rabbits, deer, caterpillars)
+- Secondary consumers (carnivores): eat herbivores (foxes, frogs, spiders)
+- Tertiary consumers (top predators): eat other carnivores (eagles, sharks, wolves)
+- Decomposers: break down dead organisms, returning nutrients to the soil (fungi, bacteria)
+
+Only about 10% of energy is transferred between trophic levels. The rest is lost as heat through metabolism.
+
+## Nutrient Cycles
+
+Unlike energy, nutrients are recycled through ecosystems:
+
+- Carbon cycle: CO₂ absorbed by plants, passed through food chains, released by respiration and decomposition
+- Nitrogen cycle: atmospheric N₂ fixed by bacteria, converted to ammonia, nitrites, and nitrates for plant use
+- Water cycle: evaporation, condensation, precipitation, and runoff
+- Phosphorus cycle: weathering of rocks releases phosphorus, absorbed by plants, returned to soil by decomposition
+
+## Biodiversity
+
+Biodiversity refers to the variety of life at all levels:
+
+- Species diversity: the number of different species in an area
+- Genetic diversity: variation in genes within a species
+- Ecosystem diversity: variety of habitats and ecological processes
+
+Earth has an estimated 8.7 million species, of which only about 1.2 million have been described. Tropical rainforests contain over 50% of all species despite covering only 6% of Earth's land surface.
+
+## Threats to Ecosystems
+
+- Habitat destruction: deforestation, urbanization, agriculture (the leading cause of species loss)
+- Climate change: shifting temperature and precipitation patterns
+- Invasive species: non-native organisms that outcompete native species
+- Pollution: chemicals, plastics, and excess nutrients
+- Overexploitation: overfishing, overhunting, unsustainable harvesting
+
+The current rate of species extinction is estimated to be 100-1,000 times higher than the natural background rate.

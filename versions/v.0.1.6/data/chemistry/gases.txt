@@ -1,0 +1,55 @@
+# Gases and Gas Laws
+
+## Properties of Gases
+
+Gases have distinctive properties compared to solids and liquids:
+
+- No fixed shape or volume: expand to fill their container
+- Low density: molecules are far apart
+- Highly compressible: volume decreases significantly under pressure
+- Diffusion: gases mix completely and spontaneously
+- Pressure: gas molecules collide with container walls, exerting force per unit area
+
+## The Gas Laws
+
+Empirical relationships between pressure (P), volume (V), temperature (T), and amount (n):
+
+- Boyle's Law (1662): at constant temperature, pressure and volume are inversely proportional (PV = constant). Doubling pressure halves volume.
+- Charles's Law (1787): at constant pressure, volume is directly proportional to absolute temperature (V/T = constant). Heating a gas expands it.
+- Avogadro's Law (1811): at constant temperature and pressure, volume is proportional to the number of moles (V/n = constant). Equal volumes of gases contain equal numbers of molecules.
+- Gay-Lussac's Law: at constant volume, pressure is directly proportional to temperature.
+
+## Ideal Gas Law
+
+Combining all gas laws: PV = nRT
+
+Where R = 8.314 J/(mol·K) is the universal gas constant.
+
+The ideal gas law assumes:
+
+- Gas molecules have negligible volume
+- No intermolecular forces between molecules
+- Collisions are perfectly elastic
+
+Real gases deviate from ideal behavior at high pressures and low temperatures (van der Waals equation accounts for this).
+
+## Atmospheric Gases
+
+Earth's atmosphere composition (dry air):
+
+- Nitrogen (N₂): 78.09%
+- Oxygen (O₂): 20.95%
+- Argon (Ar): 0.93%
+- Carbon dioxide (CO₂): 0.042% (420 ppm, rising due to fossil fuel burning)
+- Trace gases: neon, helium, methane, krypton, hydrogen, ozone
+
+Atmospheric pressure at sea level: 101,325 Pa (1 atm = 760 mmHg).
+
+## Important Gases
+
+- Oxygen (O₂): essential for respiration, produced by photosynthesis
+- Carbon dioxide (CO₂): greenhouse gas, used in photosynthesis, carbonated beverages
+- Nitrogen (N₂): inert, used in food packaging, cryogenics (liquid nitrogen at -196°C)
+- Helium (He): lighter than air, non-flammable, used in balloons, MRI machines, and cryogenics
+- Ozone (O₃): absorbs UV radiation in the stratosphere, toxic at ground level
+- Methane (CH₄): natural gas fuel, potent greenhouse gas (80× more warming than CO₂ over 20 years)

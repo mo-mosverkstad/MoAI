@@ -1,0 +1,33 @@
+# Jazz
+
+## Origins
+
+Jazz originated in New Orleans, Louisiana in the late 19th and early 20th centuries. It emerged from African American communities, blending African rhythmic traditions, blues, ragtime, and European harmony. The word "jazz" first appeared in print around 1915.
+
+## Characteristics
+
+- Improvisation: musicians spontaneously create melodies over chord progressions
+- Swing rhythm: a distinctive rhythmic feel with uneven eighth notes
+- Blue notes: flattened third, fifth, and seventh scale degrees
+- Call and response: musical conversation between instruments or sections
+- Syncopation: emphasis on unexpected beats
+- Complex harmonies: extended chords (7ths, 9ths, 11ths, 13ths)
+
+## Subgenres
+
+- Dixieland/New Orleans jazz (1900s-1920s): collective improvisation, marching band instruments
+- Swing/Big Band (1930s-1940s): large ensembles, danceable, Count Basie, Duke Ellington
+- Bebop (1940s): fast tempos, complex harmonies, Charlie Parker, Dizzy Gillespie, Thelonious Monk
+- Cool jazz (1950s): relaxed, understated, Miles Davis (Birth of the Cool), Dave Brubeck
+- Hard bop (1950s-1960s): blues and gospel influences, Art Blakey, Horace Silver
+- Free jazz (1960s): abandoning fixed chord progressions, Ornette Coleman, John Coltrane
+- Fusion (1970s): combining jazz with rock and funk, Miles Davis (Bitches Brew), Weather Report
+
+## Influential Musicians
+
+- Louis Armstrong (1901-1971): trumpet virtuoso who defined jazz soloing and scat singing
+- Duke Ellington (1899-1974): composer, pianist, and bandleader who elevated jazz to art music
+- Charlie Parker (1920-1955): alto saxophonist who revolutionized jazz with bebop
+- Miles Davis (1926-1991): trumpeter who reinvented jazz multiple times across five decades
+- John Coltrane (1926-1967): tenor saxophonist who pushed jazz into spiritual and avant-garde territory
+- Ella Fitzgerald (1917-1996): "First Lady of Song," master of scat singing and vocal improvisation

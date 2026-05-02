@@ -1,0 +1,97 @@
+# Schools of Psychology
+
+## Structuralism (1879)
+
+Founded by Wilhelm Wundt at the University of Leipzig — the first psychology laboratory.
+
+- Goal: identify the basic elements (structures) of conscious experience
+- Method: introspection — trained observers reporting their conscious experiences
+- Key figure: Edward Titchener brought structuralism to America
+- Limitation: introspection proved unreliable — different observers reported different experiences
+- Legacy: established psychology as an experimental science separate from philosophy
+
+## Functionalism (1890s)
+
+Founded by William James at Harvard University.
+
+- Goal: understand the purpose (function) of mental processes — why we think, feel, and behave
+- Influenced by Darwin's theory of evolution — mental processes evolved because they are adaptive
+- Method: observation of behavior in natural settings, not just laboratory introspection
+- Key figures: William James, John Dewey, James Rowland Angell
+- Legacy: led to applied psychology, educational psychology, and developmental psychology
+
+## Psychoanalysis (1890s-1930s)
+
+Founded by Sigmund Freud in Vienna.
+
+- Goal: understand the unconscious mind and its influence on behavior
+- Key concepts: unconscious motivation, defense mechanisms, psychosexual development, dream analysis, free association
+- Method: clinical case studies, free association, dream interpretation
+- Key figures: Freud, Carl Jung (collective unconscious, archetypes), Alfred Adler (inferiority complex), Anna Freud (ego psychology)
+- Criticism: unfalsifiable theories, overemphasis on sexuality, based on small clinical samples
+- Legacy: talk therapy, recognition of unconscious processes, influence on art and culture
+
+## Behaviorism (1913-1960s)
+
+Founded by John B. Watson; developed by B.F. Skinner.
+
+- Goal: study only observable, measurable behavior — reject the study of consciousness
+- Key principle: behavior is shaped by environment through conditioning
+- Method: controlled laboratory experiments with animals and humans
+- Key figures: Watson (Little Albert experiment), Skinner (operant conditioning, Skinner box), Pavlov (classical conditioning)
+- Criticism: ignores mental processes, oversimplifies human behavior, ethical concerns with animal research
+- Legacy: behavior therapy, applied behavior analysis, evidence-based treatment
+
+## Gestalt Psychology (1912)
+
+Founded by Max Wertheimer, Kurt Koffka, and Wolfgang Köhler in Germany.
+
+- Goal: understand how the mind organizes perceptual experience into meaningful wholes
+- Key principle: "The whole is different from the sum of its parts"
+- Contributions: laws of perceptual organization (proximity, similarity, closure, continuity)
+- Method: phenomenological observation of perceptual experience
+- Legacy: influenced cognitive psychology, design principles, problem-solving research
+
+## Humanistic Psychology (1950s-1960s)
+
+Founded by Abraham Maslow and Carl Rogers — the "Third Force" (after psychoanalysis and behaviorism).
+
+- Goal: understand human potential, growth, and self-actualization
+- Key principles: free will, subjective experience, inherent goodness of people
+- Method: qualitative research, case studies, phenomenological approaches
+- Key concepts: hierarchy of needs (Maslow), unconditional positive regard (Rogers), client-centered therapy
+- Criticism: difficult to test scientifically, overly optimistic view of human nature
+- Legacy: positive psychology, person-centered therapy, emphasis on well-being
+
+## Cognitive Psychology (1960s-present)
+
+Emerged as the "cognitive revolution" against behaviorism.
+
+- Goal: understand mental processes — attention, memory, perception, language, problem-solving, decision-making
+- Key metaphor: the mind as an information-processing system (computer analogy)
+- Method: controlled experiments measuring reaction times, error rates, brain imaging
+- Key figures: Ulric Neisser, George Miller, Noam Chomsky, Daniel Kahneman
+- Contributions: working memory models, cognitive biases, artificial intelligence
+- Legacy: dominant paradigm in modern psychology, cognitive-behavioral therapy
+
+## Evolutionary Psychology (1990s-present)
+
+Applies evolutionary theory to understand human behavior and cognition.
+
+- Goal: explain psychological traits as evolved adaptations to ancestral environments
+- Key principle: the mind contains specialized modules shaped by natural selection
+- Topics: mate selection, aggression, cooperation, fear, language, parenting
+- Key figures: Leda Cosmides, John Tooby, David Buss, Steven Pinker
+- Criticism: just-so stories, difficulty testing evolutionary hypotheses, potential for naturalistic fallacy
+- Legacy: integration of biology and psychology, understanding of universal human nature
+
+## Positive Psychology (1998-present)
+
+Founded by Martin Seligman.
+
+- Goal: study what makes life worth living — strengths, virtues, well-being, and flourishing
+- Shift from fixing pathology to building positive qualities
+- Key topics: happiness, gratitude, resilience, flow, meaning, character strengths
+- PERMA model (Seligman): Positive emotions, Engagement, Relationships, Meaning, Accomplishment
+- Criticism: may neglect genuine suffering, cultural bias toward Western individualism
+- Legacy: well-being interventions, strengths-based approaches in education and organizations

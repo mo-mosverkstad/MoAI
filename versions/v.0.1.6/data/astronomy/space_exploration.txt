@@ -1,0 +1,44 @@
+# Space Exploration
+
+## The Space Race
+
+The Space Race (1957-1975) was a competition between the United States and Soviet Union for spaceflight supremacy during the Cold War:
+
+- 1957: Sputnik 1 (USSR) — first artificial satellite
+- 1957: Laika (USSR) — first animal in orbit (dog)
+- 1961: Yuri Gagarin (USSR) — first human in space (Vostok 1, single orbit)
+- 1962: John Glenn (USA) — first American to orbit Earth
+- 1963: Valentina Tereshkova (USSR) — first woman in space
+- 1965: Alexei Leonov (USSR) — first spacewalk
+- 1969: Apollo 11 (USA) — first humans on the Moon
+- 1975: Apollo-Soyuz — first joint US-Soviet mission, symbolically ending the Space Race
+
+## Space Stations
+
+- Salyut (USSR, 1971-1986): first space stations
+- Skylab (USA, 1973-1979): first American space station
+- Mir (USSR/Russia, 1986-2001): first modular space station, continuously occupied for nearly 10 years
+- International Space Station (ISS, 1998-present): collaboration of 15 nations, continuously inhabited since 2000, orbits at 408 km altitude, size of a football field
+
+## Robotic Exploration
+
+- Mars rovers: Sojourner (1997), Spirit and Opportunity (2004), Curiosity (2012), Perseverance (2021)
+- Voyager 1 and 2 (1977): visited all four outer planets, now in interstellar space. Voyager 1 is the most distant human-made object (over 24 billion km from Earth)
+- Cassini-Huygens (1997-2017): orbited Saturn for 13 years, landed probe on Titan
+- New Horizons (2006): flew by Pluto in 2015, revealing a complex world with mountains and glaciers
+- Parker Solar Probe (2018): closest approach to the Sun, traveling at 635,000 km/h
+
+## Commercial Spaceflight
+
+- SpaceX (founded 2002): reusable rockets (Falcon 9), Crew Dragon, Starship
+- Blue Origin (founded 2000): New Shepard suborbital flights, New Glenn orbital rocket
+- Virgin Galactic: suborbital space tourism
+- SpaceX Starlink: constellation of over 5,000 satellites providing global internet
+
+## Future Goals
+
+- Artemis program: return humans to the Moon, establish permanent lunar base
+- Mars missions: SpaceX Starship aims for crewed Mars landing in the 2030s
+- Space mining: asteroids contain valuable metals (platinum, gold, rare earths)
+- Space tourism: orbital hotels and lunar tourism
+- Interstellar travel: currently theoretical (Breakthrough Starshot proposes laser-propelled probes to Alpha Centauri)

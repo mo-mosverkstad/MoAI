@@ -1,0 +1,51 @@
+# Operating Systems
+
+## Definition
+
+An operating system (OS) is system software that manages computer hardware and software resources and provides common services for computer programs. It acts as an intermediary between users and the computer hardware.
+
+## Core Functions
+
+- Process management: creating, scheduling, and terminating processes
+- Memory management: allocating and deallocating memory, virtual memory, paging
+- File system management: organizing, storing, and retrieving files on storage devices
+- Device management: controlling hardware through device drivers
+- Security: user authentication, access control, encryption
+- Networking: managing network connections and protocols
+
+## Process Scheduling
+
+The OS scheduler determines which process runs on the CPU at any given time:
+
+- First-Come, First-Served (FCFS): processes run in arrival order
+- Shortest Job First (SJF): shortest processes run first, minimizes average wait time
+- Round Robin: each process gets a fixed time slice (quantum), then moves to the back of the queue
+- Priority scheduling: processes with higher priority run first
+- Multilevel feedback queue: combines multiple scheduling algorithms
+
+## Memory Management
+
+- Physical memory: actual RAM installed in the computer
+- Virtual memory: uses disk space to extend available memory beyond physical RAM
+- Paging: divides memory into fixed-size pages (typically 4 KB)
+- Page replacement algorithms: LRU (Least Recently Used), FIFO, Clock algorithm
+- Memory protection: prevents processes from accessing each other's memory
+
+## Major Operating Systems
+
+- Unix (1969): developed at Bell Labs by Ken Thompson and Dennis Ritchie. Introduced hierarchical file systems, pipes, and the shell.
+- Linux (1991): created by Linus Torvalds as a free Unix-like OS. Powers most servers, supercomputers, and Android devices.
+- Windows (1985): Microsoft's GUI-based OS. Dominates desktop computing with approximately 75% market share.
+- macOS (2001): Apple's Unix-based OS for Mac computers. Known for its user interface and integration with Apple hardware.
+- Android (2008): Google's Linux-based mobile OS. Used by approximately 72% of smartphones worldwide.
+- iOS (2007): Apple's mobile OS for iPhone and iPad.
+
+## Concurrency
+
+Operating systems manage multiple processes running simultaneously:
+
+- Threads: lightweight processes that share memory within a process
+- Mutual exclusion (mutex): ensures only one thread accesses a shared resource at a time
+- Semaphores: signaling mechanisms for synchronization
+- Deadlock: a situation where processes wait indefinitely for resources held by each other
+- Deadlock conditions (Coffman): mutual exclusion, hold and wait, no preemption, circular wait

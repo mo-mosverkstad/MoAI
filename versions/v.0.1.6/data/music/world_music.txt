@@ -1,0 +1,44 @@
+# World Music Traditions
+
+## Indian Classical Music
+
+Indian classical music is one of the oldest musical traditions, dating back over 3,000 years. It has two main traditions:
+
+- Hindustani (North India): influenced by Persian music, uses ragas and talas. Instruments include sitar, tabla, sarangi, and tanpura. Ravi Shankar popularized it internationally.
+- Carnatic (South India): more structured and composition-based. Instruments include veena, mridangam, and violin. Based on a system of 72 parent scales (melakarta ragas).
+
+Key concepts: raga (melodic framework), tala (rhythmic cycle), drone (sustained reference pitch), improvisation within strict rules.
+
+## African Music
+
+African music is extraordinarily diverse across the continent:
+
+- West African drumming: djembe, talking drums, complex polyrhythms
+- Highlife (Ghana/Nigeria): guitar-based dance music blending African and Western elements
+- Afrobeat (Nigeria): created by Fela Kuti, combining jazz, funk, and Yoruba music
+- Mbira music (Zimbabwe): thumb piano creating interlocking melodic patterns
+- South African music: mbaqanga, kwaito, and choral traditions (Ladysmith Black Mambazo)
+
+## Latin American Music
+
+- Samba (Brazil): syncopated rhythms, percussion-driven, central to Carnival
+- Bossa nova (Brazil): gentle fusion of samba and jazz (João Gilberto, Antonio Carlos Jobim)
+- Tango (Argentina): passionate dance music with bandoneón (accordion-like instrument)
+- Salsa (Cuba/Puerto Rico/New York): energetic dance music combining son cubano with jazz
+- Mariachi (Mexico): ensemble of violins, trumpets, and guitars
+
+## East Asian Music
+
+- Chinese classical: pentatonic scales, instruments include erhu, pipa, guzheng, and dizi
+- Japanese traditional: gagaku (court music), shakuhachi (bamboo flute), koto (zither), taiko drums
+- Korean: pansori (dramatic singing), gayageum (zither), samulnori (percussion ensemble)
+- Gamelan (Indonesia): ensemble of metallophones, gongs, and drums with interlocking patterns
+
+## Celtic Music
+
+Traditional music of Ireland, Scotland, Wales, and Brittany:
+
+- Instruments: fiddle, tin whistle, uilleann pipes, bodhrán, harp, accordion
+- Forms: jigs (6/8 time), reels (4/4 time), hornpipes, slow airs
+- Sean-nós: unaccompanied traditional Irish singing
+- Revival: The Chieftains, Clannad, Enya brought Celtic music to global audiences

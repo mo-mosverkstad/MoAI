@@ -1,0 +1,61 @@
+# Waves and Sound
+
+## What is a Wave
+
+A wave is a disturbance that transfers energy from one place to another without transferring matter. The medium (air, water, string) oscillates but doesn't travel with the wave.
+
+## Types of Waves
+
+- Mechanical waves: require a medium (sound, water waves, seismic waves)
+- Electromagnetic waves: don't require a medium (light, radio, X-rays)
+- Transverse waves: oscillation perpendicular to direction of travel (light, waves on a string)
+- Longitudinal waves: oscillation parallel to direction of travel (sound, compression waves)
+
+## Wave Properties
+
+- Wavelength (λ): distance between consecutive crests or compressions
+- Frequency (f): number of complete oscillations per second (measured in Hertz, Hz)
+- Amplitude: maximum displacement from equilibrium (determines loudness for sound, brightness for light)
+- Speed: v = fλ (speed equals frequency times wavelength)
+- Period: time for one complete oscillation (T = 1/f)
+
+## Sound
+
+Sound is a longitudinal mechanical wave — compressions and rarefactions of air molecules:
+
+- Speed of sound in air: approximately 343 m/s at 20°C (varies with temperature and medium)
+- Speed in water: ~1,480 m/s; in steel: ~5,960 m/s
+- Human hearing range: 20 Hz to 20,000 Hz
+- Infrasound: below 20 Hz (elephants communicate at 14-35 Hz)
+- Ultrasound: above 20,000 Hz (medical imaging, bat echolocation, dog whistles)
+
+## Sound Intensity and Decibels
+
+Sound intensity is measured in decibels (dB), a logarithmic scale:
+
+- 0 dB: threshold of hearing
+- 30 dB: whisper
+- 60 dB: normal conversation
+- 85 dB: heavy traffic (prolonged exposure causes hearing damage)
+- 100 dB: motorcycle
+- 120 dB: threshold of pain
+- 140 dB: jet engine at 30 meters
+
+Each 10 dB increase represents a 10-fold increase in intensity.
+
+## Wave Phenomena
+
+- Reflection: waves bounce off surfaces (echo)
+- Refraction: waves change direction when entering a different medium
+- Diffraction: waves bend around obstacles or through openings
+- Interference: waves combine constructively (louder) or destructively (quieter)
+- Resonance: a system vibrates with maximum amplitude at its natural frequency
+- Doppler effect: frequency changes when source or observer moves (ambulance siren pitch change, redshift of distant galaxies)
+
+## Applications
+
+- Musical instruments: vibrating strings (guitar), air columns (flute), membranes (drums)
+- Sonar: using sound echoes to detect objects underwater
+- Ultrasound imaging: high-frequency sound waves create images of internal organs
+- Noise cancellation: destructive interference eliminates unwanted sound
+- Seismology: analyzing seismic waves reveals Earth's internal structure

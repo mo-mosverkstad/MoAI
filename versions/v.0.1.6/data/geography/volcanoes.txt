@@ -1,0 +1,45 @@
+# Volcanoes
+
+## Definition
+
+A volcano is an opening in Earth's crust through which molten rock (magma), volcanic ash, and gases escape from below the surface. When magma reaches the surface it is called lava. There are approximately 1,500 potentially active volcanoes worldwide, with about 50-70 erupting each year.
+
+## How Volcanoes Form
+
+Volcanoes form at three types of tectonic settings:
+
+- Convergent boundaries (subduction zones): oceanic plate dives beneath another plate, melting as it descends. Creates explosive volcanoes (Pacific Ring of Fire: Mount St. Helens, Mount Fuji, Krakatoa).
+- Divergent boundaries: plates pull apart, magma rises to fill the gap (Mid-Atlantic Ridge, Iceland).
+- Hotspots: plumes of hot mantle material rise through the plate (Hawaii, Yellowstone). The plate moves over the stationary hotspot, creating chains of volcanoes.
+
+## Types of Volcanoes
+
+- Shield volcanoes: broad, gently sloping, built from fluid lava flows. Non-explosive. Example: Mauna Loa, Hawaii (largest volcano on Earth by volume).
+- Stratovolcanoes (composite): steep, cone-shaped, built from alternating layers of lava and ash. Explosive. Examples: Mount Fuji, Mount Vesuvius, Mount Rainier.
+- Cinder cones: small, steep-sided, built from ejected fragments. Simplest type. Example: Parícutin, Mexico.
+- Calderas: large depressions formed when a volcano collapses after a massive eruption. Example: Yellowstone Caldera (72 km × 55 km).
+
+## Famous Eruptions
+
+- Vesuvius, 79 AD: buried Pompeii and Herculaneum, killing approximately 2,000 people. Preserved by ash in remarkable detail.
+- Tambora, 1815: largest eruption in recorded history (VEI 7). Caused "Year Without a Summer" (1816) — global crop failures and famine.
+- Krakatoa, 1883: explosion heard 4,800 km away, generated 30-meter tsunamis, killed 36,000 people. Lowered global temperatures.
+- Mount St. Helens, 1980: lateral blast destroyed 600 km² of forest, killed 57 people. Best-monitored eruption in history.
+- Pinatubo, 1991: second-largest eruption of the 20th century. Ejected 10 km³ of material, cooled global temperatures by 0.5°C for two years.
+
+## Volcanic Hazards
+
+- Lava flows: destroy everything in their path but usually move slowly enough to evacuate
+- Pyroclastic flows: superheated gas and rock fragments traveling at 700 km/h and 700°C — most deadly hazard
+- Lahars: volcanic mudflows (water + ash + debris) that can travel 100+ km downstream
+- Ashfall: collapses roofs, contaminates water, disrupts aviation (2010 Eyjafjallajökull grounded flights across Europe)
+- Volcanic gases: SO₂, CO₂, HF can be toxic (Lake Nyos, Cameroon, 1986: CO₂ release killed 1,700 people)
+- Tsunamis: triggered by volcanic collapse or submarine eruptions
+
+## Benefits of Volcanoes
+
+- Fertile soil: volcanic ash weathers into nutrient-rich agricultural land
+- Geothermal energy: Iceland generates 25% of electricity from volcanic heat
+- Mineral deposits: gold, silver, copper, diamonds associated with volcanic activity
+- New land: volcanic islands (Hawaii, Iceland, Surtsey)
+- Atmosphere: volcanic outgassing created Earth's early atmosphere and oceans

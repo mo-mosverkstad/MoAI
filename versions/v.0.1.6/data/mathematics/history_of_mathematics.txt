@@ -1,0 +1,48 @@
+# History of Mathematics
+
+## Ancient Mathematics
+
+- Babylonians (2000 BC): base-60 number system (still used for time and angles), quadratic equations, Pythagorean triples
+- Egyptians (1650 BC): Rhind Papyrus shows arithmetic, fractions, geometry for construction and surveying
+- Greeks (600 BC - 300 AD): deductive proof, Euclid's Elements, Archimedes' methods, conic sections
+- Indians (500-1200 AD): zero as a number (Brahmagupta, 628 AD), decimal place-value system, negative numbers, early algebra
+- Chinese: independent development of the Pythagorean theorem, magic squares, remainder theorem
+- Islamic Golden Age (800-1400): algebra (al-Khwarizmi), trigonometry, algorithms, preservation and transmission of Greek mathematics
+
+## Key Milestones
+
+- 300 BC: Euclid's Elements — axiomatic geometry, remained the standard for 2,000 years
+- 628 AD: Brahmagupta defines zero and rules for arithmetic with zero and negative numbers
+- 820 AD: Al-Khwarizmi's Al-Jabr — founding text of algebra (the word "algebra" derives from the title)
+- 1202: Fibonacci introduces Hindu-Arabic numerals to Europe (Liber Abaci)
+- 1637: Descartes' coordinate geometry unifies algebra and geometry
+- 1665-1666: Newton develops calculus (independently by Leibniz, 1684)
+- 1799: Gauss proves the Fundamental Theorem of Algebra
+- 1820s: Non-Euclidean geometry discovered (Lobachevsky, Bolyai)
+- 1874: Cantor creates set theory, proves different sizes of infinity
+- 1931: Gödel's incompleteness theorems — any consistent formal system has true but unprovable statements
+- 1994: Andrew Wiles proves Fermat's Last Theorem (after 358 years)
+
+## Great Mathematicians
+
+- Euclid (c. 300 BC): systematized geometry in the Elements
+- Archimedes (287-212 BC): calculated pi, discovered principles of buoyancy and levers
+- Isaac Newton (1643-1727): calculus, laws of motion, universal gravitation
+- Leonhard Euler (1707-1783): most prolific mathematician in history, contributed to every branch
+- Carl Friedrich Gauss (1777-1855): "Prince of Mathematicians," number theory, statistics, geometry
+- Bernhard Riemann (1826-1866): Riemannian geometry (foundation of general relativity), Riemann hypothesis
+- Emmy Noether (1882-1935): abstract algebra, Noether's theorem connecting symmetry and conservation laws
+- Srinivasa Ramanujan (1887-1920): self-taught Indian genius, extraordinary results in number theory
+- Alan Turing (1912-1954): foundations of computer science, computability theory
+
+## Unsolved Problems
+
+The Clay Mathematics Institute's Millennium Prize Problems ($1 million each):
+
+- Riemann Hypothesis (number theory)
+- P vs NP (computational complexity)
+- Navier-Stokes existence and smoothness (fluid dynamics)
+- Yang-Mills existence and mass gap (quantum physics)
+- Birch and Swinnerton-Dyer conjecture (number theory)
+- Hodge conjecture (algebraic geometry)
+- Poincaré conjecture (topology) — SOLVED by Grigori Perelman (2003)

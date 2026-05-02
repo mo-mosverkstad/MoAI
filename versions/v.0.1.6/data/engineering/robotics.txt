@@ -1,0 +1,52 @@
+# Robotics
+
+## Definition
+
+Robotics is the interdisciplinary field of engineering and science that deals with the design, construction, operation, and use of robots. A robot is a programmable machine capable of carrying out complex actions automatically, often interacting with the physical world through sensors and actuators.
+
+## History
+
+- 1920: Karel Čapek coins the word "robot" in his play R.U.R. (from Czech robota, meaning forced labor)
+- 1954: George Devol patents the first programmable robot (Unimate)
+- 1961: Unimate installed at General Motors — first industrial robot
+- 1969: Stanford Arm — first electrically powered computer-controlled robot arm
+- 1997: Sojourner rover explores Mars
+- 2000: Honda's ASIMO humanoid robot walks, climbs stairs, recognizes faces
+- 2004: Boston Dynamics' BigDog — quadruped robot for rough terrain
+- 2011: IBM Watson wins Jeopardy! against human champions
+- 2020: Spot (Boston Dynamics) commercially available quadruped robot
+
+## Types of Robots
+
+- Industrial robots: perform manufacturing tasks (welding, painting, assembly, pick-and-place). Over 3.5 million operational worldwide.
+- Service robots: assist humans in non-manufacturing settings (vacuum cleaners, lawn mowers, delivery robots)
+- Medical robots: surgical systems (da Vinci), rehabilitation, prosthetics, pharmacy automation
+- Mobile robots: navigate environments autonomously (autonomous vehicles, drones, Mars rovers)
+- Humanoid robots: human-shaped for interaction (ASIMO, Atlas, Sophia)
+- Collaborative robots (cobots): designed to work safely alongside humans without cages
+- Swarm robots: large numbers of simple robots coordinating collectively
+
+## Key Components
+
+- Sensors: cameras, LIDAR, ultrasonic, force/torque, IMU (inertial measurement unit)
+- Actuators: electric motors, hydraulic cylinders, pneumatic systems, artificial muscles
+- Controllers: computers that process sensor data and command actuators
+- End effectors: grippers, tools, or specialized attachments for specific tasks
+- Power supply: batteries, tethered power, solar panels
+
+## Challenges
+
+- Perception: understanding unstructured environments (far harder than controlled factories)
+- Manipulation: grasping diverse objects with varying shapes, sizes, and materials
+- Locomotion: walking, running, climbing on uneven terrain
+- Human-robot interaction: natural communication, safety, trust
+- Autonomy: making decisions without human intervention in novel situations
+- Energy: batteries limit operational time for mobile robots
+
+## Future Directions
+
+- Soft robotics: flexible materials inspired by biological organisms
+- AI integration: deep learning for perception, planning, and manipulation
+- Human augmentation: exoskeletons for strength, rehabilitation, and mobility
+- Autonomous vehicles: self-driving cars, trucks, and delivery drones
+- Space robotics: construction and maintenance in orbit, planetary exploration

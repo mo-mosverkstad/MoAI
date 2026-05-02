@@ -1,0 +1,41 @@
+# Language Acquisition
+
+## Definition
+
+Language acquisition is the process by which humans learn language. First language acquisition occurs naturally in childhood without formal instruction, while second language acquisition typically requires conscious effort.
+
+## First Language Acquisition
+
+Children acquire their native language through predictable stages:
+
+- Cooing (2-4 months): vowel-like sounds
+- Babbling (6-8 months): consonant-vowel combinations (ba-ba, da-da)
+- First words (10-14 months): single words, often nouns (mama, ball, dog)
+- Two-word stage (18-24 months): simple combinations ("more milk," "daddy go")
+- Telegraphic speech (2-3 years): short sentences without function words ("cat sit chair")
+- Complex sentences (3-5 years): questions, negation, relative clauses, past tense
+
+## Critical Period Hypothesis
+
+Eric Lenneberg (1967) proposed that there is a critical period for language acquisition, roughly from birth to puberty. After this period, acquiring native-like proficiency becomes extremely difficult. Evidence includes:
+
+- Feral children (e.g., Genie) who were isolated from language never fully acquired grammar
+- Deaf children exposed to sign language late show reduced grammatical ability
+- Second language learners rarely achieve native-like pronunciation after puberty
+
+## Theories of Acquisition
+
+- Nativist (Chomsky): children are born with an innate Language Acquisition Device (LAD) containing Universal Grammar
+- Behaviorist (Skinner): language is learned through imitation, reinforcement, and conditioning
+- Interactionist (Bruner): language develops through social interaction and scaffolding by caregivers
+- Usage-based (Tomasello): children learn language from patterns in the input they hear
+
+## Second Language Acquisition
+
+Key factors affecting success:
+
+- Age of onset: earlier is generally better for pronunciation and grammar
+- Motivation: integrative (desire to join a community) and instrumental (career goals)
+- Input: quantity and quality of exposure to the target language
+- Transfer: first language influences second language learning (positive and negative)
+- Individual differences: aptitude, learning strategies, personality

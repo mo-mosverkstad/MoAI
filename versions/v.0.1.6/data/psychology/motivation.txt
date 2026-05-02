@@ -1,0 +1,53 @@
+# Motivation
+
+## Definition
+
+Motivation is the process that initiates, guides, and sustains goal-directed behavior. It involves the biological, emotional, social, and cognitive forces that activate behavior and determine its direction, intensity, and persistence.
+
+## Maslow's Hierarchy of Needs
+
+Abraham Maslow (1943) proposed that human needs are arranged in a hierarchy:
+
+1. Physiological needs: food, water, sleep, shelter (most basic)
+2. Safety needs: security, stability, freedom from fear
+3. Belongingness and love: friendship, intimacy, family, social connection
+4. Esteem needs: achievement, recognition, respect, self-confidence
+5. Self-actualization: realizing one's full potential, creativity, personal growth (highest)
+
+Lower needs must be substantially satisfied before higher needs become motivating. However, the hierarchy is not rigid — people can pursue higher needs while lower ones are partially unmet.
+
+## Intrinsic vs. Extrinsic Motivation
+
+- Intrinsic motivation: doing something for its own sake (enjoyment, curiosity, challenge)
+- Extrinsic motivation: doing something for external rewards or to avoid punishment (money, grades, praise)
+
+Self-Determination Theory (Deci & Ryan) identifies three basic psychological needs:
+
+- Autonomy: feeling in control of one's actions
+- Competence: feeling effective and capable
+- Relatedness: feeling connected to others
+
+## Drive Theory
+
+Drives are internal states of tension that motivate behavior to restore homeostasis:
+
+- Hunger drive: low blood sugar triggers eating behavior
+- Thirst drive: dehydration triggers drinking behavior
+- Sex drive: hormonal and psychological factors motivate sexual behavior
+- Drive reduction: satisfying a drive reduces tension and reinforces the behavior
+
+## Achievement Motivation
+
+- Need for achievement (McClelland): desire to accomplish difficult tasks and meet high standards
+- Growth mindset (Dweck): believing abilities can be developed through effort leads to greater achievement
+- Fixed mindset: believing abilities are innate leads to avoidance of challenges
+- Flow (Csikszentmihalyi): state of complete absorption in an optimally challenging activity
+
+## Procrastination
+
+Procrastination is the voluntary delay of intended actions despite expecting negative consequences:
+
+- Affects approximately 20% of adults chronically
+- Related to poor emotion regulation rather than laziness
+- Temporal discounting: immediate comfort is valued over future rewards
+- Strategies: breaking tasks into small steps, implementation intentions, removing distractions

@@ -1,0 +1,48 @@
+# Nuclear Power
+
+## How It Works
+
+Nuclear power plants generate electricity through controlled nuclear fission. Uranium-235 atoms are split by neutrons, releasing enormous energy as heat. This heat boils water into steam, which drives turbines connected to generators.
+
+## Reactor Types
+
+- Pressurized Water Reactor (PWR): most common type (about 70% of reactors worldwide). Water under high pressure transfers heat from the core to a secondary steam loop.
+- Boiling Water Reactor (BWR): water boils directly in the reactor core, producing steam that drives turbines.
+- CANDU (Canada): uses heavy water as moderator, can use natural (unenriched) uranium fuel.
+- Fast breeder reactors: use fast neutrons, can produce more fissile material than they consume.
+- Small Modular Reactors (SMRs): factory-built, smaller capacity (under 300 MW), potentially safer and cheaper.
+
+## Global Status
+
+- 440 operational reactors in 32 countries (2024)
+- Provides approximately 10% of world electricity
+- France: 70% nuclear electricity (highest proportion)
+- United States: 93 reactors, largest nuclear fleet
+- China: rapidly expanding (55 reactors, 22 under construction)
+- Countries phasing out: Germany (closed last reactor 2023), Italy, Belgium
+
+## Advantages
+
+- Low carbon emissions: lifecycle emissions comparable to wind power (12 g CO₂/kWh)
+- High energy density: 1 kg of uranium produces as much energy as 14,000 kg of coal
+- Reliable baseload power: operates 24/7 regardless of weather (capacity factor ~90%)
+- Small land footprint: compared to solar and wind for equivalent output
+- Long operational life: 40-80 years per reactor
+
+## Disadvantages and Risks
+
+- Radioactive waste: spent fuel remains dangerous for thousands of years. No permanent repository yet operational (Finland's Onkalo facility expected to open ~2025).
+- Accident risk: Three Mile Island (1979), Chernobyl (1986), Fukushima (2011)
+- High construction costs: often over budget and behind schedule ($10-30 billion per reactor)
+- Proliferation: nuclear technology can be diverted to weapons programs
+- Public opposition: fear of radiation and accidents limits political support
+- Long construction time: typically 10-15 years from decision to operation
+
+## Nuclear Safety
+
+Modern reactors incorporate multiple safety systems:
+
+- Defense in depth: multiple independent barriers (fuel cladding, pressure vessel, containment building)
+- Passive safety: systems that function without power or human intervention (gravity-fed cooling)
+- Negative temperature coefficient: reactor power decreases automatically if temperature rises
+- Post-Fukushima improvements: enhanced flood protection, backup power, hydrogen management

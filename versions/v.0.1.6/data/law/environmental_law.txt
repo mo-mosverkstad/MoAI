@@ -1,0 +1,40 @@
+# Environmental Law
+
+## Definition
+
+Environmental law is the body of law that regulates human interaction with the natural environment. It aims to protect air, water, land, and ecosystems from pollution and degradation while balancing environmental protection with economic development.
+
+## Key Principles
+
+- Polluter pays principle: those who cause pollution should bear the costs of managing it
+- Precautionary principle: where there is risk of serious harm, lack of full scientific certainty should not delay protective action
+- Sustainable development: meeting present needs without compromising future generations' ability to meet theirs
+- Public participation: citizens have the right to participate in environmental decision-making
+- Environmental impact assessment: major projects must evaluate potential environmental effects before approval
+
+## Major Environmental Laws (United States)
+
+- Clean Air Act (1970): regulates air emissions from stationary and mobile sources
+- Clean Water Act (1972): regulates discharge of pollutants into waters
+- Endangered Species Act (1973): protects threatened and endangered species and their habitats
+- NEPA (1970): requires environmental impact statements for federal actions
+- CERCLA/Superfund (1980): liability for cleanup of contaminated sites
+- RCRA (1976): regulates hazardous waste from generation to disposal
+
+## International Environmental Law
+
+- Montreal Protocol (1987): phased out ozone-depleting substances. Considered the most successful environmental treaty.
+- Kyoto Protocol (1997): set binding emission reduction targets for developed countries
+- Paris Agreement (2015): 196 parties committed to limiting global warming to well below 2°C above pre-industrial levels
+- Convention on Biological Diversity (1992): conservation of biodiversity, sustainable use of resources
+- Basel Convention (1989): controls transboundary movement of hazardous waste
+
+## Climate Change Law
+
+Climate litigation is rapidly growing:
+
+- Governments sued for insufficient climate action (Urgenda v. Netherlands, 2019)
+- Fossil fuel companies sued for climate damages
+- Carbon pricing: cap-and-trade systems and carbon taxes
+- Renewable energy mandates and subsidies
+- Vehicle emission standards

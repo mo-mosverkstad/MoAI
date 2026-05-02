@@ -1,0 +1,52 @@
+# Cell Biology
+
+## The Cell
+
+The cell is the basic structural and functional unit of all living organisms. All cells come from pre-existing cells (cell theory, Schleiden and Schwann, 1839). There are an estimated 37.2 trillion cells in the human body.
+
+## Cell Types
+
+- Prokaryotic cells: no membrane-bound nucleus (bacteria, archaea). DNA in a single circular chromosome. Smaller (1-10 μm). Appeared ~3.5 billion years ago.
+- Eukaryotic cells: membrane-bound nucleus and organelles (animals, plants, fungi, protists). DNA in multiple linear chromosomes. Larger (10-100 μm). Appeared ~2 billion years ago.
+
+## Cell Organelles
+
+- Nucleus: contains DNA, controls gene expression. Nuclear envelope with pores.
+- Mitochondria: "powerhouses" — produce ATP through cellular respiration. Have their own DNA (evidence of endosymbiosis).
+- Endoplasmic reticulum (ER): rough ER (with ribosomes) synthesizes proteins; smooth ER synthesizes lipids.
+- Golgi apparatus: modifies, packages, and ships proteins to their destinations.
+- Ribosomes: translate mRNA into proteins (found free in cytoplasm or on rough ER).
+- Lysosomes: contain digestive enzymes that break down waste and cellular debris.
+- Cell membrane: phospholipid bilayer controlling what enters and exits the cell.
+- Cytoskeleton: network of protein filaments providing structure and enabling movement.
+
+Plant cells additionally have:
+
+- Cell wall: rigid cellulose structure outside the membrane providing support
+- Chloroplasts: site of photosynthesis, contain chlorophyll (also have their own DNA)
+- Central vacuole: large water-filled compartment maintaining turgor pressure
+
+## Cell Division
+
+- Mitosis: produces two identical daughter cells (growth, repair). Phases: prophase, metaphase, anaphase, telophase.
+- Meiosis: produces four genetically unique cells with half the chromosomes (gametes — eggs and sperm). Enables sexual reproduction and genetic diversity.
+- Cell cycle: G1 (growth) → S (DNA replication) → G2 (preparation) → M (mitosis)
+- Cancer: uncontrolled cell division due to mutations in genes regulating the cell cycle
+
+## Cell Communication
+
+Cells communicate through chemical signals:
+
+- Hormones: long-distance signaling through the bloodstream
+- Neurotransmitters: short-distance signaling between neurons
+- Direct contact: gap junctions allow molecules to pass between adjacent cells
+- Signal transduction: receptor receives signal → cascade of molecular events → cellular response
+
+## Stem Cells
+
+Stem cells can self-renew and differentiate into specialized cell types:
+
+- Embryonic stem cells: can become any cell type (pluripotent)
+- Adult stem cells: limited to certain cell types (multipotent) — found in bone marrow, skin, gut
+- Induced pluripotent stem cells (iPSCs): adult cells reprogrammed to embryonic-like state (Yamanaka, Nobel Prize 2012)
+- Applications: regenerative medicine, disease modeling, drug testing

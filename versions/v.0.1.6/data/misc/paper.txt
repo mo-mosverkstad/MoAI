@@ -1,0 +1,52 @@
+# Paper
+
+## History
+
+Paper is one of the most important inventions in human history, enabling the recording and transmission of knowledge across generations.
+
+- 105 AD: Cai Lun in China standardizes papermaking from bark, hemp, rags, and fishnets
+- 751 AD: papermaking knowledge reaches the Islamic world after the Battle of Talas
+- 1150: first paper mill in Europe (Xàtiva, Spain)
+- 1450: Gutenberg's printing press creates massive demand for paper
+- 1799: Louis-Nicolas Robert invents the continuous papermaking machine
+- 1840s: wood pulp replaces rags as the primary raw material
+
+## How Paper is Made
+
+Modern papermaking process:
+
+1. Pulping: wood chips are broken down into fibers using mechanical or chemical processes
+2. Bleaching: pulp is whitened using chlorine dioxide or oxygen-based chemicals
+3. Beating/refining: fibers are processed to improve bonding
+4. Forming: dilute pulp suspension is spread on a moving wire mesh, water drains away
+5. Pressing: wet sheet passes through rollers to remove more water
+6. Drying: heated cylinders evaporate remaining moisture
+7. Finishing: calendering (smoothing), coating, or sizing for specific uses
+
+## Types of Paper
+
+- Newsprint: lightweight, inexpensive, made from mechanical pulp
+- Bond paper: high-quality writing and printing paper
+- Cardboard/paperboard: thick, rigid, used for packaging
+- Tissue paper: soft, absorbent (toilet paper, facial tissue)
+- Art paper: coated for high-quality image reproduction
+- Rice paper: thin, translucent, used in Asian art and calligraphy
+- Watercolor paper: heavy, textured, absorbs water without warping
+
+## Environmental Impact
+
+- Paper industry accounts for approximately 4% of global energy use
+- Recycling one ton of paper saves 17 trees, 26,000 liters of water, and 2.5 cubic meters of landfill space
+- Recycled paper requires 70% less energy than virgin paper
+- Sustainable forestry certification (FSC) ensures responsible sourcing
+- Digital alternatives reduce but have not eliminated paper demand
+
+## Origami
+
+Origami is the Japanese art of paper folding (ori = folding, kami = paper):
+
+- Traditional origami uses a single square sheet without cutting or gluing
+- Classic models: crane (tsuru), boat, frog, butterfly
+- Modular origami: multiple folded units assembled into complex structures
+- Mathematical origami: explores geometric principles and has applications in engineering
+- Applications: solar panel deployment in space, medical stents, airbag folding, architectural design

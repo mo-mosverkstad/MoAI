@@ -1,0 +1,20 @@
+# Ethics
+
+## Definition
+
+Ethics is the branch of philosophy that deals with questions of right and wrong, good and evil, virtue and vice. It seeks to establish principles for determining what actions are morally permissible, obligatory, or forbidden.
+
+## Normative Ethical Theories
+
+- Consequentialism: the morality of an action depends solely on its outcomes. Utilitarianism (Bentham, Mill) holds that the right action maximizes overall happiness.
+- Deontology: certain actions are inherently right or wrong regardless of consequences. Kant's categorical imperative: act only according to rules you could will to be universal laws.
+- Virtue ethics: focuses on character rather than rules or consequences. Aristotle argued that virtues (courage, temperance, justice) are habits developed through practice.
+- Care ethics: emphasizes relationships and responsibilities to others, developed by Carol Gilligan and Nel Noddings.
+
+## Applied Ethics
+
+- Bioethics: ethical issues in medicine (euthanasia, genetic engineering, organ transplantation)
+- Environmental ethics: moral relationship between humans and the natural world
+- Business ethics: corporate responsibility, fair trade, labor rights
+- Technology ethics: AI bias, privacy, surveillance, autonomous weapons
+- Animal ethics: moral status of animals, factory farming, animal testing

@@ -1,0 +1,52 @@
+# Sleep and Dreams
+
+## What is Sleep
+
+Sleep is a naturally recurring state of reduced consciousness, decreased sensory activity, and inhibited voluntary muscle movement. Humans spend approximately one-third of their lives sleeping. Sleep is essential for physical health, cognitive function, and emotional well-being.
+
+## Sleep Stages
+
+Sleep cycles through distinct stages approximately every 90 minutes:
+
+- Stage 1 (N1): light sleep, transition from wakefulness, lasts 1-5 minutes
+- Stage 2 (N2): deeper sleep, heart rate slows, body temperature drops, lasts 10-25 minutes
+- Stage 3 (N3): deep slow-wave sleep, difficult to awaken, body repairs tissues and strengthens immune system
+- REM sleep: rapid eye movement, brain activity similar to waking, vivid dreams occur, muscles are paralyzed
+
+Adults typically experience 4-6 complete cycles per night. Deep sleep dominates early cycles; REM sleep increases in later cycles.
+
+## Why We Sleep
+
+Sleep serves multiple critical functions:
+
+- Memory consolidation: transferring information from short-term to long-term memory
+- Brain waste clearance: the glymphatic system removes toxic metabolic byproducts during sleep
+- Physical restoration: growth hormone released during deep sleep repairs tissues
+- Immune function: sleep deprivation impairs immune response
+- Emotional regulation: REM sleep processes emotional experiences
+
+## Dreams
+
+- Most vivid dreams occur during REM sleep
+- Everyone dreams, though not everyone remembers their dreams
+- Average person has 3-5 dreams per night, totaling about 2 hours
+- Dream content often incorporates recent experiences and emotional concerns
+- Lucid dreaming: awareness that one is dreaming while still asleep
+
+## Sleep Disorders
+
+- Insomnia: difficulty falling or staying asleep (affects 10-30% of adults)
+- Sleep apnea: repeated breathing interruptions during sleep, causing daytime fatigue
+- Narcolepsy: sudden uncontrollable episodes of falling asleep
+- Restless leg syndrome: uncomfortable sensations causing an urge to move the legs
+- Sleepwalking (somnambulism): performing complex behaviors while asleep
+
+## Sleep Deprivation
+
+Chronic sleep deprivation (less than 7 hours for adults) is associated with:
+
+- Impaired cognitive function and decision-making
+- Increased risk of obesity, diabetes, and cardiovascular disease
+- Weakened immune system
+- Depression and anxiety
+- Microsleeps: brief involuntary episodes of sleep lasting seconds

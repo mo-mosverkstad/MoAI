@@ -1,0 +1,37 @@
+# Calculus
+
+## Definition
+
+Calculus is a branch of mathematics that studies continuous change. It was independently developed by Isaac Newton and Gottfried Wilhelm Leibniz in the late 17th century. Calculus has two major branches: differential calculus and integral calculus.
+
+## Differential Calculus
+
+Differential calculus concerns the study of rates of change and slopes of curves. The derivative of a function measures how the function's output changes as its input changes. The derivative of f(x) is written as f'(x) or df/dx.
+
+Key concepts in differential calculus include:
+
+- Limits: the value a function approaches as the input approaches a certain point
+- Continuity: a function is continuous if it has no breaks, jumps, or holes
+- Chain rule: used to differentiate composite functions, (f∘g)'(x) = f'(g(x)) · g'(x)
+- Product rule: (fg)' = f'g + fg'
+- Quotient rule: (f/g)' = (f'g - fg') / g²
+
+## Integral Calculus
+
+Integral calculus is concerned with accumulation of quantities and the areas under and between curves. The definite integral of a function from a to b gives the signed area between the function and the x-axis.
+
+The Fundamental Theorem of Calculus connects differentiation and integration, stating that differentiation and integration are inverse operations. If F is an antiderivative of f, then the integral of f from a to b equals F(b) - F(a).
+
+## Applications of Calculus
+
+Calculus is used extensively in science, engineering, and economics:
+
+- Physics: calculating velocity, acceleration, work, and energy
+- Engineering: optimization of designs, signal processing
+- Economics: marginal cost and revenue analysis
+- Biology: population growth models
+- Medicine: modeling drug concentration in the bloodstream over time
+
+## History
+
+Newton developed his method of fluxions around 1666, while Leibniz published his work on calculus in 1684. The notation used today (dx, ∫) was introduced by Leibniz. The rigorous foundation of calculus using epsilon-delta definitions was established by Augustin-Louis Cauchy and Karl Weierstrass in the 19th century.

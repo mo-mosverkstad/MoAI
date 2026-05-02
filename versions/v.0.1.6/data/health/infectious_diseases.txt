@@ -1,0 +1,46 @@
+# Infectious Diseases
+
+## Definition
+
+Infectious diseases are caused by pathogenic microorganisms — bacteria, viruses, fungi, or parasites — that can spread between individuals. They remain a leading cause of death worldwide, particularly in low-income countries.
+
+## Types of Pathogens
+
+- Bacteria: single-celled organisms. Treated with antibiotics. Examples: tuberculosis, cholera, strep throat, urinary tract infections.
+- Viruses: non-living particles that hijack host cells to replicate. Treated with antivirals (limited). Examples: influenza, HIV, COVID-19, measles, Ebola.
+- Fungi: can cause superficial or systemic infections. Examples: athlete's foot, ringworm, candidiasis, aspergillosis.
+- Parasites: organisms that live on or in a host. Examples: malaria (Plasmodium), tapeworms, schistosomiasis.
+- Prions: misfolded proteins that cause fatal brain diseases. Examples: Creutzfeldt-Jakob disease, mad cow disease.
+
+## Transmission
+
+- Airborne: respiratory droplets or aerosols (influenza, COVID-19, tuberculosis, measles)
+- Direct contact: touching infected person or bodily fluids (HIV, herpes, Ebola)
+- Fecal-oral: contaminated water or food (cholera, typhoid, hepatitis A, norovirus)
+- Vector-borne: transmitted by insects (malaria by mosquitoes, Lyme disease by ticks, plague by fleas)
+- Sexually transmitted: through sexual contact (HIV, syphilis, gonorrhea, chlamydia, HPV)
+
+## Major Infectious Diseases
+
+- Tuberculosis (TB): kills 1.3 million people annually. Caused by Mycobacterium tuberculosis. One-quarter of the world's population is latently infected.
+- Malaria: kills approximately 620,000 people annually (mostly children in Africa). Caused by Plasmodium parasites transmitted by Anopheles mosquitoes.
+- HIV/AIDS: approximately 39 million people living with HIV (2022). Antiretroviral therapy enables near-normal lifespan but no cure exists.
+- COVID-19: caused by SARS-CoV-2. Pandemic declared March 2020. Over 7 million confirmed deaths (likely undercount).
+- Influenza: seasonal epidemics kill 290,000-650,000 annually. Pandemic potential (1918 Spanish flu killed 50-100 million).
+
+## Pandemics in History
+
+- Black Death (1347-1351): bubonic plague killed 75-200 million people (30-60% of Europe's population)
+- Spanish Flu (1918-1919): H1N1 influenza killed 50-100 million worldwide
+- HIV/AIDS (1981-present): approximately 40 million deaths to date
+- COVID-19 (2020-present): over 7 million confirmed deaths
+
+## Antimicrobial Resistance
+
+Antibiotic resistance is one of the greatest threats to global health:
+
+- Bacteria evolve resistance through mutation and gene transfer
+- Overuse in medicine and agriculture accelerates resistance
+- Approximately 1.27 million deaths directly caused by resistant bacteria annually (2019)
+- Without action, resistant infections could kill 10 million people per year by 2050
+- New antibiotic development has slowed dramatically (few new classes since the 1980s)

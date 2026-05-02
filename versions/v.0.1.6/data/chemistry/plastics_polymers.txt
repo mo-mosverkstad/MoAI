@@ -1,0 +1,53 @@
+# Plastics and Polymers
+
+## Definition
+
+Plastics are synthetic materials made from polymers — long-chain molecules formed by linking many small repeating units (monomers). The word "plastic" comes from the Greek plastikos, meaning "capable of being shaped." Plastics can be molded into virtually any form and have transformed modern life.
+
+## History
+
+- 1862: Alexander Parkes creates Parkesine (cellulose-based), the first man-made plastic
+- 1907: Leo Baekeland invents Bakelite, the first fully synthetic plastic
+- 1930s: Nylon, polystyrene, and polyethylene developed
+- 1940s-1950s: mass production of plastics accelerates during and after World War II
+- 1950-2020: global plastic production grew from 2 million to 367 million tonnes per year
+
+## Common Plastics
+
+- Polyethylene (PE): most produced plastic. HDPE (bottles, pipes), LDPE (bags, film)
+- Polypropylene (PP): food containers, automotive parts, textiles
+- Polyvinyl chloride (PVC): pipes, window frames, flooring
+- Polystyrene (PS): packaging foam, disposable cups, insulation
+- Polyethylene terephthalate (PET): drink bottles, polyester clothing
+- Nylon (polyamide): stockings, rope, gears, parachutes
+- Polycarbonate: eyeglass lenses, bulletproof glass, electronics
+
+## Types
+
+- Thermoplastics: soften when heated, can be remolded repeatedly (PE, PP, PET). Recyclable.
+- Thermosets: permanently harden when heated, cannot be remelted (epoxy, Bakelite, vulcanized rubber). Not easily recyclable.
+- Elastomers: rubber-like materials that stretch and return to original shape (silicone, neoprene).
+
+## Advantages
+
+- Lightweight: much lighter than metals or glass
+- Durable: resistant to corrosion, chemicals, and weathering
+- Versatile: can be rigid or flexible, transparent or opaque
+- Inexpensive: cheap to produce in large quantities
+- Insulating: poor conductor of heat and electricity (useful for wiring, packaging)
+
+## Environmental Problems
+
+- Non-biodegradable: most plastics persist for hundreds of years in the environment
+- Ocean pollution: estimated 150 million tonnes of plastic in the oceans; 8 million tonnes added annually
+- Microplastics: tiny fragments (<5mm) found in water, soil, air, food, and human blood
+- Fossil fuel dependence: 99% of plastics are made from petrochemicals
+- Low recycling rates: only about 9% of all plastic ever produced has been recycled
+
+## Solutions
+
+- Reduce and reuse: minimizing single-use plastics
+- Improved recycling: chemical recycling can break polymers back into monomers
+- Bioplastics: made from renewable sources (corn starch, sugarcane) — biodegradable under specific conditions
+- Extended producer responsibility: manufacturers responsible for end-of-life management
+- International treaties: UN Global Plastics Treaty under negotiation (2024)

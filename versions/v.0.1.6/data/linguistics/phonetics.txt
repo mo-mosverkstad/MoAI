@@ -1,0 +1,48 @@
+# Phonetics
+
+## Definition
+
+Phonetics is the scientific study of speech sounds — how they are produced, transmitted, and perceived. It is concerned with the physical properties of sounds rather than their function in any particular language.
+
+## Branches
+
+- Articulatory phonetics: how speech sounds are produced by the vocal organs
+- Acoustic phonetics: the physical properties of speech sounds as sound waves
+- Auditory phonetics: how speech sounds are perceived by the listener
+
+## The Vocal Tract
+
+Speech sounds are produced by modifying airflow from the lungs:
+
+- Lungs: provide the airstream
+- Larynx: contains the vocal folds (vocal cords) that vibrate to produce voice
+- Pharynx: the throat cavity above the larynx
+- Oral cavity: the mouth, where most articulation occurs
+- Nasal cavity: air passes through the nose for nasal sounds (m, n, ng)
+
+## Consonant Classification
+
+Consonants are classified by three features:
+
+- Place of articulation: where in the vocal tract the airflow is obstructed
+  - Bilabial (both lips): p, b, m
+  - Alveolar (tongue tip to ridge behind teeth): t, d, n, s, z
+  - Velar (back of tongue to soft palate): k, g, ng
+- Manner of articulation: how the airflow is obstructed
+  - Stops/plosives: complete closure then release (p, t, k)
+  - Fricatives: narrow gap creating turbulence (f, s, sh)
+  - Nasals: air flows through the nose (m, n)
+  - Approximants: slight narrowing without turbulence (w, r, l, y)
+- Voicing: whether the vocal folds vibrate (b is voiced, p is voiceless)
+
+## Vowel Classification
+
+Vowels are classified by tongue position and lip rounding:
+
+- Height: high (i, u), mid (e, o), low (a)
+- Backness: front (i, e), central (schwa), back (u, o)
+- Rounding: rounded (u, o) or unrounded (i, e, a)
+
+## The International Phonetic Alphabet (IPA)
+
+The IPA is a standardized system for transcribing speech sounds of all languages. Created in 1888, it contains symbols for every known speech sound. Each symbol represents exactly one sound, eliminating the ambiguity of spelling systems.

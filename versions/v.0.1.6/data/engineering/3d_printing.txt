@@ -1,0 +1,51 @@
+# 3D Printing
+
+## Definition
+
+3D printing (additive manufacturing) is the process of creating three-dimensional objects by depositing material layer by layer based on a digital model. Unlike traditional manufacturing (which removes material by cutting or drilling), 3D printing adds material only where needed, reducing waste.
+
+## History
+
+- 1984: Chuck Hull invents stereolithography (SLA), the first 3D printing technology
+- 1988: Fused Deposition Modeling (FDM) developed by Scott Crump
+- 1992: Selective Laser Sintering (SLS) commercialized
+- 2005: RepRap project — open-source 3D printer that can print its own parts
+- 2009: FDM patents expire, enabling affordable desktop 3D printers
+- 2010s: metal 3D printing matures for aerospace and medical applications
+- 2021: first 3D-printed rocket engine components fly in space
+
+## Technologies
+
+- Fused Deposition Modeling (FDM/FFF): melted plastic filament extruded through a nozzle. Most common consumer technology. Materials: PLA, ABS, PETG, nylon.
+- Stereolithography (SLA): UV laser cures liquid photopolymer resin layer by layer. High detail and smooth surfaces.
+- Selective Laser Sintering (SLS): laser fuses powdered material (nylon, metal). No support structures needed.
+- Direct Metal Laser Sintering (DMLS): laser melts metal powder (titanium, steel, aluminum). Used for aerospace and medical implants.
+- Binder Jetting: liquid binder selectively deposited onto powder bed. Fast, full-color capable.
+- Multi Jet Fusion (MJF): HP's technology using fusing agents and infrared energy. Fast production of functional parts.
+
+## Applications
+
+- Prototyping: rapidly creating physical models for testing and iteration (days instead of weeks)
+- Aerospace: lightweight structural components, rocket engine parts (SpaceX, GE Aviation)
+- Medical: custom implants, surgical guides, prosthetics, dental crowns, bioprinting tissue
+- Automotive: tooling, jigs, end-use parts, concept cars
+- Architecture: scale models, building components, entire houses (concrete printing)
+- Consumer products: jewelry, eyewear, shoes (Adidas 4DFWD), custom phone cases
+- Food: chocolate, pasta, and sugar structures
+
+## Advantages
+
+- Design freedom: complex geometries impossible with traditional manufacturing (lattice structures, internal channels)
+- Customization: each item can be unique at no extra cost
+- Reduced waste: material added only where needed (vs. machining which removes 60-90%)
+- Rapid iteration: design changes don't require new tooling
+- On-demand production: no minimum order quantities, reduced inventory
+
+## Limitations
+
+- Speed: slower than mass production for large quantities
+- Material properties: often inferior to traditionally manufactured parts (anisotropy, porosity)
+- Size constraints: build volume limited by printer size
+- Post-processing: often requires support removal, sanding, curing, or heat treatment
+- Cost: metal printing remains expensive ($100-500+ per kg of material)
+- Quality control: ensuring consistency and detecting internal defects

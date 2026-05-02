@@ -1,0 +1,47 @@
+# Philosophy of Science
+
+## What is Science?
+
+Philosophy of science examines the foundations, methods, and implications of science. It asks: What distinguishes science from non-science? How do theories relate to reality? Can science give us truth?
+
+## The Demarcation Problem
+
+What separates science from pseudoscience?
+
+- Falsifiability (Karl Popper, 1934): a theory is scientific only if it can be proven false by observation. Astrology and psychoanalysis are not science because they cannot be falsified.
+- Paradigms (Thomas Kuhn, 1962): science operates within paradigms — shared frameworks of assumptions. Normal science solves puzzles within the paradigm. Scientific revolutions occur when anomalies accumulate and a new paradigm replaces the old (Copernican revolution, relativity replacing Newtonian mechanics).
+- Research programmes (Imre Lakatos): science progresses through competing programmes; progressive ones make novel predictions that are confirmed.
+- Anarchism (Paul Feyerabend): there is no single scientific method — "anything goes." Science advances through rule-breaking and creativity.
+
+## Scientific Realism vs. Anti-Realism
+
+- Scientific realism: successful theories are approximately true descriptions of reality, including unobservable entities (electrons, quarks, genes)
+- Instrumentalism: theories are useful tools for prediction but don't necessarily describe reality
+- Constructive empiricism (van Fraassen): science aims for empirical adequacy, not truth about unobservables
+- No miracles argument (for realism): the success of science would be a miracle if theories weren't approximately true
+- Pessimistic induction (against realism): many past "successful" theories turned out to be false (phlogiston, caloric, ether)
+
+## The Problem of Induction
+
+David Hume (1739): inductive reasoning cannot be logically justified. Observing that the sun has risen every day doesn't logically guarantee it will rise tomorrow. Yet science relies on induction. Responses:
+
+- Pragmatic: induction works in practice
+- Bayesian: evidence raises probability of hypotheses
+- Inference to best explanation: accept the hypothesis that best explains evidence
+- Popper's solution: science doesn't use induction — it uses conjecture and refutation
+
+## Theory Change
+
+How does science progress?
+
+- Cumulative view: science steadily accumulates truths
+- Kuhn's revolutions: paradigm shifts are discontinuous — new paradigms are incommensurable with old ones
+- Lakatos: progressive research programmes make novel predictions; degenerating ones only explain known facts
+- Structural realism: what is preserved across theory change is mathematical structure, not specific ontology
+
+## Values in Science
+
+- Value-free ideal: science should be objective and free from social values
+- Value-laden science: values inevitably influence research questions, methods, and interpretation
+- Underdetermination: evidence alone doesn't determine theory choice — values fill the gap
+- Feminist philosophy of science: examines how gender biases have shaped scientific knowledge

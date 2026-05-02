@@ -1,0 +1,43 @@
+# Intelligence
+
+## Definition
+
+Intelligence is the ability to learn from experience, adapt to new situations, understand abstract concepts, and use knowledge to solve problems. It is one of the most studied and debated topics in psychology.
+
+## Theories of Intelligence
+
+- Spearman's g factor (1904): a single general intelligence underlies all cognitive abilities
+- Thurstone's primary mental abilities (1938): seven independent abilities (verbal, numerical, spatial, perceptual speed, memory, reasoning, word fluency)
+- Gardner's multiple intelligences (1983): eight distinct intelligences (linguistic, logical-mathematical, spatial, musical, bodily-kinesthetic, interpersonal, intrapersonal, naturalistic)
+- Sternberg's triarchic theory (1985): analytical, creative, and practical intelligence
+- Cattell's fluid and crystallized intelligence: fluid (novel problem-solving, declines with age) vs. crystallized (accumulated knowledge, stable or increases with age)
+
+## IQ Testing
+
+- Alfred Binet (1905): created the first intelligence test to identify children needing educational support
+- Stanford-Binet test: adapted by Lewis Terman at Stanford University
+- Wechsler scales: WAIS (adults), WISC (children) — most widely used today
+- IQ score: mean of 100, standard deviation of 15
+- Normal distribution: 68% score between 85-115, 95% between 70-130
+
+## Nature vs. Nurture
+
+Intelligence is influenced by both genetics and environment:
+
+- Heritability: approximately 50-80% in adults (increases with age)
+- Twin studies: identical twins' IQs correlate at 0.86, fraternal twins at 0.60
+- Environmental factors: nutrition, education, socioeconomic status, prenatal care
+- Flynn effect: IQ scores have risen approximately 3 points per decade across the 20th century (likely due to improved nutrition, education, and environmental complexity)
+
+## Controversies
+
+- Cultural bias in testing: tests may favor certain cultural backgrounds
+- Stereotype threat: awareness of negative stereotypes can impair performance
+- Single number limitation: reducing complex abilities to one score oversimplifies
+- Practical significance: IQ predicts academic and job performance but not creativity, wisdom, or life satisfaction
+
+## Intellectual Disability and Giftedness
+
+- Intellectual disability: IQ below 70 with deficits in adaptive functioning (affects ~1% of population)
+- Giftedness: typically IQ above 130 (top 2% of population)
+- Savant syndrome: extraordinary ability in one domain despite overall cognitive limitations

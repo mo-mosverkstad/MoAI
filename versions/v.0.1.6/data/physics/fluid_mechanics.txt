@@ -1,0 +1,49 @@
+# Fluid Mechanics
+
+## Definition
+
+Fluid mechanics is the branch of physics that studies the behavior of fluids (liquids and gases) at rest (fluid statics) and in motion (fluid dynamics). It is essential to engineering, meteorology, oceanography, and biology.
+
+## Properties of Fluids
+
+- Density (ρ): mass per unit volume (water: 1000 kg/m³, air: 1.2 kg/m³ at sea level)
+- Pressure: force per unit area exerted by a fluid (Pascal, Pa = N/m²)
+- Viscosity: resistance to flow (honey is more viscous than water; water is more viscous than air)
+- Compressibility: liquids are nearly incompressible; gases are highly compressible
+- Surface tension: cohesive forces at the surface create a "skin" (allows insects to walk on water)
+
+## Fluid Statics
+
+- Pascal's principle: pressure applied to a confined fluid is transmitted equally in all directions (hydraulic systems)
+- Hydrostatic pressure: P = ρgh (pressure increases with depth)
+- Archimedes' principle: a submerged object experiences an upward buoyant force equal to the weight of fluid displaced. Objects float when buoyant force exceeds weight.
+- Atmospheric pressure: 101,325 Pa at sea level (weight of air column above)
+
+## Fluid Dynamics
+
+- Continuity equation: A₁v₁ = A₂v₂ (fluid speeds up in narrow sections)
+- Bernoulli's principle: where fluid velocity increases, pressure decreases. Explains airplane lift, Venturi effect, and why shower curtains blow inward.
+- Laminar flow: smooth, orderly flow in parallel layers (low velocity, high viscosity)
+- Turbulent flow: chaotic, irregular flow with eddies and vortices (high velocity, low viscosity)
+- Reynolds number: predicts transition from laminar to turbulent flow (Re > ~2300 for pipe flow)
+
+## Navier-Stokes Equations
+
+The fundamental equations of fluid dynamics describe how velocity, pressure, temperature, and density of a fluid are related. They are nonlinear partial differential equations that have no general analytical solution. Proving whether smooth solutions always exist is one of the Millennium Prize Problems ($1 million reward).
+
+## Applications
+
+- Aerodynamics: aircraft wing design, car drag reduction, wind turbine optimization
+- Hydraulic engineering: dams, pipelines, water distribution systems
+- Meteorology: weather prediction, climate modeling, hurricane tracking
+- Cardiovascular medicine: blood flow, heart valve design, aneurysm analysis
+- Chemical engineering: mixing, heat exchangers, reactor design
+- Sports: swimming technique, golf ball dimples, cycling aerodynamics
+
+## Famous Experiments and Phenomena
+
+- Venturi effect: fluid pressure drops in a constriction (carburetors, atomizers)
+- Magnus effect: spinning objects curve in flight (curveball in baseball, banana kick in soccer)
+- Coandă effect: fluid jet follows a curved surface (used in aircraft blown flaps)
+- Vortex shedding: alternating vortices behind obstacles cause vibration (Tacoma Narrows Bridge collapse)
+- Cavitation: low-pressure bubbles form and collapse violently (damages ship propellers, used in ultrasonic cleaning)

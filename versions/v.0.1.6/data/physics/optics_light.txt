@@ -1,0 +1,52 @@
+# Optics and Light
+
+## What is Light
+
+Light is electromagnetic radiation visible to the human eye (wavelengths approximately 380-700 nanometers). It exhibits both wave and particle properties (wave-particle duality). Light travels at 299,792,458 m/s in vacuum — the fastest speed possible for any information or matter.
+
+## The Electromagnetic Spectrum
+
+From longest to shortest wavelength:
+
+- Radio waves: communication, broadcasting (wavelengths: meters to kilometers)
+- Microwaves: cooking, radar, Wi-Fi (millimeters to centimeters)
+- Infrared: heat radiation, remote controls, thermal imaging (700 nm - 1 mm)
+- Visible light: the only portion humans can see (380-700 nm)
+- Ultraviolet: causes sunburn, used for sterilization (10-380 nm)
+- X-rays: medical imaging, security scanning (0.01-10 nm)
+- Gamma rays: nuclear reactions, cancer treatment (< 0.01 nm)
+
+All electromagnetic radiation travels at the speed of light and differs only in wavelength/frequency.
+
+## Wave Properties of Light
+
+- Reflection: light bounces off surfaces (angle of incidence = angle of reflection)
+- Refraction: light bends when passing between media of different density (explains why a straw looks bent in water)
+- Diffraction: light bends around obstacles and through narrow openings
+- Interference: waves can reinforce (constructive) or cancel (destructive) each other
+- Polarization: light waves can be filtered to vibrate in only one plane
+
+## Color
+
+- White light contains all visible wavelengths (demonstrated by Newton's prism experiment, 1666)
+- Red: ~700 nm, Orange: ~600 nm, Yellow: ~580 nm, Green: ~530 nm, Blue: ~470 nm, Violet: ~400 nm
+- Objects appear colored because they absorb some wavelengths and reflect others
+- Additive color mixing (light): red + green + blue = white (RGB displays)
+- Subtractive color mixing (pigments): cyan + magenta + yellow = black (CMYK printing)
+
+## Lenses and Mirrors
+
+- Convex lens: converges light to a focal point (magnifying glass, camera, eye)
+- Concave lens: diverges light (corrects nearsightedness)
+- Concave mirror: converges light (telescopes, satellite dishes, headlights)
+- Convex mirror: diverges light, provides wide field of view (car side mirrors)
+- Focal length: distance from lens/mirror to focal point
+
+## Lasers
+
+LASER = Light Amplification by Stimulated Emission of Radiation:
+
+- Produces coherent, monochromatic, highly directional light
+- Invented in 1960 by Theodore Maiman (ruby laser)
+- Applications: surgery, fiber optic communication, barcode scanners, laser cutting, CD/DVD/Blu-ray, LIDAR, laser pointers, holography
+- Types: gas lasers (HeNe), solid-state (Nd:YAG), semiconductor (diode lasers), fiber lasers

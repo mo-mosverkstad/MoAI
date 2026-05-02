@@ -1,0 +1,57 @@
+# Cancer
+
+## Definition
+
+Cancer is a group of diseases characterized by uncontrolled growth and spread of abnormal cells. If the spread is not controlled, it can result in death. Cancer is the second leading cause of death globally, responsible for approximately 10 million deaths in 2022.
+
+## How Cancer Develops
+
+Normal cells grow, divide, and die in an orderly fashion. Cancer develops when this process goes wrong:
+
+1. DNA mutations accumulate in a cell (from carcinogens, radiation, errors in replication, or inherited mutations)
+2. Mutations disable tumor suppressor genes (brakes) or activate oncogenes (accelerators)
+3. The cell divides uncontrollably, forming a tumor
+4. Angiogenesis: the tumor develops its own blood supply
+5. Metastasis: cancer cells break away and spread to other organs through blood or lymph
+
+Typically 5-10 mutations are needed before a cell becomes cancerous. This is why cancer is more common in older people — mutations accumulate over a lifetime.
+
+## Common Types
+
+- Lung cancer: leading cause of cancer death worldwide (1.8 million deaths/year). Strongly linked to smoking.
+- Breast cancer: most common cancer in women (2.3 million new cases/year). 5-year survival rate exceeds 90% when detected early.
+- Colorectal cancer: third most common cancer. Screening (colonoscopy) can detect and remove precancerous polyps.
+- Prostate cancer: most common cancer in men in many countries. Often slow-growing.
+- Stomach cancer: more common in East Asia. Linked to H. pylori infection and diet.
+- Liver cancer: often caused by hepatitis B/C infection or alcohol abuse.
+
+## Risk Factors
+
+- Tobacco: causes approximately 22% of cancer deaths (lung, throat, bladder, pancreas)
+- Alcohol: increases risk of liver, breast, colorectal, and esophageal cancer
+- Obesity: linked to 13 types of cancer
+- UV radiation: causes most skin cancers (melanoma, basal cell, squamous cell)
+- Infections: HPV (cervical cancer), hepatitis B/C (liver cancer), H. pylori (stomach cancer)
+- Genetics: BRCA1/BRCA2 mutations increase breast and ovarian cancer risk
+
+## Treatment
+
+- Surgery: removing the tumor and surrounding tissue
+- Chemotherapy: drugs that kill rapidly dividing cells (affects cancer and some normal cells)
+- Radiation therapy: high-energy beams damage cancer cell DNA
+- Immunotherapy: helps the immune system recognize and attack cancer cells (checkpoint inhibitors)
+- Targeted therapy: drugs that target specific molecular abnormalities in cancer cells
+- Hormone therapy: blocks hormones that fuel certain cancers (breast, prostate)
+
+## Prevention
+
+Approximately 30-50% of cancers are preventable:
+
+- Don't smoke (or quit)
+- Maintain healthy weight
+- Exercise regularly
+- Limit alcohol
+- Eat fruits and vegetables
+- Protect skin from UV radiation
+- Get vaccinated (HPV, hepatitis B)
+- Screen regularly (mammography, colonoscopy, Pap smear)

@@ -1,0 +1,56 @@
+# Microbiology
+
+## Definition
+
+Microbiology is the study of microscopic organisms — bacteria, viruses, fungi, protozoa, and algae. These organisms are invisible to the naked eye but play essential roles in ecosystems, human health, industry, and agriculture.
+
+## Bacteria
+
+Single-celled prokaryotes, among the oldest life forms on Earth (3.5 billion years):
+
+- Shapes: cocci (spherical), bacilli (rod-shaped), spirilla (spiral)
+- Size: typically 1-10 micrometers
+- Reproduction: binary fission (can divide every 20 minutes under ideal conditions)
+- Metabolism: incredibly diverse — some use sunlight, some use chemicals, some require oxygen, some are poisoned by it
+- Beneficial roles: nitrogen fixation, decomposition, gut microbiome, food production (yogurt, cheese)
+- Pathogenic bacteria: tuberculosis, cholera, plague, strep throat, food poisoning
+
+## Viruses
+
+Non-living particles that replicate only inside host cells:
+
+- Structure: genetic material (DNA or RNA) enclosed in a protein coat (capsid), sometimes with a lipid envelope
+- Size: 20-300 nanometers (much smaller than bacteria)
+- Cannot reproduce independently — hijack host cell machinery
+- Not considered alive (no metabolism, no cells, cannot reproduce alone)
+- Examples: influenza, HIV, SARS-CoV-2, Ebola, rabies, measles
+- Bacteriophages: viruses that infect bacteria (most abundant biological entities on Earth)
+
+## Fungi
+
+Eukaryotic organisms that absorb nutrients from their environment:
+
+- Include yeasts (single-celled), molds, and mushrooms (multicellular)
+- Cell walls made of chitin (not cellulose like plants)
+- Decomposers: break down dead organic matter, recycling nutrients
+- Symbiotic: mycorrhizal fungi help 90% of plants absorb water and minerals
+- Useful: bread and beer (yeast fermentation), antibiotics (penicillin from Penicillium), food (mushrooms, truffles)
+- Pathogenic: athlete's foot, ringworm, candidiasis, aspergillosis
+
+## The Human Microbiome
+
+The human body hosts approximately 38 trillion microorganisms (slightly more than human cells):
+
+- Gut microbiome: 1,000+ bacterial species, weighing 1-2 kg total
+- Functions: digestion of fiber, vitamin synthesis (K, B12), immune system training, pathogen resistance
+- Disruption (dysbiosis): linked to obesity, inflammatory bowel disease, allergies, depression
+- Each person's microbiome is unique (like a fingerprint)
+- Established at birth and shaped by diet, environment, and antibiotics
+
+## Applications
+
+- Antibiotics: produced by soil bacteria and fungi (penicillin, streptomycin, tetracycline)
+- Biotechnology: bacteria engineered to produce insulin, growth hormone, biofuels
+- Food industry: fermentation (beer, wine, cheese, yogurt, soy sauce, kimchi)
+- Bioremediation: microbes that break down oil spills and toxic waste
+- Agriculture: nitrogen-fixing bacteria reduce need for synthetic fertilizers

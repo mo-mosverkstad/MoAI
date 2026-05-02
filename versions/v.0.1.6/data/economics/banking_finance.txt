@@ -1,0 +1,45 @@
+# Banking and Finance
+
+## What is Banking
+
+Banking is the business of accepting deposits, making loans, and providing financial services. Banks serve as intermediaries between savers (who deposit money) and borrowers (who need funds), earning profit from the interest rate spread.
+
+## Types of Banks
+
+- Commercial banks: serve individuals and businesses (deposits, loans, checking accounts)
+- Investment banks: help companies raise capital, facilitate mergers, trade securities (Goldman Sachs, Morgan Stanley)
+- Central banks: manage monetary policy, regulate banking system, act as lender of last resort (Federal Reserve, European Central Bank, Bank of England)
+- Credit unions: member-owned cooperatives offering banking services
+- Online banks: operate without physical branches, often offering higher interest rates
+
+## How Banks Create Money
+
+Banks create money through fractional reserve banking:
+
+- Banks are required to keep only a fraction of deposits as reserves (e.g., 10%)
+- The rest can be lent out, creating new deposits when borrowers spend
+- Money multiplier: if reserve ratio is 10%, $1,000 in deposits can support up to $10,000 in total money supply
+- This process expands the money supply far beyond the physical currency in circulation
+
+## Interest Rates
+
+- Interest: the cost of borrowing money (or the reward for saving)
+- Central bank rate: the rate at which commercial banks borrow from the central bank (federal funds rate in the US)
+- Prime rate: the rate banks charge their most creditworthy customers
+- Mortgage rates: long-term rates for home loans
+- Compound interest: interest earned on both principal and previously accumulated interest (A = P(1+r/n)^(nt))
+
+## Financial Markets
+
+- Stock market: trading ownership shares in companies (NYSE, NASDAQ, London Stock Exchange)
+- Bond market: trading debt securities (government bonds, corporate bonds)
+- Foreign exchange (forex): trading currencies ($7.5 trillion daily volume)
+- Commodities market: trading raw materials (oil, gold, wheat)
+- Derivatives market: contracts whose value derives from underlying assets (options, futures)
+
+## Financial Crises
+
+- Tulip Mania (1637): first recorded speculative bubble (Netherlands)
+- Great Depression (1929-1939): stock market crash led to global economic collapse
+- Asian Financial Crisis (1997): currency collapses across Southeast Asia
+- Global Financial Crisis (2008): subprime mortgage collapse triggered worldwide recession, bank bailouts totaling trillions of dollars

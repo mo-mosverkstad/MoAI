@@ -1,0 +1,54 @@
+# Eating Disorders
+
+## Definition
+
+Eating disorders are serious mental health conditions characterized by persistent disturbances in eating behavior and associated distressing thoughts and emotions. They affect people of all ages, genders, and backgrounds, and have the highest mortality rate of any mental illness.
+
+## Anorexia Nervosa
+
+Characterized by restriction of food intake leading to significantly low body weight:
+
+- Intense fear of gaining weight despite being underweight
+- Distorted body image (perceiving oneself as overweight when dangerously thin)
+- Denial of the seriousness of low body weight
+- Subtypes: restricting type and binge-purge type
+- Medical complications: heart failure, osteoporosis, organ damage, death
+- Mortality rate: approximately 5-10% (highest of any psychiatric disorder)
+- Affects approximately 0.5-1% of women, less common in men
+
+## Bulimia Nervosa
+
+Characterized by cycles of binge eating followed by compensatory behaviors:
+
+- Binge episodes: eating large amounts in a short period with loss of control
+- Purging: self-induced vomiting, laxative abuse, excessive exercise, fasting
+- Self-evaluation excessively influenced by body shape and weight
+- Normal or slightly above-normal weight (harder to detect than anorexia)
+- Medical complications: electrolyte imbalances, dental erosion, esophageal tears
+- Affects approximately 1-3% of women
+
+## Binge Eating Disorder
+
+The most common eating disorder:
+
+- Recurrent episodes of eating large quantities without compensatory purging
+- Eating rapidly, eating until uncomfortably full, eating when not hungry
+- Feelings of shame, guilt, and distress after bingeing
+- Often associated with obesity
+- Affects approximately 2-3% of the population
+
+## Causes
+
+- Genetic factors: 50-80% heritability
+- Psychological factors: perfectionism, low self-esteem, trauma, need for control
+- Sociocultural factors: thin-ideal media, diet culture, weight stigma
+- Neurobiological factors: serotonin and dopamine dysregulation, altered reward processing
+
+## Treatment
+
+- Cognitive-behavioral therapy (CBT): most effective for bulimia and binge eating disorder
+- Family-based treatment (Maudsley approach): most effective for adolescent anorexia
+- Nutritional rehabilitation: restoring healthy weight and eating patterns
+- Medications: SSRIs for bulimia and binge eating; limited evidence for anorexia
+- Hospitalization: necessary when medically unstable
+- Recovery is possible: many people fully recover with appropriate treatment

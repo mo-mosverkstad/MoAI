@@ -1,0 +1,47 @@
+# The Industrial Revolution
+
+## Overview
+
+The Industrial Revolution was a period of major industrialization and innovation that began in Great Britain in the mid-18th century and spread to other parts of the world. It fundamentally transformed economies from agrarian and handicraft-based to industrial and machine-manufacturing-based.
+
+## First Industrial Revolution (1760-1840)
+
+The first phase centered on textiles, steam power, and iron:
+
+- 1764: James Hargreaves invents the spinning jenny
+- 1769: James Watt patents an improved steam engine
+- 1779: Samuel Crompton invents the spinning mule
+- 1784: Henry Cort develops the puddling process for iron production
+- 1793: Eli Whitney invents the cotton gin
+
+Key innovations:
+
+- Steam engine: converted heat energy into mechanical work, powering factories and transportation
+- Textile machinery: mechanized spinning and weaving increased cloth production by orders of magnitude
+- Iron and steel: new smelting techniques enabled mass production of metal goods
+- Canal and road networks: improved transportation of raw materials and finished goods
+
+## Second Industrial Revolution (1870-1914)
+
+The second phase brought electricity, chemicals, and mass production:
+
+- 1876: Alexander Graham Bell patents the telephone
+- 1879: Thomas Edison demonstrates the practical incandescent light bulb
+- 1885: Karl Benz builds the first practical automobile
+- 1903: Wright brothers achieve powered flight
+- 1913: Henry Ford introduces the moving assembly line
+
+## Social Impact
+
+The Industrial Revolution transformed society:
+
+- Urbanization: millions moved from rural areas to cities for factory work
+- Working conditions: long hours, low wages, child labor, and dangerous factories
+- Labor movements: trade unions formed to advocate for workers' rights
+- Middle class growth: new wealth created a substantial middle class
+- Education: demand for literate workers led to public education systems
+- Public health: overcrowded cities initially suffered disease outbreaks, leading to sanitation reforms
+
+## Legacy
+
+The Industrial Revolution created the modern industrialized world. It established capitalism as the dominant economic system, enabled unprecedented population growth, and set the stage for the technological advances of the 20th and 21st centuries. It also initiated the large-scale burning of fossil fuels that drives current climate change.

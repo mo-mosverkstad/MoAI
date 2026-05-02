@@ -1,0 +1,52 @@
+# Aesthetics
+
+## Definition
+
+Aesthetics is the branch of philosophy dealing with the nature of beauty, art, and taste. It examines what makes something beautiful, what art is, and how we experience and judge artistic works.
+
+## Theories of Beauty
+
+- Objectivism: beauty is an objective property (symmetry, proportion, harmony, golden ratio)
+- Subjectivism: beauty is in the eye of the beholder — depends on individual perception
+- Kant's view: aesthetic judgments are subjective but claim universal validity. Beauty involves "disinterested pleasure" — appreciating something for its own sake, not for utility.
+- Evolutionary aesthetics: preferences evolved because they signaled fitness or safety (preference for landscapes with water, symmetrical faces)
+
+## What is Art?
+
+Defining art has proven remarkably difficult:
+
+- Imitation theory (Plato, Aristotle): art imitates reality (mimesis)
+- Expression theory (Tolstoy, Collingwood): art expresses and communicates emotions
+- Formalism (Bell, Greenberg): art is defined by its formal properties (line, color, composition, "significant form")
+- Institutional theory (Dickie): art is whatever the art world (galleries, critics, museums) recognizes as art
+- Anti-essentialism (Wittgenstein): there is no single definition — art is a "family resemblance" concept
+
+## The Sublime
+
+An aesthetic experience of awe, vastness, or overwhelming power:
+
+- Edmund Burke (1757): the sublime involves terror and astonishment (storms, mountains, the infinite, darkness)
+- Kant: the mathematical sublime (vastness) and dynamical sublime (power) reveal the superiority of human reason over nature
+- Romantic movement: embraced the sublime in art (Turner's storms, Friedrich's landscapes, Shelley's Mont Blanc)
+- Contemporary sublime: nuclear weapons, space, climate change as sources of awe and terror
+
+## Philosophy of Music
+
+- Formalism (Hanslick): music's value lies in its purely musical properties (melody, harmony, rhythm)
+- Expressivism: music expresses or arouses emotions
+- How can instrumental music (without words) express sadness or joy?
+- Music and time: music exists only in temporal unfolding — it cannot be grasped all at once
+
+## Photography and Representation
+
+- Does a photograph show reality more truthfully than a painting?
+- Susan Sontag: photographs create a sense of knowledge but can also aestheticize suffering
+- Walter Benjamin: mechanical reproduction (photography, film) destroys the "aura" of the original artwork
+- Digital manipulation: when does editing make a photograph no longer "real"?
+
+## Aesthetic Experience
+
+- Disinterestedness: appreciating something for its own sake
+- Catharsis (Aristotle): emotional purification through experiencing tragedy
+- Flow: complete absorption in creative activity
+- The everyday aesthetic: finding beauty in ordinary objects and experiences (Japanese concept of wabi-sabi)

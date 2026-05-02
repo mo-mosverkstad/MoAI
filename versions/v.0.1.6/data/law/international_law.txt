@@ -1,0 +1,40 @@
+# International Law
+
+## Definition
+
+International law is the set of rules and principles that govern relations between sovereign states and other international actors. Unlike domestic law, there is no world government to enforce international law — compliance relies on consent, reciprocity, and collective pressure.
+
+## Sources
+
+- Treaties: formal written agreements between states (Vienna Convention, Geneva Conventions)
+- Customary international law: practices accepted as legally binding through consistent state behavior
+- General principles: fundamental legal principles recognized by civilized nations
+- Judicial decisions: rulings of international courts (ICJ, ICC)
+- Writings of scholars: academic commentary as a subsidiary source
+
+## Key Institutions
+
+- United Nations (1945): 193 member states, promotes peace, security, and cooperation
+- International Court of Justice (ICJ): settles disputes between states, located in The Hague
+- International Criminal Court (ICC): prosecutes individuals for genocide, war crimes, and crimes against humanity
+- World Trade Organization (WTO): regulates international trade
+- International Law Commission: develops and codifies international law
+
+## Law of War (International Humanitarian Law)
+
+The Geneva Conventions (1949) and their Additional Protocols establish rules for armed conflict:
+
+- Distinction: combatants must distinguish between military targets and civilians
+- Proportionality: attacks must not cause excessive civilian harm relative to military advantage
+- Necessity: force must be limited to what is militarily necessary
+- Protection of prisoners of war: humane treatment, no torture, access to Red Cross
+- Protection of civilians: prohibition on targeting civilian populations
+
+## Law of the Sea
+
+The UN Convention on the Law of the Sea (UNCLOS, 1982) defines maritime zones:
+
+- Territorial sea: 12 nautical miles from coast, full sovereignty
+- Contiguous zone: 24 nautical miles, limited enforcement rights
+- Exclusive Economic Zone (EEZ): 200 nautical miles, rights to natural resources
+- High seas: beyond national jurisdiction, freedom of navigation for all states

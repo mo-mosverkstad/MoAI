@@ -1,0 +1,53 @@
+# Nuclear Physics
+
+## The Atomic Nucleus
+
+The nucleus is the dense core of an atom, containing protons and neutrons (collectively called nucleons). It was discovered by Ernest Rutherford in 1911 through his gold foil experiment, which showed that most of an atom's mass is concentrated in a tiny central region.
+
+## Nuclear Structure
+
+- Protons: positively charged, mass ≈ 1.673 × 10⁻²⁷ kg. The number of protons defines the element (atomic number Z).
+- Neutrons: electrically neutral, slightly heavier than protons. Neutrons stabilize the nucleus against electrostatic repulsion between protons.
+- Nuclear size: approximately 1-10 femtometers (10⁻¹⁵ m) — about 100,000 times smaller than the atom
+- Nuclear density: approximately 2.3 × 10¹⁷ kg/m³ (a teaspoon would weigh billions of tons)
+- Isotopes: atoms with the same number of protons but different numbers of neutrons (Carbon-12, Carbon-13, Carbon-14)
+
+## The Strong Nuclear Force
+
+The strong force holds the nucleus together, overcoming the electromagnetic repulsion between protons:
+
+- Strongest of the four fundamental forces (strong, electromagnetic, weak, gravitational)
+- Very short range: effective only within ~1 femtometer
+- Mediated by gluons (between quarks) and pions (between nucleons)
+- Binding energy: energy required to disassemble a nucleus into individual nucleons
+- Mass defect: a nucleus weighs less than the sum of its parts — the "missing" mass is the binding energy (E = mc²)
+
+## Radioactive Decay
+
+Unstable nuclei spontaneously transform to reach more stable configurations:
+
+- Alpha decay: emission of a helium-4 nucleus (heavy elements like uranium, radium)
+- Beta decay: neutron → proton + electron + antineutrino (or reverse)
+- Gamma decay: emission of high-energy photon (nucleus drops to lower energy state)
+- Half-life: time for half the atoms in a sample to decay (ranges from fractions of a second to billions of years)
+
+## Nuclear Fission
+
+Heavy nuclei split into lighter fragments, releasing energy:
+
+- Discovered by Otto Hahn and Fritz Strassmann (1938), explained by Lise Meitner
+- Uranium-235 and Plutonium-239 are the primary fissile materials
+- Chain reaction: each fission releases neutrons that trigger further fissions
+- Nuclear reactors: controlled chain reactions produce heat for electricity generation
+- Nuclear weapons: uncontrolled chain reactions release enormous energy (Little Boy: ~15 kilotons TNT equivalent)
+
+## Nuclear Fusion
+
+Light nuclei combine to form heavier ones, releasing even more energy per unit mass:
+
+- Powers all stars: hydrogen fuses to helium at temperatures above 10 million K
+- Proton-proton chain: dominant fusion process in the Sun
+- CNO cycle: dominant in stars more massive than the Sun
+- Thermonuclear weapons: hydrogen bombs use fission to trigger fusion
+- Controlled fusion: ITER project aims to demonstrate net energy gain by the 2030s
+- Fuel: deuterium (from seawater) and tritium — virtually unlimited supply

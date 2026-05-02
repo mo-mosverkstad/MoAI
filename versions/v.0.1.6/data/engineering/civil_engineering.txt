@@ -1,0 +1,47 @@
+# Civil Engineering
+
+## Definition
+
+Civil engineering is the oldest engineering discipline, dealing with the design, construction, and maintenance of the physical and natural built environment. It encompasses roads, bridges, dams, buildings, water systems, and other infrastructure that society depends on.
+
+## Branches
+
+- Structural engineering: designing buildings, bridges, and towers to withstand loads safely
+- Geotechnical engineering: soil mechanics, foundations, tunnels, slopes, retaining walls
+- Transportation engineering: highways, railways, airports, traffic systems
+- Water resources engineering: dams, flood control, irrigation, water supply
+- Environmental engineering: water treatment, waste management, pollution control
+- Construction engineering: project management, scheduling, cost estimation, site safety
+
+## Major Infrastructure Projects
+
+- Panama Canal (1914): 82 km waterway connecting Atlantic and Pacific oceans, saving 12,000 km of sailing
+- Hoover Dam (1936): 221 meters tall, generates 2,080 MW of hydroelectric power
+- Channel Tunnel (1994): 50.5 km rail tunnel under the English Channel connecting England and France
+- Three Gorges Dam (2006): world's largest power station (22.5 GW), 2,335 meters long
+- Gotthard Base Tunnel (2016): world's longest railway tunnel (57.1 km) through the Swiss Alps
+- Hong Kong-Zhuhai-Macau Bridge (2018): 55 km bridge-tunnel system, longest sea crossing
+
+## Structural Materials
+
+- Concrete: most widely used construction material. Compressive strength 20-100 MPa. Reinforced with steel bars (rebar) to resist tension.
+- Steel: high strength in both tension and compression. Used for frames, bridges, and reinforcement.
+- Timber: renewable, good strength-to-weight ratio. Cross-laminated timber (CLT) enables tall wooden buildings.
+- Masonry: brick, stone, and block construction. Excellent in compression, poor in tension.
+- Composites: fiber-reinforced polymers for bridge decks, strengthening existing structures.
+
+## Foundations
+
+Every structure needs a foundation to transfer loads to the ground:
+
+- Shallow foundations: spread footings, mat foundations (for stable soil, lighter structures)
+- Deep foundations: piles driven or drilled into bedrock (for heavy structures or weak soil)
+- Caissons: large watertight chambers sunk into the ground (bridge piers, underwater construction)
+
+## Challenges
+
+- Aging infrastructure: much of the developed world's infrastructure is 50-100 years old and deteriorating
+- Climate adaptation: designing for sea level rise, extreme weather, flooding
+- Urbanization: 68% of world population will live in cities by 2050
+- Sustainability: reducing embodied carbon in construction materials
+- Resilience: designing infrastructure to withstand earthquakes, hurricanes, and other disasters

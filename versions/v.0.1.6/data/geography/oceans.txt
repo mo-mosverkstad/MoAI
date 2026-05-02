@@ -1,0 +1,38 @@
+# Oceans
+
+## Overview
+
+Oceans cover approximately 71% of Earth's surface and contain about 97% of Earth's water. They regulate climate, produce over 50% of the world's oxygen, and support an enormous diversity of life. The ocean is divided into five major basins.
+
+## The Five Oceans
+
+- Pacific Ocean: the largest and deepest ocean, covering about 165.25 million km². Contains the Mariana Trench (10,994 meters deep, the deepest point on Earth). Named by Ferdinand Magellan in 1520.
+- Atlantic Ocean: the second largest, covering about 106.46 million km². Separates the Americas from Europe and Africa. The Mid-Atlantic Ridge runs down its center.
+- Indian Ocean: the third largest, covering about 70.56 million km². The warmest ocean, bordered by Africa, Asia, and Australia.
+- Southern Ocean (Antarctic): surrounds Antarctica, covering about 21.96 million km². Recognized as a distinct ocean in 2000. Contains the Antarctic Circumpolar Current, the strongest ocean current.
+- Arctic Ocean: the smallest and shallowest, covering about 14.06 million km². Largely covered by sea ice, which is declining due to climate change.
+
+## Ocean Currents
+
+Ocean currents are continuous movements of seawater driven by wind, temperature, salinity, and Earth's rotation:
+
+- Gulf Stream: carries warm water from the Gulf of Mexico to northwestern Europe, moderating its climate
+- Thermohaline circulation (global conveyor belt): deep ocean circulation driven by differences in water density
+- El Niño/La Niña: periodic warming/cooling of the eastern Pacific that affects global weather patterns
+- Upwelling: cold, nutrient-rich water rises from the deep ocean, supporting productive fisheries
+
+## Ocean Zones
+
+- Epipelagic (sunlight zone): 0-200m, where photosynthesis occurs
+- Mesopelagic (twilight zone): 200-1,000m, dim light, many bioluminescent organisms
+- Bathypelagic (midnight zone): 1,000-4,000m, complete darkness, high pressure
+- Abyssopelagic (abyss): 4,000-6,000m, near-freezing temperatures
+- Hadopelagic (trenches): 6,000-11,000m, extreme pressure, sparse life
+
+## Threats to Oceans
+
+- Ocean acidification: CO₂ absorption lowers pH, threatening coral reefs and shellfish
+- Overfishing: 34% of fish stocks are overfished (FAO, 2020)
+- Plastic pollution: an estimated 8 million tons of plastic enter oceans annually
+- Coral bleaching: rising temperatures cause corals to expel symbiotic algae
+- Dead zones: areas of low oxygen caused by nutrient runoff from agriculture

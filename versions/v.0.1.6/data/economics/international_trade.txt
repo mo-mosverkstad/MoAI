@@ -1,0 +1,46 @@
+# International Trade
+
+## Definition
+
+International trade is the exchange of goods, services, and capital across national borders. It allows countries to specialize in producing what they do best and import what others produce more efficiently, increasing overall global wealth.
+
+## Theories of Trade
+
+- Absolute advantage (Adam Smith, 1776): countries should export goods they produce more efficiently than others
+- Comparative advantage (David Ricardo, 1817): countries benefit from trade even if one country is more efficient at producing everything — each should specialize in goods with the lowest opportunity cost
+- Heckscher-Ohlin model: countries export goods that use their abundant factors of production intensively (labor-abundant countries export labor-intensive goods)
+- New trade theory (Krugman, 1979): economies of scale and network effects explain trade patterns between similar countries
+
+## Trade Policy
+
+- Free trade: no government barriers to international commerce
+- Tariffs: taxes on imported goods (raise prices for consumers, protect domestic industries)
+- Quotas: limits on the quantity of imports allowed
+- Subsidies: government payments to domestic producers to help them compete internationally
+- Dumping: selling exports below cost to gain market share (prohibited by WTO rules)
+- Trade agreements: bilateral or multilateral treaties reducing barriers (NAFTA/USMCA, EU single market)
+
+## The World Trade Organization (WTO)
+
+Founded in 1995, the WTO:
+
+- Has 164 member countries covering 98% of world trade
+- Sets rules for international trade through negotiated agreements
+- Resolves trade disputes between member nations
+- Promotes trade liberalization through negotiating rounds
+- Most-favored-nation principle: trade advantages given to one country must be extended to all WTO members
+
+## Global Trade Statistics
+
+- World merchandise trade: approximately $25 trillion annually (2022)
+- World services trade: approximately $7 trillion annually
+- Largest exporters: China, United States, Germany, Japan, Netherlands
+- Largest importers: United States, China, Germany, Japan, United Kingdom
+- Containerization (1956): standardized shipping containers revolutionized global trade by reducing costs 90%
+
+## Trade and Development
+
+- Export-led growth: strategy used successfully by East Asian economies (Japan, South Korea, China)
+- Import substitution: protecting domestic industries to reduce dependence on imports (mixed results in Latin America)
+- Fair trade: movement ensuring producers in developing countries receive fair prices
+- Trade and inequality: globalization has lifted billions from poverty but also displaced workers in developed countries

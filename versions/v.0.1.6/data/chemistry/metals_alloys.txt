@@ -1,0 +1,49 @@
+# Metals and Alloys
+
+## Properties of Metals
+
+Metals share characteristic properties due to metallic bonding (delocalized electrons):
+
+- Electrical conductivity: free electrons carry current (silver is the best conductor, followed by copper)
+- Thermal conductivity: free electrons transfer heat efficiently
+- Malleability: can be hammered into thin sheets without breaking
+- Ductility: can be drawn into wires
+- Luster: shiny appearance due to reflection of light by free electrons
+- High melting points: strong metallic bonds (tungsten melts at 3,422°C, the highest of any metal)
+
+## Important Metals
+
+- Iron (Fe): most widely used metal, basis of steel, 5% of Earth's crust
+- Aluminum (Al): lightweight, corrosion-resistant, most abundant metal in Earth's crust (8%)
+- Copper (Cu): excellent conductor, used in wiring and plumbing since antiquity
+- Gold (Au): does not corrode, extremely malleable, used in electronics and jewelry
+- Silver (Ag): best electrical and thermal conductor, used in electronics and photography
+- Titanium (Ti): strong, lightweight, corrosion-resistant, used in aerospace and medical implants
+- Platinum (Pt): rare, catalytic properties, used in catalytic converters and jewelry
+
+## Alloys
+
+An alloy is a mixture of metals (or metal with non-metals) designed to have improved properties:
+
+- Steel: iron + carbon (0.2-2.1%). Stronger than pure iron. Stainless steel adds chromium for corrosion resistance.
+- Bronze: copper + tin. First alloy used by humans (Bronze Age, 3300 BC). Hard and corrosion-resistant.
+- Brass: copper + zinc. Golden color, used in musical instruments and fittings.
+- Aluminum alloys: aluminum + copper/magnesium/silicon. Lightweight and strong, used in aircraft.
+- Nichrome: nickel + chromium. High electrical resistance, used in heating elements.
+- Solder: tin + lead (or tin + silver for lead-free). Low melting point, joins electronic components.
+
+## Corrosion
+
+Corrosion is the degradation of metals through chemical reactions with the environment:
+
+- Rusting: iron reacts with oxygen and water to form iron oxide (Fe₂O₃). Costs the global economy over $2.5 trillion annually.
+- Prevention methods: painting, galvanizing (zinc coating), stainless steel (chromium forms protective oxide layer), cathodic protection, anodizing
+
+## Recycling
+
+Metals are infinitely recyclable without loss of properties:
+
+- Aluminum recycling uses 95% less energy than producing from ore
+- Steel is the most recycled material in the world
+- Precious metals are recovered from electronic waste (urban mining)
+- Recycling reduces mining, energy use, and environmental damage

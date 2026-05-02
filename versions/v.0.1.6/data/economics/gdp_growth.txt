@@ -1,0 +1,56 @@
+# GDP and Economic Growth
+
+## What is GDP
+
+Gross Domestic Product (GDP) is the total monetary value of all finished goods and services produced within a country's borders in a specific time period. It is the most widely used measure of economic output and is used to compare the economic performance of different countries.
+
+## Measuring GDP
+
+GDP can be calculated three ways (all yield the same result):
+
+- Expenditure approach: GDP = C + I + G + (X - M)
+  - C = consumer spending
+  - I = business investment
+  - G = government spending
+  - X - M = net exports (exports minus imports)
+
+- Income approach: sum of all incomes earned in production (wages, profits, rents, interest)
+
+- Production approach: sum of value added at each stage of production
+
+## GDP Per Capita
+
+GDP per capita (GDP divided by population) is a better indicator of individual living standards than total GDP. Countries with the highest GDP per capita (2023) include Luxembourg, Singapore, Ireland, and Norway.
+
+## Limitations of GDP
+
+GDP does not measure:
+
+- Income inequality: a country can have high GDP but extreme poverty
+- Non-market activities: household work, volunteer work, subsistence farming
+- Environmental degradation: pollution and resource depletion are not subtracted
+- Quality of life: leisure time, health, education, happiness
+- Underground economy: illegal activities and unreported income
+
+## Economic Growth
+
+Economic growth is the increase in the production of goods and services over time, typically measured as the percentage change in real GDP.
+
+Sources of economic growth:
+
+- Physical capital accumulation: investment in machinery, infrastructure, technology
+- Human capital: education, training, and health improvements
+- Technological progress: innovation and productivity improvements
+- Institutional quality: rule of law, property rights, stable governance
+- Trade: specialization and access to larger markets
+
+## Business Cycles
+
+Economies experience recurring fluctuations:
+
+- Expansion: rising GDP, falling unemployment, increasing investment
+- Peak: maximum economic output before a downturn
+- Recession: two consecutive quarters of declining GDP
+- Trough: the lowest point before recovery begins
+
+Central banks use monetary policy (interest rates, money supply) and governments use fiscal policy (taxation, spending) to moderate business cycles.

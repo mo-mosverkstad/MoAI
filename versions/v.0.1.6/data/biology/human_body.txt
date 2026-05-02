@@ -1,0 +1,51 @@
+# The Human Body
+
+## Organ Systems
+
+The human body contains 11 major organ systems that work together to maintain life:
+
+- Circulatory system: heart, blood vessels, and blood transport oxygen and nutrients
+- Respiratory system: lungs and airways exchange oxygen and carbon dioxide
+- Nervous system: brain, spinal cord, and nerves process information and coordinate responses
+- Digestive system: breaks down food into nutrients for absorption
+- Musculoskeletal system: 206 bones and over 600 muscles provide structure and movement
+- Immune system: defends against pathogens using white blood cells and antibodies
+- Endocrine system: glands produce hormones that regulate metabolism, growth, and reproduction
+- Urinary system: kidneys filter blood and produce urine to remove waste
+- Integumentary system: skin, hair, and nails protect against the external environment
+- Reproductive system: produces gametes and enables reproduction
+- Lymphatic system: drains excess fluid and supports immune function
+
+## The Heart
+
+The human heart is a muscular organ about the size of a fist that pumps blood throughout the body. It beats approximately 100,000 times per day, pumping about 7,500 liters of blood daily.
+
+The heart has four chambers:
+
+- Right atrium: receives deoxygenated blood from the body
+- Right ventricle: pumps blood to the lungs for oxygenation
+- Left atrium: receives oxygenated blood from the lungs
+- Left ventricle: pumps oxygenated blood to the entire body
+
+## The Brain
+
+The human brain weighs approximately 1.4 kg and contains about 86 billion neurons. It consumes 20% of the body's energy despite being only 2% of body weight.
+
+Major brain regions:
+
+- Cerebral cortex: higher thinking, language, consciousness
+- Cerebellum: coordination, balance, motor learning
+- Brainstem: basic life functions (breathing, heart rate, sleep)
+- Hippocampus: memory formation
+- Amygdala: emotional processing, fear responses
+- Prefrontal cortex: decision-making, planning, personality
+
+## The Immune System
+
+The immune system protects against disease through multiple layers:
+
+- Physical barriers: skin, mucous membranes, stomach acid
+- Innate immunity: rapid, non-specific response (inflammation, fever, natural killer cells)
+- Adaptive immunity: specific, slower response that creates memory (T cells, B cells, antibodies)
+
+Vaccines work by training the adaptive immune system to recognize pathogens without causing disease, creating immunological memory for future protection.

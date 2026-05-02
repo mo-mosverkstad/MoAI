@@ -1,0 +1,49 @@
+# Constellations and Celestial Navigation
+
+## What are Constellations
+
+Constellations are patterns of stars as seen from Earth that have been named and used by various cultures throughout history. The International Astronomical Union (IAU) recognizes 88 official constellations that together cover the entire sky without overlap.
+
+## Famous Constellations
+
+- Orion (the Hunter): one of the most recognizable, visible worldwide. Contains Betelgeuse (red supergiant) and Rigel (blue supergiant). The three stars of Orion's Belt point toward Sirius.
+- Ursa Major (Great Bear): contains the Big Dipper asterism. The two "pointer stars" of the Big Dipper point toward Polaris (the North Star).
+- Ursa Minor (Little Bear): contains Polaris at the tip of its tail.
+- Scorpius (the Scorpion): prominent in summer skies, contains the red supergiant Antares.
+- Crux (Southern Cross): smallest constellation, visible only from the Southern Hemisphere, used for navigation.
+- Cassiopeia: W-shaped pattern, circumpolar in northern latitudes (visible year-round).
+
+## The Zodiac
+
+The zodiac consists of 12 constellations along the ecliptic (the Sun's apparent path through the sky):
+
+Aries, Taurus, Gemini, Cancer, Leo, Virgo, Libra, Scorpius, Sagittarius, Capricornus, Aquarius, Pisces.
+
+The Sun appears to pass through each zodiac constellation over the course of a year. Due to precession of Earth's axis, the astronomical zodiac no longer aligns with astrological signs.
+
+## Celestial Navigation
+
+Before GPS, sailors and explorers navigated using the stars:
+
+- Polaris (North Star): located within 1° of the celestial north pole. Its altitude above the horizon equals the observer's latitude.
+- Southern Cross: used to find south in the Southern Hemisphere
+- Sextant: instrument measuring the angle between a celestial body and the horizon
+- Celestial sphere: imaginary sphere surrounding Earth on which stars appear fixed
+- Right ascension and declination: celestial coordinates analogous to longitude and latitude
+
+## Star Brightness
+
+- Apparent magnitude: how bright a star appears from Earth (lower = brighter; Sirius = -1.46, faintest visible = +6)
+- Absolute magnitude: intrinsic brightness at a standard distance of 10 parsecs
+- The brightest star in the night sky is Sirius (8.6 light-years away)
+- The nearest star system is Alpha Centauri (4.37 light-years away)
+
+## Cultural Significance
+
+Different cultures created different constellation patterns from the same stars:
+
+- Greek/Roman: mythological figures (Orion, Perseus, Andromeda)
+- Chinese: organized into 28 lunar mansions and 3 enclosures
+- Aboriginal Australian: dark constellations formed by dark patches in the Milky Way (Emu in the Sky)
+- Polynesian: used for ocean navigation across the Pacific
+- Indigenous North American: varied by nation (Big Dipper as a bear in many traditions)

@@ -1,0 +1,57 @@
+# Particle Physics
+
+## The Standard Model
+
+The Standard Model is the theory describing the fundamental particles and forces of nature. It has been confirmed by thousands of experiments and is one of the most successful theories in physics.
+
+## Fundamental Particles
+
+Matter particles (fermions):
+
+Quarks (make up protons and neutrons):
+- Up quark (u): charge +2/3
+- Down quark (d): charge -1/3
+- Charm quark (c), Strange quark (s), Top quark (t), Bottom quark (b)
+- Proton = uud, Neutron = udd
+- Quarks are never found alone — they are always confined in hadrons (confinement)
+
+Leptons:
+- Electron (e): charge -1, orbits atomic nuclei
+- Muon (μ): heavier version of electron, unstable
+- Tau (τ): heaviest lepton, very unstable
+- Three neutrinos (νe, νμ, ντ): nearly massless, weakly interacting
+
+## Fundamental Forces
+
+Each force is mediated by carrier particles (bosons):
+
+- Electromagnetic force: carried by photons. Infinite range. Binds electrons to nuclei.
+- Strong nuclear force: carried by gluons. Very short range (~1 fm). Binds quarks into protons/neutrons and nucleons into nuclei.
+- Weak nuclear force: carried by W and Z bosons. Very short range. Responsible for radioactive beta decay.
+- Gravity: carried by gravitons (hypothetical, not yet detected). Infinite range. Not included in the Standard Model.
+
+## The Higgs Boson
+
+- Predicted in 1964 by Peter Higgs and others
+- Discovered at CERN's Large Hadron Collider on July 4, 2012
+- Mass: 125 GeV/c²
+- The Higgs field gives mass to fundamental particles through the Higgs mechanism
+- Particles that interact strongly with the Higgs field are heavy; those that don't are light or massless
+
+## Particle Accelerators
+
+- Large Hadron Collider (LHC): 27 km circumference, collides protons at 13 TeV, located at CERN (Switzerland/France border)
+- Accelerators smash particles together at near-light speed to create new particles
+- Detectors (ATLAS, CMS) are the size of buildings, containing millions of sensors
+- Previous discoveries: W and Z bosons (1983), top quark (1995), Higgs boson (2012)
+
+## Beyond the Standard Model
+
+The Standard Model is incomplete:
+
+- Does not include gravity
+- Does not explain dark matter or dark energy (95% of the universe)
+- Does not explain why there is more matter than antimatter
+- Does not explain neutrino masses
+- Has 19 free parameters that must be measured, not predicted
+- Proposed extensions: supersymmetry, string theory, grand unified theories

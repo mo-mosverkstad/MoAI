@@ -1,0 +1,50 @@
+# Probability and Statistics
+
+## Probability Theory
+
+Probability is the mathematical study of randomness and uncertainty. It provides a framework for quantifying the likelihood of events. The probability of an event ranges from 0 (impossible) to 1 (certain).
+
+Fundamental concepts:
+
+- Sample space: the set of all possible outcomes of an experiment
+- Event: a subset of the sample space
+- Conditional probability: P(A|B) = P(A∩B) / P(B), the probability of A given B has occurred
+- Independence: events A and B are independent if P(A∩B) = P(A)·P(B)
+- Bayes' theorem: P(A|B) = P(B|A)·P(A) / P(B), used to update probabilities with new evidence
+
+## Probability Distributions
+
+A probability distribution describes how probabilities are distributed over the values of a random variable.
+
+Discrete distributions:
+
+- Bernoulli: single trial with probability p of success
+- Binomial: number of successes in n independent Bernoulli trials
+- Poisson: number of events in a fixed interval, given a constant average rate
+
+Continuous distributions:
+
+- Normal (Gaussian): bell-shaped curve, defined by mean μ and standard deviation σ
+- Exponential: time between events in a Poisson process
+- Uniform: all values in an interval are equally likely
+
+## Statistical Inference
+
+Statistical inference draws conclusions about populations from sample data.
+
+- Point estimation: using sample statistics to estimate population parameters
+- Confidence intervals: a range of values likely to contain the true parameter
+- Hypothesis testing: evaluating claims about populations using sample evidence
+- p-value: the probability of observing results as extreme as the data, assuming the null hypothesis is true
+
+## The Central Limit Theorem
+
+The Central Limit Theorem states that the sampling distribution of the sample mean approaches a normal distribution as the sample size increases, regardless of the population's distribution. This theorem is fundamental to statistical inference and explains why the normal distribution appears so frequently in nature.
+
+## Applications
+
+- Medicine: clinical trials, epidemiology
+- Finance: risk assessment, portfolio optimization
+- Quality control: process monitoring, acceptance sampling
+- Machine learning: Bayesian inference, probabilistic models
+- Insurance: actuarial science, premium calculation

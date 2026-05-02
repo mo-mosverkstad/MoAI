@@ -1,0 +1,57 @@
+# Linear Algebra
+
+## Definition
+
+Linear algebra is the branch of mathematics concerning linear equations, linear maps, and their representations in vector spaces and through matrices. It is fundamental to modern mathematics and has applications in physics, computer science, and engineering.
+
+## Vectors and Vector Spaces
+
+A vector is a mathematical object that has both magnitude and direction. A vector space is a collection of vectors that can be added together and multiplied by scalars. The dimension of a vector space is the number of vectors in its basis.
+
+Properties of vector spaces:
+
+- Closure under addition and scalar multiplication
+- Existence of a zero vector (additive identity)
+- Existence of additive inverses
+- Associativity and commutativity of addition
+- Distributivity of scalar multiplication over vector addition
+
+## Matrices
+
+A matrix is a rectangular array of numbers arranged in rows and columns. Matrices represent linear transformations and systems of linear equations. An m×n matrix has m rows and n columns.
+
+Key matrix operations:
+
+- Addition: element-wise addition of matrices of the same dimensions
+- Multiplication: the product AB is defined when the number of columns of A equals the number of rows of B
+- Transpose: flipping a matrix over its diagonal, converting rows to columns
+- Inverse: a matrix A⁻¹ such that AA⁻¹ = I (the identity matrix)
+- Determinant: a scalar value that encodes properties of the linear transformation
+
+## Eigenvalues and Eigenvectors
+
+An eigenvector of a square matrix A is a nonzero vector v such that Av = λv, where λ is the corresponding eigenvalue. Eigenvalues and eigenvectors are central to many applications:
+
+- Principal Component Analysis (PCA) in data science
+- Quantum mechanics (observables are represented by operators with eigenvalues)
+- Vibration analysis in mechanical engineering
+- Google's PageRank algorithm
+
+## Systems of Linear Equations
+
+A system of linear equations can be written in matrix form as Ax = b. Methods for solving include:
+
+- Gaussian elimination: row reduction to echelon form
+- LU decomposition: factoring A into lower and upper triangular matrices
+- Cramer's rule: using determinants (practical only for small systems)
+- Iterative methods: Jacobi, Gauss-Seidel (for large sparse systems)
+
+## Applications
+
+Linear algebra is essential in:
+
+- Computer graphics: transformations, rotations, projections
+- Machine learning: neural networks, dimensionality reduction
+- Cryptography: Hill cipher, lattice-based cryptography
+- Economics: input-output models, Markov chains
+- Signal processing: Fourier transforms, filtering

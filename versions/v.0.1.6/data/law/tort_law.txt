@@ -1,0 +1,44 @@
+# Tort Law
+
+## Definition
+
+Tort law deals with civil wrongs — situations where one person's actions cause harm to another. Unlike criminal law (where the state prosecutes), tort law allows injured parties to seek compensation from those who harmed them. The word "tort" comes from the Latin tortum, meaning "twisted" or "wrong."
+
+## Types of Torts
+
+- Intentional torts: deliberate harmful acts (assault, battery, false imprisonment, defamation, trespass)
+- Negligence: failure to exercise reasonable care, causing unintended harm
+- Strict liability: liability without fault for inherently dangerous activities or defective products
+
+## Negligence
+
+The most common tort claim. To prove negligence, the plaintiff must establish:
+
+1. Duty of care: the defendant owed a duty to act reasonably
+2. Breach: the defendant failed to meet that standard of care
+3. Causation: the breach actually caused the plaintiff's injury
+4. Damages: the plaintiff suffered actual harm (physical, financial, or emotional)
+
+The "reasonable person" standard: would a reasonable person in the defendant's position have acted differently?
+
+## Product Liability
+
+Manufacturers and sellers can be held liable for defective products:
+
+- Manufacturing defects: the product deviates from its intended design
+- Design defects: the product's design is inherently dangerous
+- Warning defects: inadequate instructions or failure to warn of risks
+
+## Defamation
+
+Making false statements that damage someone's reputation:
+
+- Libel: written defamation
+- Slander: spoken defamation
+- Defenses: truth, opinion, privilege, public figure doctrine
+
+## Remedies
+
+- Compensatory damages: reimburse actual losses (medical bills, lost wages, pain and suffering)
+- Punitive damages: punish particularly egregious conduct and deter future wrongdoing
+- Injunctions: court orders to stop harmful behavior

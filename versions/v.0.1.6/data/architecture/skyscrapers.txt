@@ -1,0 +1,43 @@
+# Skyscrapers
+
+## Definition
+
+A skyscraper is a continuously habitable high-rise building of over 40 floors, predominantly designed for office, commercial, or residential use. The development of skyscrapers was made possible by the invention of the steel frame, the elevator, and reinforced concrete.
+
+## History
+
+- 1885: Home Insurance Building, Chicago (10 floors) — generally considered the first skyscraper, using a steel frame
+- 1913: Woolworth Building, New York (57 floors, 241 meters) — tallest building for 17 years
+- 1931: Empire State Building, New York (102 floors, 443 meters) — built in just 410 days
+- 1973: World Trade Center, New York (110 floors, 417 meters)
+- 1998: Petronas Towers, Kuala Lumpur (88 floors, 452 meters)
+- 2010: Burj Khalifa, Dubai (163 floors, 828 meters) — current tallest building
+- Under construction: Jeddah Tower, Saudi Arabia (planned 1,000+ meters)
+
+## Structural Systems
+
+- Steel frame: columns and beams form a rigid skeleton
+- Tube structure: exterior columns closely spaced form a rigid tube (World Trade Center)
+- Bundled tube: multiple tubes grouped together (Willis Tower)
+- Outrigger system: connects core to perimeter columns for lateral stability
+- Diagrid: diagonal grid of steel members on the exterior (30 St Mary Axe, London)
+- Buttressed core: central core with buttresses (Burj Khalifa)
+
+## Engineering Challenges
+
+- Wind loads: tall buildings must resist enormous lateral forces from wind
+- Seismic design: earthquake resistance through base isolation or dampers
+- Foundation: transferring massive loads to bedrock or stable soil
+- Elevator systems: express elevators, sky lobbies, and double-deck cars for efficiency
+- Fire safety: sprinklers, fireproof materials, evacuation stairs, refuge floors
+- Sway control: tuned mass dampers reduce perceptible movement (Taipei 101 has a 730-ton pendulum)
+
+## Environmental Impact
+
+Modern skyscrapers increasingly incorporate green design:
+
+- Double-skin facades for natural ventilation
+- Solar panels integrated into building skin
+- Rainwater harvesting and greywater recycling
+- Green terraces and sky gardens
+- Energy-efficient LED lighting and smart building management systems

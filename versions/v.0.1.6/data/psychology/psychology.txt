@@ -1,0 +1,55 @@
+# Psychology
+
+## Definition
+
+Psychology is the scientific study of mind and behavior. It encompasses the study of conscious and unconscious phenomena, including feelings, thoughts, perception, memory, and motivation. Psychology aims to understand individuals and groups through establishing general principles and researching specific cases.
+
+## Major Schools of Thought
+
+- Structuralism (Wundt, 1879): analyzed consciousness into basic elements through introspection
+- Psychoanalysis (Freud, 1890s): unconscious desires and childhood experiences shape behavior
+- Behaviorism (Watson, Skinner, 1920s-1960s): only observable behavior is scientifically valid; learning through conditioning
+- Humanistic psychology (Maslow, Rogers, 1950s): focus on personal growth, self-actualization, and free will
+- Cognitive psychology (1960s-present): studies mental processes — memory, attention, problem-solving, language
+- Evolutionary psychology: behavior is shaped by natural selection over millions of years
+
+## Memory
+
+Human memory is not a single system but consists of multiple interacting systems:
+
+- Sensory memory: holds sensory information for milliseconds to seconds
+- Short-term (working) memory: holds about 7±2 items for 15-30 seconds without rehearsal
+- Long-term memory: potentially unlimited capacity and duration
+  - Explicit (declarative): facts and events we can consciously recall
+  - Implicit (procedural): skills and habits we perform without conscious awareness
+
+The process of forming long-term memories involves encoding, storage, and retrieval. The hippocampus plays a critical role in converting short-term memories to long-term memories.
+
+## Cognitive Biases
+
+Systematic patterns of deviation from rationality in judgment:
+
+- Confirmation bias: seeking information that confirms existing beliefs
+- Anchoring: over-relying on the first piece of information encountered
+- Availability heuristic: judging probability by how easily examples come to mind
+- Dunning-Kruger effect: people with limited knowledge overestimate their competence
+- Loss aversion: losses feel approximately twice as painful as equivalent gains feel good
+- Hindsight bias: believing past events were predictable after learning the outcome
+
+## Developmental Psychology
+
+Human psychological development across the lifespan:
+
+- Piaget's stages: sensorimotor (0-2), preoperational (2-7), concrete operational (7-11), formal operational (11+)
+- Erikson's psychosocial stages: eight stages from trust vs. mistrust (infancy) to integrity vs. despair (old age)
+- Attachment theory (Bowlby): early bonds with caregivers shape later relationships
+
+## Mental Health
+
+Common psychological disorders:
+
+- Depression: persistent sadness, loss of interest, affecting approximately 280 million people worldwide
+- Anxiety disorders: excessive worry or fear, the most common mental health condition
+- PTSD: develops after experiencing or witnessing traumatic events
+- Schizophrenia: distorted thinking, hallucinations, and delusions, affecting about 1% of the population
+- ADHD: difficulty sustaining attention, hyperactivity, and impulsivity

@@ -1,0 +1,33 @@
+# Roman Architecture
+
+## Overview
+
+Roman architecture (c. 100 BC - 400 AD) combined Greek aesthetic ideals with revolutionary engineering innovations. The Romans invented concrete, perfected the arch and dome, and built infrastructure that still functions today. Their architecture expressed the power and organization of the Roman state.
+
+## Key Innovations
+
+- Concrete (opus caementicium): made from volcanic ash (pozzolana), lime, and aggregate. Stronger and more versatile than stone, it could be molded into any shape.
+- The arch: Romans perfected the semicircular arch, enabling bridges, aqueducts, and large interior spaces
+- The vault: barrel vaults and groin vaults covered large rectangular spaces
+- The dome: the Pantheon's unreinforced concrete dome (43.3 meters diameter) remained the world's largest for 1,300 years
+
+## Famous Buildings
+
+- Colosseum (80 AD): amphitheater seating 50,000-80,000 spectators, with a retractable awning and underground staging areas
+- Pantheon (125 AD): temple with a perfect hemispherical dome, oculus (open hole) at the top providing the only light
+- Roman Forum: the political, religious, and commercial center of Rome
+- Baths of Caracalla (216 AD): massive public bathing complex for 1,600 simultaneous bathers
+- Basilica of Maxentius (312 AD): largest building in the Forum, with 35-meter vaulted ceilings
+
+## Infrastructure
+
+- Aqueducts: 11 aqueducts supplied Rome with 1 million cubic meters of water daily. The Pont du Gard in France stands 49 meters high.
+- Roads: over 400,000 km of roads, built in layers (foundation, gravel, paving stones). Many routes are still used today.
+- Sewers: the Cloaca Maxima (6th century BC) drained the Forum and is still partially in use
+- Bridges: the Pont du Gard, Alcántara Bridge (Spain, 104 AD) still carries traffic
+
+## Domestic Architecture
+
+- Domus: single-family urban house with atrium (central courtyard) and peristyle (garden)
+- Insula: multi-story apartment buildings housing the urban poor (up to 8 stories)
+- Villa: country estates with farms, gardens, and luxurious living quarters

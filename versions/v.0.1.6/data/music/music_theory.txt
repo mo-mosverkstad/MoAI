@@ -1,0 +1,51 @@
+# Music Theory
+
+## Definition
+
+Music theory is the study of the practices and possibilities of music. It examines the fundamental elements that compose musical works and provides a framework for understanding, analyzing, and creating music.
+
+## Pitch and Scales
+
+- Pitch: the perceived frequency of a sound (higher frequency = higher pitch)
+- Octave: the interval between one pitch and another with double its frequency
+- Chromatic scale: all 12 semitones within an octave
+- Major scale: a seven-note scale with a specific pattern of whole and half steps (W-W-H-W-W-W-H)
+- Minor scale: a seven-note scale with a darker sound (W-H-W-W-H-W-W for natural minor)
+- Pentatonic scale: a five-note scale common in folk music worldwide
+
+## Intervals
+
+An interval is the distance between two pitches:
+
+- Unison: same pitch
+- Minor/Major second: 1-2 semitones
+- Minor/Major third: 3-4 semitones
+- Perfect fourth: 5 semitones
+- Perfect fifth: 7 semitones
+- Octave: 12 semitones
+
+## Chords and Harmony
+
+A chord is three or more notes sounded simultaneously:
+
+- Major triad: root + major third + perfect fifth (sounds bright, happy)
+- Minor triad: root + minor third + perfect fifth (sounds dark, sad)
+- Diminished triad: root + minor third + diminished fifth (sounds tense)
+- Seventh chords: triads with an added seventh (dominant 7th, major 7th, minor 7th)
+
+## Rhythm and Meter
+
+- Beat: the basic unit of time in music
+- Tempo: the speed of the beat (measured in BPM — beats per minute)
+- Meter: the grouping of beats (4/4 = four beats per measure, 3/4 = waltz time)
+- Syncopation: emphasis on normally weak beats
+- Polyrhythm: two or more conflicting rhythms played simultaneously
+
+## Key Signatures
+
+A key signature indicates which notes are sharp or flat throughout a piece:
+
+- C major / A minor: no sharps or flats
+- G major / E minor: one sharp (F#)
+- F major / D minor: one flat (Bb)
+- Key relationships: the circle of fifths shows how keys relate to each other

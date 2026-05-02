@@ -1,0 +1,47 @@
+# Graph Theory
+
+## Definition
+
+Graph theory is the study of graphs — mathematical structures used to model pairwise relations between objects. A graph consists of vertices (nodes) connected by edges (links). Graph theory has applications in computer science, biology, social science, transportation, and many other fields.
+
+## Basic Concepts
+
+- Vertex (node): a fundamental unit, represented as a point
+- Edge (link): a connection between two vertices
+- Degree: the number of edges connected to a vertex
+- Path: a sequence of vertices connected by edges
+- Cycle: a path that starts and ends at the same vertex
+- Connected graph: every pair of vertices has a path between them
+- Directed graph (digraph): edges have direction (one-way connections)
+- Weighted graph: edges have associated numerical values (distances, costs)
+
+## Types of Graphs
+
+- Complete graph (Kn): every pair of vertices is connected (n vertices, n(n-1)/2 edges)
+- Bipartite graph: vertices divided into two groups with edges only between groups
+- Tree: connected graph with no cycles (n vertices, n-1 edges)
+- Planar graph: can be drawn on a plane without edge crossings
+- Eulerian graph: contains a circuit that visits every edge exactly once
+- Hamiltonian graph: contains a cycle that visits every vertex exactly once
+
+## Famous Problems
+
+- Seven Bridges of Königsberg (Euler, 1736): is it possible to walk through the city crossing each bridge exactly once? Euler proved it impossible — founding graph theory.
+- Four Color Theorem (1976): any map can be colored with at most four colors such that no adjacent regions share a color. First major theorem proved by computer.
+- Traveling Salesman Problem (TSP): find the shortest route visiting all cities exactly once. NP-hard — no known efficient algorithm for large instances.
+
+## Algorithms
+
+- Breadth-first search (BFS): explores all neighbors before moving deeper
+- Depth-first search (DFS): explores as far as possible along each branch
+- Dijkstra's algorithm: finds shortest paths from a source vertex in weighted graphs
+- Kruskal's/Prim's algorithms: find minimum spanning trees
+- PageRank (Google): ranks web pages by analyzing the link graph of the internet
+
+## Applications
+
+- Social networks: people are vertices, friendships are edges (Facebook, LinkedIn)
+- Internet: routers are vertices, connections are edges (routing algorithms)
+- Transportation: cities are vertices, roads/flights are edges (GPS navigation)
+- Biology: protein interaction networks, neural networks, food webs
+- Scheduling: task dependencies modeled as directed acyclic graphs

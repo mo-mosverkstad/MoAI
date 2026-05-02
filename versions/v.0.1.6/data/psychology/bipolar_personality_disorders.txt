@@ -1,0 +1,71 @@
+# Bipolar Disorder and Personality Disorders
+
+## Bipolar Disorder
+
+Bipolar disorder (formerly manic-depressive illness) is characterized by extreme mood swings between mania (or hypomania) and depression.
+
+Types:
+
+- Bipolar I: at least one manic episode (may include depressive episodes)
+- Bipolar II: at least one hypomanic episode and one major depressive episode (no full mania)
+- Cyclothymic disorder: chronic fluctuating mood with hypomanic and depressive symptoms that don't meet full criteria
+
+Manic episode symptoms:
+
+- Abnormally elevated, expansive, or irritable mood lasting at least 7 days
+- Decreased need for sleep (feeling rested after 3 hours)
+- Pressured speech, racing thoughts
+- Grandiosity or inflated self-esteem
+- Increased goal-directed activity or psychomotor agitation
+- Risky behavior (spending sprees, sexual indiscretions, reckless driving)
+- Possible psychotic features (delusions, hallucinations)
+
+Treatment: mood stabilizers (lithium, valproate), atypical antipsychotics, psychoeducation, cognitive-behavioral therapy. Lifelong management typically required.
+
+Prevalence: approximately 2.4% of the global population. Equal rates in men and women.
+
+## Borderline Personality Disorder (BPD)
+
+A pattern of instability in interpersonal relationships, self-image, emotions, and marked impulsivity:
+
+- Frantic efforts to avoid real or imagined abandonment
+- Unstable and intense relationships (idealization and devaluation)
+- Identity disturbance: unstable self-image
+- Impulsivity (spending, substance abuse, reckless driving, binge eating)
+- Recurrent suicidal behavior or self-harm
+- Emotional instability: intense episodes of dysphoria, irritability, or anxiety
+- Chronic feelings of emptiness
+- Inappropriate intense anger
+- Transient paranoid ideation or dissociation under stress
+
+Treatment: Dialectical Behavior Therapy (DBT, developed by Marsha Linehan) is the gold standard — teaches mindfulness, distress tolerance, emotion regulation, and interpersonal effectiveness.
+
+## Narcissistic Personality Disorder
+
+A pattern of grandiosity, need for admiration, and lack of empathy:
+
+- Grandiose sense of self-importance
+- Preoccupation with fantasies of unlimited success, power, or beauty
+- Belief in being special and unique
+- Requires excessive admiration
+- Sense of entitlement
+- Exploitative in relationships
+- Lacks empathy
+- Envious of others or believes others are envious
+- Arrogant behaviors or attitudes
+
+Affects approximately 1-6% of the population, more common in males.
+
+## Antisocial Personality Disorder
+
+A pattern of disregard for and violation of others' rights since age 15:
+
+- Failure to conform to social norms (repeated illegal behavior)
+- Deceitfulness (lying, using aliases, conning others)
+- Impulsivity and failure to plan ahead
+- Irritability and aggressiveness (repeated fights or assaults)
+- Reckless disregard for safety of self or others
+- Consistent irresponsibility
+- Lack of remorse
+
+Related to psychopathy (Hare's Psychopathy Checklist): superficial charm, grandiosity, pathological lying, manipulation, shallow affect, callousness. Affects approximately 3% of males and 1% of females.

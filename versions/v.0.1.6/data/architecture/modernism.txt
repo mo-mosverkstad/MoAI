@@ -1,0 +1,32 @@
+# Modernist Architecture
+
+## Overview
+
+Modernist architecture emerged in the early 20th century as a rejection of historical ornamentation. Its motto was "form follows function" — buildings should be designed primarily for their purpose, using modern materials like steel, glass, and reinforced concrete.
+
+## Principles
+
+- Rejection of ornament: Adolf Loos declared "ornament is crime" in 1908
+- Open floor plans: flexible interior spaces without load-bearing walls
+- Honest materials: exposing structural elements rather than hiding them
+- Integration with nature: large windows connecting interior and exterior
+- Mass production: standardized components for efficient construction
+- International Style: universal design principles applicable anywhere
+
+## Key Architects
+
+- Le Corbusier (1887-1965): Swiss-French architect who defined the Five Points of Architecture (pilotis, free plan, free facade, ribbon windows, roof garden). Designed Villa Savoye and Unité d'Habitation.
+- Ludwig Mies van der Rohe (1886-1969): German-American architect known for "less is more." Designed the Barcelona Pavilion and Farnsworth House.
+- Frank Lloyd Wright (1867-1959): American architect who developed organic architecture. Designed Fallingwater and the Guggenheim Museum.
+- Walter Gropius (1883-1969): founded the Bauhaus school in 1919, integrating art, craft, and technology.
+
+## The Bauhaus
+
+The Bauhaus school (1919-1933) in Germany was the most influential art and design school of the 20th century. It sought to unify art, craft, and technology. The Bauhaus building in Dessau (1926) exemplifies its principles: glass curtain walls, flat roof, asymmetric composition. The Nazis closed the school in 1933, and its members emigrated, spreading modernist ideas worldwide.
+
+## Criticism
+
+- Lack of human scale: massive concrete buildings can feel alienating
+- Urban renewal failures: modernist housing projects often became sites of poverty and crime
+- Cultural insensitivity: the International Style ignored local traditions and climate
+- Monotony: repetitive forms across different contexts

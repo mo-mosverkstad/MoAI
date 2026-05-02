@@ -1,0 +1,38 @@
+# Quantum Mechanics
+
+## Overview
+
+Quantum mechanics is the fundamental theory of physics that describes nature at the smallest scales of energy levels of atoms and subatomic particles. It was developed in the early 20th century when classical physics failed to explain phenomena such as blackbody radiation, the photoelectric effect, and atomic spectra.
+
+## Key Principles
+
+- Wave-particle duality: all matter exhibits both wave and particle properties. Electrons can behave as waves (diffraction) or particles (photoelectric effect).
+- Heisenberg uncertainty principle: it is impossible to simultaneously know both the exact position and exact momentum of a particle. The more precisely one is measured, the less precisely the other can be known.
+- Superposition: a quantum system can exist in multiple states simultaneously until measured. Schrödinger's cat thought experiment illustrates this — the cat is both alive and dead until observed.
+- Quantum entanglement: two particles can be correlated such that measuring one instantly determines the state of the other, regardless of distance. Einstein called this "spooky action at a distance."
+- Quantization: energy, angular momentum, and other properties come in discrete amounts (quanta), not continuous values.
+
+## History
+
+- 1900: Max Planck proposes energy quantization to explain blackbody radiation
+- 1905: Albert Einstein explains the photoelectric effect using light quanta (photons)
+- 1913: Niels Bohr proposes the quantized atomic model
+- 1924: Louis de Broglie proposes wave-particle duality for matter
+- 1925-1926: Werner Heisenberg and Erwin Schrödinger independently develop quantum mechanics
+- 1927: Heisenberg formulates the uncertainty principle
+- 1935: Einstein, Podolsky, and Rosen publish the EPR paradox about entanglement
+
+## The Schrödinger Equation
+
+The Schrödinger equation is the fundamental equation of quantum mechanics. It describes how the quantum state of a physical system changes over time. The wave function ψ contains all information about a quantum system, and |ψ|² gives the probability of finding a particle at a given location.
+
+## Applications
+
+Quantum mechanics underlies much of modern technology:
+
+- Semiconductors and transistors: the basis of all modern electronics
+- Lasers: stimulated emission of coherent light
+- MRI scanners: nuclear magnetic resonance imaging
+- LED lights: quantum transitions in semiconductor materials
+- Quantum computing: uses superposition and entanglement for computation
+- Cryptography: quantum key distribution provides theoretically unbreakable encryption

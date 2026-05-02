@@ -1,0 +1,57 @@
+# Attention-Deficit/Hyperactivity Disorder (ADHD)
+
+## Definition
+
+ADHD is a neurodevelopmental disorder characterized by persistent patterns of inattention, hyperactivity, and impulsivity that interfere with functioning and development. It affects approximately 5-7% of children and 2-5% of adults worldwide.
+
+## Presentations
+
+- Predominantly inattentive: difficulty sustaining attention, easily distracted, forgetful, disorganized
+- Predominantly hyperactive-impulsive: fidgeting, difficulty sitting still, excessive talking, interrupting, acting without thinking
+- Combined presentation: symptoms of both inattention and hyperactivity-impulsivity
+
+## Symptoms of Inattention
+
+- Difficulty sustaining attention in tasks or play
+- Frequently losing things necessary for tasks
+- Easily distracted by extraneous stimuli
+- Forgetful in daily activities
+- Difficulty organizing tasks and managing time
+- Avoidance of tasks requiring sustained mental effort
+- Failure to follow through on instructions or finish tasks
+- Appearing not to listen when spoken to directly
+
+## Symptoms of Hyperactivity-Impulsivity
+
+- Fidgeting, squirming, tapping hands or feet
+- Leaving seat when remaining seated is expected
+- Running or climbing in inappropriate situations
+- Inability to engage in leisure activities quietly
+- Talking excessively
+- Blurting out answers before questions are completed
+- Difficulty waiting one's turn
+- Interrupting or intruding on others
+
+## Neurobiology
+
+- Prefrontal cortex: underactive, impairing executive functions
+- Dopamine and norepinephrine: deficient signaling in frontal-striatal circuits
+- Brain development: cortical maturation delayed by approximately 3 years
+- Brain structure: slightly smaller prefrontal cortex, basal ganglia, and cerebellum
+- Heritability: approximately 75% (one of the most heritable psychiatric conditions)
+
+## Treatment
+
+- Stimulant medications: methylphenidate (Ritalin) and amphetamines (Adderall) — effective in 70-80% of cases
+- Non-stimulant medications: atomoxetine, guanfacine
+- Behavioral therapy: organizational skills training, parent training, classroom accommodations
+- Cognitive-behavioral therapy: addressing negative thought patterns and developing coping strategies
+- Exercise: regular physical activity improves attention and executive function
+- Environmental modifications: reducing distractions, breaking tasks into smaller steps, using timers and reminders
+
+## ADHD in Adults
+
+- Hyperactivity often decreases with age; inattention and impulsivity persist
+- Associated with difficulties in work performance, relationships, and time management
+- Higher rates of substance abuse, accidents, and comorbid conditions
+- Often undiagnosed until adulthood, especially in women (who more often present with inattentive type)

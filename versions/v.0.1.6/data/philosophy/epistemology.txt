@@ -1,0 +1,46 @@
+# Epistemology
+
+## Definition
+
+Epistemology is the branch of philosophy concerned with the nature, sources, and limits of knowledge. It asks: What is knowledge? How do we acquire it? What can we know with certainty?
+
+## The Classical Definition
+
+Knowledge is traditionally defined as justified true belief (JTB):
+
+- Belief: the subject holds the proposition to be true
+- Truth: the proposition is actually true
+- Justification: the subject has good reasons for the belief
+
+In 1963, Edmund Gettier showed that JTB is insufficient — there are cases where someone has a justified true belief that intuitively is not knowledge (Gettier problems).
+
+## Sources of Knowledge
+
+- Perception: knowledge gained through the five senses
+- Reason: knowledge derived through logical deduction (mathematics, logic)
+- Testimony: knowledge gained from others (education, books, news)
+- Memory: retention of previously acquired knowledge
+- Introspection: knowledge of one's own mental states
+
+## Skepticism
+
+Philosophical skepticism questions whether knowledge is possible:
+
+- Cartesian skepticism: Descartes' evil demon — how can we know we're not being systematically deceived?
+- Brain in a vat: how can we know we're not brains being fed simulated experiences?
+- Problem of induction (Hume): past regularities don't guarantee future ones
+- Pyrrhonian skepticism: suspend judgment on all claims, achieving tranquility (ataraxia)
+
+## Rationalism vs. Empiricism
+
+- Rationalism (Descartes, Leibniz, Spinoza): reason is the primary source of knowledge. Some knowledge is innate or a priori (independent of experience). "I think, therefore I am" (cogito ergo sum).
+- Empiricism (Locke, Hume, Berkeley): all knowledge comes from sensory experience. The mind begins as a blank slate (tabula rasa). No innate ideas.
+- Kant's synthesis: some knowledge is a priori but structured by the mind's categories (space, time, causality). We can know the world as it appears to us (phenomena) but not as it is in itself (noumena).
+
+## Contemporary Epistemology
+
+- Reliabilism: a belief is justified if produced by a reliable cognitive process
+- Virtue epistemology: intellectual virtues (open-mindedness, thoroughness) constitute good epistemic practice
+- Social epistemology: how social factors affect knowledge (testimony, expertise, group belief)
+- Formal epistemology: using probability theory and logic to model rational belief
+- Epistemic injustice (Fricker): wrongly denying someone's credibility due to prejudice

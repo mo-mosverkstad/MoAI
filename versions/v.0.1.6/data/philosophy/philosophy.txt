@@ -1,0 +1,47 @@
+# Philosophy
+
+## Definition
+
+Philosophy is the systematic study of fundamental questions about existence, knowledge, values, reason, mind, and language. The word comes from the Greek philosophia, meaning "love of wisdom." Philosophy differs from science in that its questions often cannot be resolved through empirical observation alone.
+
+## Major Branches
+
+- Metaphysics: the study of the nature of reality, existence, and the universe
+- Epistemology: the study of knowledge — what we can know and how we can know it
+- Ethics: the study of moral values and principles of right and wrong conduct
+- Logic: the study of valid reasoning and argumentation
+- Aesthetics: the study of beauty, art, and taste
+- Political philosophy: the study of government, justice, rights, and liberty
+
+## Ancient Greek Philosophy
+
+Greek philosophy laid the foundation for Western thought:
+
+- Socrates (470-399 BC): developed the Socratic method of questioning; "The unexamined life is not worth living"
+- Plato (428-348 BC): student of Socrates, founded the Academy, proposed the Theory of Forms — that abstract ideals (justice, beauty) are more real than physical objects
+- Aristotle (384-322 BC): student of Plato, founded the Lyceum, contributed to logic, biology, ethics, and politics. His works dominated Western thought for nearly 2,000 years.
+
+## Major Philosophical Traditions
+
+- Rationalism: knowledge comes primarily from reason (Descartes, Leibniz, Spinoza)
+- Empiricism: knowledge comes primarily from sensory experience (Locke, Hume, Berkeley)
+- Existentialism: focuses on individual existence, freedom, and choice (Kierkegaard, Sartre, Camus)
+- Utilitarianism: actions are right if they promote the greatest happiness for the greatest number (Bentham, Mill)
+- Pragmatism: truth is determined by practical consequences (James, Dewey, Peirce)
+
+## Famous Thought Experiments
+
+- Plato's Cave: prisoners see only shadows on a wall and mistake them for reality
+- Descartes' Evil Demon: how can we know our senses aren't being deceived?
+- Trolley Problem: is it moral to sacrifice one person to save five?
+- Ship of Theseus: if every plank of a ship is replaced, is it still the same ship?
+- Chinese Room (Searle): can a computer truly understand language, or only simulate understanding?
+
+## Philosophy of Mind
+
+The mind-body problem asks how mental states relate to physical brain states:
+
+- Dualism (Descartes): mind and body are separate substances
+- Physicalism: mental states are identical to or reducible to brain states
+- Functionalism: mental states are defined by their functional roles, not their physical composition
+- The hard problem of consciousness (Chalmers): why does subjective experience exist at all?

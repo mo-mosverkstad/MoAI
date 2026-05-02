@@ -1,0 +1,47 @@
+# Deserts
+
+## Definition
+
+A desert is a region that receives less than 250 mm (10 inches) of precipitation per year. Deserts cover approximately 33% of Earth's land surface. They are not necessarily hot — Antarctica is technically the world's largest desert.
+
+## Types of Deserts
+
+- Subtropical deserts: caused by descending dry air at ~30° latitude (Sahara, Arabian, Kalahari)
+- Rain shadow deserts: mountains block moisture-carrying winds (Gobi, Patagonian, Great Basin)
+- Coastal deserts: cold ocean currents cool air, preventing rain (Atacama, Namib)
+- Polar deserts: extremely cold air holds very little moisture (Antarctica, Arctic)
+- Interior deserts: far from ocean moisture sources (Gobi, Taklamakan)
+
+## Major Deserts
+
+- Sahara (Africa): world's largest hot desert, 9.2 million km² (roughly the size of the United States). Temperatures reach 58°C. Only 25% is sand dunes; most is rocky plateau.
+- Antarctic Desert: largest overall desert, 14.2 million km². Average temperature -49°C. Receives only 51 mm precipitation annually.
+- Arabian Desert: 2.3 million km², covers most of the Arabian Peninsula. Contains the Rub' al Khali (Empty Quarter), the largest continuous sand desert.
+- Gobi (Asia): 1.3 million km², cold desert in Mongolia and China. Temperatures range from -40°C to 45°C.
+- Atacama (Chile): driest non-polar desert. Some weather stations have never recorded rain. Used as a Mars analog by NASA.
+
+## Desert Adaptations
+
+Plants:
+
+- Cacti: store water in stems, spines reduce water loss and deter herbivores
+- Deep roots: mesquite roots can reach 50 meters deep to access groundwater
+- Ephemeral plants: complete entire life cycle in weeks after rare rainfall
+- Waxy coatings: reduce evaporation from leaf surfaces
+
+Animals:
+
+- Camels: tolerate 25% body water loss, store fat (not water) in humps, can drink 100 liters in 10 minutes
+- Kangaroo rat: never drinks water — obtains all moisture from metabolizing dry seeds
+- Fennec fox: enormous ears radiate heat, nocturnal to avoid daytime temperatures
+- Sidewinder rattlesnake: moves sideways to minimize contact with hot sand
+
+## Desertification
+
+The expansion of desert conditions into previously non-desert areas:
+
+- Affects approximately 3.6 billion hectares (25% of Earth's land)
+- Causes: overgrazing, deforestation, unsustainable farming, climate change
+- Sahel region (Africa): southern edge of Sahara advancing southward
+- Affects 250 million people directly, threatens 1 billion more
+- Solutions: sustainable land management, reforestation (Great Green Wall of Africa), improved irrigation

@@ -1,0 +1,49 @@
+# Taxation
+
+## Definition
+
+Taxation is the process by which governments collect revenue from individuals and businesses to fund public services and infrastructure. Taxes are compulsory contributions — failure to pay is punishable by law.
+
+## Types of Taxes
+
+- Income tax: levied on earnings from employment, investments, and business profits. Most countries use progressive rates (higher income = higher rate).
+- Corporate tax: levied on business profits. Rates vary widely (Ireland 12.5%, US 21%, Japan 30%).
+- Sales tax / VAT: levied on purchases of goods and services. VAT (Value Added Tax) is collected at each stage of production.
+- Property tax: levied on real estate ownership, based on assessed value.
+- Capital gains tax: levied on profits from selling assets (stocks, property).
+- Estate/inheritance tax: levied on wealth transferred after death.
+- Excise tax: levied on specific goods (alcohol, tobacco, fuel) — often called "sin taxes."
+- Payroll tax: funds social insurance programs (Social Security, Medicare in the US).
+
+## Tax Principles
+
+- Ability to pay: those with higher income should pay more (progressive taxation)
+- Benefit principle: those who benefit from public services should pay for them
+- Horizontal equity: people in similar situations should pay similar taxes
+- Vertical equity: people in different situations should pay different amounts
+- Efficiency: taxes should minimize distortion of economic decisions
+- Simplicity: tax systems should be easy to understand and administer
+
+## Progressive vs. Regressive
+
+- Progressive tax: rate increases with income (income tax with brackets)
+- Proportional (flat) tax: same rate for all income levels
+- Regressive tax: takes a larger percentage from low-income earners (sales tax, lottery tickets)
+
+## Tax Revenue Usage
+
+Governments use tax revenue for:
+
+- Defense and security
+- Healthcare and social services
+- Education
+- Infrastructure (roads, bridges, public transit)
+- Debt service (interest on government borrowing)
+- Social safety nets (unemployment insurance, pensions)
+
+## Tax Avoidance and Evasion
+
+- Tax avoidance: legal strategies to minimize tax liability (deductions, credits, offshore structures)
+- Tax evasion: illegal failure to pay taxes owed (hiding income, false deductions)
+- Tax havens: jurisdictions with very low or zero tax rates (Cayman Islands, Luxembourg, Bermuda)
+- OECD global minimum tax (2021): agreement for a 15% minimum corporate tax rate across 140 countries

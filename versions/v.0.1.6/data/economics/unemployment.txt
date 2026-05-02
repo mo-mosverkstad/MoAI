@@ -1,0 +1,48 @@
+# Unemployment
+
+## Definition
+
+Unemployment occurs when people who are actively seeking work are unable to find jobs. The unemployment rate is the percentage of the labor force that is unemployed. It is one of the most closely watched economic indicators.
+
+## Types of Unemployment
+
+- Frictional unemployment: temporary unemployment while transitioning between jobs. Normal and healthy — people searching for better matches. Usually short-term.
+- Structural unemployment: mismatch between workers' skills and available jobs. Caused by technological change, globalization, or shifts in industry. Can be long-term.
+- Cyclical unemployment: caused by economic downturns (recessions). Rises when demand for goods and services falls. Addressed by fiscal and monetary policy.
+- Seasonal unemployment: predictable fluctuations due to seasons (tourism, agriculture, retail).
+
+## Measuring Unemployment
+
+- Labor force: all people aged 16+ who are employed or actively seeking work
+- Unemployment rate = (unemployed / labor force) × 100
+- Labor force participation rate: percentage of working-age population in the labor force
+- Underemployment: working part-time involuntarily or in jobs below one's skill level (not captured in headline rate)
+- Discouraged workers: people who have stopped looking for work (not counted as unemployed)
+
+## Natural Rate of Unemployment
+
+The natural rate (approximately 4-5% in developed economies) is the unemployment rate when the economy is at full employment — consisting only of frictional and structural unemployment. Below this rate, inflation tends to accelerate (Phillips curve relationship).
+
+## Consequences of Unemployment
+
+Individual effects:
+
+- Loss of income and financial hardship
+- Deterioration of skills and employability
+- Mental health impacts (depression, anxiety, loss of self-esteem)
+- Physical health decline
+- Social isolation
+
+Economic effects:
+
+- Lost output (GDP below potential)
+- Reduced tax revenue and increased government spending on benefits
+- Hysteresis: prolonged unemployment can become self-reinforcing
+
+## Policy Responses
+
+- Monetary policy: central banks lower interest rates to stimulate borrowing and spending
+- Fiscal policy: government increases spending or cuts taxes to boost demand
+- Job training programs: help workers acquire new skills for available jobs
+- Unemployment insurance: provides temporary income while job searching
+- Active labor market policies: job placement services, subsidized employment

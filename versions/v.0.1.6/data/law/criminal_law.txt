@@ -1,0 +1,52 @@
+# Criminal Law
+
+## Definition
+
+Criminal law defines conduct that is prohibited by the state because it threatens public safety and welfare. It prescribes punishments for those who commit crimes. Unlike civil law (which resolves disputes between individuals), criminal law involves prosecution by the state.
+
+## Elements of a Crime
+
+Most crimes require two elements:
+
+- Actus reus (guilty act): the physical act or omission that constitutes the crime
+- Mens rea (guilty mind): the mental state or intent required. Levels include:
+  - Intention: deliberately causing the prohibited result
+  - Recklessness: consciously taking an unjustifiable risk
+  - Negligence: failing to exercise reasonable care
+  - Strict liability: no mental state required (regulatory offenses)
+
+## Categories of Crime
+
+- Felonies: serious crimes punishable by more than one year in prison (murder, robbery, arson)
+- Misdemeanors: less serious offenses punishable by fines or less than one year (petty theft, vandalism)
+- Infractions: minor violations punishable only by fines (traffic tickets, littering)
+
+## Types of Criminal Offenses
+
+- Crimes against persons: murder, assault, kidnapping, sexual offenses
+- Crimes against property: theft, burglary, arson, fraud, vandalism
+- Crimes against public order: disorderly conduct, drug offenses, weapons violations
+- White-collar crimes: embezzlement, insider trading, money laundering, tax evasion
+- Cybercrimes: hacking, identity theft, online fraud, ransomware
+
+## Criminal Procedure
+
+The typical criminal justice process:
+
+1. Investigation: police gather evidence
+2. Arrest: suspect taken into custody based on probable cause
+3. Charging: prosecutor files formal charges
+4. Arraignment: defendant enters a plea (guilty, not guilty, no contest)
+5. Trial: prosecution must prove guilt beyond a reasonable doubt
+6. Sentencing: if convicted, judge imposes punishment
+7. Appeal: defendant may challenge the conviction in a higher court
+
+## Punishment
+
+Purposes of criminal punishment:
+
+- Deterrence: discouraging future criminal behavior
+- Incapacitation: removing dangerous individuals from society
+- Rehabilitation: reforming offenders to prevent recidivism
+- Retribution: imposing proportional punishment for wrongdoing
+- Restitution: compensating victims for their losses

@@ -1,0 +1,52 @@
+# Schizophrenia
+
+## Definition
+
+Schizophrenia is a severe mental disorder characterized by distortions in thinking, perception, emotions, language, sense of self, and behavior. It affects approximately 1% of the world's population and typically emerges in late adolescence or early adulthood.
+
+## Symptoms
+
+Positive symptoms (additions to normal experience):
+
+- Hallucinations: perceiving things that aren't there (most commonly auditory — hearing voices)
+- Delusions: fixed false beliefs resistant to evidence (paranoid, grandiose, referential)
+- Disorganized speech: loose associations, tangential thinking, word salad
+- Disorganized behavior: unpredictable agitation, catatonia, inappropriate affect
+
+Negative symptoms (reductions in normal functioning):
+
+- Flat affect: reduced emotional expression
+- Alogia: poverty of speech
+- Avolition: lack of motivation to initiate activities
+- Anhedonia: inability to experience pleasure
+- Social withdrawal
+
+Cognitive symptoms:
+
+- Impaired working memory
+- Difficulty with attention and concentration
+- Reduced processing speed
+- Impaired executive function (planning, decision-making)
+
+## Causes
+
+- Genetics: 80% heritability; having a first-degree relative with schizophrenia increases risk 10-fold
+- Dopamine hypothesis: excess dopamine activity in mesolimbic pathway
+- Glutamate hypothesis: reduced NMDA receptor function
+- Neurodevelopmental factors: prenatal infections, birth complications, childhood adversity
+- Cannabis use in adolescence increases risk in genetically vulnerable individuals
+
+## Treatment
+
+- Antipsychotic medications: first-generation (haloperidol) and second-generation (risperidone, olanzapine, clozapine) block dopamine D2 receptors
+- Clozapine: most effective for treatment-resistant schizophrenia but requires blood monitoring
+- Psychosocial interventions: cognitive-behavioral therapy, social skills training, family therapy
+- Supported employment and housing: helping maintain independence
+- Early intervention: treating first episodes quickly improves long-term outcomes
+
+## Prognosis
+
+- About one-third recover significantly
+- About one-third have intermittent episodes with partial recovery
+- About one-third have chronic, severe symptoms
+- Life expectancy reduced by 15-20 years (cardiovascular disease, suicide, accidents)

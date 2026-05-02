@@ -1,0 +1,46 @@
+# Green Buildings
+
+## Definition
+
+Green building (also called sustainable building) is the practice of designing, constructing, and operating buildings to minimize environmental impact while maximizing occupant health and resource efficiency. Green buildings use less energy, water, and materials while producing less waste and pollution.
+
+## Certification Systems
+
+- LEED (Leadership in Energy and Environmental Design): the most widely used green building rating system, developed by the US Green Building Council. Rates buildings from Certified to Platinum.
+- BREEAM (Building Research Establishment Environmental Assessment Method): the world's first green building rating system, developed in the UK in 1990.
+- Passive House (Passivhaus): German standard focusing on ultra-low energy consumption through superinsulation and airtightness.
+- Living Building Challenge: the most rigorous standard, requiring net-zero energy, water, and waste.
+
+## Energy Efficiency Strategies
+
+- Passive solar design: orienting buildings to maximize winter sun and minimize summer heat
+- High-performance insulation: reducing heat loss through walls, roofs, and floors
+- Triple-glazed windows: minimizing heat transfer while admitting daylight
+- Heat recovery ventilation: extracting heat from exhaust air to warm incoming fresh air
+- LED lighting with daylight sensors: reducing electricity consumption by 60-80%
+- Ground-source heat pumps: using stable underground temperatures for heating and cooling
+
+## Water Conservation
+
+- Rainwater harvesting: collecting roof runoff for irrigation and toilet flushing
+- Greywater recycling: treating water from sinks and showers for reuse
+- Low-flow fixtures: reducing water consumption by 30-50%
+- Green roofs: absorbing rainwater and reducing stormwater runoff
+- Drought-resistant landscaping: minimizing irrigation needs
+
+## Materials
+
+- Recycled content: using materials with high recycled content (steel, glass, concrete)
+- Locally sourced materials: reducing transportation emissions
+- Rapidly renewable materials: bamboo, cork, straw bales
+- Low-VOC products: paints, adhesives, and finishes that don't emit harmful chemicals
+- Mass timber: cross-laminated timber as a low-carbon alternative to steel and concrete
+
+## Benefits
+
+- 30-50% reduction in energy use compared to conventional buildings
+- 30-50% reduction in water use
+- Improved indoor air quality and occupant health
+- Higher property values and rental rates
+- Lower operating costs over the building's lifetime
+- Reduced carbon emissions

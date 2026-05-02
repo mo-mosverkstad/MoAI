@@ -1,0 +1,40 @@
+# The Big Bang
+
+## Overview
+
+The Big Bang theory is the prevailing cosmological model explaining the origin and evolution of the universe. It states that the universe began as an extremely hot, dense point approximately 13.8 billion years ago and has been expanding and cooling ever since.
+
+## Evidence
+
+Three pillars of evidence support the Big Bang:
+
+- Expansion of the universe: Edwin Hubble (1929) observed that distant galaxies are moving away from us, with velocity proportional to distance (Hubble's Law). Space itself is expanding.
+- Cosmic Microwave Background (CMB): discovered in 1965 by Penzias and Wilson. This faint radiation fills all of space at a temperature of 2.725 K — the afterglow of the Big Bang, emitted 380,000 years after the beginning.
+- Primordial nucleosynthesis: the observed abundances of hydrogen (75%), helium (25%), and trace lithium match predictions of nuclear reactions in the first few minutes after the Big Bang.
+
+## Timeline of the Universe
+
+- 0 seconds: the Big Bang — all matter, energy, space, and time originate
+- 10⁻³⁶ seconds: cosmic inflation — universe expands exponentially by a factor of at least 10²⁶
+- 10⁻⁶ seconds: quarks combine to form protons and neutrons
+- 3 minutes: nucleosynthesis — protons and neutrons fuse into helium nuclei
+- 380,000 years: recombination — atoms form, universe becomes transparent, CMB released
+- 200 million years: first stars ignite
+- 1 billion years: first galaxies form
+- 9.2 billion years: our Solar System forms
+- 13.8 billion years: present day
+
+## Dark Matter and Dark Energy
+
+The visible universe is only about 5% of its total content:
+
+- Dark matter (27%): invisible matter that interacts gravitationally but not electromagnetically. Evidence: galaxy rotation curves, gravitational lensing, CMB patterns. Leading candidates: WIMPs, axions.
+- Dark energy (68%): mysterious force causing the expansion of the universe to accelerate. Discovered in 1998 through observations of distant supernovae. Its nature remains unknown.
+
+## The Fate of the Universe
+
+Possible futures depend on the nature of dark energy:
+
+- Big Freeze: expansion continues forever, stars burn out, universe approaches absolute zero
+- Big Rip: dark energy increases, eventually tearing apart galaxies, stars, atoms
+- Big Crunch: expansion reverses, universe collapses back to a singularity (currently disfavored)

@@ -1,0 +1,39 @@
+# Electronic Music
+
+## Definition
+
+Electronic music is music that employs electronic instruments, digital technology, and computer-based production techniques. It ranges from experimental art music to mainstream dance genres and has fundamentally transformed how music is created and consumed.
+
+## History
+
+- 1920s: Theremin and Ondes Martenot — earliest electronic instruments
+- 1948: Musique concrète (Pierre Schaeffer) — manipulating recorded sounds
+- 1950s: Electronic studios in Cologne and New York — synthesized sounds
+- 1964: Robert Moog introduces the Moog synthesizer
+- 1970s: Kraftwerk pioneers electronic pop; Giorgio Moroder creates disco
+- 1980s: MIDI standard enables communication between electronic instruments
+- 1988: Acid house and rave culture emerge in Chicago and the UK
+- 1990s-2000s: Digital audio workstations (DAWs) democratize production
+
+## Subgenres
+
+- Ambient: atmospheric, textural (Brian Eno, Aphex Twin's Selected Ambient Works)
+- Techno: repetitive beats, originated in Detroit (Juan Atkins, Derrick May)
+- House: four-on-the-floor beat, originated in Chicago (Frankie Knuckles)
+- Drum and bass: fast breakbeats (160-180 BPM), heavy bass (Goldie, Roni Size)
+- Trance: melodic, building energy (Tiësto, Armin van Buuren)
+- Dubstep: heavy bass wobbles, half-time rhythms (Skrillex, Burial)
+- EDM: broad commercial electronic dance music (Avicii, Calvin Harris, Deadmau5)
+
+## Production Technology
+
+- Synthesizers: generate sound electronically (subtractive, FM, wavetable, granular)
+- Samplers: record and play back audio snippets
+- Drum machines: Roland TR-808 and TR-909 defined electronic rhythm
+- DAWs: Ableton Live, FL Studio, Logic Pro — complete production environments
+- MIDI: Musical Instrument Digital Interface — standard for connecting electronic instruments
+- VST plugins: software instruments and effects
+
+## Cultural Impact
+
+Electronic music transformed nightlife culture worldwide through clubs, festivals, and raves. Major festivals include Tomorrowland (Belgium), Sonar (Barcelona), and Movement (Detroit). DJs became global superstars, and electronic production techniques now pervade virtually all popular music genres.

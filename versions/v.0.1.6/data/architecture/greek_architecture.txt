@@ -1,0 +1,35 @@
+# Ancient Greek Architecture
+
+## Overview
+
+Ancient Greek architecture developed between the 7th century BC and the 1st century AD. It established principles of proportion, symmetry, and harmony that have influenced Western architecture for over 2,500 years. Greek architecture was primarily religious, with temples as the most important building type.
+
+## The Three Orders
+
+Greek architecture is defined by three column orders, each with distinct proportions and decorative details:
+
+- Doric order: the oldest and simplest. Sturdy columns with no base, plain capitals, and a frieze of alternating triglyphs and metopes. Example: the Parthenon.
+- Ionic order: more slender and elegant. Columns have bases and scroll-shaped (volute) capitals. Example: the Erechtheion.
+- Corinthian order: the most ornate. Tall columns with capitals decorated with acanthus leaves. Example: the Temple of Olympian Zeus in Athens.
+
+## The Parthenon
+
+The Parthenon (447-432 BC) on the Athenian Acropolis is the most famous Greek building. Dedicated to the goddess Athena, it was designed by architects Ictinus and Callicrates under the supervision of sculptor Phidias.
+
+Remarkable features:
+
+- Optical refinements: columns lean slightly inward, the floor curves upward at the center, and corner columns are thicker — all to counteract optical illusions
+- Golden ratio: proportions approximate the golden ratio (1:1.618)
+- 46 outer columns, each 10.4 meters tall
+- Originally housed a 12-meter gold and ivory statue of Athena
+
+## Other Building Types
+
+- Agora: public marketplace and civic center
+- Theater: semicircular open-air venues with excellent acoustics (Theater of Epidaurus seats 14,000)
+- Stoa: covered walkway with columns, used for commerce and philosophy
+- Stadium: athletic venues for competitions (original Olympic stadium at Olympia)
+
+## Legacy
+
+Greek architectural principles were adopted by the Romans, revived during the Renaissance, and continue to influence public buildings worldwide. The US Capitol, the British Museum, and countless courthouses and banks use Greek-inspired columns and pediments.

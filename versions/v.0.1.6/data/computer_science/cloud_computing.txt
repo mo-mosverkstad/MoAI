@@ -1,0 +1,52 @@
+# Cloud Computing
+
+## Definition
+
+Cloud computing is the delivery of computing services — servers, storage, databases, networking, software, analytics, and intelligence — over the internet ("the cloud"). Instead of owning and maintaining physical data centers, organizations rent access to computing resources from cloud providers on a pay-as-you-go basis.
+
+## Service Models
+
+- Infrastructure as a Service (IaaS): rent virtual machines, storage, and networking. User manages OS and applications. Examples: Amazon EC2, Google Compute Engine, Azure Virtual Machines.
+- Platform as a Service (PaaS): provider manages infrastructure; user deploys applications. Examples: AWS Elastic Beanstalk, Google App Engine, Heroku.
+- Software as a Service (SaaS): fully managed applications accessed via browser. Examples: Gmail, Salesforce, Microsoft 365, Slack, Zoom.
+
+## Deployment Models
+
+- Public cloud: resources shared among multiple tenants (AWS, Azure, Google Cloud)
+- Private cloud: dedicated infrastructure for a single organization (on-premises or hosted)
+- Hybrid cloud: combination of public and private clouds with data/application portability
+- Multi-cloud: using services from multiple cloud providers to avoid vendor lock-in
+
+## Major Cloud Providers
+
+- Amazon Web Services (AWS): launched 2006, largest market share (~32%). Services include EC2, S3, Lambda, RDS, SageMaker.
+- Microsoft Azure: second largest (~22%). Strong integration with Microsoft enterprise products.
+- Google Cloud Platform (GCP): third largest (~11%). Strong in data analytics, AI/ML, and Kubernetes.
+- Others: Alibaba Cloud (dominant in China), IBM Cloud, Oracle Cloud.
+
+## Key Technologies
+
+- Virtualization: running multiple virtual machines on a single physical server
+- Containers (Docker): lightweight, portable application packaging
+- Kubernetes: orchestration system for managing containerized applications at scale
+- Serverless (Functions as a Service): run code without managing servers (AWS Lambda, Azure Functions)
+- Object storage: scalable storage for unstructured data (AWS S3, Azure Blob Storage)
+- CDN (Content Delivery Network): caching content at edge locations worldwide for low latency
+
+## Advantages
+
+- Scalability: instantly scale resources up or down based on demand
+- Cost efficiency: no upfront capital expenditure, pay only for what you use
+- Global reach: deploy applications in data centers worldwide in minutes
+- Reliability: built-in redundancy, high availability (99.99% uptime SLAs)
+- Speed: provision resources in minutes instead of weeks
+- Security: cloud providers invest billions in security infrastructure
+
+## Challenges
+
+- Vendor lock-in: migrating between providers can be difficult and costly
+- Data sovereignty: regulations may require data to stay in specific geographic regions
+- Security concerns: shared responsibility model — provider secures infrastructure, customer secures data
+- Latency: network distance to cloud data centers can affect real-time applications
+- Cost management: without monitoring, cloud bills can grow unexpectedly
+- Outages: major cloud outages can affect millions of users simultaneously

@@ -1,0 +1,49 @@
+# Renewable Energy
+
+## Overview
+
+Renewable energy comes from sources that are naturally replenished on a human timescale. In 2022, renewables accounted for approximately 30% of global electricity generation. The transition from fossil fuels to renewables is essential for mitigating climate change.
+
+## Solar Energy
+
+Solar photovoltaic (PV) cells convert sunlight directly into electricity using the photovoltaic effect. Solar is the fastest-growing energy source globally.
+
+- Efficiency: commercial panels achieve 20-23% efficiency; laboratory cells exceed 47%
+- Cost: has fallen 89% since 2010, now the cheapest source of electricity in most regions
+- Capacity: global installed capacity exceeded 1,000 GW in 2022
+- Limitations: intermittent (no generation at night), requires large areas, manufacturing uses energy
+
+## Wind Energy
+
+Wind turbines convert kinetic energy of wind into electricity through rotating blades connected to a generator.
+
+- Onshore wind: turbines on land, typically 2-5 MW capacity each
+- Offshore wind: turbines in ocean waters, larger (up to 15 MW), stronger and more consistent winds
+- Global capacity: approximately 900 GW installed by 2022
+- Limitations: intermittent, visual impact, noise, bird and bat mortality
+
+## Hydroelectric Power
+
+Hydropower generates electricity from flowing water, typically using dams to create reservoirs.
+
+- Largest source of renewable electricity globally (about 16% of world electricity)
+- Three Gorges Dam (China): world's largest power station at 22.5 GW capacity
+- Pumped-storage: uses excess electricity to pump water uphill, then releases it to generate power during peak demand
+- Limitations: environmental impact on rivers and ecosystems, displacement of communities, drought vulnerability
+
+## Other Renewables
+
+- Geothermal: heat from Earth's interior (Iceland generates 25% of electricity from geothermal)
+- Biomass: organic material burned or converted to fuel (wood, crop waste, biogas)
+- Tidal and wave: energy from ocean movements (still largely experimental)
+- Hydrogen: produced by electrolysis using renewable electricity (green hydrogen)
+
+## Energy Storage
+
+Storage is critical for managing intermittent renewable sources:
+
+- Lithium-ion batteries: dominant technology for grid storage and electric vehicles
+- Pumped hydro: accounts for 95% of global energy storage capacity
+- Compressed air: stores energy by compressing air in underground caverns
+- Flow batteries: use liquid electrolytes for long-duration storage
+- Green hydrogen: excess renewable electricity produces hydrogen for later use

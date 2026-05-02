@@ -1,0 +1,61 @@
+# Software Engineering
+
+## Definition
+
+Software engineering is the systematic application of engineering principles to the design, development, testing, deployment, and maintenance of software. It aims to produce reliable, efficient, and maintainable software within time and budget constraints.
+
+## Software Development Life Cycle (SDLC)
+
+- Requirements analysis: understanding what the software should do (functional and non-functional requirements)
+- Design: planning the architecture, components, interfaces, and data structures
+- Implementation: writing the actual code
+- Testing: verifying the software works correctly and meets requirements
+- Deployment: releasing the software to users
+- Maintenance: fixing bugs, adding features, and adapting to changing requirements
+
+## Development Methodologies
+
+- Waterfall: sequential phases (requirements → design → implementation → testing → deployment). Each phase completed before the next begins. Suitable for well-understood, stable requirements.
+- Agile: iterative and incremental development in short cycles (sprints of 1-4 weeks). Embraces changing requirements. Manifesto values: individuals over processes, working software over documentation, customer collaboration over contracts, responding to change over following a plan.
+- Scrum: Agile framework with defined roles (Product Owner, Scrum Master, Development Team), ceremonies (sprint planning, daily standup, retrospective), and artifacts (product backlog, sprint backlog).
+- Kanban: visualize workflow, limit work in progress, optimize flow. No fixed iterations.
+- DevOps: integrates development and operations for continuous delivery. Automates building, testing, and deployment.
+
+## Design Principles
+
+- SOLID principles:
+  - Single Responsibility: each class has one reason to change
+  - Open/Closed: open for extension, closed for modification
+  - Liskov Substitution: subtypes must be substitutable for their base types
+  - Interface Segregation: many specific interfaces over one general interface
+  - Dependency Inversion: depend on abstractions, not concretions
+
+- DRY (Don't Repeat Yourself): avoid code duplication
+- KISS (Keep It Simple, Stupid): simplest solution that works
+- YAGNI (You Aren't Gonna Need It): don't build features until needed
+
+## Testing
+
+- Unit testing: testing individual functions or methods in isolation
+- Integration testing: testing interactions between components
+- System testing: testing the complete system end-to-end
+- Acceptance testing: verifying the system meets business requirements
+- Regression testing: ensuring new changes don't break existing functionality
+- Test-Driven Development (TDD): write tests before writing code
+
+## Version Control
+
+- Git: distributed version control system (created by Linus Torvalds, 2005)
+- Branching: parallel development streams (feature branches, release branches)
+- Merging: combining changes from different branches
+- Pull requests: code review before merging changes
+- GitHub/GitLab: platforms for hosting repositories and collaboration
+- CI/CD: Continuous Integration / Continuous Deployment — automated build, test, and deploy pipelines
+
+## Technical Debt
+
+Shortcuts taken during development that make future changes harder:
+
+- Causes: time pressure, lack of knowledge, changing requirements, poor design decisions
+- Consequences: slower development, more bugs, harder onboarding, eventual system rewrites
+- Management: regular refactoring, code reviews, automated testing, documentation

@@ -1,0 +1,41 @@
+# The Guitar
+
+## History
+
+The guitar's ancestors include the lute, vihuela, and oud, dating back thousands of years. The modern six-string guitar emerged in Spain in the late 18th century. Antonio de Torres Jurado (1817-1892) established the design of the modern classical guitar around 1850.
+
+## Types
+
+- Classical guitar: nylon strings, wide neck, fingerpicked, used for classical and flamenco
+- Acoustic guitar: steel strings, narrower neck, louder projection, used for folk, country, and pop
+- Electric guitar: solid or semi-hollow body, magnetic pickups convert string vibration to electrical signal
+- Bass guitar: four to six strings tuned an octave lower, provides rhythmic and harmonic foundation
+- Twelve-string guitar: paired strings create a rich, shimmering sound
+
+## How It Works
+
+- Six strings tuned E-A-D-G-B-E (standard tuning)
+- Frets divide the neck into semitone intervals
+- Pressing a string against a fret shortens its vibrating length, raising the pitch
+- The body amplifies vibrations (acoustic) or pickups detect them (electric)
+- Electric guitars use amplifiers and effects pedals to shape their sound
+
+## Influential Guitarists
+
+- Andrés Segovia (1893-1987): established classical guitar as a concert instrument
+- Robert Johnson (1911-1938): legendary blues guitarist, influenced all rock guitar
+- Jimi Hendrix (1942-1970): revolutionized electric guitar with feedback, distortion, and wah-wah
+- B.B. King (1925-2015): "King of the Blues," expressive vibrato and string bending
+- Jimmy Page (born 1944): Led Zeppelin guitarist, pioneered hard rock guitar
+- Eddie Van Halen (1955-2020): introduced two-handed tapping technique to rock
+
+## Guitar Effects
+
+Electric guitarists use effects to modify their sound:
+
+- Distortion/overdrive: adds grit and sustain (the sound of rock)
+- Reverb: simulates acoustic spaces
+- Delay/echo: repeats the signal after a time interval
+- Wah-wah: sweeps a frequency peak up and down
+- Chorus: thickens the sound by adding slightly detuned copies
+- Looper: records and plays back phrases for layering

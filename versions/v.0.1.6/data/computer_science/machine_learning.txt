@@ -1,0 +1,61 @@
+# Machine Learning
+
+## Definition
+
+Machine learning is a subset of artificial intelligence that enables systems to learn and improve from experience without being explicitly programmed. Instead of following fixed rules, machine learning algorithms build mathematical models from training data to make predictions or decisions.
+
+## Types of Machine Learning
+
+- Supervised learning: the algorithm learns from labeled training data (input-output pairs)
+  - Classification: predicting discrete categories (spam detection, image recognition)
+  - Regression: predicting continuous values (house prices, temperature forecasting)
+
+- Unsupervised learning: the algorithm finds patterns in unlabeled data
+  - Clustering: grouping similar data points (customer segmentation, gene expression analysis)
+  - Dimensionality reduction: reducing the number of features while preserving structure (PCA, t-SNE)
+
+- Reinforcement learning: an agent learns by interacting with an environment and receiving rewards or penalties (game playing, robotics, autonomous driving)
+
+## Common Algorithms
+
+- Linear regression: fits a straight line to predict continuous outcomes
+- Logistic regression: predicts probabilities for binary classification
+- Decision trees: make predictions by learning decision rules from features
+- Random forests: ensemble of decision trees that vote on predictions
+- Support vector machines (SVM): find optimal hyperplanes separating classes
+- k-nearest neighbors (k-NN): classifies based on the majority class of nearest data points
+- Neural networks: layers of interconnected nodes inspired by biological neurons
+
+## Deep Learning
+
+Deep learning uses neural networks with many layers (deep neural networks) to learn hierarchical representations of data:
+
+- Convolutional Neural Networks (CNNs): specialized for image and video processing
+- Recurrent Neural Networks (RNNs): process sequential data (text, time series)
+- Transformers: attention-based architecture that revolutionized NLP (BERT, GPT)
+- Generative Adversarial Networks (GANs): generate realistic synthetic data
+
+## Training Process
+
+1. Data collection and preprocessing
+2. Split data into training, validation, and test sets
+3. Choose model architecture and hyperparameters
+4. Train: minimize a loss function using optimization (gradient descent)
+5. Validate: tune hyperparameters on validation set
+6. Test: evaluate final performance on held-out test data
+
+## Challenges
+
+- Overfitting: model memorizes training data but fails on new data
+- Underfitting: model is too simple to capture underlying patterns
+- Bias in data: models can perpetuate or amplify societal biases present in training data
+- Interpretability: complex models (deep learning) are often "black boxes"
+- Data requirements: deep learning typically requires large amounts of labeled data
+
+## Applications
+
+- Computer vision: facial recognition, medical imaging, autonomous vehicles
+- Natural language processing: translation, chatbots, sentiment analysis
+- Recommendation systems: Netflix, Spotify, Amazon product suggestions
+- Healthcare: drug discovery, diagnosis assistance, protein structure prediction
+- Finance: fraud detection, algorithmic trading, credit scoring

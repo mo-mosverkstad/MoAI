@@ -1,0 +1,47 @@
+# Poverty and Inequality
+
+## Defining Poverty
+
+Poverty is the state of having insufficient resources to meet basic human needs (food, shelter, clothing, healthcare, education).
+
+- Absolute poverty: living below a minimum income threshold. The World Bank defines extreme poverty as living on less than $2.15 per day (2022 purchasing power parity).
+- Relative poverty: having significantly less income than the median in one's society (typically below 50-60% of median income).
+- Multidimensional poverty: measured by deprivations in health, education, and living standards (not just income).
+
+## Global Poverty Statistics
+
+- Approximately 700 million people live in extreme poverty (2024)
+- Down from 1.9 billion in 1990 — the greatest reduction in poverty in human history
+- Sub-Saharan Africa has the highest poverty rates (approximately 35%)
+- East Asia achieved the most dramatic reduction (China lifted 800 million from poverty since 1980)
+- COVID-19 pandemic pushed approximately 70 million people back into extreme poverty
+
+## Income Inequality
+
+Inequality measures how unevenly income or wealth is distributed:
+
+- Gini coefficient: ranges from 0 (perfect equality) to 1 (one person has everything). Most countries range from 0.25 (Scandinavia) to 0.65 (South Africa).
+- Top 1% share: the richest 1% own approximately 46% of global wealth (2023)
+- Bottom 50% share: the poorest half of humanity owns approximately 2% of global wealth
+- Within-country inequality has risen in most developed nations since the 1980s
+- Between-country inequality has decreased as developing nations grow faster
+
+## Causes of Poverty
+
+- Lack of education and skills
+- Unemployment and underemployment
+- Discrimination (gender, race, caste, disability)
+- Conflict and political instability
+- Geographic isolation and lack of infrastructure
+- Health problems and disability
+- Intergenerational transmission (poverty trap)
+
+## Poverty Reduction Strategies
+
+- Economic growth: historically the most powerful poverty reducer
+- Education: each additional year of schooling increases earnings by approximately 10%
+- Social safety nets: cash transfers, food assistance, unemployment insurance
+- Healthcare access: preventing catastrophic medical expenses
+- Microfinance: small loans enabling entrepreneurship
+- Infrastructure: roads, electricity, clean water, internet access
+- Land reform and property rights: enabling asset accumulation

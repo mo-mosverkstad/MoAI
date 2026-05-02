@@ -1,0 +1,43 @@
+# Galaxies
+
+## Definition
+
+A galaxy is a gravitationally bound system of stars, stellar remnants, interstellar gas, dust, and dark matter. Galaxies range from dwarfs with a few billion stars to giants with one hundred trillion stars, all orbiting a common center of mass.
+
+## Types of Galaxies
+
+Edwin Hubble classified galaxies by shape (Hubble sequence):
+
+- Spiral galaxies: flat rotating disks with spiral arms, central bulge, and halo. Contain young and old stars, gas, and dust. Examples: Milky Way, Andromeda (M31).
+- Elliptical galaxies: smooth, featureless ellipsoids ranging from nearly spherical to elongated. Contain mostly old stars with little gas or dust. Range from dwarf to giant (M87 contains trillions of stars).
+- Lenticular galaxies: intermediate between spiral and elliptical — disk-shaped but without prominent spiral arms.
+- Irregular galaxies: no distinct shape, often result of gravitational interactions. Examples: Large and Small Magellanic Clouds.
+
+## The Milky Way
+
+Our home galaxy:
+
+- Type: barred spiral galaxy
+- Diameter: approximately 100,000 light-years
+- Stars: 100-400 billion
+- Age: approximately 13.6 billion years
+- Central supermassive black hole: Sagittarius A* (4 million solar masses)
+- Our Sun is located about 26,000 light-years from the center in the Orion Arm
+- Orbital period of the Sun around the galactic center: approximately 225 million years
+
+## Galaxy Formation and Evolution
+
+- Galaxies formed from density fluctuations in the early universe after the Big Bang
+- Small protogalaxies merged to form larger galaxies (hierarchical formation)
+- Galaxy mergers continue today — the Milky Way will merge with Andromeda in approximately 4.5 billion years
+- Active galactic nuclei (AGN): galaxies with extremely luminous centers powered by accreting supermassive black holes
+- Quasars: the most luminous AGN, visible across billions of light-years
+
+## Galaxy Clusters
+
+Galaxies are not uniformly distributed but form structures:
+
+- Galaxy groups: 3-30 galaxies (Local Group contains ~80 galaxies including Milky Way and Andromeda)
+- Galaxy clusters: hundreds to thousands of galaxies (Virgo Cluster, Coma Cluster)
+- Superclusters: clusters of clusters (Laniakea Supercluster contains ~100,000 galaxies)
+- Cosmic web: galaxies are distributed along filaments surrounding vast empty voids

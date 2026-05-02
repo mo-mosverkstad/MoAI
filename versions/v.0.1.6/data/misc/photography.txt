@@ -1,0 +1,46 @@
+# Photography
+
+## Definition
+
+Photography is the art and science of capturing light to create images. The word comes from Greek: photos (light) and graphe (drawing) — literally "drawing with light."
+
+## History
+
+- 1826: Joseph Nicéphore Niépce creates the first permanent photograph (8-hour exposure)
+- 1839: Louis Daguerre announces the daguerreotype process (minutes-long exposure on silver-coated copper)
+- 1841: William Henry Fox Talbot patents the calotype (negative-positive process enabling multiple prints)
+- 1888: George Eastman introduces the Kodak camera ("You press the button, we do the rest")
+- 1936: First color slide film (Kodachrome) introduced
+- 1975: Steven Sasson at Kodak builds the first digital camera (0.01 megapixels)
+- 2000s: Digital cameras surpass film in quality and convenience
+- 2007: iPhone launches, making photography ubiquitous (over 1.4 trillion photos taken annually by 2020)
+
+## How Cameras Work
+
+All cameras share basic principles:
+
+- Lens: focuses light onto the recording medium
+- Aperture: controls how much light enters (measured in f-stops: f/1.4, f/2.8, f/5.6, etc.)
+- Shutter: controls how long light hits the sensor (1/1000s to several seconds)
+- Sensor (or film): records the light pattern as an image
+- ISO/sensitivity: amplifies the signal (higher ISO = more sensitive but more noise)
+
+The exposure triangle: aperture, shutter speed, and ISO work together to determine exposure.
+
+## Types of Photography
+
+- Portrait: capturing people, emphasizing expression and personality
+- Landscape: natural scenery, often using wide-angle lenses and small apertures
+- Street photography: candid images of everyday life in public spaces
+- Wildlife: animals in natural habitats, requiring telephoto lenses and patience
+- Macro: extreme close-ups revealing details invisible to the naked eye
+- Astrophotography: celestial objects (stars, galaxies, nebulae)
+- Documentary/photojournalism: recording events and social conditions
+
+## Composition Principles
+
+- Rule of thirds: placing subjects at intersections of a 3×3 grid
+- Leading lines: using lines to guide the viewer's eye through the image
+- Framing: using elements in the scene to frame the subject
+- Depth of field: controlling what is sharp and what is blurred
+- Light: the quality, direction, and color of light define the mood

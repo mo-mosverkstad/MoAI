@@ -1,0 +1,47 @@
+# Learning and Conditioning
+
+## Definition
+
+Learning is a relatively permanent change in behavior or knowledge resulting from experience. Psychology identifies several distinct mechanisms through which learning occurs.
+
+## Classical Conditioning
+
+Discovered by Ivan Pavlov (1890s) through experiments with dogs:
+
+- Unconditioned stimulus (US): naturally triggers a response (food causes salivation)
+- Unconditioned response (UR): natural reaction to the US (salivation)
+- Conditioned stimulus (CS): neutral stimulus paired with the US (bell)
+- Conditioned response (CR): learned reaction to the CS (salivation to bell alone)
+
+Key phenomena:
+
+- Acquisition: the CS-US pairing is learned
+- Extinction: the CR weakens when CS is presented without US
+- Spontaneous recovery: extinguished CR reappears after a rest period
+- Generalization: similar stimuli also trigger the CR
+- Discrimination: learning to respond only to the specific CS
+
+## Operant Conditioning
+
+B.F. Skinner (1930s-1960s) studied how consequences shape behavior:
+
+- Positive reinforcement: adding something pleasant increases behavior (praise, rewards)
+- Negative reinforcement: removing something unpleasant increases behavior (taking aspirin removes headache)
+- Positive punishment: adding something unpleasant decreases behavior (spanking)
+- Negative punishment: removing something pleasant decreases behavior (taking away privileges)
+
+Schedules of reinforcement:
+
+- Fixed ratio: reinforcement after a set number of responses (every 5th response)
+- Variable ratio: reinforcement after an unpredictable number (slot machines)
+- Fixed interval: reinforcement for first response after a set time period
+- Variable interval: reinforcement after unpredictable time periods
+
+## Observational Learning
+
+Albert Bandura (1961) demonstrated that people learn by watching others:
+
+- Bobo doll experiment: children who watched adults act aggressively toward a doll imitated the aggression
+- Modeling: learning by observing and imitating a model's behavior
+- Vicarious reinforcement: learning from observing consequences others receive
+- Self-efficacy: belief in one's ability to succeed, influenced by observing similar others succeed

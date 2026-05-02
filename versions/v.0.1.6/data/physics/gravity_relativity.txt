@@ -1,0 +1,43 @@
+# Gravity and Relativity
+
+## Newton's Law of Gravitation
+
+Isaac Newton published his law of universal gravitation in 1687. It states that every mass attracts every other mass with a force proportional to the product of their masses and inversely proportional to the square of the distance between them: F = GMm/r².
+
+Newton's theory successfully explains:
+
+- Planetary orbits (Kepler's laws)
+- Tides caused by the Moon and Sun
+- The trajectory of projectiles
+- Why objects fall at the same rate regardless of mass (in a vacuum)
+
+## Special Relativity (1905)
+
+Albert Einstein's special theory of relativity is based on two postulates:
+
+1. The laws of physics are the same in all inertial reference frames
+2. The speed of light in vacuum (c = 299,792,458 m/s) is the same for all observers
+
+Consequences of special relativity:
+
+- Time dilation: moving clocks run slower. A clock traveling at 90% of light speed ticks at about 44% the rate of a stationary clock.
+- Length contraction: objects moving at high speed appear shorter in the direction of motion
+- Mass-energy equivalence: E = mc², energy and mass are interchangeable
+- Relativity of simultaneity: events simultaneous in one frame may not be in another
+- Nothing with mass can reach the speed of light
+
+## General Relativity (1915)
+
+Einstein's general theory of relativity describes gravity not as a force but as the curvature of spacetime caused by mass and energy. Massive objects bend the fabric of spacetime, and other objects follow curved paths (geodesics) through this curved spacetime.
+
+Predictions confirmed by observation:
+
+- Gravitational lensing: light bends around massive objects (first confirmed during the 1919 solar eclipse)
+- Gravitational time dilation: clocks run slower in stronger gravitational fields (confirmed by GPS satellites, which must correct for this effect)
+- Gravitational waves: ripples in spacetime caused by accelerating masses (first detected by LIGO in 2015)
+- Black holes: regions where spacetime curvature becomes extreme
+- Expansion of the universe: spacetime itself is expanding (discovered by Hubble in 1929)
+
+## GPS and Relativity
+
+The Global Positioning System requires both special and general relativistic corrections. Without these corrections, GPS positions would drift by about 10 km per day. Satellite clocks tick faster than ground clocks (general relativity: weaker gravity) but slower due to their orbital speed (special relativity). The net effect is that satellite clocks gain about 38 microseconds per day relative to ground clocks.

@@ -1,0 +1,49 @@
+# The Age of Exploration
+
+## Overview
+
+The Age of Exploration (1400s-1600s) was a period when European nations sent expeditions across the world's oceans, establishing trade routes, colonies, and global connections. It was driven by the desire for trade (especially spices), religious conversion, national prestige, and scientific curiosity.
+
+## Key Explorers
+
+- Henry the Navigator (1394-1460): Portuguese prince who sponsored expeditions along the African coast
+- Bartolomeu Dias (1488): first European to round the Cape of Good Hope (southern tip of Africa)
+- Christopher Columbus (1492): sailing for Spain, reached the Caribbean (believed he had reached Asia)
+- Vasco da Gama (1498): first European to reach India by sea (around Africa)
+- Amerigo Vespucci (1499-1502): recognized that the Americas were separate continents (America named after him)
+- Ferdinand Magellan (1519-1522): his expedition completed the first circumnavigation of the globe (Magellan died in the Philippines; Juan Sebastián Elcano completed the voyage)
+- Hernán Cortés (1519-1521): conquered the Aztec Empire in Mexico
+- Francisco Pizarro (1532): conquered the Inca Empire in Peru
+- Francis Drake (1577-1580): second circumnavigation, English privateer against Spain
+- James Cook (1768-1779): mapped the Pacific, reached Australia and New Zealand
+
+## Enabling Technologies
+
+- Caravel: small, maneuverable ship capable of sailing against the wind
+- Magnetic compass: reliable navigation far from land
+- Astrolabe and cross-staff: determining latitude from star positions
+- Portolan charts: detailed coastal maps with compass bearings
+- Gunpowder weapons: military advantage over indigenous peoples
+
+## Consequences
+
+Positive:
+
+- Global trade networks established (Columbian Exchange)
+- Scientific knowledge expanded (geography, biology, astronomy)
+- Cultural exchange between civilizations
+
+Negative:
+
+- Indigenous population collapse: European diseases (smallpox, measles) killed 90% of Native Americans
+- Transatlantic slave trade: 12.5 million Africans forcibly transported to the Americas (1500-1870)
+- Colonial exploitation: extraction of resources, destruction of indigenous cultures
+- Environmental transformation: introduction of invasive species, deforestation
+
+## The Columbian Exchange
+
+The transfer of plants, animals, diseases, and ideas between the Americas and the Old World after 1492:
+
+- To the Americas: wheat, horses, cattle, pigs, smallpox, measles, Christianity
+- From the Americas: potatoes, tomatoes, corn (maize), tobacco, chocolate, rubber, syphilis
+- Potatoes and corn transformed European and Asian agriculture, enabling population growth

@@ -1,0 +1,59 @@
+# Sleep and Health
+
+## Importance of Sleep
+
+Sleep is as essential to health as nutrition and exercise. During sleep, the body repairs tissues, consolidates memories, releases growth hormones, and clears metabolic waste from the brain. Chronic sleep deprivation is associated with numerous health problems.
+
+## Sleep Requirements
+
+Recommended sleep duration by age (National Sleep Foundation):
+
+- Newborns (0-3 months): 14-17 hours
+- Infants (4-11 months): 12-15 hours
+- Toddlers (1-2 years): 11-14 hours
+- Preschoolers (3-5 years): 10-13 hours
+- School-age (6-13 years): 9-11 hours
+- Teenagers (14-17 years): 8-10 hours
+- Adults (18-64 years): 7-9 hours
+- Older adults (65+): 7-8 hours
+
+## Circadian Rhythm
+
+The circadian rhythm is the body's internal 24-hour clock:
+
+- Controlled by the suprachiasmatic nucleus (SCN) in the hypothalamus
+- Synchronized by light exposure (especially blue light)
+- Melatonin: hormone released in darkness that promotes sleepiness
+- Chronotypes: individual variation in sleep-wake timing (morning larks vs. night owls)
+- Jet lag: circadian disruption from rapid travel across time zones
+- Shift work: working against the circadian rhythm increases health risks
+
+## Sleep Hygiene
+
+Practices that promote good sleep:
+
+- Consistent schedule: same bedtime and wake time every day (including weekends)
+- Dark, cool, quiet environment: 18-20°C is optimal
+- Limit screen time: blue light from devices suppresses melatonin (stop 1-2 hours before bed)
+- Avoid caffeine: half-life of 5 hours means afternoon coffee affects nighttime sleep
+- Avoid alcohol: disrupts sleep architecture despite initial sedative effect
+- Regular exercise: improves sleep quality (but not within 2-3 hours of bedtime)
+- Relaxation routine: reading, meditation, warm bath before bed
+
+## Health Consequences of Poor Sleep
+
+- Obesity: sleep deprivation increases hunger hormones (ghrelin) and decreases satiety hormones (leptin)
+- Cardiovascular disease: sleeping less than 6 hours increases heart attack risk by 20%
+- Diabetes: sleep deprivation impairs glucose metabolism and insulin sensitivity
+- Immune dysfunction: one night of poor sleep can reduce natural killer cell activity by 70%
+- Mental health: strong bidirectional relationship with depression and anxiety
+- Cognitive impairment: equivalent to alcohol intoxication after 24 hours without sleep
+- Accidents: drowsy driving causes approximately 100,000 crashes per year in the US
+
+## Sleep Technology
+
+- Polysomnography: gold standard sleep study measuring brain waves, eye movements, muscle activity, heart rate, and breathing
+- Actigraphy: wrist-worn devices tracking movement to estimate sleep patterns
+- Consumer sleep trackers: smartwatches and rings (approximate but not clinical-grade)
+- CPAP machines: continuous positive airway pressure treats obstructive sleep apnea
+- Cognitive Behavioral Therapy for Insomnia (CBT-I): most effective long-term treatment for chronic insomnia
