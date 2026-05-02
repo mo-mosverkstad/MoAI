@@ -318,8 +318,12 @@ Output: JSON Lines to `profiling.output_file` + brief summary to stderr.
 | File | Purpose |
 |------|---------|
 | `sentence_encoder.h/.cpp` | Transformer encoder with sinusoidal PE |
-| `encoder_trainer.h/.cpp` | InfoNCE contrastive training |
+| `encoder_trainer.h/.cpp` | InfoNCE contrastive training with batch-level progress bar |
 | `train_main.cpp` | Legacy training entry point (unused — absorbed into `moai train-encoder`) |
+
+**Training command**: `moai train-encoder --epochs 10 --dim 128`
+
+Trains a Transformer sentence encoder using contrastive learning (InfoNCE loss). Training pairs are generated automatically by splitting ingested documents into overlapping chunks — a short chunk serves as the "query" and a longer overlapping chunk serves as the "document." The model learns to produce similar embeddings for related text.
 
 ### 6.10 Query Analysis (`src/query/`)
 
@@ -329,7 +333,53 @@ Output: JSON Lines to `profiling.output_file` + brief summary to stderr.
 | `i_query_analyzer.h` | IQueryAnalyzer interface: analyze(), name() |
 | `query_analyzer.h/.cpp` | RuleBasedQueryAnalyzer implementing IQueryAnalyzer |
 | `query_analyzer_factory.h` | Config-driven factory with NeuralQueryAnalyzerAdapter |
-| `neural_query_analyzer.h/.cpp` | Neural multi-task Transformer (libtorch) |
+| `neural_query_analyzer.h/.cpp` | Neural multi-task Transformer (libtorch) with batch-level progress bar |
+
+**Training command**: `moai train-qa --epochs 30`
+
+#### How Neural Query Analyzer Training Works
+
+The training data is **auto-generated** from ingested documents — no manual labeling needed:
+
+1. **Extract entities** from each document (capitalized phrases like "Stockholm", acronyms like "TCP", and longer words)
+2. **Apply templates** from `config/vocabularies/language.conf` `[TEMPLATES]` section to each entity, generating synthetic queries with known labels
+
+Example: if "Stockholm" is extracted, templates generate:
+- "where is stockholm" → intent: FACTUAL, answer_type: LOCATION
+- "what is stockholm" → intent: FACTUAL, answer_type: DEFINITION
+- "when was stockholm created" → intent: FACTUAL, answer_type: TEMPORAL
+- "how does stockholm work" → intent: EXPLANATION, answer_type: PROCEDURE
+- etc.
+
+#### Three Simultaneous Classification Tasks (Multi-Task Learning)
+
+| Task | Classes | Purpose |
+|------|---------|--------|
+| Intent | FACTUAL, EXPLANATION, PROCEDURAL, COMPARISON, GENERAL | What kind of answer the user wants |
+| Answer Type | LOCATION, DEFINITION, PERSON_PROFILE, TEMPORAL, PROCEDURE, COMPARISON, SUMMARY | What type of information to extract |
+| Entity (BIO tagging) | B (begin), I (inside), O (outside) | Which words in the query are the entity |
+
+#### Templates (`config/vocabularies/language.conf`)
+
+```
+[TEMPLATES]
+where is           |              | FACTUAL     | LOCATION
+what is            |              | FACTUAL     | DEFINITION
+who invented       |              | FACTUAL     | PERSON_PROFILE
+when was           | invented     | FACTUAL     | TEMPORAL
+how does           | work         | EXPLANATION | PROCEDURE
+explain            |              | EXPLANATION | SUMMARY
+difference between | and something | COMPARISON | COMPARISON
+...
+```
+
+Format: `prefix | suffix | intent | answer_type`. Entity is inserted between prefix and suffix.
+
+#### Limitations
+
+- Some generated queries are semantically nonsensical ("who invented stockholm") — but the model learns the **pattern** ("who invented X" → PERSON_PROFILE)
+- Produces only a single InformationNeed per query (no multi-need decomposition)
+- The rule-based analyzer handles multi-clause queries better ("tell me where stockholm is and why it is important" → 2 needs)
 
 ### 6.11 Chunking (`src/chunk/`)
 

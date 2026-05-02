@@ -90,6 +90,8 @@ void EncoderTrainer::train(SegmentReader& reader, int epochs,
     std::mt19937 rng(42);
     int64_t tok_max = std::min(max_len_, static_cast<int64_t>(64));
 
+    int total_batches = static_cast<int>((pairs.size()) / batch_size);
+
     for (int epoch = 0; epoch < epochs; epoch++) {
         std::shuffle(pairs.begin(), pairs.end(), rng);
 
@@ -129,11 +131,22 @@ void EncoderTrainer::train(SegmentReader& reader, int epochs,
 
             total_loss += loss.item<double>();
             steps++;
+
+            // Progress bar
+            int bar_width = 30;
+            int filled = (total_batches > 0) ? (steps * bar_width / total_batches) : bar_width;
+            std::cerr << "\rEpoch " << (epoch + 1) << "/" << epochs << " [";
+            for (int p = 0; p < bar_width; p++)
+                std::cerr << (p < filled ? '=' : (p == filled ? '>' : ' '));
+            std::cerr << "] " << steps << "/" << total_batches
+                      << " loss=" << std::fixed << std::setprecision(4)
+                      << (total_loss / steps) << std::flush;
         }
 
-        std::cerr << "Epoch " << (epoch + 1) << "/" << epochs
+        std::cerr << "\rEpoch " << (epoch + 1) << "/" << epochs
                   << " loss=" << std::fixed << std::setprecision(4)
-                  << (steps > 0 ? total_loss / steps : 0.0) << "\n";
+                  << (steps > 0 ? total_loss / steps : 0.0)
+                  << std::string(40, ' ') << "\n";
     }
 
     model_->eval();

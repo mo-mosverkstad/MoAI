@@ -146,6 +146,19 @@ Improves retrieval (the hybrid search step):
 ./moai hybrid "what is a database"
 ```
 
+Training data: auto-generated from ingested documents by splitting them into overlapping chunks (short "query" chunk + longer "document" chunk). Uses InfoNCE contrastive loss.
+
+Progress bar shows batch-level progress:
+```
+Epoch 3/10 [=========>                    ] 142/500 loss=0.4321
+```
+
+Output files (in `embeddings/`):
+| File | Description |
+|------|-------------|
+| `encoder.pt` | Trained Transformer model |
+| `vocab.txt` | Vocabulary (created if not present) |
+
 ### (optional, requires libtorch): Train neural query analyzer
 Improves query analysis (the InformationNeed extraction step):
 * Replaces the rule-based property/entity detection with a neural multi-task classifier
@@ -159,9 +172,42 @@ Improves query analysis (the InformationNeed extraction step):
 # stderr: "Using neural query analyzer"
 ```
 
+Training data: auto-generated from ingested documents — entities are extracted from documents and combined with templates from `config/vocabularies/language.conf` `[TEMPLATES]` section. No manual labeling needed. With 201 documents, generates ~880,000 training samples.
+
+Three simultaneous classification tasks:
+| Task | Classes | Purpose |
+|------|---------|--------|
+| Intent | FACTUAL, EXPLANATION, PROCEDURAL, COMPARISON, GENERAL | What kind of answer the user wants |
+| Answer Type | LOCATION, DEFINITION, PERSON_PROFILE, TEMPORAL, PROCEDURE, COMPARISON, SUMMARY | What type of information to extract |
+| Entity (BIO) | B (begin), I (inside), O (outside) | Which words in the query are the entity |
+
+Progress bar shows batch-level progress:
+```
+Epoch 2/30 [====================>         ] 75196/110324 loss=0.0061
+```
+
+Output file: `embeddings/qa_model.pt` (written only after all epochs complete).
+
 Note: The neural analyzer currently produces a single InformationNeed per query
 (mapped from its legacy QueryAnalysis output). Multi-need decomposition is only
 available via the rule-based analyzer in this version.
+
+### Interrupting training
+
+Training can be safely interrupted with Ctrl+C at any time:
+* `train-encoder`: model saved only after all epochs — interruption leaves no partial files
+* `train-qa`: model saved only after all epochs — interruption leaves no partial files
+* No temp files are created during training
+* The `embeddings/` directory will only contain files from previously completed runs
+
+### Files in `embeddings/`
+
+| File | Created by | Purpose |
+|------|-----------|--------|
+| `model.bin` | `moai build-hnsw` | BoW feedforward embedding model |
+| `vocab.txt` | `moai build-hnsw` or `train-encoder` | Term-to-ID vocabulary |
+| `encoder.pt` | `moai train-encoder` | Trained Transformer encoder (optional) |
+| `qa_model.pt` | `moai train-qa` | Trained query analyzer model (optional) |
 
 ---
 
@@ -255,7 +301,8 @@ cat ../profiling.jsonl
 ## 6. Quick Smoke Test
 
 ```bash
-cmake .. -DCMAKE_BUILD_TYPE=Release && cmake --build .
+cmake .. -DCMAKE_BUILD_TYPE=Release -DUSE_TORCH=ON -DCMAKE_PREFIX_PATH=~/opt/libtorch
+cmake --build .
 
 ./moai ingest ../data
 ./moai build-hnsw
@@ -265,6 +312,11 @@ cmake .. -DCMAKE_BUILD_TYPE=Release && cmake --build .
 
 # Train neural query analyzer (requires libtorch)
 ./moai train-qa --epochs 30
+
+# default.conf
+  query.analyzer = auto         # rule | neural | auto
+  retrieval.retriever = hybrid   # bm25 | hnsw | hybrid
+  embedding.method = auto        # bow | transformer | auto
 
 # Integration tests
 bash ../tests/test_qa_integration.sh
