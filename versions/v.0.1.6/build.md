@@ -167,12 +167,14 @@ Improves query analysis (the InformationNeed extraction step):
 * However: the neural analyzer currently produces a single InformationNeed per query — it doesn't support multi-need decomposition. So multi-clause queries like "tell me where stockholm is and why it is important" would lose the clause-splitting capability and produce only one need.
 
 ```bash
-./moai train-qa --epochs 30
+./moai train-qa                          # default: 10 epochs
+./moai train-qa --epochs 30              # more epochs if needed
+
 ./moai ask "when was the transistor invented"
 # stderr: "Using neural query analyzer"
 ```
 
-Training data: auto-generated from ingested documents — entities are extracted from documents and combined with templates from `config/vocabularies/language.conf` `[TEMPLATES]` section. No manual labeling needed. With 201 documents, generates ~880,000 training samples.
+Training data: auto-generated from ingested documents — entities are extracted from documents and combined with templates from `config/vocabularies/language.conf` `[TEMPLATES]` section. No manual labeling needed. With 201 documents, generates ~880,000 training samples. (~30 hours).
 
 Three simultaneous classification tasks:
 | Task | Classes | Purpose |
@@ -311,6 +313,7 @@ cmake --build .
 ./moai train-encoder --epochs 10 --dim 128
 
 # Train neural query analyzer (requires libtorch)
+./moai train-qa
 ./moai train-qa --epochs 30
 
 # default.conf

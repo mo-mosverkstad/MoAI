@@ -323,7 +323,50 @@ Output: JSON Lines to `profiling.output_file` + brief summary to stderr.
 
 **Training command**: `moai train-encoder --epochs 10 --dim 128`
 
-Trains a Transformer sentence encoder using contrastive learning (InfoNCE loss). Training pairs are generated automatically by splitting ingested documents into overlapping chunks — a short chunk serves as the "query" and a longer overlapping chunk serves as the "document." The model learns to produce similar embeddings for related text.
+#### Training Data Source
+
+The training data is the **same documents you ingested** with `moai ingest ../data`. The encoder trainer reads all documents from `../segments/seg_000001` — the same segment files used for search. No external dataset or manual annotation is required. The quality of the trained encoder depends directly on the quantity and diversity of your ingested documents.
+
+#### Training Data Generation
+
+Training pairs are auto-generated from the ingested documents:
+
+1. Load all documents from the segment (`reader.doc_count()` documents)
+2. Tokenize each document into words
+3. Create overlapping chunk pairs from each document:
+   - Query chunk: 5 consecutive words starting at position i
+   - Document chunk: 15 consecutive words starting at position i (overlaps with query)
+   - Stride: 5 words (pairs generated every 5 words)
+4. Each pair represents semantically related text from the same document
+
+Example from a document about TCP:
+```
+Document: "TCP ensures reliable data delivery through several mechanisms including three way handshake..."
+Pair 1: query="TCP ensures reliable data delivery"  doc="TCP ensures reliable data delivery through several mechanisms including three way handshake..."
+Pair 2: query="through several mechanisms including three"  doc="through several mechanisms including three way handshake..."
+```
+
+With 201 documents, this generates thousands of (query, document) training pairs.
+
+#### Training Mechanism (InfoNCE Contrastive Loss)
+
+The encoder uses contrastive learning to produce embeddings where related text is close and unrelated text is far apart:
+
+1. For each batch of pairs, encode both query and document through the same Transformer
+2. Compute similarity matrix: dot products between all query embeddings and all document embeddings in the batch
+3. InfoNCE loss: the correct pair (diagonal) should have higher similarity than all other combinations (off-diagonal)
+4. Effect: the model learns that a query chunk and its source document chunk should have similar embeddings, while chunks from different documents should have dissimilar embeddings
+
+#### Architecture
+
+- Transformer encoder with sinusoidal positional encoding
+- Configurable: dimension (default 128), attention heads (4), layers (2), max sequence length (64 tokens)
+- Mean pooling over non-padded tokens produces a fixed-size embedding vector
+- Optimizer: AdamW with weight decay 0.01
+
+#### Output
+
+The trained model is saved to `embeddings/encoder.pt`. When present, the HNSW retriever automatically uses it (via `embedding.method = auto`) instead of the BoW feedforward model, producing semantically meaningful nearest-neighbor search.
 
 ### 6.10 Query Analysis (`src/query/`)
 
@@ -335,7 +378,13 @@ Trains a Transformer sentence encoder using contrastive learning (InfoNCE loss).
 | `query_analyzer_factory.h` | Config-driven factory with NeuralQueryAnalyzerAdapter |
 | `neural_query_analyzer.h/.cpp` | Neural multi-task Transformer (libtorch) with batch-level progress bar |
 
-**Training command**: `moai train-qa --epochs 30`
+**Training command**: `moai train-qa` (default: 10 epochs, 100K samples max)
+
+```bash
+moai train-qa                          # default: 10 epochs, 100K samples
+moai train-qa --epochs 20              # more epochs if needed
+moai train-qa --max-samples 50000      # faster training with fewer samples
+```
 
 #### How Neural Query Analyzer Training Works
 
@@ -343,6 +392,7 @@ The training data is **auto-generated** from ingested documents — no manual la
 
 1. **Extract entities** from each document (capitalized phrases like "Stockholm", acronyms like "TCP", and longer words)
 2. **Apply templates** from `config/vocabularies/language.conf` `[TEMPLATES]` section to each entity, generating synthetic queries with known labels
+3. **Shuffle and cap**: samples are shuffled and capped to `--max-samples` (default 100,000) to keep training time reasonable
 
 Example: if "Stockholm" is extracted, templates generate:
 - "where is stockholm" → intent: FACTUAL, answer_type: LOCATION
@@ -350,6 +400,16 @@ Example: if "Stockholm" is extracted, templates generate:
 - "when was stockholm created" → intent: FACTUAL, answer_type: TEMPORAL
 - "how does stockholm work" → intent: EXPLANATION, answer_type: PROCEDURE
 - etc.
+
+With 201 documents, ~880,000 raw samples are generated but capped to 100,000 by default. The model converges quickly (loss < 0.01 within 2 epochs), so more samples provide diminishing returns.
+
+#### Training Time
+
+| Configuration | Samples | Batches/epoch | Approx. time |
+|--------------|---------|---------------|-------------|
+| Default (100K, 10 epochs) | 100,000 | 12,500 | ~1 hour |
+| `--max-samples 50000 --epochs 5` | 50,000 | 6,250 | ~15 minutes |
+| Uncapped (880K, 30 epochs) | 880,000 | 110,000 | ~30 hours |
 
 #### Three Simultaneous Classification Tasks (Multi-Task Learning)
 
