@@ -482,22 +482,33 @@ v.0.1.6/
 |       +-- pipeline_rules.conf     # self-ask, dependencies, preferred chunks, hints
 |       +-- domains.conf            # evidence domain keywords, negations, opposites
 |       +-- language.conf           # stop words, non-entity words, training templates
-+-- data/                           # 21 text documents across 7 topics
++-- data/                           # 201 text documents across 19 topics
++-- embeddings/                     # trained models and vocabulary
+|   +-- model.bin                   # BoW feedforward embedding model (from build-hnsw)
+|   +-- vocab.txt                   # term-to-ID vocabulary
+|   +-- encoder.pt                  # trained Transformer encoder (from train-encoder, optional)
++-- segments/                       # ingested document index
+|   +-- seg_000001/
+|   |   +-- docs.bin                # document metadata (count, lengths)
+|   |   +-- postings.bin            # inverted index (varint+delta encoded)
+|   |   +-- rawdocs.bin             # raw document text storage
+|   |   +-- terms.bin               # term dictionary
+|   +-- .conversation               # conversation memory state (ephemeral, gitignored)
 +-- src/
 |   +-- answer/                     # synthesis, validation, planning, compression, scope
 |   +-- chunk/                      # document chunking and classification
-|   +-- cli/                        # command-line interface
+|   +-- cli/                        # command-line interface (unified moai binary)
 |   +-- common/                     # config, vocab_loader, rules_loader, varint
 |   +-- conversation/               # cross-process conversation memory
-|   +-- embedding/                  # BoW embedding model, vocabulary
+|   +-- embedding/                  # BoW embedding model, vocabulary, IEmbedder interface
 |   +-- encoder/                    # neural Transformer encoder (optional, libtorch)
 |   +-- hnsw/                       # HNSW vector index
 |   +-- hybrid/                     # legacy hybrid command
 |   +-- inverted/                   # tokenizer, BM25, boolean search, phrase matching
 |   +-- query/                      # InformationNeed model, query analyzers
-|   +-- profiling/                   # Profiler, ScopeTimer (opt-in performance data)
-|   +-- pipeline/                    # Pipeline struct, PipelineBuilder, run() logic
-|   +-- retrieval/                  # IRetriever interface, BM25/HNSW/Hybrid retrievers, EmbeddingIndex, factory
+|   +-- profiling/                  # Profiler, ScopeTimer (opt-in performance data)
+|   +-- pipeline/                   # Pipeline struct, PipelineBuilder, run() logic
+|   +-- retrieval/                  # IRetriever interface, BM25/HNSW/Hybrid retrievers, factory
 |   +-- storage/                    # binary segment reader/writer, WAL, manifest
 |   +-- summarizer/                 # extractive summarization
 |   +-- tools/                      # sandboxed command execution
@@ -507,12 +518,29 @@ v.0.1.6/
 |   +-- test_config_matrix.sh       # Algorithm combination matrix tests
 |   +-- benchmark.sh                # Performance benchmark runner
 |   +-- benchmark_queries.txt       # 15 benchmark queries
++-- .gitignore                      # ignores: build/, segments/.conversation, profiling.jsonl
 +-- CMakeLists.txt
 +-- build.md
 +-- history.md
 +-- codebase_analysis.md
 +-- todo.md
 ```
+
+### Runtime Data Files
+
+| Directory | File | Created by | Purpose | Git tracked? |
+|-----------|------|-----------|---------|-------------|
+| `embeddings/` | `model.bin` | `moai build-hnsw` | BoW feedforward embedding model | ✅ Yes |
+| `embeddings/` | `vocab.txt` | `moai build-hnsw` | Term-to-ID vocabulary | ✅ Yes |
+| `embeddings/` | `encoder.pt` | `moai train-encoder` | Trained Transformer encoder (optional) | ✅ Yes |
+| `embeddings/` | `qa_model.pt` | `moai train-qa` | Trained neural query analyzer (optional) | ✅ Yes (if present) |
+| `segments/seg_000001/` | `docs.bin` | `moai ingest` | Document metadata (count, lengths) | ✅ Yes |
+| `segments/seg_000001/` | `postings.bin` | `moai ingest` | Inverted index (BM25 search) | ✅ Yes |
+| `segments/seg_000001/` | `rawdocs.bin` | `moai ingest` | Raw document text storage | ✅ Yes |
+| `segments/seg_000001/` | `terms.bin` | `moai ingest` | Term dictionary | ✅ Yes |
+| `segments/` | `.conversation` | `moai ask` | Conversation memory (ephemeral) | ❌ Gitignored |
+| `/` | `profiling.jsonl` | `moai ask --profile` | Profiling output (ephemeral) | ❌ Gitignored |
+| `/` | `build/` | `cmake --build` | Compiled binaries | ❌ Gitignored |
 
 ---
 

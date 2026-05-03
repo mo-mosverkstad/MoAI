@@ -1,3 +1,10 @@
 /build
 /embeddings
 /segments
+
+# --- Proposed .gitignore (tracks trained models and index for demo/testing) ---
+# Uncomment below and remove the three lines above to track embeddings/ and segments/
+#
+# /build
+# /segments/.conversation
+# /profiling.jsonl
