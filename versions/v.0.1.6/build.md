@@ -46,6 +46,90 @@ cmake .. -DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTS=ON
 cmake --build .
 ```
 
+### Witout unit tests
+
+```bash
+cmake .. -DCMAKE_BUILD_TYPE=Release \
+         -DUSE_TORCH=ON -DCMAKE_PREFIX_PATH=~/opt/libtorch \
+         -DBUILD_TESTS=OFF
+cmake --build .
+```
+
+### In Red Hat 8.10
+
+VDI environments typically have an older system GCC and a corporate proxy that blocks GitHub access.
+
+The VDI version is Red Hat 8.10.
+
+```bash
+$ cat /etc/os-release
+NAME="Red Hat Enterprise Linux"
+VERSION="8.10 (Ootpa)"
+ID="rhel"
+ID_LIKE="fedora"
+VERSION_ID="8.10"
+PLATFORM_ID="platform:el8"
+PRETTY_NAME="Red Hat Enterprise Linux 8.10 (Ootpa)"
+ANSI_COLOR="0;31"
+CPE_NAME="cpe:/o:redhat:enterprise_linux:8::baseos"
+HOME_URL="https://www.redhat.com/"
+DOCUMENTATION_URL="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8"
+BUG_REPORT_URL="https://issues.redhat.com/"
+
+REDHAT_BUGZILLA_PRODUCT="Red Hat Enterprise Linux 8"
+REDHAT_BUGZILLA_PRODUCT_VERSION=8.10
+REDHAT_SUPPORT_PRODUCT="Red Hat Enterprise Linux"
+REDHAT_SUPPORT_PRODUCT_VERSION="8.10"
+```
+
+**Problem 1: GoogleTest download fails (HTTP 403 from proxy)**
+
+The `FetchContent` mechanism downloads GoogleTest during cmake configuration. Corporate proxies block this. Solution: disable tests with `-DBUILD_TESTS=OFF`.
+
+**Problem 2: `GLIBCXX_3.4.26 not found` at runtime**
+
+The binary is compiled with a newer GCC but at runtime finds the old system libstdc++. Solution: set `LD_LIBRARY_PATH` to the GCC module's library directory.
+
+**Full build steps:**
+
+```bash
+# Load a GCC >= 9 (required for C++20 and compatible libstdc++)
+module load gcc/10.3.0
+
+# Clean build (important after switching compilers)
+rm -rf build && mkdir build && cd build
+
+# Configure — disable tests (proxy blocks GitHub), explicitly set compiler
+cmake .. -DCMAKE_BUILD_TYPE=Release \
+         -DUSE_TORCH=ON -DCMAKE_PREFIX_PATH=~/opt/libtorch \
+         -DBUILD_TESTS=OFF \
+         -DCMAKE_C_COMPILER=$(which gcc) \
+         -DCMAKE_CXX_COMPILER=$(which g++)
+
+# Build
+cmake --build .
+
+# Set runtime library path (required before running moai)
+export LD_LIBRARY_PATH=$(dirname $(gcc -print-file-name=libstdc++.so)):$LD_LIBRARY_PATH
+
+# Verify
+./moai ingest ../data
+./moai build-hnsw
+./moai ask "where is stockholm"
+```
+
+**Tip:** Add the `export LD_LIBRARY_PATH=...` line to your `~/.bashrc` so you don't need to set it every session.
+
+**Without libtorch:**
+
+```bash
+module load gcc/10.3.0
+rm -rf build && mkdir build && cd build
+cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=OFF
+cmake --build .
+export LD_LIBRARY_PATH=$(dirname $(gcc -print-file-name=libstdc++.so)):$LD_LIBRARY_PATH
+./moai ingest ../data
+```
 ---
 
 ## 3. Run Tests
