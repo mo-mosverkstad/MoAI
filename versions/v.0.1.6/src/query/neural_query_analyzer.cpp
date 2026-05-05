@@ -8,6 +8,7 @@
 #include <iostream>
 #include <iomanip>
 #include <sstream>
+#include <fstream>
 #include <regex>
 #include <cctype>
 
@@ -175,7 +176,8 @@ std::vector<QuerySample> NeuralQueryAnalyzer::generate_training_data(
 
 void NeuralQueryAnalyzer::train(
     const std::vector<QuerySample>& samples,
-    int epochs, double lr, int batch_size)
+    int epochs, double lr, int batch_size,
+    int start_epoch, const std::string& checkpoint_path)
 {
     if (samples.empty()) {
         std::cerr << "No training samples.\n";
@@ -240,7 +242,7 @@ void NeuralQueryAnalyzer::train(
     std::mt19937 rng(42);
     int total_batches = static_cast<int>(prepared.size() / batch_size);
 
-    for (int epoch = 0; epoch < epochs; epoch++) {
+    for (int epoch = start_epoch; epoch < epochs; epoch++) {
         std::vector<size_t> indices(prepared.size());
         std::iota(indices.begin(), indices.end(), 0);
         std::shuffle(indices.begin(), indices.end(), rng);
@@ -317,6 +319,14 @@ void NeuralQueryAnalyzer::train(
                   << " loss=" << std::fixed << std::setprecision(4)
                   << (steps > 0 ? total_loss / steps : 0.0)
                   << std::string(40, ' ') << "\n";
+
+        // Save checkpoint after each epoch for resume capability
+        if (!checkpoint_path.empty()) {
+            torch::save(model_, checkpoint_path);
+            std::string epoch_file = checkpoint_path.substr(0, checkpoint_path.rfind(".")) + "_epoch.txt";
+            std::ofstream ef(epoch_file);
+            ef << (epoch + 1);
+        }
     }
 
     model_->eval();

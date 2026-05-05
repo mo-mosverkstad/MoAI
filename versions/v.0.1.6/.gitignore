@@ -8,3 +8,5 @@
 # /build
 # /segments/.conversation
 # /profiling.jsonl
+# /embeddings/qa_checkpoint.pt
+# /embeddings/qa_checkpoint_epoch.txt

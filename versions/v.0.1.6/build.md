@@ -251,14 +251,12 @@ Improves query analysis (the InformationNeed extraction step):
 * However: the neural analyzer currently produces a single InformationNeed per query — it doesn't support multi-need decomposition. So multi-clause queries like "tell me where stockholm is and why it is important" would lose the clause-splitting capability and produce only one need.
 
 ```bash
-./moai train-qa                          # default: 10 epochs
-./moai train-qa --epochs 30              # more epochs if needed
-
+./moai train-qa --epochs 30              # full training (~30 hours, all CPU cores)
 ./moai ask "when was the transistor invented"
 # stderr: "Using neural query analyzer"
 ```
 
-Training data: auto-generated from ingested documents — entities are extracted from documents and combined with templates from `config/vocabularies/language.conf` `[TEMPLATES]` section. No manual labeling needed. With 201 documents, generates ~880,000 training samples. (~30 hours).
+Training data: auto-generated from ingested documents — entities are extracted from documents and combined with templates from `config/vocabularies/language.conf` `[TEMPLATES]` section. No manual labeling needed. With 201 documents, generates ~880,000 training samples.
 
 Three simultaneous classification tasks:
 | Task | Classes | Purpose |
@@ -274,17 +272,56 @@ Epoch 2/30 [====================>         ] 75196/110324 loss=0.0061
 
 Output file: `embeddings/qa_model.pt` (written only after all epochs complete).
 
+### Controlling CPU Usage (`--threads`)
+
+By default, libtorch uses all available CPU cores, which can overload a shared VDI. Use `--threads N` to limit CPU usage:
+
+```bash
+# Check total cores first
+nproc                          # e.g. returns 16
+
+./moai train-qa --epochs 30 --threads 2    # ~12% CPU on 16-core machine
+./moai train-qa --epochs 30 --threads 4    # ~25% CPU on 16-core machine
+```
+
+CPU usage is approximately `N / total_cores × 100%`. The training takes proportionally longer:
+
+| `--threads` | CPU usage (16-core) | Approx. time |
+|-------------|--------------------|--------------|
+| (default)   | ~100%              | ~30 hours    |
+| 4           | ~25%               | ~120 hours   |
+| 2           | ~12%               | ~240 hours   |
+
+Recommended for shared VDI: `--threads 4` (25% CPU, stays below the radar).
+
+### Pause and Resume (`--resume`)
+
+Training saves a checkpoint after every completed epoch. You can safely interrupt with Ctrl+C and resume later:
+
+```bash
+# Start training
+./moai train-qa --epochs 30 --threads 4
+
+# Ctrl+C at any time — checkpoint saved to embeddings/qa_checkpoint.pt
+
+# Resume from where it stopped
+./moai train-qa --epochs 30 --threads 4 --resume
+```
+
+Checkpoint files (`qa_checkpoint.pt`, `qa_checkpoint_epoch.txt`) are automatically deleted after successful completion. If you interrupt and don't want to resume, simply delete them:
+
+```bash
+rm ../embeddings/qa_checkpoint.pt ../embeddings/qa_checkpoint_epoch.txt
+```
+
 Note: The neural analyzer currently produces a single InformationNeed per query
 (mapped from its legacy QueryAnalysis output). Multi-need decomposition is only
 available via the rule-based analyzer in this version.
 
 ### Interrupting training
 
-Training can be safely interrupted with Ctrl+C at any time:
-* `train-encoder`: model saved only after all epochs — interruption leaves no partial files
-* `train-qa`: model saved only after all epochs — interruption leaves no partial files
-* No temp files are created during training
-* The `embeddings/` directory will only contain files from previously completed runs
+- `train-encoder`: model saved only after all epochs — interruption leaves no partial files
+- `train-qa`: checkpoint saved after **each epoch** — use `--resume` to continue from where it stopped
 
 ### Files in `embeddings/`
 
@@ -397,8 +434,14 @@ cmake --build .
 ./moai train-encoder --epochs 10 --dim 128
 
 # Train neural query analyzer (requires libtorch)
-./moai train-qa
-./moai train-qa --epochs 30
+./moai train-qa --epochs 30 --threads 4          # ~25% CPU
+./moai train-qa --epochs 30 --threads 4 --resume  # resume after interruption
+
+# Ctrl+C to interrupt at any epoch boundary
+# A checkpoint is saved after each epoch to embeddings/qa_checkpoint.pt
+
+# Resume later from where it stopped
+./moai train-qa --epochs 30 --threads 2 --resume
 
 # default.conf
   query.analyzer = auto         # rule | neural | auto

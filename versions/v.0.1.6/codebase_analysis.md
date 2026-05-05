@@ -378,13 +378,21 @@ The trained model is saved to `embeddings/encoder.pt`. When present, the HNSW re
 | `query_analyzer_factory.h` | Config-driven factory with NeuralQueryAnalyzerAdapter |
 | `neural_query_analyzer.h/.cpp` | Neural multi-task Transformer (libtorch) with batch-level progress bar |
 
-**Training command**: `moai train-qa` (default: 10 epochs, 100K samples max)
+**Training command**: `moai train-qa --epochs 30` (full quality)
 
 ```bash
-moai train-qa                          # default: 10 epochs, 100K samples
-moai train-qa --epochs 20              # more epochs if needed
-moai train-qa --max-samples 50000      # faster training with fewer samples
+moai train-qa --epochs 30                          # full training, all CPU cores
+moai train-qa --epochs 30 --threads 4              # ~25% CPU on 16-core machine
+moai train-qa --epochs 30 --threads 4 --resume     # resume after interruption
 ```
+
+#### CPU Throttling (`--threads`)
+
+`--threads N` calls `torch::set_num_threads(N)` and `torch::set_num_interop_threads(N)`, limiting libtorch to N cores. CPU usage ≈ `N / total_cores × 100%`. Check total cores with `nproc`.
+
+#### Pause and Resume (`--resume`)
+
+A checkpoint is saved to `embeddings/qa_checkpoint.pt` after every completed epoch. Training can be interrupted with Ctrl+C and resumed with `--resume`. Checkpoint files are deleted automatically on successful completion.
 
 #### How Neural Query Analyzer Training Works
 
@@ -534,6 +542,8 @@ v.0.1.6/
 | `embeddings/` | `vocab.txt` | `moai build-hnsw` | Term-to-ID vocabulary | ✅ Yes |
 | `embeddings/` | `encoder.pt` | `moai train-encoder` | Trained Transformer encoder (optional) | ✅ Yes |
 | `embeddings/` | `qa_model.pt` | `moai train-qa` | Trained neural query analyzer (optional) | ✅ Yes (if present) |
+| `embeddings/` | `qa_checkpoint.pt` | `moai train-qa` (mid-run) | Per-epoch checkpoint for resume (deleted on completion) | ❌ Gitignored |
+| `embeddings/` | `qa_checkpoint_epoch.txt` | `moai train-qa` (mid-run) | Saved epoch number for resume (deleted on completion) | ❌ Gitignored |
 | `segments/seg_000001/` | `docs.bin` | `moai ingest` | Document metadata (count, lengths) | ✅ Yes |
 | `segments/seg_000001/` | `postings.bin` | `moai ingest` | Inverted index (BM25 search) | ✅ Yes |
 | `segments/seg_000001/` | `rawdocs.bin` | `moai ingest` | Raw document text storage | ✅ Yes |

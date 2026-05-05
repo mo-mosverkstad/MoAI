@@ -52,7 +52,8 @@ public:
 
     // Generate training data from corpus heuristics, then train
     void train(const std::vector<QuerySample>& samples,
-               int epochs = 20, double lr = 1e-3, int batch_size = 8);
+               int epochs = 20, double lr = 1e-3, int batch_size = 8,
+               int start_epoch = 0, const std::string& checkpoint_path = "");
 
     // Generate synthetic training samples from document texts
     static std::vector<QuerySample> generate_training_data(

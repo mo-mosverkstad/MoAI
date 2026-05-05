@@ -15,6 +15,7 @@
 #endif
 #include <iostream>
 #include <filesystem>
+#include <fstream>
 #include <unordered_map>
 #include <algorithm>
 #include <iomanip>
@@ -31,7 +32,7 @@ int run_cli(int argc, char** argv) {
                   << "  moai ask <query> [--json] [--brief] [--detailed] [--profile]\n"
 #ifdef HAS_TORCH
                   << "  moai train-encoder [--epochs N] [--dim D] [--lr R]\n"
-                  << "  moai train-qa [--epochs N]\n"
+                  << "  moai train-qa [--epochs N] [--threads N] [--resume]\n"
 #endif
                   << "  moai run <cmd> [args...]\n";
         return 1;
@@ -349,11 +350,22 @@ int run_cli(int argc, char** argv) {
         std::string segdir = "../segments/seg_000001";
         std::string embeddir = "../embeddings";
         int epochs = 30;
+        int threads = 0;
+        bool resume = false;
         for (int i = 2; i < argc; i++) {
             std::string arg = argv[i];
             if (arg == "--epochs" && i + 1 < argc) epochs = std::stoi(argv[++i]);
+            else if (arg == "--threads" && i + 1 < argc) threads = std::stoi(argv[++i]);
+            else if (arg == "--resume") resume = true;
             else if (arg == "--segdir" && i + 1 < argc) segdir = argv[++i];
             else if (arg == "--embeddir" && i + 1 < argc) embeddir = argv[++i];
+        }
+
+        // Limit CPU usage
+        if (threads > 0) {
+            torch::set_num_threads(threads);
+            torch::set_num_interop_threads(threads);
+            std::cerr << "Using " << threads << " thread(s)\n";
         }
 
         SegmentReader reader(segdir);
@@ -375,11 +387,29 @@ int run_cli(int argc, char** argv) {
         std::cerr << "Generated " << samples.size() << " training samples\n";
 
         NeuralQueryAnalyzer nqa(vocab, 128, 64);
-        nqa.train(samples, epochs, 1e-3, 8);
+
+        // Resume from checkpoint if requested
+        std::string checkpoint_path = embeddir + "/qa_checkpoint.pt";
+        int start_epoch = 0;
+        if (resume && std::filesystem::exists(checkpoint_path)) {
+            nqa.load(checkpoint_path);
+            std::string epoch_file = embeddir + "/qa_checkpoint_epoch.txt";
+            if (std::filesystem::exists(epoch_file)) {
+                std::ifstream ef(epoch_file);
+                ef >> start_epoch;
+            }
+            std::cerr << "Resumed from checkpoint at epoch " << start_epoch << "\n";
+        }
+
+        nqa.train(samples, epochs, 1e-3, 8, start_epoch, checkpoint_path);
 
         std::string model_path = embeddir + "/qa_model.pt";
         nqa.save(model_path);
         std::cerr << "Query analyzer model saved to " << model_path << "\n";
+
+        // Clean up checkpoint after successful completion
+        std::filesystem::remove(checkpoint_path);
+        std::filesystem::remove(embeddir + "/qa_checkpoint_epoch.txt");
 
         // Use legacy interface for test output
         auto test = [&](const char* q) {

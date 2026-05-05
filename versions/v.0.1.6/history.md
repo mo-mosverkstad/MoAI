@@ -68,7 +68,7 @@ moai build-hnsw
 moai hybrid <query>
 moai ask <query> [--json] [--brief] [--detailed] [--profile]
 moai train-encoder [--epochs N] [--dim D] [--lr R]    # requires libtorch
-moai train-qa [--epochs N]                             # requires libtorch
+moai train-qa [--epochs N] [--threads N] [--resume]    # requires libtorch
 moai run <cmd> [args...]
 ```
 
@@ -131,7 +131,7 @@ moai build-hnsw
 moai hybrid <query>
 moai ask <query> [--json] [--brief] [--detailed] [--profile]
 moai train-encoder [--epochs N] [--dim D] [--lr R]    # requires libtorch
-moai train-qa [--epochs N]                             # requires libtorch
+moai train-qa [--epochs N] [--threads N] [--resume]    # requires libtorch
 moai run <cmd> [args...]
 ```
 
@@ -178,3 +178,46 @@ Entity: tcp
 ### Verification
 
 - 75/75 integration tests pass (no regressions)
+
+---
+
+## Step 5c: CPU Throttling and Pause/Resume for `train-qa`
+
+### Problem
+
+`moai train-qa --epochs 30` consumed 100% of all CPU cores on a shared VDI, making the machine unusable for others. Training also could not be interrupted and resumed — a Ctrl+C meant starting over from epoch 1.
+
+### Fixes
+
+| Change | File | Description |
+|--------|------|-------------|
+| Added `--threads N` flag | `src/cli/commands.cpp` | Calls `torch::set_num_threads(N)` and `torch::set_num_interop_threads(N)` to limit CPU cores used |
+| Added `--resume` flag | `src/cli/commands.cpp` | Loads checkpoint and reads saved epoch number before training |
+| Added per-epoch checkpoint saving | `src/query/neural_query_analyzer.cpp` | Saves `qa_checkpoint.pt` and `qa_checkpoint_epoch_txt` after each epoch |
+| Updated train method signature | `src/query/neural_query_analyzer.h/.cpp` | Added `start_epoch` and `checkpoint_path` parameters |
+| Auto-cleanup on completion | `src/cli/commands.cpp` | Deletes checkpoint files after successful full training |
+| Updated usage string | `src/cli/commands.cpp` | Shows `[--threads N] [--resume]` |
+
+### CPU Usage
+
+`--threads N` limits libtorch to N CPU cores. Usage is approximately `N / total_cores × 100%`:
+
+| `--threads` | CPU usage (16-core) | Approx. time |
+|-------------|--------------------|--------------:|
+| (default)   | ~100%              | ~30 hours     |
+| 4           | ~25%               | ~120 hours    |
+| 2           | ~12%               | ~240 hours    |
+
+### Pause and Resume
+
+```bash
+./moai train-qa --epochs 30 --threads 4    # start
+# Ctrl+C at any epoch boundary
+./moai train-qa --epochs 30 --threads 4 --resume   # continue
+```
+
+Checkpoint files are saved to `embeddings/qa_checkpoint.pt` and `embeddings/qa_checkpoint_epoch.txt` after each epoch, and deleted automatically on successful completion.
+
+### Verification
+
+- 75/75 integration tests pass
