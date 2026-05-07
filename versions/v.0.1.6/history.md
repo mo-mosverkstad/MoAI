@@ -204,9 +204,9 @@ Entity: tcp
 
 | `--threads` | CPU usage (16-core) | Approx. time |
 |-------------|--------------------|--------------:|
-| (default)   | ~100%              | ~30 hours     |
-| 4           | ~25%               | ~120 hours    |
-| 2           | ~12%               | ~240 hours    |
+| (default)   | ~100%              | ~3 hours      |
+| 4           | ~25%               | ~12 hours     |
+| 2           | ~12%               | ~24 hours     |
 
 ### Pause and Resume
 
@@ -217,6 +217,39 @@ Entity: tcp
 ```
 
 Checkpoint files are saved to `embeddings/qa_checkpoint.pt` and `embeddings/qa_checkpoint_epoch.txt` after each epoch, and deleted automatically on successful completion.
+
+### Verification
+
+- 75/75 integration tests pass
+
+---
+
+## Step 5d: Training Data Quality Improvement for `train-qa`
+
+### Problem
+
+`moai train-qa --epochs 30` generated ~880,000 training samples and took ~30 hours because every word ≥5 characters was treated as an entity. Most samples were nonsensical (e.g., "where is through", "who invented several").
+
+### Root Cause
+
+In `generate_training_data()`, line `if (w.size() >= 5) entities.push_back(w)` added every 5+ character word as an entity. With 13,049 vocabulary words, this produced ~40,000 "entities" × 22 templates = 880K samples — mostly garbage.
+
+### Fix
+
+| Change | Description |
+|--------|-------------|
+| Removed generic word extraction | No longer treats every 5+ char word as an entity |
+| Only proper entities | Uses `extract_entities()` which finds capitalized phrases and acronyms |
+| Max 20 entities per document | Limits per-document entities to prevent explosion |
+
+### Impact
+
+| | Before | After |
+|--|--------|-------|
+| Entities per doc | ~200 (every 5+ char word) | ~20 (proper nouns, acronyms) |
+| Total samples | ~880,000 | ~88,000 |
+| Training time (30 epochs, all cores) | ~30 hours | ~3 hours |
+| Training quality | Poor (garbage data) | Better (real entities only) |
 
 ### Verification
 

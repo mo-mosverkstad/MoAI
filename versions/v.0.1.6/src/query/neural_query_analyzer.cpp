@@ -140,16 +140,18 @@ std::vector<QuerySample> NeuralQueryAnalyzer::generate_training_data(
     for (auto& doc : doc_texts) {
         auto entities = extract_entities(doc);
 
-        // Also extract lowercase key terms from sentences
-        Tokenizer tok;
-        auto words = tok.tokenize(doc);
-        // Grab longer words as potential entities
-        for (auto& w : words)
-            if (w.size() >= 5) entities.push_back(w);
-
+        // Only use proper entities (capitalized phrases, acronyms)
+        // Skip generic words — they produce nonsense training data
         std::sort(entities.begin(), entities.end());
         entities.erase(std::unique(entities.begin(), entities.end()),
                        entities.end());
+
+        // Limit entities per document to keep training set manageable
+        const size_t max_entities_per_doc = 20;
+        if (entities.size() > max_entities_per_doc) {
+            std::shuffle(entities.begin(), entities.end(), rng);
+            entities.resize(max_entities_per_doc);
+        }
 
         for (auto& entity : entities) {
             if (entity.size() < 3 || entity.size() > 40) continue;

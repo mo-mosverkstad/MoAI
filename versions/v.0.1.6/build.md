@@ -251,12 +251,12 @@ Improves query analysis (the InformationNeed extraction step):
 * However: the neural analyzer currently produces a single InformationNeed per query — it doesn't support multi-need decomposition. So multi-clause queries like "tell me where stockholm is and why it is important" would lose the clause-splitting capability and produce only one need.
 
 ```bash
-./moai train-qa --epochs 30              # full training (~30 hours, all CPU cores)
+./moai train-qa --epochs 30              # full training (~3 hours, all CPU cores)
 ./moai ask "when was the transistor invented"
 # stderr: "Using neural query analyzer"
 ```
 
-Training data: auto-generated from ingested documents — entities are extracted from documents and combined with templates from `config/vocabularies/language.conf` `[TEMPLATES]` section. No manual labeling needed. With 201 documents, generates ~880,000 training samples.
+Training data: auto-generated from ingested documents — proper entities (capitalized phrases, acronyms) are extracted from documents and combined with templates from `config/vocabularies/language.conf` `[TEMPLATES]` section. No manual labeling needed. With 201 documents, generates ~88,000 high-quality training samples (max 20 entities per document × 22 templates).
 
 Three simultaneous classification tasks:
 | Task | Classes | Purpose |
@@ -267,7 +267,7 @@ Three simultaneous classification tasks:
 
 Progress bar shows batch-level progress:
 ```
-Epoch 2/30 [====================>         ] 75196/110324 loss=0.0061
+Epoch 2/30 [====================>         ] 7500/11000 loss=0.0061
 ```
 
 Output file: `embeddings/qa_model.pt` (written only after all epochs complete).
@@ -288,9 +288,9 @@ CPU usage is approximately `N / total_cores × 100%`. The training takes proport
 
 | `--threads` | CPU usage (16-core) | Approx. time |
 |-------------|--------------------|--------------|
-| (default)   | ~100%              | ~30 hours    |
-| 4           | ~25%               | ~120 hours   |
-| 2           | ~12%               | ~240 hours   |
+| (default)   | ~100%              | ~3 hours     |
+| 4           | ~25%               | ~12 hours    |
+| 2           | ~12%               | ~24 hours    |
 
 Recommended for shared VDI: `--threads 4` (25% CPU, stays below the radar).
 
@@ -317,6 +317,11 @@ rm ../embeddings/qa_checkpoint.pt ../embeddings/qa_checkpoint_epoch.txt
 Note: The neural analyzer currently produces a single InformationNeed per query
 (mapped from its legacy QueryAnalysis output). Multi-need decomposition is only
 available via the rule-based analyzer in this version.
+
+**Recommendation:** Use `query.analyzer = rule` (the default) for production. The neural
+analyzer is experimental — the rule-based analyzer achieves better accuracy (75/75 tests
+vs 34/75) and supports multi-need queries. `train-encoder` is the training step that
+genuinely improves MoAI's quality; `train-qa` provides marginal benefit.
 
 ### Interrupting training
 

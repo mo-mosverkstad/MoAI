@@ -368,6 +368,14 @@ The encoder uses contrastive learning to produce embeddings where related text i
 
 The trained model is saved to `embeddings/encoder.pt`. When present, the HNSW retriever automatically uses it (via `embedding.method = auto`) instead of the BoW feedforward model, producing semantically meaningful nearest-neighbor search.
 
+#### Value Assessment
+
+`train-encoder` is the **genuinely useful** training step in MoAI. Unlike `train-qa` (which learns query patterns that the rule-based analyzer already handles well), `train-encoder` learns the semantic structure of YOUR documents:
+
+- Without training: HNSW uses random BoW vectors — semantic search is essentially random
+- With training: HNSW uses learned embeddings — documents semantically similar to the query rank higher, even without keyword overlap
+- Impact: queries like "Is Stockholm close to the sea?" find relevant content even though the exact words don't appear in documents
+
 ### 6.10 Query Analysis (`src/query/`)
 
 | File | Purpose |
@@ -400,7 +408,7 @@ The training data is **auto-generated** from ingested documents — no manual la
 
 1. **Extract entities** from each document (capitalized phrases like "Stockholm", acronyms like "TCP", and longer words)
 2. **Apply templates** from `config/vocabularies/language.conf` `[TEMPLATES]` section to each entity, generating synthetic queries with known labels
-3. **Shuffle and cap**: samples are shuffled and capped to `--max-samples` (default 100,000) to keep training time reasonable
+3. **Shuffle**: samples are shuffled for training
 
 Example: if "Stockholm" is extracted, templates generate:
 - "where is stockholm" → intent: FACTUAL, answer_type: LOCATION
@@ -409,15 +417,15 @@ Example: if "Stockholm" is extracted, templates generate:
 - "how does stockholm work" → intent: EXPLANATION, answer_type: PROCEDURE
 - etc.
 
-With 201 documents, ~880,000 raw samples are generated but capped to 100,000 by default. The model converges quickly (loss < 0.01 within 2 epochs), so more samples provide diminishing returns.
+With 201 documents, ~88,000 training samples are generated (max 20 proper entities per document × 22 templates). Only capitalized phrases and acronyms are used as entities — generic words are excluded to avoid nonsensical training data.
 
 #### Training Time
 
 | Configuration | Samples | Batches/epoch | Approx. time |
 |--------------|---------|---------------|-------------|
-| Default (100K, 10 epochs) | 100,000 | 12,500 | ~1 hour |
-| `--max-samples 50000 --epochs 5` | 50,000 | 6,250 | ~15 minutes |
-| Uncapped (880K, 30 epochs) | 880,000 | 110,000 | ~30 hours |
+| Default (all cores) | ~88,000 | ~11,000 | ~3 hours |
+| `--threads 4` (16-core machine) | ~88,000 | ~11,000 | ~12 hours |
+| `--threads 2` (16-core machine) | ~88,000 | ~11,000 | ~24 hours |
 
 #### Three Simultaneous Classification Tasks (Multi-Task Learning)
 
@@ -448,6 +456,31 @@ Format: `prefix | suffix | intent | answer_type`. Entity is inserted between pre
 - Some generated queries are semantically nonsensical ("who invented stockholm") — but the model learns the **pattern** ("who invented X" → PERSON_PROFILE)
 - Produces only a single InformationNeed per query (no multi-need decomposition)
 - The rule-based analyzer handles multi-clause queries better ("tell me where stockholm is and why it is important" → 2 needs)
+
+#### Comparative Assessment: Rule-Based vs. Neural Query Analyzer
+
+| Aspect | Rule-Based (`query.analyzer = rule`) | Neural (`query.analyzer = neural`) |
+|--------|--------------------------------------|------------------------------------|
+| Training required | None | ~3 hours (`train-qa --epochs 30`) |
+| Multi-need queries | ✅ Splits clauses into multiple needs | ❌ Single need only |
+| Test results | 75/75 pass | 34/75 pass (classifies most queries as DEFINITION) |
+| Unusual phrasings | May miss non-standard patterns | Potentially better (if well-trained) |
+| Acronym/entity detection | Heuristic (longest keyword, acronym preference) | BIO tagging (learned) |
+| Maintenance | Edit vocabulary files | Retrain model |
+| Recommended | ✅ Default for production use | Experimental/research only |
+
+**Recommendation:** Use `query.analyzer = rule` (the default). The neural analyzer is currently experimental — it provides marginal benefit for unusual phrasings but significantly worse overall accuracy and no multi-need support. The rule-based analyzer is fast, deterministic, and handles the full query decomposition pipeline.
+
+#### Why `train-qa` Exists
+
+`train-qa` learns **query patterns** ("where is X" → LOCATION), not document content. The documents are only used to extract entity names as slot-fillers for templates. The model would learn the same patterns from any set of entities — it doesn't need YOUR specific documents.
+
+This is fundamentally different from `train-encoder`, which genuinely learns from your document content to produce meaningful semantic embeddings.
+
+| Training Command | What It Learns | Needs Your Documents? | Production Value |
+|-----------------|----------------|----------------------|------------------|
+| `train-encoder` | Document similarity (for semantic search) | ✅ Yes — learns your content's semantic structure | High — significantly improves retrieval |
+| `train-qa` | Query classification patterns | ❌ Not really — documents only provide entity names | Low — rule-based analyzer works better |
 
 ### 6.11 Chunking (`src/chunk/`)
 
