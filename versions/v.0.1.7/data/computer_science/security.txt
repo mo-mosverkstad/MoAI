@@ -1,0 +1,40 @@
+# Computer Security
+
+Computer security aims to protect systems, data, and networks from unauthorized access and threats.
+
+## Key Concepts - CIA Triad
+
+Core security objectives:
+- Confidentiality: preventing unauthorized access
+- Integrity: preventing unauthorized modification
+- Availability: ensuring systems are operational
+
+## Security Domains
+
+- Network security
+- Application security
+- Identity and access management
+- Cryptography
+- Cloud security
+- Operating system hardening
+
+## Threat Types
+
+- Malware: viruses, worms, trojans
+- Virus: attaches to files and spreads when executed
+- Worm: self-propagating malware that spreads across networks
+- Trojan: disguised malicious program that appears legitimate
+- Ransomware: encrypts data and demands payment for decryption
+- Phishing and social engineering
+- Denial-of-Service attacks
+- Supply-chain attacks
+- Insider threats
+
+## Best Practices
+
+- Principle of least privilege
+- Multi-factor authentication (MFA)
+- Regular patching and patch management
+- Encryption at rest and in transit
+- Security monitoring and logging
+- Incident response planning
